@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /accounts.html
 
-Sitemap: https://kalyanielectricals.in/sitemap.xml
+Sitemap: https://kalyanielectrical.in/sitemap.xml
