@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Kalyani Electrical — kalyanielectricals.in (Pune & Maharashtra)</title>
+  <meta name="description" content="About Kalyani Electrical (kalyanielectricals.in) - Founded in 2020 in Pune by Amar, Munal, and Vishal. Dedicated specialists in Electrical, LT Panels, Solar, Low-TDS Cleaning, CCTV, Fire Alarm, Biometrics & LAN Networking." />
+
+  <!-- Favicons & App Manifest -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0F2354" />
+  <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            ke: {
+              navy: '#0F2354',
+              navyDark: '#091638',
+              red: '#D91E2A',
+              redDark: '#B3151F',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .bg-subtle-grid {
+      background-image:
+        linear-gradient(to right, rgba(15, 35, 84, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 35, 84, 0.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+
+    .dark .bg-subtle-grid {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+
+    .partner-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .partner-card:hover {
+      transform: translateY(-4px);
+    }
+
+    #bot-panel {
+      transform-origin: bottom right;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #bot-panel.hidden-bot {
+      opacity: 0;
+      transform: scale(0.92) translateY(12px);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased flex flex-col min-h-screen selection:bg-ke-navy selection:text-white">
+
+  <!-- ======================================================================= -->
+  <!-- TOP NAVIGATION BAR (Consistent Across All Pages)                        -->
+  <!-- ======================================================================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-2">
+
+        <!-- Brand Logo (Links to Home) -->
+        <a href="index.html" class="flex items-center gap-3 text-left focus:outline-none shrink-0" aria-label="Kalyani Electrical Home">
+          <div class="bg-white p-1.5 rounded-xl border border-slate-200/80 shadow-2xs flex items-center justify-center">
+            <img src="logo.png" alt="Kalyani Electrical Logo" class="h-11 sm:h-12 w-auto object-contain"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <svg style="display:none;" viewBox="0 0 260 155" class="h-11 sm:h-12 w-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kalyani Electrical Emblem">
+              <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
+              <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
+              <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
+              <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
+              <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
+              <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
+              <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
+              <text x="130" y="132" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
+              <polygon points="91,132 95.5,123 100,132" fill="#D91E2A"/>
+              <line x1="36" y1="146" x2="64" y2="146" stroke="#0F2354" stroke-width="2"/>
+              <text x="130" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
+              <line x1="196" y1="146" x2="224" y2="146" stroke="#0F2354" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="hidden xl:block border-l border-slate-200 dark:border-slate-700 pl-3">
+            <span class="block font-display font-bold text-xs text-ke-navy dark:text-white tracking-wide uppercase">kalyanielectricals.in</span>
+            <span class="block text-[11px] text-slate-500 dark:text-slate-400 font-medium">Est. 2020 • Pune</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
+          <a href="index.html" data-i18n="nav_home" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Home</a>
+          <a href="services.html" data-i18n="nav_services" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Services</a>
+          <a href="about.html" data-i18n="nav_about" class="px-3 py-2 rounded-xl text-xs font-bold text-ke-red bg-ke-red/10 border border-ke-red/20 transition-all">About Us</a>
+          <a href="gallery.html" data-i18n="nav_gallery" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Gallery</a>
+          <a href="rate-card.html" data-i18n="nav_ratecard" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Rate Card</a>
+          <a href="contact.html" data-i18n="nav_contact" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Contact Us</a>
+          <a href="client.html" data-i18n="nav_client" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Client Portal</a>
+          <a href="accounts.html" data-i18n="nav_accounts" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Accounts</a>
+        </nav>
+
+        <!-- Right Controls: Language Switcher (EN | हिंदी | मराठी) + Light/Dark Theme -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700" role="group" aria-label="Language Switcher">
+            <button type="button" onclick="setLanguage('en')" id="lang-btn-en" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold bg-ke-navy text-white transition-all">EN</button>
+            <button type="button" onclick="setLanguage('hi')" id="lang-btn-hi" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-ke-navy transition-all">हिंदी</button>
+            <button type="button" onclick="setLanguage('mr')" id="lang-btn-mr" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-ke-navy transition-all">मराठी</button>
+          </div>
+
+          <button type="button" onclick="toggleTheme()" aria-label="Toggle Light and Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ke-navy dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          </button>
+
+          <button id="mobile-menu-toggle" type="button" aria-label="Toggle Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-ke-navy dark:text-white hover:bg-slate-200">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu-drawer" class="hidden lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-5 space-y-1.5 shadow-xl">
+      <a href="index.html" data-i18n="nav_home" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+      <a href="services.html" data-i18n="nav_services" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Services</a>
+      <a href="about.html" data-i18n="nav_about" class="block px-4 py-2.5 rounded-xl text-sm font-bold text-ke-red bg-ke-red/10">About Us</a>
+      <a href="gallery.html" data-i18n="nav_gallery" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Gallery</a>
+      <a href="rate-card.html" data-i18n="nav_ratecard" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Rate Card</a>
+      <a href="contact.html" data-i18n="nav_contact" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Contact Us</a>
+      <a href="client.html" data-i18n="nav_client" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Client Portal</a>
+      <a href="accounts.html" data-i18n="nav_accounts" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Accounts</a>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- MAIN CONTENT: ABOUT US PAGE                                             -->
+  <!-- ======================================================================= -->
+  <main class="pt-20 flex-grow bg-subtle-grid">
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: ELEGANT HERO & COMPANY ORIGIN STORY                        -->
+    <!-- ===================================================================== -->
+    <section class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800">
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-ke-navy/10 dark:bg-ke-navy/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-ke-red/10 dark:bg-ke-red/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Left Text Column -->
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-bold mb-5 border border-ke-navy/15 dark:border-white/15">
+              <span class="w-2 h-2 rounded-full bg-ke-red animate-pulse"></span>
+              <span data-i18n="about_badge">Established 2020 • Tapodham, Warje, Pune – 411058</span>
+            </div>
+
+            <h1 data-i18n="about_title" class="font-display font-extrabold text-3xl sm:text-5xl text-ke-navy dark:text-white tracking-tight leading-[1.15]">
+              Three Specialists. One Unified Technical Contracting Partner.
+            </h1>
+
+            <p data-i18n="about_lead" class="text-slate-600 dark:text-slate-300 text-base sm:text-lg mt-5 leading-relaxed">
+              Before forming <strong>Kalyani Electrical</strong>, partners <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong> built strong individual careers across distinct technical domains—ranging from industrial electrical engineering and MSEDCL grid operations to IT systems analysis, Cummins backup power, and electronic security.
+            </p>
+
+            <p data-i18n="about_story_2" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed">
+              In <strong>2020</strong>, we came together in <strong>Pune</strong> with a clear vision: clients should not have to coordinate with five separate contractors for electrical wiring, LT panels, solar power, CCTV surveillance, fire alarms, biometric access, and LAN networking. Today, from our office in <strong>Tapodham, Warje, Pune – 411058</strong>, we execute projects across all of Pune and throughout Maharashtra with direct partner accountability.
+            </p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-3.5">
+              <a href="services.html" class="px-6 py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-bold text-sm shadow-lg shadow-ke-navy/20 flex items-center gap-2 transition-all">
+                <span data-i18n="btn_view_services">Explore Our 9 Services</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-ke-red"></i>
+              </a>
+              <a href="contact.html" class="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-ke-navy dark:text-white border border-slate-300 dark:border-slate-700 font-bold text-sm hover:border-ke-navy transition-all flex items-center gap-2">
+                <i data-lucide="phone-call" class="w-4 h-4 text-ke-red"></i>
+                <span data-i18n="btn_contact_partners">Speak With a Partner</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Visual Card Column -->
+          <div class="lg:col-span-5">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xl">
+              <div class="flex items-center justify-center bg-slate-50 dark:bg-slate-800/70 rounded-2xl p-5 border border-slate-100 dark:border-slate-700 mb-6">
+                <img src="logo.png" alt="Kalyani Electrical Brand Emblem" class="h-24 sm:h-28 w-auto object-contain"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <svg style="display:none;" viewBox="0 0 260 155" class="h-24 sm:h-28 w-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KE Emblem">
+                  <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
+                  <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
+                  <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
+                  <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
+                  <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
+                  <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
+                  <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
+                  <text x="130" y="132" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
+                  <polygon points="91,132 95.5,123 100,132" fill="#D91E2A"/>
+                  <line x1="36" y1="146" x2="64" y2="146" stroke="#0F2354" stroke-width="2"/>
+                  <text x="130" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
+                  <line x1="196" y1="146" x2="224" y2="146" stroke="#0F2354" stroke-width="2"/>
+                </svg>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3.5 text-center">
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700">
+                  <span class="block font-display font-extrabold text-2xl text-ke-navy dark:text-white">Est. 2020</span>
+                  <span data-i18n="stat_founded" class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Founded in Pune</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700">
+                  <span class="block font-display font-extrabold text-2xl text-ke-red">9 Services</span>
+                  <span data-i18n="stat_services" class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">End-to-End Turnkey</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700">
+                  <span class="block font-display font-extrabold text-xl text-ke-navy dark:text-white">All Pune</span>
+                  <span data-i18n="stat_maharashtra" class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">&amp; Across Maharashtra</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700">
+                  <span class="block font-display font-extrabold text-xl text-emerald-600 dark:text-emerald-400">Licensed</span>
+                  <span data-i18n="stat_licensed" class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Safety &amp; Quality</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: MEET OUR THREE PARTNERS (INDIVIDUAL EXPERTISE SHOWCASE)     -->
+    <!-- ===================================================================== -->
+    <section class="py-14 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span data-i18n="partners_tag" class="text-xs font-bold uppercase tracking-wider text-ke-red">Leadership &amp; Domain Specialists</span>
+          <h2 data-i18n="partners_heading" class="font-display font-extrabold text-2xl sm:text-4xl text-ke-navy dark:text-white mt-1.5">
+            Meet the Three Partners Behind Kalyani Electrical
+          </h2>
+          <p data-i18n="partners_sub" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
+            Each partner brings independent, field-proven expertise from a specialized technical background—ensuring every project is designed, quoted, and executed with precision.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-7">
+
+          <!-- =============================================================== -->
+          <!-- PARTNER 1: AMAR (25+ Years Electrical + IT Technician/Analyst)  -->
+          <!-- =============================================================== -->
+          <div class="partner-card bg-white dark:bg-slate-900 rounded-3xl p-7 border-2 border-slate-200 dark:border-slate-800 hover:border-ke-navy dark:hover:border-blue-500 shadow-sm flex flex-col justify-between">
+            <div>
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <span class="px-3 py-1 rounded-full bg-ke-red/10 text-ke-red text-xs font-extrabold">
+                  25+ Years Experience
+                </span>
+                <span class="px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-slate-200 text-[11px] font-bold">
+                  Quotations &amp; Tech Design
+                </span>
+              </div>
+
+              <!-- Partner Identity -->
+              <div class="flex items-center gap-4 mb-5">
+                <div class="w-14 h-14 rounded-2xl bg-ke-navy text-white font-display font-extrabold text-2xl flex items-center justify-center shrink-0 shadow-md">
+                  A
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-2xl text-ke-navy dark:text-white">Amar</h3>
+                  <p data-i18n="amar_role" class="text-xs font-bold text-ke-red">Partner • Electrical, IT Systems &amp; Estimation</p>
+                </div>
+              </div>
+
+              <!-- Detailed Experience Narrative -->
+              <p data-i18n="amar_desc" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
+                Amar has been actively working in the electrical field for the past <strong>25 years</strong>, handling complex domestic, commercial, and industrial electrical projects. Alongside electrical contracting, he spent valuable years in the IT sector working as an <strong>IT Technician and Technical Analyst</strong> in an IT company.
+              </p>
+
+              <!-- Core Technical Strengths -->
+              <div class="bg-slate-50 dark:bg-slate-800/70 rounded-2xl p-4 border border-slate-200/70 dark:border-slate-700 space-y-2">
+                <span data-i18n="core_expertise_lbl" class="block text-[11px] font-extrabold uppercase tracking-wider text-ke-navy dark:text-amber-300 mb-1.5">
+                  Core Technical Strengths
+                </span>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-ke-red shrink-0 mt-0.5"></i>
+                  <span data-i18n="amar_skill_1">25 Years of Core Electrical Engineering &amp; Project Estimation</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-ke-red shrink-0 mt-0.5"></i>
+                  <span data-i18n="amar_skill_2">IT Technician &amp; Technical Analyst Background</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-ke-red shrink-0 mt-0.5"></i>
+                  <span data-i18n="amar_skill_3">Deep Expertise in LAN Networking, IP CCTV, Fire Alarm, Biometric Access Control &amp; Video Door Phones (VDP)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct Contact Footer -->
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex items-center justify-between text-xs mb-3">
+                <span data-i18n="direct_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Quotation Desk:</span>
+                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 83096 42700</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <a href="tel:+918309642700" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call">Call Amar</span>
+                </a>
+                <button type="button" onclick="openPartnerWhatsApp('quotation')" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- =============================================================== -->
+          <!-- PARTNER 2: MUNAL (9+ Years Electrical/CCTV + Cummins Power)     -->
+          <!-- =============================================================== -->
+          <div class="partner-card bg-white dark:bg-slate-900 rounded-3xl p-7 border-2 border-slate-200 dark:border-slate-800 hover:border-blue-600 dark:hover:border-blue-500 shadow-sm flex flex-col justify-between">
+            <div>
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <span class="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-extrabold">
+                  9+ Years Experience
+                </span>
+                <span class="px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-slate-200 text-[11px] font-bold">
+                  Inquiries &amp; Power Backup
+                </span>
+              </div>
+
+              <!-- Partner Identity -->
+              <div class="flex items-center gap-4 mb-5">
+                <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white font-display font-extrabold text-2xl flex items-center justify-center shrink-0 shadow-md">
+                  M
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-2xl text-ke-navy dark:text-white">Munal</h3>
+                  <p data-i18n="munal_role" class="text-xs font-bold text-blue-600 dark:text-blue-400">Partner • Power Backup, CCTV &amp; Client Inquiries</p>
+                </div>
+              </div>
+
+              <!-- Detailed Experience Narrative -->
+              <p data-i18n="munal_desc" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
+                Munal brings <strong>9 years of hands-on experience</strong> in electrical installations and CCTV surveillance systems. Having worked with <strong>Cummins Generators and Power</strong>, he possesses in-depth practical knowledge of inverter systems, backup power architecture, and uninterrupted power solutions.
+              </p>
+
+              <!-- Core Technical Strengths -->
+              <div class="bg-slate-50 dark:bg-slate-800/70 rounded-2xl p-4 border border-slate-200/70 dark:border-slate-700 space-y-2">
+                <span data-i18n="core_expertise_lbl" class="block text-[11px] font-extrabold uppercase tracking-wider text-ke-navy dark:text-amber-300 mb-1.5">
+                  Core Technical Strengths
+                </span>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
+                  <span data-i18n="munal_skill_1">9 Years in Electrical Wiring &amp; CCTV Camera Installations</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
+                  <span data-i18n="munal_skill_2">Cummins Generators &amp; Power Background — Specialist in Inverter &amp; Backup Power Systems</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
+                  <span data-i18n="munal_skill_3">Client Consultation, Site Surveys &amp; Project Coordination</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct Contact Footer -->
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex items-center justify-between text-xs mb-3">
+                <span data-i18n="inquiry_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Inquiry Desk:</span>
+                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 83291 71435</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <a href="tel:+918329171435" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call_munal">Call Munal</span>
+                </a>
+                <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- =============================================================== -->
+          <!-- PARTNER 3: VISHAL (10 Years Electrical + Ex-MSEDCL + Licensed)  -->
+          <!-- =============================================================== -->
+          <div class="partner-card bg-white dark:bg-slate-900 rounded-3xl p-7 border-2 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-500 shadow-sm flex flex-col justify-between">
+            <div>
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <span class="px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 text-xs font-extrabold">
+                  10 Years • Ex-MSEDCL
+                </span>
+                <span class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold">
+                  Licensed Electrician
+                </span>
+              </div>
+
+              <!-- Partner Identity -->
+              <div class="flex items-center gap-4 mb-5">
+                <div class="w-14 h-14 rounded-2xl bg-ke-red text-white font-display font-extrabold text-2xl flex items-center justify-center shrink-0 shadow-md">
+                  V
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-2xl text-ke-navy dark:text-white">Vishal</h3>
+                  <p data-i18n="vishal_role" class="text-xs font-bold text-amber-600 dark:text-amber-400">Partner • Licensed Electrical Execution &amp; Support</p>
+                </div>
+              </div>
+
+              <!-- Detailed Experience Narrative -->
+              <p data-i18n="vishal_desc" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
+                Vishal holds <strong>10 years of dedicated electrical experience</strong> and has previously worked with <strong>Maharashtra State Electricity Distribution Co. Ltd. (MSEDCL)</strong>. Holding an official <strong>Electrical License</strong>, he leads on-site execution, LT distribution safety compliance, and rapid maintenance support.
+              </p>
+
+              <!-- Core Technical Strengths -->
+              <div class="bg-slate-50 dark:bg-slate-800/70 rounded-2xl p-4 border border-slate-200/70 dark:border-slate-700 space-y-2">
+                <span data-i18n="core_expertise_lbl" class="block text-[11px] font-extrabold uppercase tracking-wider text-ke-navy dark:text-amber-300 mb-1.5">
+                  Core Technical Strengths
+                </span>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                  <span data-i18n="vishal_skill_1">10 Years Field Electrical Experience &amp; Official Electrical License Holder</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                  <span data-i18n="vishal_skill_2">Former Experience with Maharashtra State Electricity Distribution Co. Ltd. (MSEDCL)</span>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                  <span data-i18n="vishal_skill_3">On-Site Supervision, LT Panel Safety &amp; Rapid Complaint Resolution</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct Contact Footer -->
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex items-center justify-between text-xs mb-3">
+                <span data-i18n="support_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Support Desk:</span>
+                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 80874 79681</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <a href="tel:+918087479681" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call_vishal">Call Vishal</span>
+                </a>
+                <button type="button" onclick="openPartnerWhatsApp('complaint')" class="py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 3: OUR EXECUTION MODEL (SMALL SITES VS LARGE PROJECTS)        -->
+    <!-- ===================================================================== -->
+    <section class="py-14 bg-white dark:bg-slate-900/70 border-y border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span data-i18n="workflow_tag" class="text-xs font-bold uppercase tracking-wider text-ke-red">How We Operate</span>
+          <h2 data-i18n="workflow_title" class="font-display font-extrabold text-2xl sm:text-4xl text-ke-navy dark:text-white mt-1">
+            Structured Execution for Every Project Scale
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-7 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-2xl bg-ke-red/10 text-ke-red flex items-center justify-center mb-4">
+              <i data-lucide="zap" class="w-6 h-6"></i>
+            </div>
+            <h3 data-i18n="exec_1_t" class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-2">Small Sites: Daily Visit &amp; Quick Finish</h3>
+            <p data-i18n="exec_1_d" class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              For residential repairs, flat wiring, CCTV additions, or urgent troubleshooting, our technicians visit daily and complete the work cleanly without unnecessary delays.
+            </p>
+          </div>
+
+          <div class="p-7 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-2xl bg-ke-navy/10 dark:bg-blue-500/20 text-ke-navy dark:text-blue-400 flex items-center justify-center mb-4">
+              <i data-lucide="building-2" class="w-6 h-6"></i>
+            </div>
+            <h3 data-i18n="exec_2_t" class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-2">Large Sites: Dedicated On-Site Office</h3>
+            <p data-i18n="exec_2_d" class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              For housing societies, shopping malls, commercial towers, and industrial plants, we establish a dedicated On-Site Office to manage material inventory, manpower supervision, and daily progress.
+            </p>
+          </div>
+
+          <div class="p-7 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+              <i data-lucide="map-pin" class="w-6 h-6"></i>
+            </div>
+            <h3 data-i18n="exec_3_t" class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-2">All Pune &amp; Across Maharashtra</h3>
+            <p data-i18n="exec_3_d" class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              Headquartered at Tapodham, Warje, Pune – 411058, we cover every locality in Pune &amp; PCMC while executing commercial and industrial turnkey contracts across Maharashtra.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 4: SECTORS & WHY CLIENTS TRUST US                             -->
+    <!-- ===================================================================== -->
+    <section class="py-14 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-ke-navy rounded-3xl p-7 sm:p-10 text-white shadow-xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7">
+              <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-bold mb-3">
+                kalyanielectricals.in • Quality &amp; Safety First
+              </span>
+              <h2 data-i18n="cta_banner_title" class="font-display font-extrabold text-2xl sm:text-3xl leading-tight">
+                Ready to Discuss Your Electrical, Solar, Security, or Networking Project?
+              </h2>
+              <p data-i18n="cta_banner_desc" class="text-slate-300 text-sm mt-3 leading-relaxed">
+                Connect directly with Amar for quotations, Munal for inquiries and backup power guidance, or Vishal for licensed electrical execution and support.
+              </p>
+            </div>
+            <div class="lg:col-span-5 flex flex-wrap sm:justify-end gap-3">
+              <a href="rate-card.html" class="px-5 py-3.5 rounded-2xl bg-ke-red hover:bg-ke-redDark text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md transition-all">
+                <i data-lucide="file-down" class="w-4 h-4"></i>
+                <span data-i18n="btn_rate_card">View Rate Card</span>
+              </a>
+              <a href="gallery.html" class="px-5 py-3.5 rounded-2xl bg-white text-ke-navy hover:bg-slate-100 font-bold text-xs sm:text-sm flex items-center gap-2 transition-all">
+                <i data-lucide="images" class="w-4 h-4 text-ke-red"></i>
+                <span data-i18n="btn_gallery">View Site Gallery</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- FLOATING WHATSAPP & DESK ASSISTANT                                      -->
+  <!-- ======================================================================= -->
+  <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end">
+    <div id="bot-panel" class="hidden-bot mb-3 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div class="bg-ke-navy px-5 py-4 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-ke-red flex items-center justify-center shrink-0">
+            <i data-lucide="headphones" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-sm leading-tight">Kalyani Partner Desk</h4>
+            <span class="text-[11px] text-slate-300 block">Amar • Munal • Vishal</span>
+          </div>
+        </div>
+        <button type="button" onclick="toggleBot()" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-200">
+          <i data-lucide="chevron-down" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-4 bg-slate-50 dark:bg-slate-950 space-y-2.5">
+        <button type="button" onclick="openPartnerWhatsApp('quotation')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+          <span>Amar — Quotations &amp; IT/Security (8309642700)</span>
+          <span class="px-2 py-0.5 rounded bg-ke-red/10 text-ke-red text-[10px]">Quote</span>
+        </button>
+        <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+          <span>Munal — Inquiries &amp; Power Backup (8329171435)</span>
+          <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 text-[10px]">Inquiry</span>
+        </button>
+        <button type="button" onclick="openPartnerWhatsApp('complaint')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+          <span>Vishal — Licensed Execution &amp; Support (8087479681)</span>
+          <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 text-[10px]">Support</span>
+        </button>
+      </div>
+    </div>
+
+    <button type="button" onclick="toggleBot()" class="flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-ke-navy hover:bg-ke-navyDark text-white shadow-xl border border-white/15 transition-all hover:scale-[1.03]">
+      <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ke-red opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-ke-red"></span>
+      </span>
+      <span class="font-display font-bold text-xs sm:text-sm">WhatsApp Desk</span>
+      <i data-lucide="message-square" class="w-4 h-4 text-amber-300"></i>
+    </button>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- BOTTOM FOOTER (Privacy Policy Strictly Here + Social & Help Buttons)   -->
+  <!-- ======================================================================= -->
+  <footer class="bg-ke-navy text-white border-t border-ke-navyDark mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
+        
+        <div class="flex items-center gap-3.5 text-center sm:text-left">
+          <div class="bg-white px-3 py-1.5 rounded-xl">
+            <img src="logo.png" alt="KE Logo" class="h-10 w-auto object-contain"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <svg style="display:none;" viewBox="0 0 260 155" class="h-10 w-auto" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
+              <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
+              <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
+              <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
+              <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
+              <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
+              <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
+              <text x="130" y="132" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
+              <text x="130" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
+            </svg>
+          </div>
+          <div>
+            <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight block">
+              kalyanielectricals.in <span class="text-ke-red">Electrical Services</span>
+            </span>
+            <span class="text-xs text-slate-300 block mt-0.5">
+              Tapodham, Warje, Pune – 411058 • Est. 2020 (Amar, Munal &amp; Vishal)
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-2.5">
+          <a href="index.html" data-i18n="nav_home" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Home</a>
+          <a href="about.html" data-i18n="nav_about" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">About Us</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Privacy Policy</a>
+          <a href="contact.html" data-i18n="nav_contact" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Contact Us</a>
+
+          <a href="https://www.instagram.com/kalyani_electrical" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-pink-600/90 hover:bg-pink-600 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+            <i data-lucide="instagram" class="w-3.5 h-3.5"></i><span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com/search/top?q=Kalyani%20Electrical%20Pune" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-blue-600/90 hover:bg-blue-600 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+            <i data-lucide="facebook" class="w-3.5 h-3.5"></i><span>Facebook</span>
+          </a>
+          <a href="mailto:kalyanielectrical6@gmail.com?subject=Help%20-%20Kalyani%20Electrical%20(kalyanielectricals.in)" class="px-4 py-2 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i><span>Help</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <p>© 2020–2026 kalyanielectricals.in — Kalyani Electrical Services, Tapodham, Warje, Pune – 411058.</p>
+        <a href="mailto:kalyanielectrical6@gmail.com" class="hover:text-white transition-colors">kalyanielectrical6@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================= -->
+  <!-- JAVASCRIPT: 3-LANGUAGE TRANSLATIONS, DARK MODE & PARTNER WHATSAPP       -->
+  <!-- ======================================================================= -->
+  <script>
+    const PARTNERS = {
+      quotation: { name: 'Amar', wa: '918309642700', role: 'Quotation & Technical Design Desk' },
+      inquiry:   { name: 'Munal', wa: '918329171435', role: 'General Inquiry & Power Systems Desk' },
+      complaint: { name: 'Vishal', wa: '918087479681', role: 'Licensed Execution & Support Desk' }
+    };
+
+    const I18N = {
+      en: {
+        nav_home: 'Home', nav_services: 'Services', nav_about: 'About Us', nav_gallery: 'Gallery',
+        nav_ratecard: 'Rate Card', nav_contact: 'Contact Us', nav_client: 'Client Portal',
+        nav_accounts: 'Accounts', nav_privacy: 'Privacy Policy',
+        about_badge: 'Established 2020 • Tapodham, Warje, Pune – 411058',
+        about_title: 'Three Specialists. One Unified Technical Contracting Partner.',
+        about_lead: 'Before forming Kalyani Electrical, partners Amar, Munal, and Vishal built strong individual careers across distinct technical domains—ranging from industrial electrical engineering and MSEDCL grid operations to IT systems analysis, Cummins backup power, and electronic security.',
+        about_story_2: 'In 2020, we came together in Pune with a clear vision: clients should not have to coordinate with five separate contractors for electrical wiring, LT panels, solar power, CCTV surveillance, fire alarms, biometric access, and LAN networking. Today, from our office in Tapodham, Warje, Pune – 411058, we execute projects across all of Pune and throughout Maharashtra with direct partner accountability.',
+        btn_view_services: 'Explore Our 9 Services',
+        btn_contact_partners: 'Speak With a Partner',
+        stat_founded: 'Founded in Pune',
+        stat_services: 'End-to-End Turnkey',
+        stat_maharashtra: '& Across Maharashtra',
+        stat_licensed: 'Safety & Quality',
+        partners_tag: 'Leadership & Domain Specialists',
+        partners_heading: 'Meet the Three Partners Behind Kalyani Electrical',
+        partners_sub: 'Each partner brings independent, field-proven expertise from a specialized technical background—ensuring every project is designed, quoted, and executed with precision.',
+        core_expertise_lbl: 'Core Technical Strengths',
+        direct_desk_lbl: 'Direct Quotation Desk:',
+        inquiry_desk_lbl: 'Direct Inquiry Desk:',
+        support_desk_lbl: 'Direct Support Desk:',
+        btn_call: 'Call Amar',
+        btn_call_munal: 'Call Munal',
+        btn_call_vishal: 'Call Vishal',
+        amar_role: 'Partner • Electrical, IT Systems & Estimation',
+        amar_desc: 'Amar has been actively working in the electrical field for the past 25 years, handling complex domestic, commercial, and industrial electrical projects. Alongside electrical contracting, he spent valuable years in the IT sector working as an IT Technician and Technical Analyst in an IT company.',
+        amar_skill_1: '25 Years of Core Electrical Engineering & Project Estimation',
+        amar_skill_2: 'IT Technician & Technical Analyst Background',
+        amar_skill_3: 'Deep Expertise in LAN Networking, IP CCTV, Fire Alarm, Biometric Access Control & Video Door Phones (VDP)',
+        munal_role: 'Partner • Power Backup, CCTV & Client Inquiries',
+        munal_desc: 'Munal brings 9 years of hands-on experience in electrical installations and CCTV surveillance systems. Having worked with Cummins Generators and Power, he possesses in-depth practical knowledge of inverter systems, backup power architecture, and uninterrupted power solutions.',
+        munal_skill_1: '9 Years in Electrical Wiring & CCTV Camera Installations',
+        munal_skill_2: 'Cummins Generators & Power Background — Specialist in Inverter & Backup Power Systems',
+        munal_skill_3: 'Client Consultation, Site Surveys & Project Coordination',
+        vishal_role: 'Partner • Licensed Electrical Execution & Support',
+        vishal_desc: 'Vishal holds 10 years of dedicated electrical experience and has previously worked with Maharashtra State Electricity Distribution Co. Ltd. (MSEDCL). Holding an official Electrical License, he leads on-site execution, LT distribution safety compliance, and rapid maintenance support.',
+        vishal_skill_1: '10 Years Field Electrical Experience & Official Electrical License Holder',
+        vishal_skill_2: 'Former Experience with Maharashtra State Electricity Distribution Co. Ltd. (MSEDCL)',
+        vishal_skill_3: 'On-Site Supervision, LT Panel Safety & Rapid Complaint Resolution',
+        workflow_tag: 'How We Operate',
+        workflow_title: 'Structured Execution for Every Project Scale',
+        exec_1_t: 'Small Sites: Daily Visit & Quick Finish',
+        exec_1_d: 'For residential repairs, flat wiring, CCTV additions, or urgent troubleshooting, our technicians visit daily and complete the work cleanly without unnecessary delays.',
+        exec_2_t: 'Large Sites: Dedicated On-Site Office',
+        exec_2_d: 'For housing societies, shopping malls, commercial towers, and industrial plants, we establish a dedicated On-Site Office to manage material inventory, manpower supervision, and daily progress.',
+        exec_3_t: 'All Pune & Across Maharashtra',
+        exec_3_d: 'Headquartered at Tapodham, Warje, Pune – 411058, we cover every locality in Pune & PCMC while executing commercial and industrial turnkey contracts across Maharashtra.',
+        cta_banner_title: 'Ready to Discuss Your Electrical, Solar, Security, or Networking Project?',
+        cta_banner_desc: 'Connect directly with Amar for quotations, Munal for inquiries and backup power guidance, or Vishal for licensed electrical execution and support.',
+        btn_rate_card: 'View Rate Card',
+        btn_gallery: 'View Site Gallery'
+      },
+      hi: {
+        nav_home: 'होम', nav_services: 'सेवाएं', nav_about: 'हमारे बारे में', nav_gallery: 'गैलरी',
+        nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क करें', nav_client: 'क्लाइंट पोर्टल',
+        nav_accounts: 'अकाउंट्स', nav_privacy: 'प्राइवेसी पॉलिसी',
+        about_badge: 'स्थापना 2020 • तपोधाम, वारजे, पुणे – 411058',
+        about_title: 'तीन विशेषज्ञ। एक भरोसेमंद टेक्निकल कॉन्ट्रैक्टिंग पार्टनर।',
+        about_lead: 'कल्याणी इलेक्ट्रिकल की शुरुआत करने से पहले, तीनों पार्टनर अमर, मुनाल और विशाल ने अलग-अलग टेक्निकल क्षेत्रों में मजबूत अनुभव हासिल किया—जिसमें इंडस्ट्रियल इलेक्ट्रिकल इंजीनियरिंग, MSEDCL ग्रिड कार्य, IT सिस्टम एनालिसिस, Cummins बैकअप पावर और इलेक्ट्रॉनिक सिक्योरिटी शामिल हैं।',
+        about_story_2: '2020 में हम तीनों एक साथ आए और पुणे में कल्याणी इलेक्ट्रिकल की स्थापना की, ताकि ग्राहकों को इलेक्ट्रिकल वायरिंग, LT पैनल, सोलर पावर, CCTV, फायर अलार्म, बायोमेट्रिक एक्सेस और LAN नेटवर्किंग के लिए अलग-अलग वेंडर्स के पास न जाना पड़े। आज तपोधाम, वारजे, पुणे – 411058 से हम पूरे पुणे और महाराष्ट्र में प्रोजेक्ट्स पूरा करते हैं।',
+        btn_view_services: 'सभी 9 सेवाएं देखें',
+        btn_contact_partners: 'पार्टनर से बात करें',
+        stat_founded: 'पुणे में स्थापना',
+        stat_services: 'संपूर्ण टर्नकी सेवाएं',
+        stat_maharashtra: 'और पूरे महाराष्ट्र में',
+        stat_licensed: 'सुरक्षा और गुणवत्ता',
+        partners_tag: 'नेतृत्व और तकनीकी विशेषज्ञ',
+        partners_heading: 'कल्याणी इलेक्ट्रिकल के तीनों पार्टनर्स से मिलें',
+        partners_sub: 'हर पार्टनर का अपना अलग और व्यावहारिक तकनीकी अनुभव है—जिससे हर प्रोजेक्ट की प्लानिंग, कोटेशन और साइट एग्जीक्यूशन सटीक होता है।',
+        core_expertise_lbl: 'मुख्य तकनीकी विशेषज्ञता',
+        direct_desk_lbl: 'डायरेक्ट कोटेशन डेस्क:',
+        inquiry_desk_lbl: 'डायरेक्ट इन्क्वायरी डेस्क:',
+        support_desk_lbl: 'डायरेक्ट सपोर्ट डेस्क:',
+        btn_call: 'अमर को कॉल करें',
+        btn_call_munal: 'मुनाल को कॉल करें',
+        btn_call_vishal: 'विशाल को कॉल करें',
+        amar_role: 'पार्टनर • इलेक्ट्रिकल, IT सिस्टम्स और एस्टीमेशन',
+        amar_desc: 'अमर पिछले 25 वर्षों से इलेक्ट्रिकल क्षेत्र में सक्रिय रूप से काम कर रहे हैं और घरेलू, कमर्शियल व इंडस्ट्रियल प्रोजेक्ट्स संभालते हैं। इसके साथ ही उन्होंने IT कंपनी में IT टेक्नीशियन और टेक्निकल एनालिस्ट के रूप में काम किया है।',
+        amar_skill_1: '25 वर्षों का इलेक्ट्रिकल इंजीनियरिंग और प्रोजेक्ट एस्टीमेशन अनुभव',
+        amar_skill_2: 'IT कंपनी में IT टेक्नीशियन और टेक्निकल एनालिस्ट का अनुभव',
+        amar_skill_3: 'LAN नेटवर्किंग, IP CCTV, फायर अलार्म, बायोमेट्रिक एक्सेस कंट्रोल और वीडियो डोर फोन (VDP) की गहरी जानकारी',
+        munal_role: 'पार्टनर • पावर बैकअप, CCTV और क्लाइंट इन्क्वायरी',
+        munal_desc: 'मुनाल को इलेक्ट्रिकल और CCTV सिस्टम्स में 9 वर्षों का अनुभव है। Cummins Generators and Power में काम करने के कारण उन्हें इन्वर्टर, UPS और बैकअप पावर सिस्टम्स की बेहतरीन तकनीकी समझ है।',
+        munal_skill_1: 'इलेक्ट्रिकल वायरिंग और CCTV इंस्टॉलेशन में 9 वर्षों का अनुभव',
+        munal_skill_2: 'Cummins Generators and Power का अनुभव — इन्वर्टर और पावर बैकअप सिस्टम्स के विशेषज्ञ',
+        munal_skill_3: 'क्लाइंट कंसल्टेशन, साइट विजिट और प्रोजेक्ट कोऑर्डिनेशन',
+        vishal_role: 'पार्टनर • लाइसेंस्ड इलेक्ट्रिकल एग्जीक्यूशन और सपोर्ट',
+        vishal_desc: 'विशाल को इलेक्ट्रिकल क्षेत्र में 10 वर्षों का अनुभव है और वे महाराष्ट्र राज्य विद्युत वितरण कंपनी मर्यादित (MSEDCL) में काम कर चुके हैं। उनके पास आधिकारिक इलेक्ट्रिकल लाइसेंस भी है।',
+        vishal_skill_1: '10 वर्षों का फील्ड इलेक्ट्रिकल अनुभव और आधिकारिक इलेक्ट्रिकल लाइसेंस धारक',
+        vishal_skill_2: 'महाराष्ट्र राज्य विद्युत वितरण कंपनी (MSEDCL) में कार्य करने का अनुभव',
+        vishal_skill_3: 'ऑन-साइट सुपरविजन, LT पैनल सुरक्षा और त्वरित कंप्लेंट समाधान',
+        workflow_tag: 'हमारी कार्यप्रणाली',
+        workflow_title: 'हर प्रोजेक्ट के आकार के अनुसार व्यवस्थित कार्य',
+        exec_1_t: 'छोटी साइट्स: डेली विजिट और त्वरित समाप्ति',
+        exec_1_d: 'घरेलू रिपेयर, फ्लैट वायरिंग, CCTV या अर्जेंट फॉल्ट के लिए हमारी टीम रोजाना विजिट करके काम को जल्दी और सफाई से पूरा करती है।',
+        exec_2_t: 'बड़ी साइट्स: डेडिकेटेड ऑन-साइट ऑफिस',
+        exec_2_d: 'बड़ी सोसायटी, शॉपिंग मॉल, कमर्शियल बिल्डिंग और इंडस्ट्रियल प्लांट्स पर हम अपना ऑन-साइट ऑफिस बनाते हैं ताकि मटेरियल और काम की निगरानी सुचारू रहे।',
+        exec_3_t: 'पूरा पुणे और संपूर्ण महाराष्ट्र',
+        exec_3_d: 'तपोधाम, वारजे, पुणे – 411058 से हम पुणे के सभी क्षेत्रों के साथ-साथ पूरे महाराष्ट्र में प्रोजेक्ट्स करते हैं।',
+        cta_banner_title: 'अपने इलेक्ट्रिकल, सोलर, सिक्योरिटी या नेटवर्किंग प्रोजेक्ट पर चर्चा करें',
+        cta_banner_desc: 'कोटेशन के लिए अमर से, इन्क्वायरी और पावर बैकअप के लिए मुनाल से, या लाइसेंस्ड इलेक्ट्रिकल कार्य व सपोर्ट के लिए विशाल से सीधे जुड़ें।',
+        btn_rate_card: 'रेट कार्ड देखें',
+        btn_gallery: 'साइट गैलरी देखें'
+      },
+      mr: {
+        nav_home: 'होम', nav_services: 'सेवा', nav_about: 'आमच्याबद्दल', nav_gallery: 'गॅलरी',
+        nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क', nav_client: 'क्लायंट पोर्टल',
+        nav_accounts: 'अकाउंट्स', nav_privacy: 'प्रायव्हसी पॉलिसी',
+        about_badge: 'स्थापना २०२० • तपोधाम, वारजे, पुणे – ४११०५८',
+        about_title: 'तीन तज्ञ. एक विश्वासार्ह टेक्निकल कॉन्ट्रॅक्टिंग पार्टनर.',
+        about_lead: 'कल्याणी इलेक्ट्रिकल सुरू करण्यापूर्वी, तिन्ही पार्टनर अमर, मुनाल आणि विशाल यांनी आपापल्या स्वतंत्र तांत्रिक क्षेत्रांत मोठा अनुभव घेतला—ज्यामध्ये इंडस्ट्रियल इलेक्ट्रिकल, MSEDCL कार्य, IT सिस्टीम ॲनालिसिस, Cummins बॅकअप पॉवर आणि इलेक्ट्रॉनिक सिक्युरिटी यांचा समावेश आहे.',
+        about_story_2: '२०२० मध्ये आम्ही तिघे एकत्र आलो आणि पुण्यात कल्याणी इलेक्ट्रिकलची स्थापना केली, जेणेकरून ग्राहकांना इलेक्ट्रिकल वायरिंग, LT पॅनेल, सोलर पॉवर, CCTV, फायर अलार्म, बायोमेट्रिक आणि LAN नेटवर्किंगसाठी वेगवेगळ्या कॉन्ट्रॅक्टर्सकडे जावे लागू नये. आज तपोधाम, वारजे, पुणे – ४११०५८ येथून आम्ही संपूर्ण पुणे आणि महाराष्ट्रात कामे करतो.',
+        btn_view_services: 'आमच्या सर्व ९ सेवा पहा',
+        btn_contact_partners: 'पार्टनरशी बोला',
+        stat_founded: 'पुण्यात स्थापना',
+        stat_services: 'संपूर्ण टर्नकी सेवा',
+        stat_maharashtra: 'आणि संपूर्ण महाराष्ट्रात',
+        stat_licensed: 'सुरक्षा आणि गुणवत्ता',
+        partners_tag: 'नेतृत्व आणि तांत्रिक तज्ञ',
+        partners_heading: 'कल्याणी इलेक्ट्रिकलच्या तिन्ही पार्टनर्सची ओळख',
+        partners_sub: 'प्रत्येक पार्टनरचा स्वतंत्र आणि प्रत्यक्ष कामाचा अनुभव आहे—त्यामुळे प्रत्येक प्रोजेक्टचे नियोजन, कोटेशन आणि अंमलबजावणी अचूक होते.',
+        core_expertise_lbl: 'मुख्य तांत्रिक कौशल्ये',
+        direct_desk_lbl: 'थेट कोटेशन डेस्क:',
+        inquiry_desk_lbl: 'थेट चौकशी डेस्क:',
+        support_desk_lbl: 'थेट सपोर्ट डेस्क:',
+        btn_call: 'अमर यांना कॉल करा',
+        btn_call_munal: 'मुनाल यांना कॉल करा',
+        btn_call_vishal: 'विशाल यांना कॉल करा',
+        amar_role: 'पार्टनर • इलेक्ट्रिकल, IT सिस्टीम्स आणि एस्टिमेशन',
+        amar_desc: 'अमर गेल्या २५ वर्षांपासून इलेक्ट्रिकल क्षेत्रात कार्यरत असून घरगुती, कमर्शियल आणि इंडस्ट्रियल प्रोजेक्ट्स हाताळतात. त्यासोबतच त्यांनी IT कंपनीमध्ये IT टेक्निशियन आणि टेक्निकल ॲनालिस्ट म्हणून काम केले आहे.',
+        amar_skill_1: '२५ वर्षांचा इलेक्ट्रिकल इंजिनिअरिंग आणि प्रोजेक्ट एस्टिमेशन अनुभव',
+        amar_skill_2: 'IT कंपनीमध्ये IT टेक्निशियन आणि टेक्निकल ॲनालिस्टचा अनुभव',
+        amar_skill_3: 'LAN नेटवर्किंग, IP CCTV, फायर अलार्म, बायोमेट्रिक ॲक्सेस कंट्रोल आणि व्हिडिओ डोअर फोन (VDP) चे सखोल ज्ञान',
+        munal_role: 'पार्टनर • पॉवर बॅकअप, CCTV आणि ग्राहक चौकशी',
+        munal_desc: 'मुनाल यांना इलेक्ट्रिकल आणि CCTV सिस्टीमचा ९ वर्षांचा अनुभव आहे. Cummins Generators and Power मध्ये काम केल्यामुळे त्यांना इन्व्हर्टर आणि बॅकअप पॉवर सिस्टीमची उत्तम जाण आहे.',
+        munal_skill_1: 'इलेक्ट्रिकल वायरिंग आणि CCTV इन्स्टॉलेशनचा ९ वर्षांचा अनुभव',
+        munal_skill_2: 'Cummins Generators and Power चा अनुभव — इन्व्हर्टर आणि पॉवर बॅकअप तज्ञ',
+        munal_skill_3: 'ग्राहक सल्लामसलत, साइट व्हिजिट आणि प्रोजेक्ट समन्वय',
+        vishal_role: 'पार्टनर • परवानाधारक इलेक्ट्रिकल अंमलबजावणी आणि सपोर्ट',
+        vishal_desc: 'विशाल यांना इलेक्ट्रिकल क्षेत्रातील १० वर्षांचा अनुभव असून त्यांनी महाराष्ट्र राज्य विद्युत वितरण कंपनी मर्यादित (MSEDCL) मध्ये काम केले आहे. त्यांच्याकडे अधिकृत इलेक्ट्रिकल लायसन्स देखील आहे.',
+        vishal_skill_1: '१० वर्षांचा फील्ड इलेक्ट्रिकल अनुभव आणि अधिकृत इलेक्ट्रिकल लायसन्स धारक',
+        vishal_skill_2: 'महाराष्ट्र राज्य विद्युत वितरण कंपनी (MSEDCL) मधील कामाचा अनुभव',
+        vishal_skill_3: 'ऑन-साइट देखरेख, LT पॅनेल सुरक्षा आणि त्वरित तक्रार निवारण',
+        workflow_tag: 'आमची कार्यपद्धती',
+        workflow_title: 'प्रत्येक प्रोजेक्टनुसार नियोजित अंमलबजावणी',
+        exec_1_t: 'छोट्या साइट्स: दररोज भेट आणि जलद पूर्तता',
+        exec_1_d: 'घरगुती दुरुस्ती, फ्लॅट वायरिंग, CCTV किंवा तातडीच्या कामांसाठी आमची टीम दररोज भेट देऊन काम स्वच्छ आणि वेळेत पूर्ण करते.',
+        exec_2_t: 'मोठ्या साइट्स: स्वतंत्र ऑन-साइट ऑफिस',
+        exec_2_d: 'मोठ्या सोसायट्या, शॉपिंग मॉल्स, कमर्शियल ऑफिसेस आणि इंडस्ट्रियल प्लांट्सवर आम्ही आमचे ऑन-साइट ऑफिस उभारतो.',
+        exec_3_t: 'संपूर्ण पुणे आणि महाराष्ट्रभर सेवा',
+        exec_3_d: 'तपोधाम, वारजे, पुणे – ४११०५८ येथून आम्ही पुण्यातील सर्व भागांसह संपूर्ण महाराष्ट्रात प्रोजेक्ट्स पूर्ण करतो.',
+        cta_banner_title: 'तुमच्या इलेक्ट्रिकल, सोलर, सिक्युरिटी किंवा नेटवर्किंग प्रोजेक्टसाठी संपर्क साधा',
+        cta_banner_desc: 'कोटेशनसाठी अमर, चौकशी व पॉवर बॅकअपसाठी मुनाल, किंवा लायसन्सधारक इलेक्ट्रिकल कामासाठी विशाल यांच्याशी थेट संपर्क साधा.',
+        btn_rate_card: 'रेट कार्ड पहा',
+        btn_gallery: 'साइट गॅलरी पहा'
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!I18N[lang]) lang = 'en';
+      localStorage.setItem('ke_lang', lang);
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('bg-ke-navy', 'text-white');
+        btn.classList.add('text-slate-600', 'dark:text-slate-300');
+      });
+      const activeBtn = document.getElementById(`lang-btn-${lang}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+        activeBtn.classList.add('bg-ke-navy', 'text-white');
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[lang][key]) {
+          el.textContent = I18N[lang][key];
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.toggle('dark');
+      localStorage.setItem('ke_theme', isDark ? 'dark' : 'light');
+    }
+
+    function openPartnerWhatsApp(deskKey) {
+      const p = PARTNERS[deskKey] || PARTNERS.inquiry;
+      const msg = `Hello ${p.name} (Kalyani Electrical - kalyanielectricals.in),\n\nI visited your About Us page and would like to discuss a project under *${p.role}*.`;
+      window.open(`https://wa.me/${p.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    let botOpen = false;
+    function toggleBot() {
+      const panel = document.getElementById('bot-panel');
+      botOpen = !botOpen;
+      panel.classList.toggle('hidden-bot', !botOpen);
+    }
+
+    function applyFallbackFavicon() {
+      const fav = document.getElementById('dynamic-favicon');
+      if (!fav) return;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" rx="26" fill="#FFFFFF"/><path d="M 22 86 A 46 46 0 0 1 94 18 A 49 49 0 0 0 22 86 Z" fill="#0F2354"/><path d="M 104 72 A 48 48 0 0 1 28 94 A 51 51 0 0 0 104 72 Z" fill="#D91E2A"/><path d="M 26 36 H 41 L 38 55 L 57 36 H 74 L 51 58 L 63 82 H 47 L 38 64 L 35 82 H 20 Z" fill="#0F2354"/><polygon points="88,18 55,62 70,62 54,98 91,53 75,53" fill="#D91E2A"/><polygon points="86,36 112,36 110,46 84,46" fill="#D91E2A"/><polygon points="83,54 106,54 104,64 81,64" fill="#D91E2A"/><polygon points="76,72 104,72 102,82 74,82" fill="#D91E2A"/></svg>`;
+      fav.href = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+      applyFallbackFavicon();
+
+      const savedTheme = localStorage.getItem('ke_theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+
+      const savedLang = localStorage.getItem('ke_lang') || 'en';
+      setLanguage(savedLang);
+
+      const menuBtn = document.getElementById('mobile-menu-toggle');
+      const drawer = document.getElementById('mobile-menu-drawer');
+      if (menuBtn && drawer) {
+        menuBtn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+      }
+    });
+  </script>
+</body>
+</html>
