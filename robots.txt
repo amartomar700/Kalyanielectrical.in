@@ -1,1 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /accounts.html
 
+Sitemap: https://kalyanielectricals.in/sitemap.xml
