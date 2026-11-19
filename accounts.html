@@ -154,7 +154,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
       <!-- =================================================================== -->
-      <!-- VIEW A: LOCK SCREEN (NO PASSWORD HINT SHOWN)                        -->
+      <!-- VIEW A: LOCK SCREEN (SERVER-VERIFIED PASSWORD, NO SOURCE HINT)     -->
       <!-- =================================================================== -->
       <div id="partner-lock-view" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-10 border-2 border-ke-navy/15 dark:border-slate-800 shadow-2xl text-center">
         <div class="w-16 h-16 rounded-2xl bg-ke-red text-white flex items-center justify-center mx-auto mb-5 shadow-md">
@@ -193,7 +193,7 @@
             <p id="pass-error-msg" class="hidden text-xs font-bold text-ke-red mt-1.5">Incorrect password! Please try again.</p>
           </div>
 
-          <button type="submit" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
+          <button type="submit" id="unlock-submit-btn" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
             <i data-lucide="unlock" class="w-4 h-4 text-amber-300"></i>
             <span data-i18n="acc_btn_unlock">Unlock Console</span>
           </button>
@@ -621,9 +621,10 @@
         <div id="tab-panel-settings" class="acc-tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Change Access Password</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Update the shared console password used by Amar, Munal, and Vishal.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Update the shared console password saved in Apps Script.</p>
             <form onsubmit="changePartnerPassword(event)" class="space-y-3">
-              <input type="password" id="new-partner-pass" required minlength="4" placeholder="Enter New Password (min 4 chars)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
+              <input type="password" id="current-partner-pass" required placeholder="Current Password" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
+              <input type="password" id="new-partner-pass" required minlength="4" placeholder="New Password (min 4 chars)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
               <button type="submit" class="px-5 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold">
                 Update Password
               </button>
@@ -703,12 +704,12 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: DAILY WORK ENTRY, OWNER-ONLY EDIT/DELETE & AUDIT LOG       -->
+  <!-- JAVASCRIPT: SERVER-VERIFIED AUTH, DAILY WORK ENTRY & AUDIT LOG        -->
   <!-- ======================================================================= -->
   <script>
-    const DEFAULT_PARTNER_PASS = 'KE2020';
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUw6DPxou-kW33GLXtR1-YJa43JC_LcruFg8LuP-9beDOpfRbV6hqfqfLnkQB_rBwCgw/exec';
     let currentPartner = 'Amar';
+    let sessionPass = '';
 
     function formatMoney(num) {
       return Number(num || 0).toLocaleString('en-IN', {
@@ -722,48 +723,71 @@
       return `Date: ${r.date} | Inc: ₹${formatMoney(r.income)} | Mat: ₹${formatMoney(r.material)} | Exp: ₹${formatMoney(r.expense)} | Net: ₹${formatMoney(net)} | Settled: ${r.settled}`;
     }
 
-    function getStoredPassword() {
-      return localStorage.getItem('ke_partner_pass') || DEFAULT_PARTNER_PASS;
-    }
-
     function togglePassVisibility() {
       const inp = document.getElementById('partner-password-input');
       inp.type = inp.type === 'password' ? 'text' : 'password';
     }
 
-    function unlockPartnerDashboard(event) {
+    async function unlockPartnerDashboard(event) {
       event.preventDefault();
       const entered = document.getElementById('partner-password-input').value.trim();
       const partner = document.getElementById('partner-select').value;
       const errEl = document.getElementById('pass-error-msg');
+      const btn = document.getElementById('unlock-submit-btn');
 
-      if (entered === getStoredPassword()) {
-        errEl.classList.add('hidden');
-        currentPartner = partner;
-        document.getElementById('active-partner-name').textContent = partner;
-        document.getElementById('form-creator-label').textContent = partner;
-        document.getElementById('work-creator-label').textContent = partner;
-        document.getElementById('partner-lock-view').classList.add('hidden');
-        document.getElementById('partner-dashboard-view').classList.remove('hidden');
+      errEl.classList.add('hidden');
+      errEl.textContent = 'Incorrect password! Please try again.';
 
-        const todayStr = new Date().toISOString().split('T')[0];
-        document.getElementById('row-date').value = todayStr;
-        document.getElementById('work-date').value = todayStr;
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span>Verifying...</span>`;
 
-        cancelEditRow();
-        cancelEditWorkRow();
-        renderDailyWorkTable();
-        renderIncomeTable();
-        renderAuditLog();
-        renderPublishedDocs();
-        fetchRowsFromGoogleSheet();
-        if (window.lucide) lucide.createIcons();
-      } else {
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'verifyPassword', password: entered })
+        });
+        const data = await res.json();
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+
+        if (!data || !data.valid) {
+          errEl.classList.remove('hidden');
+          return;
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+        errEl.textContent = 'Could not verify password. Check network or script deployment.';
         errEl.classList.remove('hidden');
+        return;
       }
+
+      sessionPass = entered;
+      currentPartner = partner;
+      document.getElementById('active-partner-name').textContent = partner;
+      document.getElementById('form-creator-label').textContent = partner;
+      document.getElementById('work-creator-label').textContent = partner;
+      document.getElementById('partner-lock-view').classList.add('hidden');
+      document.getElementById('partner-dashboard-view').classList.remove('hidden');
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      document.getElementById('row-date').value = todayStr;
+      document.getElementById('work-date').value = todayStr;
+
+      cancelEditRow();
+      cancelEditWorkRow();
+      renderDailyWorkTable();
+      renderIncomeTable();
+      renderAuditLog();
+      renderPublishedDocs();
+      fetchRowsFromGoogleSheet();
+      if (window.lucide) lucide.createIcons();
     }
 
     function lockPartnerDashboard() {
+      sessionPass = '';
       cancelEditRow();
       cancelEditWorkRow();
       document.getElementById('partner-password-input').value = '';
@@ -1027,13 +1051,13 @@
     // GOOGLE SHEET SYNC & LEDGER RECORDS
     // =======================================================================
     async function syncWithGoogleSheet(payload) {
-      if (!APPS_SCRIPT_URL) return;
+      if (!APPS_SCRIPT_URL || !sessionPass) return;
       try {
         await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ ...payload, password: sessionPass })
         });
       } catch (err) {
         console.warn('Google Sheet sync queued locally:', err);
@@ -1041,9 +1065,10 @@
     }
 
     async function fetchRowsFromGoogleSheet() {
-      if (!APPS_SCRIPT_URL) return;
+      if (!APPS_SCRIPT_URL || !sessionPass) return;
       try {
-        const res = await fetch(APPS_SCRIPT_URL);
+        const url = `${APPS_SCRIPT_URL}?password=${encodeURIComponent(sessionPass)}`;
+        const res = await fetch(url);
         const data = await res.json();
         if (data && data.status === 'ok') {
           if (Array.isArray(data.rows) && data.rows.length > 0) {
@@ -1541,13 +1566,34 @@
       `).join('');
     }
 
-    function changePartnerPassword(event) {
+    async function changePartnerPassword(event) {
       event.preventDefault();
+      const currentPass = document.getElementById('current-partner-pass').value.trim();
       const newPass = document.getElementById('new-partner-pass').value.trim();
       if (newPass.length < 4) return;
-      localStorage.setItem('ke_partner_pass', newPass);
-      document.getElementById('new-partner-pass').value = '';
-      alert('Password updated successfully!');
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'changePassword',
+            currentPassword: currentPass,
+            newPassword: newPass
+          })
+        });
+        const data = await res.json();
+        if (data && data.status === 'ok') {
+          sessionPass = newPass;
+          document.getElementById('current-partner-pass').value = '';
+          document.getElementById('new-partner-pass').value = '';
+          alert('Password updated in Apps Script successfully!');
+        } else {
+          alert(data.message || 'Could not update password. Check current password.');
+        }
+      } catch (err) {
+        alert('Error updating password. Check connection.');
+      }
     }
 
     function downloadFullBackup() {
