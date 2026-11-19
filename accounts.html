@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Partner Accounts &amp; Profit Tracker | Kalyani Electrical — kalyanielectrical.in</title>
-  <meta name="description" content="Password-protected Partner Income Tracker, 3-Way Share Ledger (Amar, Munal & Vishal), and Client Portal Document Manager for Kalyani Electrical." />
+  <meta name="description" content="Password-protected Partner Income Tracker, 3-Way Share Ledger (Amar, Munal & Vishal), Edit/Delete Audit Log, and Client Portal Document Manager for Kalyani Electrical." />
 
   <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -148,7 +148,7 @@
   </header>
 
   <!-- ======================================================================= -->
-  <!-- MAIN CONTENT: PARTNER PASSWORD-LOCKED ACCOUNTS & INCOME TRACKER         -->
+  <!-- MAIN CONTENT: PARTNER PASSWORD-LOCKED ACCOUNTS & AUDIT TRAIL            -->
   <!-- ======================================================================= -->
   <main class="pt-20 flex-grow bg-subtle-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
@@ -168,7 +168,7 @@
           Partner Income Tracker &amp; Vault
         </h1>
         <p data-i18n="acc_sub" class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-          Authorized exclusively for partners <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>. Select your partner profile and enter the Partner Password to unlock.
+          Authorized exclusively for partners <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>. Only the entry creator can edit or delete their row, and every edit or deletion is recorded in the Audit Log.
         </p>
 
         <form onsubmit="unlockPartnerDashboard(event)" class="mt-6 space-y-4 text-left">
@@ -209,7 +209,7 @@
       <!-- =================================================================== -->
       <div id="partner-dashboard-view" class="hidden space-y-6">
 
-        <!-- Partner Header Bar (Matches Sheet1 Header: "Partner Income Tracker — Login by [Partner]") -->
+        <!-- Partner Header Bar -->
         <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">
@@ -219,10 +219,14 @@
               Partner Income Tracker — Login by <span id="active-partner-name" class="text-amber-300">Amar</span>
             </h2>
             <p class="text-slate-200 text-xs sm:text-sm mt-1">
-              Auto-calculates Net Benefit on Hand &amp; Equal 3-Way Share (Amar, Munal &amp; Vishal) with Settlement Status.
+              Every edit or deletion is automatically recorded in the <strong>Edit &amp; Delete History</strong> so all partners can see changes.
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" onclick="fetchRowsFromGoogleSheet()" class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>Sync Sheet</span>
+            </button>
             <button type="button" onclick="printIncomeTrackerPDF()" class="px-4 py-2.5 rounded-xl bg-white text-ke-navy hover:bg-slate-100 text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
               <i data-lucide="printer" class="w-4 h-4 text-ke-red"></i>
               <span>Print / PDF Report</span>
@@ -234,7 +238,7 @@
           </div>
         </div>
 
-        <!-- 4 Top KPI Summary Boxes (Exact Match to Sheet1 Row 2–4) -->
+        <!-- 4 Top KPI Summary Boxes -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-[#d9e2f8]/60 dark:bg-slate-900 rounded-2xl p-5 border border-ke-navy/20 dark:border-slate-800 shadow-xs">
             <span class="text-xs font-extrabold uppercase tracking-wider text-ke-navy dark:text-blue-300 block">Total Gross Income</span>
@@ -254,7 +258,7 @@
           </div>
         </div>
 
-        <!-- Partner-Wise Share Summary Strip (Amar | Munal | Vishal + Unsettled Alert) -->
+        <!-- Partner-Wise Share Summary Strip -->
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
@@ -289,7 +293,7 @@
         <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
-            1. Partner Income &amp; Share Sheet
+            1. Partner Income &amp; Audit Log
           </button>
           <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
             2. Upload Client Portal Docs
@@ -300,20 +304,23 @@
         </div>
 
         <!-- ================================================================= -->
-        <!-- TAB 1: PARTNER INCOME TRACKER (EXACT SHEET1 COLUMNS & FORMULAS)   -->
+        <!-- TAB 1: PARTNER INCOME TRACKER + EDIT/DELETE AUDIT HISTORY        -->
         <!-- ================================================================= -->
         <div id="tab-panel-ledger" class="acc-tab-panel space-y-6">
 
-          <!-- Add New Client / Site Income Entry Form -->
+          <!-- Add / Edit Entry Form -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Add New Site Income &amp; Split Entry</h3>
+              <h3 id="entry-form-heading" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">
+                Add New Site Income Entry (Entry by: <span class="text-ke-red" id="form-creator-label">Amar</span>)
+              </h3>
               <span id="live-preview-pill" class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
                 Live Preview: Net ₹ 0.00 | Each Partner ₹ 0.00
               </span>
             </div>
 
-            <form onsubmit="addIncomeRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
+            <form id="income-entry-form" onsubmit="saveIncomeRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
+              <input type="hidden" id="editing-row-id" value="" />
               <div>
                 <label class="block text-[11px] font-bold text-slate-500 mb-1">Date *</label>
                 <input type="date" id="row-date" required class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
@@ -335,35 +342,46 @@
                 <input type="number" id="row-expense" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1">Partner Settlement</label>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Settlement</label>
                 <div class="flex gap-1.5">
-                  <select id="row-settled" class="w-full px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
-                    <option value="No">No (Pending)</option>
-                    <option value="Yes">Yes (Settled)</option>
+                  <select id="row-settled" class="w-full px-2 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
                   </select>
-                  <button type="submit" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold shrink-0 transition-all">
+                  <button type="submit" id="save-row-btn" class="px-3.5 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold shrink-0 transition-all">
                     + Add
+                  </button>
+                  <button type="button" id="cancel-edit-btn" onclick="cancelEditRow()" class="hidden px-2.5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold shrink-0">
+                    ✕
                   </button>
                 </div>
               </div>
             </form>
           </div>
 
-          <!-- Interactive Ledger Table (Matches Sheet1 Columns A to K) -->
+          <!-- Interactive Ledger Table -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Partner Income &amp; Settlement Sheet</h3>
-                <p class="text-[11px] text-slate-500">Tip: Click on the <strong>Yes / No</strong> badge in any row to toggle Partner Settlement status.</p>
+                <p class="text-[11px] text-slate-500">
+                  <strong>Entry By</strong> shows who created the row. Only that partner can <strong>Edit</strong>, toggle <strong>Yes/No</strong>, or <strong>Delete</strong> it.
+                </p>
               </div>
               <div class="flex flex-wrap items-center gap-2">
+                <select id="filter-creator" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
+                  <option value="ALL">All Partners</option>
+                  <option value="Amar">Added by Amar</option>
+                  <option value="Munal">Added by Munal</option>
+                  <option value="Vishal">Added by Vishal</option>
+                </select>
                 <select id="filter-settled" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
-                  <option value="ALL">Show All Rows</option>
-                  <option value="Yes">Settled Only (Yes)</option>
-                  <option value="No">Pending Only (No)</option>
+                  <option value="ALL">All Status</option>
+                  <option value="Yes">Settled (Yes)</option>
+                  <option value="No">Pending (No)</option>
                 </select>
                 <button type="button" onclick="exportIncomeCSV()" class="px-3.5 py-1.5 rounded-lg bg-ke-navy text-white text-xs font-bold hover:bg-ke-navyDark">
-                  Export Excel / CSV
+                  Export CSV
                 </button>
               </div>
             </div>
@@ -372,37 +390,77 @@
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr class="bg-[#3c5f90] text-white uppercase tracking-wider text-[11px]">
-                    <th class="py-3 px-3 text-center">Sr. No.</th>
-                    <th class="py-3 px-3 text-center">Date</th>
+                    <th class="py-3 px-2.5 text-center">Sr.</th>
+                    <th class="py-3 px-2.5 text-center">Date</th>
                     <th class="py-3 px-3">Client</th>
-                    <th class="py-3 px-3 text-right">Income</th>
-                    <th class="py-3 px-3 text-right">Material</th>
-                    <th class="py-3 px-3 text-right">Expenses</th>
-                    <th class="py-3 px-3 text-right">Net Benefit on Hand</th>
-                    <th class="py-3 px-3 text-right">Amar's Share</th>
-                    <th class="py-3 px-3 text-right">Munal's Share</th>
-                    <th class="py-3 px-3 text-right">Vishal's Share</th>
-                    <th class="py-3 px-3 text-center">Partner Settlement</th>
-                    <th class="py-3 px-2 text-center">Del</th>
+                    <th class="py-3 px-2.5 text-center">Entry By</th>
+                    <th class="py-3 px-2.5 text-right">Income</th>
+                    <th class="py-3 px-2.5 text-right">Material</th>
+                    <th class="py-3 px-2.5 text-right">Expenses</th>
+                    <th class="py-3 px-2.5 text-right">Net Benefit</th>
+                    <th class="py-3 px-2.5 text-right">Amar's Share</th>
+                    <th class="py-3 px-2.5 text-right">Munal's Share</th>
+                    <th class="py-3 px-2.5 text-right">Vishal's Share</th>
+                    <th class="py-3 px-2.5 text-center">Settled</th>
+                    <th class="py-3 px-2.5 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="income-table-body" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
                 <tfoot>
                   <tr class="bg-[#ececf4] dark:bg-slate-800 font-extrabold text-slate-900 dark:text-white border-t-2 border-slate-400 dark:border-slate-600">
-                    <td class="py-3 px-3 text-center" colspan="3">Total</td>
-                    <td id="foot-income" class="py-3 px-3 text-right">0.00</td>
-                    <td id="foot-material" class="py-3 px-3 text-right">0.00</td>
-                    <td id="foot-expense" class="py-3 px-3 text-right">0.00</td>
-                    <td id="foot-net" class="py-3 px-3 text-right text-emerald-700 dark:text-emerald-400">0.00</td>
-                    <td id="foot-amar" class="py-3 px-3 text-right">0.00</td>
-                    <td id="foot-munal" class="py-3 px-3 text-right">0.00</td>
-                    <td id="foot-vishal" class="py-3 px-3 text-right">0.00</td>
+                    <td class="py-3 px-3 text-center" colspan="4">Total</td>
+                    <td id="foot-income" class="py-3 px-2.5 text-right">0.00</td>
+                    <td id="foot-material" class="py-3 px-2.5 text-right">0.00</td>
+                    <td id="foot-expense" class="py-3 px-2.5 text-right">0.00</td>
+                    <td id="foot-net" class="py-3 px-2.5 text-right text-emerald-700 dark:text-emerald-400">0.00</td>
+                    <td id="foot-amar" class="py-3 px-2.5 text-right">0.00</td>
+                    <td id="foot-munal" class="py-3 px-2.5 text-right">0.00</td>
+                    <td id="foot-vishal" class="py-3 px-2.5 text-right">0.00</td>
                     <td colspan="2"></td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
+
+          <!-- EDIT & DELETE AUDIT LOG (Permanent Change Tracker for All Partners) -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border-2 border-amber-500/30 dark:border-slate-800 shadow-md">
+            <div class="p-5 bg-amber-50/70 dark:bg-slate-800/70 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="history" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">
+                    Edit &amp; Delete History Log (Transparency Record)
+                  </h3>
+                  <p class="text-[11px] text-slate-600 dark:text-slate-300">
+                    Automatically records every <strong>Edited</strong> or <strong>Deleted</strong> entry—who made the change, time, and old vs. new details.
+                  </p>
+                </div>
+              </div>
+              <span id="audit-count-badge" class="px-3 py-1 rounded-full bg-ke-navy text-white text-[11px] font-bold">
+                0 Changes Logged
+              </span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase text-[11px]">
+                    <th class="py-2.5 px-4">Date &amp; Time</th>
+                    <th class="py-2.5 px-3">Partner</th>
+                    <th class="py-2.5 px-3">Action</th>
+                    <th class="py-2.5 px-3">Client</th>
+                    <th class="py-2.5 px-4">Old Details</th>
+                    <th class="py-2.5 px-4">New Details / Status</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-log-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
 
         <!-- ================================================================= -->
@@ -482,7 +540,7 @@
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Backup &amp; Restore Accounts Data</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of all Partner Income Tracker rows and Client Documents.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of all Partner Income Tracker rows, Audit History, and Client Documents.</p>
             <button type="button" onclick="downloadFullBackup()" class="px-5 py-2.5 rounded-xl bg-ke-navy hover:bg-ke-navyDark text-white text-xs font-extrabold flex items-center gap-2">
               <i data-lucide="download" class="w-4 h-4 text-amber-300"></i>
               <span>Download Full Accounts Backup (.json)</span>
@@ -553,10 +611,11 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: PARTNER INCOME TRACKER, 3-WAY SHARE & PDF REPORT GENERATOR  -->
+  <!-- JAVASCRIPT: OWNER-ONLY EDIT/DELETE, AUDIT LOG & GOOGLE SHEET SYNC       -->
   <!-- ======================================================================= -->
   <script>
     const DEFAULT_PARTNER_PASS = 'KE2020';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUw6DPxou-kW33GLXtR1-YJa43JC_LcruFg8LuP-9beDOpfRbV6hqfqfLnkQB_rBwCgw/exec';
     let currentPartner = 'Amar';
 
     function formatMoney(num) {
@@ -564,6 +623,11 @@
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
+    }
+
+    function summarizeRow(r) {
+      const net = Number(r.income) - Number(r.material) - Number(r.expense);
+      return `Date: ${r.date} | Inc: ₹${formatMoney(r.income)} | Mat: ₹${formatMoney(r.material)} | Exp: ₹${formatMoney(r.expense)} | Net: ₹${formatMoney(net)} | Settled: ${r.settled}`;
     }
 
     function getStoredPassword() {
@@ -585,11 +649,15 @@
         errEl.classList.add('hidden');
         currentPartner = partner;
         document.getElementById('active-partner-name').textContent = partner;
+        document.getElementById('form-creator-label').textContent = partner;
         document.getElementById('partner-lock-view').classList.add('hidden');
         document.getElementById('partner-dashboard-view').classList.remove('hidden');
         document.getElementById('row-date').value = new Date().toISOString().split('T')[0];
+        cancelEditRow();
         renderIncomeTable();
+        renderAuditLog();
         renderPublishedDocs();
+        fetchRowsFromGoogleSheet();
         if (window.lucide) lucide.createIcons();
       } else {
         errEl.classList.remove('hidden');
@@ -597,6 +665,7 @@
     }
 
     function lockPartnerDashboard() {
+      cancelEditRow();
       document.getElementById('partner-password-input').value = '';
       document.getElementById('partner-dashboard-view').classList.add('hidden');
       document.getElementById('partner-lock-view').classList.remove('hidden');
@@ -615,7 +684,99 @@
       activeBtn.classList.add('bg-ke-navy', 'text-white', 'shadow-xs');
     }
 
-    // PARTNER INCOME TRACKER DATA (Initialized with Sheet1 Entry: vikash shinde)
+    // AUDIT TRAIL LOGS
+    function getAuditLogs() {
+      return JSON.parse(localStorage.getItem('ke_partner_audit_logs') || '[]');
+    }
+
+    function recordAuditLog(action, client, oldSummary, newSummary) {
+      const entry = {
+        id: 'aud-' + Date.now(),
+        timestamp: new Date().toLocaleString('en-IN'),
+        partner: currentPartner,
+        action,
+        client,
+        oldSummary,
+        newSummary
+      };
+      const logs = getAuditLogs();
+      logs.unshift(entry);
+      localStorage.setItem('ke_partner_audit_logs', JSON.stringify(logs));
+      renderAuditLog();
+      return entry;
+    }
+
+    function renderAuditLog() {
+      const logs = getAuditLogs();
+      const tbody = document.getElementById('audit-log-body');
+      const badge = document.getElementById('audit-count-badge');
+      badge.textContent = `${logs.length} ${logs.length === 1 ? 'Change' : 'Changes'} Logged`;
+
+      if (logs.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-5 px-4 text-center text-slate-400">
+              No edits or deletions yet. Any edit or delete made by a partner will appear here permanently.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = logs.map(l => {
+        const isDelete = l.action === 'Deleted';
+        const pillClass = isDelete
+          ? 'bg-red-100 text-ke-red dark:bg-red-950/60 dark:text-red-300'
+          : 'bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300';
+        return `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+            <td class="py-2.5 px-4 whitespace-nowrap text-slate-500 dark:text-slate-400">${l.timestamp}</td>
+            <td class="py-2.5 px-3 font-extrabold text-ke-navy dark:text-amber-300 whitespace-nowrap">${l.partner}</td>
+            <td class="py-2.5 px-3 whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${pillClass}">${l.action}</span>
+            </td>
+            <td class="py-2.5 px-3 font-bold text-slate-900 dark:text-white">${l.client}</td>
+            <td class="py-2.5 px-4 text-slate-600 dark:text-slate-300">${l.oldSummary}</td>
+            <td class="py-2.5 px-4 font-semibold ${isDelete ? 'text-ke-red' : 'text-emerald-700 dark:text-emerald-400'}">${l.newSummary}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function syncWithGoogleSheet(payload) {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YAHAN_APNA')) return;
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Google Sheet sync queued locally:', err);
+      }
+    }
+
+    async function fetchRowsFromGoogleSheet() {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YAHAN_APNA')) return;
+      try {
+        const res = await fetch(APPS_SCRIPT_URL);
+        const data = await res.json();
+        if (data && data.status === 'ok') {
+          if (Array.isArray(data.rows) && data.rows.length > 0) {
+            localStorage.setItem('ke_partner_income_rows', JSON.stringify(data.rows));
+            renderIncomeTable();
+          }
+          if (Array.isArray(data.auditLogs) && data.auditLogs.length > 0) {
+            localStorage.setItem('ke_partner_audit_logs', JSON.stringify(data.auditLogs));
+            renderAuditLog();
+          }
+        }
+      } catch (err) {
+        console.warn('Using local browser data:', err);
+      }
+    }
+
     function getIncomeRows() {
       const saved = JSON.parse(localStorage.getItem('ke_partner_income_rows') || 'null');
       if (saved) return saved;
@@ -628,7 +789,10 @@
           material: 650.00,
           expense: 200.00,
           settled: 'Yes',
-          addedBy: 'Amar'
+          addedBy: 'Amar',
+          editedCount: 0,
+          lastEditedBy: '',
+          lastEditedAt: ''
         }
       ];
       localStorage.setItem('ke_partner_income_rows', JSON.stringify(initial));
@@ -645,8 +809,9 @@
         `Live Preview: Net ₹ ${formatMoney(net)} | Each Partner ₹ ${formatMoney(share)}`;
     }
 
-    function addIncomeRow(event) {
+    function saveIncomeRow(event) {
       event.preventDefault();
+      const editId = document.getElementById('editing-row-id').value;
       const date = document.getElementById('row-date').value;
       const client = document.getElementById('row-client').value.trim();
       const income = parseFloat(document.getElementById('row-income').value) || 0;
@@ -654,48 +819,151 @@
       const expense = parseFloat(document.getElementById('row-expense').value) || 0;
       const settled = document.getElementById('row-settled').value;
 
-      const rows = getIncomeRows();
-      rows.push({
-        id: Date.now(),
-        date,
-        client,
-        income,
-        material,
-        expense,
-        settled,
-        addedBy: currentPartner
-      });
-      localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      let rows = getIncomeRows();
 
+      if (editId) {
+        const target = rows.find(r => String(r.id) === String(editId));
+        if (!target) return;
+        if (target.addedBy !== currentPartner) {
+          alert(`Only ${target.addedBy} can edit this entry.`);
+          return;
+        }
+
+        const oldSnapshot = { ...target };
+        const oldSummary = summarizeRow(oldSnapshot);
+
+        target.date = date;
+        target.client = client;
+        target.income = income;
+        target.material = material;
+        target.expense = expense;
+        target.settled = settled;
+        target.editedCount = (Number(target.editedCount) || 0) + 1;
+        target.lastEditedBy = currentPartner;
+        target.lastEditedAt = new Date().toLocaleString('en-IN');
+
+        const newSummary = summarizeRow(target);
+        const auditEntry = recordAuditLog('Edited', client, oldSummary, newSummary);
+
+        localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+        syncWithGoogleSheet({ action: 'edit', row: target, audit: auditEntry });
+        cancelEditRow();
+      } else {
+        const newRow = {
+          id: Date.now(),
+          date,
+          client,
+          income,
+          material,
+          expense,
+          settled,
+          addedBy: currentPartner,
+          editedCount: 0,
+          lastEditedBy: '',
+          lastEditedAt: ''
+        };
+        rows.push(newRow);
+        localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+        syncWithGoogleSheet({ action: 'add', row: newRow });
+
+        document.getElementById('row-client').value = '';
+        document.getElementById('row-income').value = '';
+        document.getElementById('row-material').value = '0';
+        document.getElementById('row-expense').value = '0';
+        updateLiveSplitPreview();
+      }
+
+      renderIncomeTable();
+    }
+
+    function startEditRow(id) {
+      const row = getIncomeRows().find(r => String(r.id) === String(id));
+      if (!row) return;
+      if (row.addedBy !== currentPartner) {
+        alert(`Permission denied: This entry was created by ${row.addedBy}. Only ${row.addedBy} can edit it.`);
+        return;
+      }
+
+      document.getElementById('editing-row-id').value = row.id;
+      document.getElementById('row-date').value = row.date;
+      document.getElementById('row-client').value = row.client;
+      document.getElementById('row-income').value = row.income;
+      document.getElementById('row-material').value = row.material;
+      document.getElementById('row-expense').value = row.expense;
+      document.getElementById('row-settled').value = row.settled;
+
+      document.getElementById('save-row-btn').textContent = 'Save';
+      document.getElementById('cancel-edit-btn').classList.remove('hidden');
+      updateLiveSplitPreview();
+      document.getElementById('income-entry-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function cancelEditRow() {
+      document.getElementById('editing-row-id').value = '';
       document.getElementById('row-client').value = '';
       document.getElementById('row-income').value = '';
       document.getElementById('row-material').value = '0';
       document.getElementById('row-expense').value = '0';
+      document.getElementById('row-settled').value = 'No';
+      document.getElementById('save-row-btn').textContent = '+ Add';
+      document.getElementById('cancel-edit-btn').classList.add('hidden');
       updateLiveSplitPreview();
-      renderIncomeTable();
     }
 
     function toggleSettlement(id) {
-      const rows = getIncomeRows().map(r => {
-        if (r.id === id) {
-          r.settled = r.settled === 'Yes' ? 'No' : 'Yes';
-        }
-        return r;
-      });
+      const rows = getIncomeRows();
+      const target = rows.find(r => String(r.id) === String(id));
+      if (!target) return;
+      if (target.addedBy !== currentPartner) {
+        alert(`Only ${target.addedBy} can change the settlement status of this entry.`);
+        return;
+      }
+
+      const oldSummary = `Settled: ${target.settled}`;
+      target.settled = target.settled === 'Yes' ? 'No' : 'Yes';
+      target.editedCount = (Number(target.editedCount) || 0) + 1;
+      target.lastEditedBy = currentPartner;
+      target.lastEditedAt = new Date().toLocaleString('en-IN');
+
+      const auditEntry = recordAuditLog(
+        'Edited',
+        target.client,
+        oldSummary,
+        `Settled changed to: ${target.settled} (Income ₹${formatMoney(target.income)})`
+      );
+
       localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      syncWithGoogleSheet({ action: 'toggle', id: id, audit: auditEntry });
       renderIncomeTable();
     }
 
     function deleteIncomeRow(id) {
-      if (!confirm('Delete this entry from Partner Income Tracker?')) return;
-      const rows = getIncomeRows().filter(r => r.id !== id);
-      localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      const rows = getIncomeRows();
+      const target = rows.find(r => String(r.id) === String(id));
+      if (!target) return;
+      if (target.addedBy !== currentPartner) {
+        alert(`Only ${target.addedBy} can delete this entry.`);
+        return;
+      }
+      if (!confirm('Delete this entry? This deletion will be permanently recorded in Edit & Delete History.')) return;
+
+      const auditEntry = recordAuditLog(
+        'Deleted',
+        target.client,
+        summarizeRow(target),
+        `Entry deleted by ${currentPartner}`
+      );
+
+      const updated = rows.filter(r => String(r.id) !== String(id));
+      localStorage.setItem('ke_partner_income_rows', JSON.stringify(updated));
+      syncWithGoogleSheet({ action: 'delete', id: id, audit: auditEntry });
       renderIncomeTable();
     }
 
     function renderIncomeTable() {
       const allRows = getIncomeRows();
-      const filter = document.getElementById('filter-settled').value;
+      const settledFilter = document.getElementById('filter-settled').value;
+      const creatorFilter = document.getElementById('filter-creator').value;
 
       let totInc = 0, totMat = 0, totExp = 0, totNet = 0, pendingNet = 0;
       allRows.forEach(r => {
@@ -718,33 +986,62 @@
       document.getElementById('share-vishal').textContent = `₹ ${formatMoney(totShare)}`;
       document.getElementById('pending-settlement-amt').textContent = `₹ ${formatMoney(pendingNet)}`;
 
-      const filteredRows = allRows.filter(r => filter === 'ALL' || r.settled === filter);
-      const tbody = document.getElementById('income-table-body');
+      const filteredRows = allRows.filter(r => {
+        const matchSettled = settledFilter === 'ALL' || r.settled === settledFilter;
+        const matchCreator = creatorFilter === 'ALL' || (r.addedBy || 'Amar') === creatorFilter;
+        return matchSettled && matchCreator;
+      });
 
+      const tbody = document.getElementById('income-table-body');
       tbody.innerHTML = filteredRows.map((r, index) => {
+        const creator = r.addedBy || 'Amar';
+        const isOwner = creator === currentPartner;
         const net = Number(r.income) - Number(r.material) - Number(r.expense);
         const share = net / 3;
         const isYes = r.settled === 'Yes';
+        const wasEdited = (Number(r.editedCount) || 0) > 0;
+
+        const creatorBadgeColor =
+          creator === 'Amar' ? 'bg-ke-navy/10 text-ke-navy dark:bg-blue-500/20 dark:text-blue-300' :
+          creator === 'Munal' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
+          'bg-red-100 text-ke-red dark:bg-red-900/40 dark:text-red-300';
+
         return `
           <tr class="${index % 2 === 0 ? 'bg-[#f8f8ff] dark:bg-slate-900' : 'bg-white dark:bg-slate-900/60'} hover:bg-blue-50/60 dark:hover:bg-slate-800/70">
-            <td class="py-2.5 px-3 text-center font-bold">${index + 1}</td>
-            <td class="py-2.5 px-3 text-center whitespace-nowrap">${r.date}</td>
-            <td class="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">${r.client}</td>
-            <td class="py-2.5 px-3 text-right font-medium">${formatMoney(r.income)}</td>
-            <td class="py-2.5 px-3 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.material)}</td>
-            <td class="py-2.5 px-3 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.expense)}</td>
-            <td class="py-2.5 px-3 text-right font-extrabold text-ke-navy dark:text-emerald-400">${formatMoney(net)}</td>
-            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
-            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
-            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
-            <td class="py-2.5 px-3 text-center">
-              <button type="button" onclick="toggleSettlement(${r.id})" title="Click to toggle Yes / No"
-                class="px-3.5 py-1 rounded-full text-[11px] font-extrabold transition-all ${isYes ? 'bg-[#3ec08a] text-[#003823]' : 'bg-amber-200 text-amber-900'}">
-                ${isYes ? 'Yes' : 'No'}
-              </button>
+            <td class="py-2.5 px-2.5 text-center font-bold">${index + 1}</td>
+            <td class="py-2.5 px-2.5 text-center whitespace-nowrap">${r.date}</td>
+            <td class="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">
+              <span>${r.client}</span>
+              ${wasEdited ? `<span title="Edited by ${r.lastEditedBy || creator} on ${r.lastEditedAt || ''}" class="ml-1.5 px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] font-extrabold">Edited</span>` : ''}
             </td>
-            <td class="py-2.5 px-2 text-center">
-              <button type="button" onclick="deleteIncomeRow(${r.id})" class="text-slate-400 hover:text-ke-red font-bold">✕</button>
+            <td class="py-2.5 px-2.5 text-center whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${creatorBadgeColor}">${creator}</span>
+            </td>
+            <td class="py-2.5 px-2.5 text-right font-medium">${formatMoney(r.income)}</td>
+            <td class="py-2.5 px-2.5 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.material)}</td>
+            <td class="py-2.5 px-2.5 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.expense)}</td>
+            <td class="py-2.5 px-2.5 text-right font-extrabold text-ke-navy dark:text-emerald-400">${formatMoney(net)}</td>
+            <td class="py-2.5 px-2.5 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-2.5 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-2.5 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-2.5 text-center">
+              ${isOwner
+                ? `<button type="button" onclick="toggleSettlement(${r.id})" title="Click to toggle Yes / No"
+                     class="px-3 py-1 rounded-full text-[11px] font-extrabold cursor-pointer transition-all ${isYes ? 'bg-[#3ec08a] text-[#003823]' : 'bg-amber-200 text-amber-900'}">
+                     ${isYes ? 'Yes' : 'No'}
+                   </button>`
+                : `<span title="Only ${creator} can change settlement"
+                     class="px-3 py-1 rounded-full text-[11px] font-bold opacity-80 ${isYes ? 'bg-[#3ec08a]/80 text-[#003823]' : 'bg-amber-100 text-amber-800'}">
+                     ${isYes ? 'Yes' : 'No'}
+                   </span>`
+              }
+            </td>
+            <td class="py-2.5 px-2.5 text-center whitespace-nowrap">
+              ${isOwner
+                ? `<button type="button" onclick="startEditRow(${r.id})" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-700 hover:bg-ke-navy hover:text-white text-[11px] font-bold mr-1">Edit</button>
+                   <button type="button" onclick="deleteIncomeRow(${r.id})" class="px-1.5 py-1 rounded text-slate-400 hover:text-ke-red font-bold">✕</button>`
+                : `<span class="text-[11px] font-semibold text-slate-400 italic">View Only</span>`
+              }
             </td>
           </tr>
         `;
@@ -761,11 +1058,11 @@
 
     function exportIncomeCSV() {
       const rows = getIncomeRows();
-      let csv = 'Sr. No.,Date,Client,Income,Material,Expenses,Net Benefit on Hand,Amar Share,Munal Share,Vishal Share,Partner Settlement\n';
+      let csv = 'Sr. No.,Date,Client,Entry By,Edited Count,Income,Material,Expenses,Net Benefit on Hand,Amar Share,Munal Share,Vishal Share,Partner Settlement\n';
       rows.forEach((r, idx) => {
         const net = Number(r.income) - Number(r.material) - Number(r.expense);
         const share = (net / 3).toFixed(2);
-        csv += `${idx + 1},"${r.date}","${r.client}",${Number(r.income).toFixed(2)},${Number(r.material).toFixed(2)},${Number(r.expense).toFixed(2)},${net.toFixed(2)},${share},${share},${share},"${r.settled}"\n`;
+        csv += `${idx + 1},"${r.date}","${r.client}","${r.addedBy || 'Amar'}",${Number(r.editedCount) || 0},${Number(r.income).toFixed(2)},${Number(r.material).toFixed(2)},${Number(r.expense).toFixed(2)},${net.toFixed(2)},${share},${share},${share},"${r.settled}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
@@ -777,7 +1074,9 @@
 
     function printIncomeTrackerPDF() {
       const rows = getIncomeRows();
+      const logs = getAuditLogs();
       let totInc = 0, totMat = 0, totExp = 0, totNet = 0;
+
       const bodyHtml = rows.map((r, idx) => {
         const net = Number(r.income) - Number(r.material) - Number(r.expense);
         const share = net / 3;
@@ -789,7 +1088,8 @@
           <tr>
             <td style="text-align:center;">${idx + 1}</td>
             <td style="text-align:center;">${r.date}</td>
-            <td>${r.client}</td>
+            <td>${r.client}${(r.editedCount > 0) ? ' (Edited)' : ''}</td>
+            <td style="text-align:center;">${r.addedBy || 'Amar'}</td>
             <td style="text-align:right;">${formatMoney(r.income)}</td>
             <td style="text-align:right;">${formatMoney(r.material)}</td>
             <td style="text-align:right;">${formatMoney(r.expense)}</td>
@@ -801,6 +1101,17 @@
           </tr>
         `;
       }).join('');
+
+      const auditRowsHtml = logs.map(l => `
+        <tr>
+          <td>${l.timestamp}</td>
+          <td><b>${l.partner}</b></td>
+          <td><b>${l.action}</b></td>
+          <td>${l.client}</td>
+          <td>${l.oldSummary}</td>
+          <td>${l.newSummary}</td>
+        </tr>
+      `).join('');
 
       const win = window.open('', '_blank', 'width=1050,height=750');
       if (!win) {
@@ -817,10 +1128,11 @@
             @page { size: A4 landscape; margin: 10mm; }
             body { font-family: Arial, sans-serif; color: #181c1f; margin: 0; }
             .title { background: #3c5f90 !important; color: #fff; padding: 12px; text-align: center; font-size: 16px; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; }
-            th { background: #3c5f90 !important; color: #fff; padding: 7px 5px; border: 1px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            td { padding: 6px 5px; border: 1px solid #000; }
+            table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 10.5px; }
+            th { background: #3c5f90 !important; color: #fff; padding: 6px 5px; border: 1px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            td { padding: 5px; border: 1px solid #000; }
             tfoot td { background: #ececf4 !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            h3 { margin-top: 16px; font-size: 13px; color: #0F2354; }
           </style>
         </head>
         <body>
@@ -828,14 +1140,14 @@
           <table>
             <thead>
               <tr>
-                <th>Sr. No.</th><th>Date</th><th>Client</th><th>Income</th><th>Material</th><th>Expenses</th>
-                <th>Net Benefit on Hand</th><th>Amar's Share</th><th>Munal's Share</th><th>Vishal's Share</th><th>Partner Settlement</th>
+                <th>Sr.</th><th>Date</th><th>Client</th><th>Entry By</th><th>Income</th><th>Material</th><th>Expenses</th>
+                <th>Net Benefit</th><th>Amar's Share</th><th>Munal's Share</th><th>Vishal's Share</th><th>Settled</th>
               </tr>
             </thead>
             <tbody>${bodyHtml}</tbody>
             <tfoot>
               <tr>
-                <td colspan="3">Total</td>
+                <td colspan="4">Total</td>
                 <td style="text-align:right;">${formatMoney(totInc)}</td>
                 <td style="text-align:right;">${formatMoney(totMat)}</td>
                 <td style="text-align:right;">${formatMoney(totExp)}</td>
@@ -847,6 +1159,16 @@
               </tr>
             </tfoot>
           </table>
+
+          ${logs.length > 0 ? `
+            <h3>Edit &amp; Delete History Log</h3>
+            <table>
+              <thead>
+                <tr><th>Time</th><th>Partner</th><th>Action</th><th>Client</th><th>Old Details</th><th>New Details</th></tr>
+              </thead>
+              <tbody>${auditRowsHtml}</tbody>
+            </table>
+          ` : ''}
           <script>window.onload = function() { setTimeout(function() { window.print(); }, 250); };<\/script>
         </body>
         </html>
@@ -854,7 +1176,6 @@
       win.document.close();
     }
 
-    // CLIENT DOCUMENTS PUBLISHER (SYNCS WITH client.html)
     function getPartnerClientDocs() {
       return JSON.parse(localStorage.getItem('ke_client_docs') || '[]');
     }
@@ -931,6 +1252,7 @@
         exportedBy: currentPartner,
         exportedAt: new Date().toISOString(),
         partnerIncomeTracker: getIncomeRows(),
+        auditLogs: getAuditLogs(),
         clientDocuments: getPartnerClientDocs()
       };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -948,7 +1270,7 @@
         nav_accounts: 'Accounts', nav_privacy: 'Privacy Policy',
         acc_badge: 'Restricted Partner Access',
         acc_title: 'Partner Income Tracker & Vault',
-        acc_sub: 'Authorized exclusively for partners Amar, Munal, and Vishal. Select your partner profile and enter the Partner Password to unlock.',
+        acc_sub: 'Authorized exclusively for partners Amar, Munal, and Vishal. Only the entry creator can edit or delete their row, and every edit or deletion is recorded in the Audit Log.',
         acc_lbl_pass: 'Partner Security Password *',
         acc_btn_unlock: 'Unlock Partner Accounts'
       },
@@ -958,7 +1280,7 @@
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्राइवेसी पॉलिसी',
         acc_badge: 'केवल पार्टनर्स के लिए सुरक्षित',
         acc_title: 'पार्टनर इनकम ट्रैकर और अकाउंट्स',
-        acc_sub: 'यह पेज केवल अमर, मुनाल और विशाल के लिए सुरक्षित है। अनलॉक करने के लिए पार्टनर पासवर्ड दर्ज करें।',
+        acc_sub: 'यह पेज केवल अमर, मुनाल और विशाल के लिए है। जो एंट्री करेगा केवल वही उसे एडिट या डिलीट कर पाएगा, और हर एडिट या डिलीट की हिस्ट्री सेव रहेगी।',
         acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
         acc_btn_unlock: 'अकाउंट्स अनलॉक करें'
       },
@@ -968,7 +1290,7 @@
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्रायव्हसी पॉलिसी',
         acc_badge: 'फक्त पार्टनर्ससाठी राखीव',
         acc_title: 'पार्टनर इन्कम ट्रॅकर आणि अकाउंट्स',
-        acc_sub: 'हे पेज फक्त अमर, मुनाल आणि विशाल यांच्यासाठी सुरक्षित आहे. उघडण्यासाठी पार्टनर पासवर्ड टाका.',
+        acc_sub: 'हे पेज फक्त अमर, मुनाल आणि विशाल यांच्यासाठी आहे. ज्याने एंट्री केली आहे फक्त तोच ती एडिट किंवा डिलीट करू शकेल, आणि प्रत्येक बदलाची नोंद हिस्ट्रीमध्ये राहील.',
         acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
         acc_btn_unlock: 'अकाउंट्स उघडा'
       }
