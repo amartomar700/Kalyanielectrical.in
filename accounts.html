@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partner Accounts &amp; Profit Tracker | Kalyani Electrical — kalyanielectrical.in</title>
-  <meta name="description" content="Password-protected Partner Income Tracker, 3-Way Share Ledger (Amar, Munal & Vishal), Edit/Delete Audit Log, and Client Portal Document Manager for Kalyani Electrical." />
+  <title>Site Logs &amp; Sync Console | Kalyani Electrical — kalyanielectrical.in</title>
+  <meta name="description" content="Protected site operations console for Kalyani Electrical partners (Amar, Munal & Vishal) with Daily Work Entry, records, and audit history." />
 
   <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -148,13 +148,13 @@
   </header>
 
   <!-- ======================================================================= -->
-  <!-- MAIN CONTENT: PARTNER PASSWORD-LOCKED ACCOUNTS & AUDIT TRAIL            -->
+  <!-- MAIN CONTENT: PROTECTED CONSOLE, DAILY WORK ENTRY & AUDIT TRAIL       -->
   <!-- ======================================================================= -->
   <main class="pt-20 flex-grow bg-subtle-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
       <!-- =================================================================== -->
-      <!-- VIEW A: PARTNER PASSWORD LOCK SCREEN                                -->
+      <!-- VIEW A: LOCK SCREEN (NO PASSWORD HINT SHOWN)                        -->
       <!-- =================================================================== -->
       <div id="partner-lock-view" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-10 border-2 border-ke-navy/15 dark:border-slate-800 shadow-2xl text-center">
         <div class="w-16 h-16 rounded-2xl bg-ke-red text-white flex items-center justify-center mx-auto mb-5 shadow-md">
@@ -162,29 +162,29 @@
         </div>
 
         <span data-i18n="acc_badge" class="inline-block px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-extrabold uppercase tracking-wider mb-2">
-          Restricted Partner Access
+          Restricted Access
         </span>
         <h1 data-i18n="acc_title" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white">
-          Partner Income Tracker &amp; Vault
+          Site Logs &amp; Sync Console
         </h1>
         <p data-i18n="acc_sub" class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-          Authorized exclusively for partners <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>. Only the entry creator can edit or delete their row, and every edit or deletion is recorded in the Audit Log.
+          Authorized exclusively for team members <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>. Only the entry creator can edit or delete their row, and changes are logged.
         </p>
 
         <form onsubmit="unlockPartnerDashboard(event)" class="mt-6 space-y-4 text-left">
           <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Login As Partner</label>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Login Profile</label>
             <select id="partner-select" class="w-full px-3.5 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold text-ke-navy dark:text-white focus:outline-none focus:border-ke-navy">
-              <option value="Amar">Amar (Partner)</option>
-              <option value="Munal">Munal (Partner)</option>
-              <option value="Vishal">Vishal (Partner)</option>
+              <option value="Amar">Amar</option>
+              <option value="Munal">Munal</option>
+              <option value="Vishal">Vishal</option>
             </select>
           </div>
 
           <div>
-            <label data-i18n="acc_lbl_pass" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Partner Security Password *</label>
+            <label data-i18n="acc_lbl_pass" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Access Password *</label>
             <div class="relative">
-              <input type="password" id="partner-password-input" required placeholder="Enter Partner Password"
+              <input type="password" id="partner-password-input" required placeholder="Enter Password"
                      class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-base font-bold tracking-widest text-ke-navy dark:text-white focus:outline-none focus:border-ke-navy" />
               <button type="button" onclick="togglePassVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-ke-navy">
                 <i data-lucide="eye" class="w-4 h-4"></i>
@@ -195,31 +195,27 @@
 
           <button type="submit" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
             <i data-lucide="unlock" class="w-4 h-4 text-amber-300"></i>
-            <span data-i18n="acc_btn_unlock">Unlock Partner Accounts</span>
+            <span data-i18n="acc_btn_unlock">Unlock Console</span>
           </button>
         </form>
-
-        <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400">
-          Default Initial Password: <code class="font-bold text-ke-navy dark:text-amber-300">KE2020</code> (Changeable inside dashboard)
-        </div>
       </div>
 
       <!-- =================================================================== -->
-      <!-- VIEW B: UNLOCKED PARTNER INCOME TRACKER DASHBOARD                   -->
+      <!-- VIEW B: UNLOCKED CONSOLE DASHBOARD                                 -->
       <!-- =================================================================== -->
       <div id="partner-dashboard-view" class="hidden space-y-6">
 
-        <!-- Partner Header Bar -->
+        <!-- Header Bar -->
         <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">
               ● Active Session • kalyanielectrical.in
             </span>
             <h2 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
-              Partner Income Tracker — Login by <span id="active-partner-name" class="text-amber-300">Amar</span>
+              Site Logs &amp; Sync Console — Login by <span id="active-partner-name" class="text-amber-300">Amar</span>
             </h2>
             <p class="text-slate-200 text-xs sm:text-sm mt-1">
-              Every edit or deletion is automatically recorded in the <strong>Edit &amp; Delete History</strong> so all partners can see changes.
+              Manage date-wise daily work entries, ledger records, and transparency history. Only the creator can edit or delete their entry.
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2.5">
@@ -292,30 +288,126 @@
 
         <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
-          <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
-            1. Partner Income &amp; Audit Log
+          <button type="button" onclick="switchAccTab('dailywork')" id="tab-btn-dailywork" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
+            1. Daily Work Entry
+          </button>
+          <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
+            2. Ledger &amp; Audit Log
           </button>
           <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
-            2. Upload Client Portal Docs
+            3. Upload Client Portal Docs
           </button>
           <button type="button" onclick="switchAccTab('settings')" id="tab-btn-settings" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
-            3. Backup &amp; Change Password
+            4. Backup &amp; Password
           </button>
         </div>
 
         <!-- ================================================================= -->
-        <!-- TAB 1: PARTNER INCOME TRACKER + EDIT/DELETE AUDIT HISTORY        -->
+        <!-- TAB 1: DAILY WORK ENTRY (DATE-WISE DAILY ROUTINE & WORK LOG)     -->
         <!-- ================================================================= -->
-        <div id="tab-panel-ledger" class="acc-tab-panel space-y-6">
+        <div id="tab-panel-dailywork" class="acc-tab-panel space-y-6">
 
-          <!-- Add / Edit Entry Form -->
+          <!-- Add / Edit Daily Work Entry Form -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <h3 id="work-form-heading" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">
+                Daily Work Entry — Log Date-Wise Work (<span class="text-ke-red" id="work-creator-label">Amar</span>)
+              </h3>
+              <span class="px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-bold">
+                Date-Wise Routine &amp; Site Record
+              </span>
+            </div>
+
+            <form id="daily-work-form" onsubmit="saveDailyWorkRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+              <input type="hidden" id="editing-work-id" value="" />
+              <div>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Work Date *</label>
+                <input type="date" id="work-date" required class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+              </div>
+              <div class="lg:col-span-2">
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Site / Work Activity *</label>
+                <input type="text" id="work-activity" required placeholder="e.g., Warje site wiring, CCTV check, panel visit" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Status *</label>
+                <select id="work-status" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
+                  <option value="Completed">Completed</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Notes / Handover</label>
+                <input type="text" id="work-notes" placeholder="Material needed / next step" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+              </div>
+              <div class="flex items-end gap-1.5">
+                <button type="submit" id="save-work-btn" class="w-full px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold transition-all">
+                  + Save Entry
+                </button>
+                <button type="button" id="cancel-work-edit-btn" onclick="cancelEditWorkRow()" class="hidden px-2.5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold shrink-0">
+                  ✕
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Date-Wise Daily Work Table -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Daily Work Entry Log</h3>
+                <p class="text-[11px] text-slate-500">
+                  Filter by date or partner. Only the partner who created an entry can edit or delete it; others can view it.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="date" id="filter-work-date" onchange="renderDailyWorkTable()" aria-label="Filter by Date"
+                       class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200" />
+                <button type="button" onclick="clearWorkDateFilter()" class="px-2.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-[11px] font-bold">
+                  All Dates
+                </button>
+                <select id="filter-work-partner" onchange="renderDailyWorkTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
+                  <option value="ALL">All Profiles</option>
+                  <option value="Amar">Amar</option>
+                  <option value="Munal">Munal</option>
+                  <option value="Vishal">Vishal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-[#3c5f90] text-white uppercase tracking-wider text-[11px]">
+                    <th class="py-3 px-2.5 text-center">Sr.</th>
+                    <th class="py-3 px-3 text-center">Date</th>
+                    <th class="py-3 px-4">Site / Work Activity</th>
+                    <th class="py-3 px-3 text-center">Entry By</th>
+                    <th class="py-3 px-3 text-center">Status</th>
+                    <th class="py-3 px-4">Notes / Handover</th>
+                    <th class="py-3 px-3 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="daily-work-table-body" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 2: LEDGER + EDIT/DELETE AUDIT HISTORY                        -->
+        <!-- ================================================================= -->
+        <div id="tab-panel-ledger" class="acc-tab-panel hidden space-y-6">
+
+          <!-- Add / Edit Ledger Entry Form -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
               <h3 id="entry-form-heading" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">
-                Add New Site Income Entry (Entry by: <span class="text-ke-red" id="form-creator-label">Amar</span>)
+                Add Record Entry (Entry by: <span class="text-ke-red" id="form-creator-label">Amar</span>)
               </h3>
               <span id="live-preview-pill" class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
-                Live Preview: Net ₹ 0.00 | Each Partner ₹ 0.00
+                Live Preview: Net ₹ 0.00 | Each Share ₹ 0.00
               </span>
             </div>
 
@@ -363,14 +455,14 @@
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Partner Income &amp; Settlement Sheet</h3>
+                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Records &amp; Settlement Sheet</h3>
                 <p class="text-[11px] text-slate-500">
-                  <strong>Entry By</strong> shows who created the row. Only that partner can <strong>Edit</strong>, toggle <strong>Yes/No</strong>, or <strong>Delete</strong> it.
+                  <strong>Entry By</strong> shows who created the row. Only that user can <strong>Edit</strong>, toggle <strong>Yes/No</strong>, or <strong>Delete</strong> it.
                 </p>
               </div>
               <div class="flex flex-wrap items-center gap-2">
                 <select id="filter-creator" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
-                  <option value="ALL">All Partners</option>
+                  <option value="ALL">All Profiles</option>
                   <option value="Amar">Added by Amar</option>
                   <option value="Munal">Added by Munal</option>
                   <option value="Vishal">Added by Vishal</option>
@@ -423,7 +515,7 @@
             </div>
           </div>
 
-          <!-- EDIT & DELETE AUDIT LOG (Permanent Change Tracker for All Partners) -->
+          <!-- EDIT & DELETE AUDIT LOG -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border-2 border-amber-500/30 dark:border-slate-800 shadow-md">
             <div class="p-5 bg-amber-50/70 dark:bg-slate-800/70 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2.5">
@@ -432,7 +524,7 @@
                 </div>
                 <div>
                   <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">
-                    Edit &amp; Delete History Log (Transparency Record)
+                    Edit &amp; Delete History Log
                   </h3>
                   <p class="text-[11px] text-slate-600 dark:text-slate-300">
                     Automatically records every <strong>Edited</strong> or <strong>Deleted</strong> entry—who made the change, time, and old vs. new details.
@@ -449,9 +541,9 @@
                 <thead>
                   <tr class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase text-[11px]">
                     <th class="py-2.5 px-4">Date &amp; Time</th>
-                    <th class="py-2.5 px-3">Partner</th>
+                    <th class="py-2.5 px-3">User</th>
                     <th class="py-2.5 px-3">Action</th>
-                    <th class="py-2.5 px-3">Client</th>
+                    <th class="py-2.5 px-3">Client / Item</th>
                     <th class="py-2.5 px-4">Old Details</th>
                     <th class="py-2.5 px-4">New Details / Status</th>
                   </tr>
@@ -464,7 +556,7 @@
         </div>
 
         <!-- ================================================================= -->
-        <!-- TAB 2: PUBLISH DOCUMENTS TO CLIENT PORTAL (client.html)           -->
+        <!-- TAB 3: PUBLISH DOCUMENTS TO CLIENT PORTAL (client.html)           -->
         <!-- ================================================================= -->
         <div id="tab-panel-clientdocs" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -524,26 +616,26 @@
         </div>
 
         <!-- ================================================================= -->
-        <!-- TAB 3: BACKUP & CHANGE PARTNER PASSWORD                           -->
+        <!-- TAB 4: BACKUP & CHANGE PASSWORD                                   -->
         <!-- ================================================================= -->
         <div id="tab-panel-settings" class="acc-tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Change Partner Access Password</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Update the shared security password used by Amar, Munal, and Vishal.</p>
+            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Change Access Password</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Update the shared console password used by Amar, Munal, and Vishal.</p>
             <form onsubmit="changePartnerPassword(event)" class="space-y-3">
-              <input type="password" id="new-partner-pass" required minlength="4" placeholder="Enter New Partner Password (min 4 chars)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
+              <input type="password" id="new-partner-pass" required minlength="4" placeholder="Enter New Password (min 4 chars)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
               <button type="submit" class="px-5 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold">
-                Update Partner Password
+                Update Password
               </button>
             </form>
           </div>
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Backup &amp; Restore Accounts Data</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of all Partner Income Tracker rows, Audit History, and Client Documents.</p>
+            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Backup Console Data</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of Daily Work Entries, Records, Audit History, and Client Documents.</p>
             <button type="button" onclick="downloadFullBackup()" class="px-5 py-2.5 rounded-xl bg-ke-navy hover:bg-ke-navyDark text-white text-xs font-extrabold flex items-center gap-2">
               <i data-lucide="download" class="w-4 h-4 text-amber-300"></i>
-              <span>Download Full Accounts Backup (.json)</span>
+              <span>Download Full Backup (.json)</span>
             </button>
           </div>
         </div>
@@ -611,7 +703,7 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: OWNER-ONLY EDIT/DELETE, AUDIT LOG & GOOGLE SHEET SYNC       -->
+  <!-- JAVASCRIPT: DAILY WORK ENTRY, OWNER-ONLY EDIT/DELETE & AUDIT LOG       -->
   <!-- ======================================================================= -->
   <script>
     const DEFAULT_PARTNER_PASS = 'KE2020';
@@ -650,10 +742,17 @@
         currentPartner = partner;
         document.getElementById('active-partner-name').textContent = partner;
         document.getElementById('form-creator-label').textContent = partner;
+        document.getElementById('work-creator-label').textContent = partner;
         document.getElementById('partner-lock-view').classList.add('hidden');
         document.getElementById('partner-dashboard-view').classList.remove('hidden');
-        document.getElementById('row-date').value = new Date().toISOString().split('T')[0];
+
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('row-date').value = todayStr;
+        document.getElementById('work-date').value = todayStr;
+
         cancelEditRow();
+        cancelEditWorkRow();
+        renderDailyWorkTable();
         renderIncomeTable();
         renderAuditLog();
         renderPublishedDocs();
@@ -666,6 +765,7 @@
 
     function lockPartnerDashboard() {
       cancelEditRow();
+      cancelEditWorkRow();
       document.getElementById('partner-password-input').value = '';
       document.getElementById('partner-dashboard-view').classList.add('hidden');
       document.getElementById('partner-lock-view').classList.remove('hidden');
@@ -684,7 +784,187 @@
       activeBtn.classList.add('bg-ke-navy', 'text-white', 'shadow-xs');
     }
 
+    // =======================================================================
+    // DAILY WORK ENTRY (DATE-WISE DAILY ROUTINE & WORK LOG)
+    // =======================================================================
+    function getDailyWorkRows() {
+      const saved = JSON.parse(localStorage.getItem('ke_daily_work_rows') || 'null');
+      if (saved) return saved;
+      const initial = [
+        {
+          id: 1732010000100,
+          date: '2026-11-19',
+          activity: 'Vikash Shinde site work & inspection',
+          status: 'Completed',
+          notes: 'Settled & logged for day record',
+          addedBy: 'Amar',
+          editedCount: 0
+        }
+      ];
+      localStorage.setItem('ke_daily_work_rows', JSON.stringify(initial));
+      return initial;
+    }
+
+    function saveDailyWorkRow(event) {
+      event.preventDefault();
+      const editId = document.getElementById('editing-work-id').value;
+      const date = document.getElementById('work-date').value;
+      const activity = document.getElementById('work-activity').value.trim();
+      const status = document.getElementById('work-status').value;
+      const notes = document.getElementById('work-notes').value.trim() || '-';
+
+      const rows = getDailyWorkRows();
+
+      if (editId) {
+        const target = rows.find(r => String(r.id) === String(editId));
+        if (!target) return;
+        if (target.addedBy !== currentPartner) {
+          alert(`Only ${target.addedBy} can edit this daily work entry.`);
+          return;
+        }
+        const oldSummary = `Date: ${target.date} | Work: ${target.activity} | Status: ${target.status} | Notes: ${target.notes}`;
+        target.date = date;
+        target.activity = activity;
+        target.status = status;
+        target.notes = notes;
+        target.editedCount = (Number(target.editedCount) || 0) + 1;
+
+        const newSummary = `Date: ${date} | Work: ${activity} | Status: ${status} | Notes: ${notes}`;
+        recordAuditLog('Edited', `[Work] ${activity}`, oldSummary, newSummary);
+        localStorage.setItem('ke_daily_work_rows', JSON.stringify(rows));
+        cancelEditWorkRow();
+      } else {
+        rows.unshift({
+          id: Date.now(),
+          date,
+          activity,
+          status,
+          notes,
+          addedBy: currentPartner,
+          editedCount: 0
+        });
+        localStorage.setItem('ke_daily_work_rows', JSON.stringify(rows));
+        document.getElementById('work-activity').value = '';
+        document.getElementById('work-notes').value = '';
+      }
+
+      renderDailyWorkTable();
+    }
+
+    function startEditWorkRow(id) {
+      const row = getDailyWorkRows().find(r => String(r.id) === String(id));
+      if (!row) return;
+      if (row.addedBy !== currentPartner) {
+        alert(`Only ${row.addedBy} can edit this daily work entry.`);
+        return;
+      }
+
+      document.getElementById('editing-work-id').value = row.id;
+      document.getElementById('work-date').value = row.date;
+      document.getElementById('work-activity').value = row.activity;
+      document.getElementById('work-status').value = row.status;
+      document.getElementById('work-notes').value = row.notes === '-' ? '' : row.notes;
+
+      document.getElementById('save-work-btn').textContent = 'Save';
+      document.getElementById('cancel-work-edit-btn').classList.remove('hidden');
+      document.getElementById('daily-work-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function cancelEditWorkRow() {
+      document.getElementById('editing-work-id').value = '';
+      document.getElementById('work-activity').value = '';
+      document.getElementById('work-notes').value = '';
+      document.getElementById('work-status').value = 'Completed';
+      document.getElementById('save-work-btn').textContent = '+ Save Entry';
+      document.getElementById('cancel-work-edit-btn').classList.add('hidden');
+    }
+
+    function deleteDailyWorkRow(id) {
+      const rows = getDailyWorkRows();
+      const target = rows.find(r => String(r.id) === String(id));
+      if (!target) return;
+      if (target.addedBy !== currentPartner) {
+        alert(`Only ${target.addedBy} can delete this daily work entry.`);
+        return;
+      }
+      if (!confirm('Delete this daily work entry? It will be recorded in Edit & Delete History.')) return;
+
+      const oldSummary = `Date: ${target.date} | Work: ${target.activity} | Status: ${target.status} | Notes: ${target.notes}`;
+      recordAuditLog('Deleted', `[Work] ${target.activity}`, oldSummary, `Work entry deleted by ${currentPartner}`);
+
+      const updated = rows.filter(r => String(r.id) !== String(id));
+      localStorage.setItem('ke_daily_work_rows', JSON.stringify(updated));
+      renderDailyWorkTable();
+    }
+
+    function clearWorkDateFilter() {
+      document.getElementById('filter-work-date').value = '';
+      renderDailyWorkTable();
+    }
+
+    function renderDailyWorkTable() {
+      const rows = getDailyWorkRows();
+      const dateFilter = document.getElementById('filter-work-date').value;
+      const partnerFilter = document.getElementById('filter-work-partner').value;
+
+      const filtered = rows.filter(r => {
+        const matchDate = !dateFilter || r.date === dateFilter;
+        const matchPartner = partnerFilter === 'ALL' || (r.addedBy || 'Amar') === partnerFilter;
+        return matchDate && matchPartner;
+      });
+
+      const tbody = document.getElementById('daily-work-table-body');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-6 px-4 text-center text-slate-400">
+              No daily work entries found for the selected filter.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((r, idx) => {
+        const creator = r.addedBy || 'Amar';
+        const isOwner = creator === currentPartner;
+        const wasEdited = (Number(r.editedCount) || 0) > 0;
+
+        const statusBadge =
+          r.status === 'Completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300' :
+          r.status === 'In Progress' ? 'bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300' :
+          'bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300';
+
+        return `
+          <tr class="${idx % 2 === 0 ? 'bg-[#f8f8ff] dark:bg-slate-900' : 'bg-white dark:bg-slate-900/60'} hover:bg-blue-50/60 dark:hover:bg-slate-800/70">
+            <td class="py-2.5 px-2.5 text-center font-bold">${idx + 1}</td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap font-semibold">${r.date}</td>
+            <td class="py-2.5 px-4 font-semibold text-slate-900 dark:text-white">
+              <span>${r.activity}</span>
+              ${wasEdited ? `<span class="ml-1.5 px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] font-extrabold">Edited</span>` : ''}
+            </td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-ke-navy/10 text-ke-navy dark:bg-blue-500/20 dark:text-blue-300">${creator}</span>
+            </td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${statusBadge}">${r.status}</span>
+            </td>
+            <td class="py-2.5 px-4 text-slate-600 dark:text-slate-300">${r.notes || '-'}</td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap">
+              ${isOwner
+                ? `<button type="button" onclick="startEditWorkRow(${r.id})" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-700 hover:bg-ke-navy hover:text-white text-[11px] font-bold mr-1">Edit</button>
+                   <button type="button" onclick="deleteDailyWorkRow(${r.id})" class="px-1.5 py-1 rounded text-slate-400 hover:text-ke-red font-bold">✕</button>`
+                : `<span class="text-[11px] font-semibold text-slate-400 italic">View Only</span>`
+              }
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // =======================================================================
     // AUDIT TRAIL LOGS
+    // =======================================================================
     function getAuditLogs() {
       return JSON.parse(localStorage.getItem('ke_partner_audit_logs') || '[]');
     }
@@ -716,7 +996,7 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="6" class="py-5 px-4 text-center text-slate-400">
-              No edits or deletions yet. Any edit or delete made by a partner will appear here permanently.
+              No edits or deletions yet. Any edit or delete made will appear here permanently.
             </td>
           </tr>
         `;
@@ -743,8 +1023,11 @@
       }).join('');
     }
 
+    // =======================================================================
+    // GOOGLE SHEET SYNC & LEDGER RECORDS
+    // =======================================================================
     async function syncWithGoogleSheet(payload) {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YAHAN_APNA')) return;
+      if (!APPS_SCRIPT_URL) return;
       try {
         await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
@@ -758,7 +1041,7 @@
     }
 
     async function fetchRowsFromGoogleSheet() {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YAHAN_APNA')) return;
+      if (!APPS_SCRIPT_URL) return;
       try {
         const res = await fetch(APPS_SCRIPT_URL);
         const data = await res.json();
@@ -806,7 +1089,7 @@
       const net = inc - mat - exp;
       const share = net / 3;
       document.getElementById('live-preview-pill').textContent =
-        `Live Preview: Net ₹ ${formatMoney(net)} | Each Partner ₹ ${formatMoney(share)}`;
+        `Live Preview: Net ₹ ${formatMoney(net)} | Each Share ₹ ${formatMoney(share)}`;
     }
 
     function saveIncomeRow(event) {
@@ -819,7 +1102,7 @@
       const expense = parseFloat(document.getElementById('row-expense').value) || 0;
       const settled = document.getElementById('row-settled').value;
 
-      let rows = getIncomeRows();
+      const rows = getIncomeRows();
 
       if (editId) {
         const target = rows.find(r => String(r.id) === String(editId));
@@ -829,9 +1112,7 @@
           return;
         }
 
-        const oldSnapshot = { ...target };
-        const oldSummary = summarizeRow(oldSnapshot);
-
+        const oldSummary = summarizeRow({ ...target });
         target.date = date;
         target.client = client;
         target.income = income;
@@ -1068,12 +1349,13 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Kalyani_Partner_Income_Tracker_${new Date().toISOString().split('T')[0]}.csv`;
+      a.download = `Kalyani_Site_Records_${new Date().toISOString().split('T')[0]}.csv`;
       a.click();
     }
 
     function printIncomeTrackerPDF() {
       const rows = getIncomeRows();
+      const workRows = getDailyWorkRows();
       const logs = getAuditLogs();
       let totInc = 0, totMat = 0, totExp = 0, totNet = 0;
 
@@ -1102,6 +1384,17 @@
         `;
       }).join('');
 
+      const workHtml = workRows.map((w, idx) => `
+        <tr>
+          <td style="text-align:center;">${idx + 1}</td>
+          <td style="text-align:center;">${w.date}</td>
+          <td>${w.activity}</td>
+          <td style="text-align:center;">${w.addedBy || 'Amar'}</td>
+          <td style="text-align:center;">${w.status}</td>
+          <td>${w.notes || '-'}</td>
+        </tr>
+      `).join('');
+
       const auditRowsHtml = logs.map(l => `
         <tr>
           <td>${l.timestamp}</td>
@@ -1123,7 +1416,7 @@
         <!DOCTYPE html>
         <html>
         <head>
-          <title>Partner Income Tracker — Kalyani Electrical</title>
+          <title>Site Logs &amp; Sync Console — Kalyani Electrical</title>
           <style>
             @page { size: A4 landscape; margin: 10mm; }
             body { font-family: Arial, sans-serif; color: #181c1f; margin: 0; }
@@ -1136,7 +1429,7 @@
           </style>
         </head>
         <body>
-          <div class="title">Partner Income Tracker — Login by ${currentPartner} (Kalyani Electrical • kalyanielectrical.in)</div>
+          <div class="title">Site Logs &amp; Sync Console — Login by ${currentPartner} (Kalyani Electrical • kalyanielectrical.in)</div>
           <table>
             <thead>
               <tr>
@@ -1160,11 +1453,21 @@
             </tfoot>
           </table>
 
+          ${workRows.length > 0 ? `
+            <h3>Daily Work Entry Log</h3>
+            <table>
+              <thead>
+                <tr><th>Sr.</th><th>Date</th><th>Site / Work Activity</th><th>Entry By</th><th>Status</th><th>Notes</th></tr>
+              </thead>
+              <tbody>${workHtml}</tbody>
+            </table>
+          ` : ''}
+
           ${logs.length > 0 ? `
             <h3>Edit &amp; Delete History Log</h3>
             <table>
               <thead>
-                <tr><th>Time</th><th>Partner</th><th>Action</th><th>Client</th><th>Old Details</th><th>New Details</th></tr>
+                <tr><th>Time</th><th>User</th><th>Action</th><th>Client / Item</th><th>Old Details</th><th>New Details</th></tr>
               </thead>
               <tbody>${auditRowsHtml}</tbody>
             </table>
@@ -1244,13 +1547,14 @@
       if (newPass.length < 4) return;
       localStorage.setItem('ke_partner_pass', newPass);
       document.getElementById('new-partner-pass').value = '';
-      alert('Partner password updated successfully!');
+      alert('Password updated successfully!');
     }
 
     function downloadFullBackup() {
       const data = {
         exportedBy: currentPartner,
         exportedAt: new Date().toISOString(),
+        dailyWorkEntries: getDailyWorkRows(),
         partnerIncomeTracker: getIncomeRows(),
         auditLogs: getAuditLogs(),
         clientDocuments: getPartnerClientDocs()
@@ -1259,7 +1563,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Kalyani_Partner_Accounts_Backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `Kalyani_Site_Logs_Backup_${new Date().toISOString().split('T')[0]}.json`;
       a.click();
     }
 
@@ -1268,31 +1572,31 @@
         nav_home: 'Home', nav_services: 'Services', nav_about: 'About Us', nav_gallery: 'Gallery',
         nav_ratecard: 'Rate Card', nav_contact: 'Contact Us', nav_client: 'Client Portal',
         nav_accounts: 'Accounts', nav_privacy: 'Privacy Policy',
-        acc_badge: 'Restricted Partner Access',
-        acc_title: 'Partner Income Tracker & Vault',
-        acc_sub: 'Authorized exclusively for partners Amar, Munal, and Vishal. Only the entry creator can edit or delete their row, and every edit or deletion is recorded in the Audit Log.',
-        acc_lbl_pass: 'Partner Security Password *',
-        acc_btn_unlock: 'Unlock Partner Accounts'
+        acc_badge: 'Restricted Access',
+        acc_title: 'Site Logs & Sync Console',
+        acc_sub: 'Authorized exclusively for team members Amar, Munal, and Vishal. Only the entry creator can edit or delete their row, and changes are logged.',
+        acc_lbl_pass: 'Access Password *',
+        acc_btn_unlock: 'Unlock Console'
       },
       hi: {
         nav_home: 'होम', nav_services: 'सेवाएं', nav_about: 'हमारे बारे में', nav_gallery: 'गैलरी',
         nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क करें', nav_client: 'क्लाइंट पोर्टल',
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्राइवेसी पॉलिसी',
-        acc_badge: 'केवल पार्टनर्स के लिए सुरक्षित',
-        acc_title: 'पार्टनर इनकम ट्रैकर और अकाउंट्स',
-        acc_sub: 'यह पेज केवल अमर, मुनाल और विशाल के लिए है। जो एंट्री करेगा केवल वही उसे एडिट या डिलीट कर पाएगा, और हर एडिट या डिलीट की हिस्ट्री सेव रहेगी।',
-        acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
-        acc_btn_unlock: 'अकाउंट्स अनलॉक करें'
+        acc_badge: 'सीमित एक्सेस',
+        acc_title: 'साइट लॉग्स और सिंक कंसोल',
+        acc_sub: 'यह पेज केवल अमर, मुनाल और विशाल के लिए है। जो एंट्री करेगा केवल वही उसे एडिट या डिलीट कर पाएगा, और हर बदलाव की हिस्ट्री सेव रहेगी।',
+        acc_lbl_pass: 'एक्सेस पासवर्ड *',
+        acc_btn_unlock: 'कंसोल अनलॉक करें'
       },
       mr: {
         nav_home: 'होम', nav_services: 'सेवा', nav_about: 'आमच्याबद्दल', nav_gallery: 'गॅलरी',
         nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क', nav_client: 'क्लायंट पोर्टल',
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्रायव्हसी पॉलिसी',
-        acc_badge: 'फक्त पार्टनर्ससाठी राखीव',
-        acc_title: 'पार्टनर इन्कम ट्रॅकर आणि अकाउंट्स',
-        acc_sub: 'हे पेज फक्त अमर, मुनाल आणि विशाल यांच्यासाठी आहे. ज्याने एंट्री केली आहे फक्त तोच ती एडिट किंवा डिलीट करू शकेल, आणि प्रत्येक बदलाची नोंद हिस्ट्रीमध्ये राहील.',
-        acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
-        acc_btn_unlock: 'अकाउंट्स उघडा'
+        acc_badge: 'मर्यादित प्रवेश',
+        acc_title: 'साइट लॉग्स आणि सिंक कंसोल',
+        acc_sub: 'हे पेज फक्त अमर, मुनाल आणि विशाल यांच्यासाठी आहे. ज्याने एंट्री केली आहे फक्त तोच ती एडिट किंवा डिलीट करू शकेल आणि बदलांची नोंद राहील.',
+        acc_lbl_pass: 'प्रवेश पासवर्ड *',
+        acc_btn_unlock: 'कंसोल उघडा'
       }
     };
 
