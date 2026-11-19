@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partner Accounts &amp; Ledger | Kalyani Electrical — kalyanielectrical.in</title>
-  <meta name="description" content="Password-protected Partner Accounts, Site Ledger, and Client Portal Document Manager for Kalyani Electrical (Amar, Munal & Vishal)." />
+  <title>Partner Accounts &amp; Profit Tracker | Kalyani Electrical — kalyanielectrical.in</title>
+  <meta name="description" content="Password-protected Partner Income Tracker, 3-Way Share Ledger (Amar, Munal & Vishal), and Client Portal Document Manager for Kalyani Electrical." />
 
   <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -64,16 +64,6 @@
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    }
-
-    #bot-panel {
-      transform-origin: bottom right;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #bot-panel.hidden-bot {
-      opacity: 0;
-      transform: scale(0.92) translateY(12px);
-      pointer-events: none;
     }
   </style>
 </head>
@@ -158,10 +148,10 @@
   </header>
 
   <!-- ======================================================================= -->
-  <!-- MAIN CONTENT: PARTNER PASSWORD-LOCKED ACCOUNTS & DOCUMENT MANAGER       -->
+  <!-- MAIN CONTENT: PARTNER PASSWORD-LOCKED ACCOUNTS & INCOME TRACKER         -->
   <!-- ======================================================================= -->
   <main class="pt-20 flex-grow bg-subtle-grid">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
       <!-- =================================================================== -->
       <!-- VIEW A: PARTNER PASSWORD LOCK SCREEN                                -->
@@ -175,7 +165,7 @@
           Restricted Partner Access
         </span>
         <h1 data-i18n="acc_title" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white">
-          Partner Accounts &amp; Vault
+          Partner Income Tracker &amp; Vault
         </h1>
         <p data-i18n="acc_sub" class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
           Authorized exclusively for partners <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>. Select your partner profile and enter the Partner Password to unlock.
@@ -183,9 +173,9 @@
 
         <form onsubmit="unlockPartnerDashboard(event)" class="mt-6 space-y-4 text-left">
           <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Select Partner</label>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Login As Partner</label>
             <select id="partner-select" class="w-full px-3.5 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold text-ke-navy dark:text-white focus:outline-none focus:border-ke-navy">
-              <option value="Amar">Amar (Managing Partner)</option>
+              <option value="Amar">Amar (Partner)</option>
               <option value="Munal">Munal (Partner)</option>
               <option value="Vishal">Vishal (Partner)</option>
             </select>
@@ -215,49 +205,91 @@
       </div>
 
       <!-- =================================================================== -->
-      <!-- VIEW B: UNLOCKED PARTNER DASHBOARD                                  -->
+      <!-- VIEW B: UNLOCKED PARTNER INCOME TRACKER DASHBOARD                   -->
       <!-- =================================================================== -->
       <div id="partner-dashboard-view" class="hidden space-y-6">
 
-        <!-- Partner Header Bar -->
-        <div class="bg-ke-navy text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- Partner Header Bar (Matches Sheet1 Header: "Partner Income Tracker — Login by [Partner]") -->
+        <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
           <div>
-            <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold mb-2">
-              ● Authenticated Partner Session: <strong id="active-partner-name">Amar</strong>
+            <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">
+              ● Active Session • kalyanielectrical.in
             </span>
-            <h2 class="font-display font-extrabold text-2xl sm:text-3xl">
-              Kalyani Electrical — Partner Accounts &amp; Client Vault
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
+              Partner Income Tracker — Login by <span id="active-partner-name" class="text-amber-300">Amar</span>
             </h2>
-            <p class="text-slate-300 text-xs sm:text-sm mt-1">
-              Manage site income/expenses, publish documents to the Client Portal, and export financial backups.
+            <p class="text-slate-200 text-xs sm:text-sm mt-1">
+              Auto-calculates Net Benefit on Hand &amp; Equal 3-Way Share (Amar, Munal &amp; Vishal) with Settlement Status.
             </p>
           </div>
-          <button type="button" onclick="lockPartnerDashboard()" class="self-start sm:self-auto px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
-            <i data-lucide="lock" class="w-4 h-4"></i>
-            <span>Lock &amp; Exit</span>
-          </button>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" onclick="printIncomeTrackerPDF()" class="px-4 py-2.5 rounded-xl bg-white text-ke-navy hover:bg-slate-100 text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
+              <i data-lucide="printer" class="w-4 h-4 text-ke-red"></i>
+              <span>Print / PDF Report</span>
+            </button>
+            <button type="button" onclick="lockPartnerDashboard()" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+              <span>Lock</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Financial KPI Summary Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-xs">
-            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block">Total Site Receipts (Income)</span>
-            <span id="kpi-income" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white mt-1 block">₹ 0</span>
+        <!-- 4 Top KPI Summary Boxes (Exact Match to Sheet1 Row 2–4) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-[#d9e2f8]/60 dark:bg-slate-900 rounded-2xl p-5 border border-ke-navy/20 dark:border-slate-800 shadow-xs">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-ke-navy dark:text-blue-300 block">Total Gross Income</span>
+            <span id="kpi-gross" class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1.5 block">₹ 20,000.00</span>
           </div>
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-xs">
-            <span class="text-xs font-bold uppercase tracking-wider text-ke-red block">Total Site Expenses</span>
-            <span id="kpi-expense" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white mt-1 block">₹ 0</span>
+          <div class="bg-emerald-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-emerald-500/25 dark:border-slate-800 shadow-xs">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 block">Total Net Income</span>
+            <span id="kpi-net" class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-700 dark:text-emerald-400 mt-1.5 block">₹ 19,150.00</span>
           </div>
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-xs">
-            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block">Net Project Balance</span>
-            <span id="kpi-balance" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white mt-1 block">₹ 0</span>
+          <div class="bg-amber-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-amber-500/25 dark:border-slate-800 shadow-xs">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-300 block">Expenses (Petrol, Tools, Freight)</span>
+            <span id="kpi-expense" class="font-display font-extrabold text-2xl sm:text-3xl text-amber-800 dark:text-amber-300 mt-1.5 block">₹ 200.00</span>
+          </div>
+          <div class="bg-rose-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-ke-red/25 dark:border-slate-800 shadow-xs">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-ke-red block">Total Material</span>
+            <span id="kpi-material" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-red mt-1.5 block">₹ 650.00</span>
+          </div>
+        </div>
+
+        <!-- Partner-Wise Share Summary Strip (Amar | Munal | Vishal + Unsettled Alert) -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase block">Amar's Total Share</span>
+              <span id="share-amar" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+            </div>
+            <span class="w-9 h-9 rounded-xl bg-ke-navy text-white font-extrabold text-sm flex items-center justify-center">A</span>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase block">Munal's Total Share</span>
+              <span id="share-munal" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+            </div>
+            <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-extrabold text-sm flex items-center justify-center">M</span>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase block">Vishal's Total Share</span>
+              <span id="share-vishal" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+            </div>
+            <span class="w-9 h-9 rounded-xl bg-ke-red text-white font-extrabold text-sm flex items-center justify-center">V</span>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-slate-400 uppercase block">Pending Settlement (No)</span>
+              <span id="pending-settlement-amt" class="font-display font-extrabold text-lg text-amber-600 dark:text-amber-400">₹ 0.00</span>
+            </div>
+            <i data-lucide="clock" class="w-5 h-5 text-amber-500"></i>
           </div>
         </div>
 
         <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
-            1. Site Ledger &amp; Expenses
+            1. Partner Income &amp; Share Sheet
           </button>
           <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
             2. Upload Client Portal Docs
@@ -268,60 +300,106 @@
         </div>
 
         <!-- ================================================================= -->
-        <!-- TAB 1: SITE ACCOUNTS & EXPENSE LEDGER                             -->
+        <!-- TAB 1: PARTNER INCOME TRACKER (EXACT SHEET1 COLUMNS & FORMULAS)   -->
         <!-- ================================================================= -->
         <div id="tab-panel-ledger" class="acc-tab-panel space-y-6">
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-4">Add New Account Entry</h3>
-            <form onsubmit="addLedgerEntry(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+
+          <!-- Add New Client / Site Income Entry Form -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Add New Site Income &amp; Split Entry</h3>
+              <span id="live-preview-pill" class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
+                Live Preview: Net ₹ 0.00 | Each Partner ₹ 0.00
+              </span>
+            </div>
+
+            <form onsubmit="addIncomeRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1">Entry Type</label>
-                <select id="led-type" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
-                  <option value="Income">Income (+ Payment Received)</option>
-                  <option value="Expense">Expense (- Material / Labour)</option>
-                </select>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Date *</label>
+                <input type="date" id="row-date" required class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+              </div>
+              <div class="lg:col-span-2">
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Client / Site Name *</label>
+                <input type="text" id="row-client" required placeholder="e.g., vikash shinde" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1">Site / Client Name</label>
-                <input type="text" id="led-site" required placeholder="e.g., Warje Society Solar" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Income (₹) *</label>
+                <input type="number" id="row-income" required min="0" step="0.01" placeholder="20000" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold text-ke-navy dark:text-white" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1">Description</label>
-                <input type="text" id="led-desc" required placeholder="e.g., Advance / Cable Purchase" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Material (₹)</label>
+                <input type="number" id="row-material" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1">Amount (₹)</label>
-                <input type="number" id="led-amount" required min="1" step="any" placeholder="e.g., 15000" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Expenses (₹)</label>
+                <input type="number" id="row-expense" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
-              <div class="flex items-end">
-                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold transition-all">
-                  + Save Entry
-                </button>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Partner Settlement</label>
+                <div class="flex gap-1.5">
+                  <select id="row-settled" class="w-full px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
+                    <option value="No">No (Pending)</option>
+                    <option value="Yes">Yes (Settled)</option>
+                  </select>
+                  <button type="submit" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold shrink-0 transition-all">
+                    + Add
+                  </button>
+                </div>
               </div>
             </form>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+          <!-- Interactive Ledger Table (Matches Sheet1 Columns A to K) -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-              <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Recent Ledger Transactions</h3>
-              <button type="button" onclick="exportLedgerCSV()" class="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-ke-navy dark:text-amber-300 hover:bg-slate-200">
-                Export Excel / CSV
-              </button>
+              <div>
+                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Partner Income &amp; Settlement Sheet</h3>
+                <p class="text-[11px] text-slate-500">Tip: Click on the <strong>Yes / No</strong> badge in any row to toggle Partner Settlement status.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <select id="filter-settled" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
+                  <option value="ALL">Show All Rows</option>
+                  <option value="Yes">Settled Only (Yes)</option>
+                  <option value="No">Pending Only (No)</option>
+                </select>
+                <button type="button" onclick="exportIncomeCSV()" class="px-3.5 py-1.5 rounded-lg bg-ke-navy text-white text-xs font-bold hover:bg-ke-navyDark">
+                  Export Excel / CSV
+                </button>
+              </div>
             </div>
+
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr class="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-300 uppercase">
-                    <th class="py-3 px-4">Date</th>
-                    <th class="py-3 px-4">Partner</th>
-                    <th class="py-3 px-4">Site / Client</th>
-                    <th class="py-3 px-4">Description</th>
-                    <th class="py-3 px-4">Type</th>
-                    <th class="py-3 px-4 text-right">Amount (₹)</th>
-                    <th class="py-3 px-4 text-center">Action</th>
+                  <tr class="bg-[#3c5f90] text-white uppercase tracking-wider text-[11px]">
+                    <th class="py-3 px-3 text-center">Sr. No.</th>
+                    <th class="py-3 px-3 text-center">Date</th>
+                    <th class="py-3 px-3">Client</th>
+                    <th class="py-3 px-3 text-right">Income</th>
+                    <th class="py-3 px-3 text-right">Material</th>
+                    <th class="py-3 px-3 text-right">Expenses</th>
+                    <th class="py-3 px-3 text-right">Net Benefit on Hand</th>
+                    <th class="py-3 px-3 text-right">Amar's Share</th>
+                    <th class="py-3 px-3 text-right">Munal's Share</th>
+                    <th class="py-3 px-3 text-right">Vishal's Share</th>
+                    <th class="py-3 px-3 text-center">Partner Settlement</th>
+                    <th class="py-3 px-2 text-center">Del</th>
                   </tr>
                 </thead>
-                <tbody id="ledger-table-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+                <tbody id="income-table-body" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
+                <tfoot>
+                  <tr class="bg-[#ececf4] dark:bg-slate-800 font-extrabold text-slate-900 dark:text-white border-t-2 border-slate-400 dark:border-slate-600">
+                    <td class="py-3 px-3 text-center" colspan="3">Total</td>
+                    <td id="foot-income" class="py-3 px-3 text-right">0.00</td>
+                    <td id="foot-material" class="py-3 px-3 text-right">0.00</td>
+                    <td id="foot-expense" class="py-3 px-3 text-right">0.00</td>
+                    <td id="foot-net" class="py-3 px-3 text-right text-emerald-700 dark:text-emerald-400">0.00</td>
+                    <td id="foot-amar" class="py-3 px-3 text-right">0.00</td>
+                    <td id="foot-munal" class="py-3 px-3 text-right">0.00</td>
+                    <td id="foot-vishal" class="py-3 px-3 text-right">0.00</td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -346,7 +424,7 @@
               </div>
               <div>
                 <label class="block text-xs font-bold mb-1">Client / Society / Company Name *</label>
-                <input type="text" id="doc-client-name" required placeholder="e.g., Sai Krupa Housing Society" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                <input type="text" id="doc-client-name" required placeholder="e.g., Vikash Shinde" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
               </div>
               <div>
                 <label class="block text-xs font-bold mb-1">Document Category *</label>
@@ -361,12 +439,12 @@
                 <label class="block text-xs font-bold mb-1">Site Location &amp; Amount (₹)</label>
                 <div class="grid grid-cols-2 gap-2">
                   <input type="text" id="doc-location" required placeholder="Warje, Pune" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs" />
-                  <input type="text" id="doc-amount" required placeholder="₹ 35,000" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
+                  <input type="text" id="doc-amount" required placeholder="₹ 20,000" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
                 </div>
               </div>
               <div class="sm:col-span-2">
                 <label class="block text-xs font-bold mb-1">Document Title *</label>
-                <input type="text" id="doc-title" required placeholder="e.g., 15kW Rooftop Solar & Low-TDS Cleaning AMC" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                <input type="text" id="doc-title" required placeholder="e.g., Electrical Installation & Testing Work" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
               </div>
               <div class="sm:col-span-2">
                 <label class="block text-xs font-bold mb-1">Work Summary / Technical Notes *</label>
@@ -404,7 +482,7 @@
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Backup &amp; Restore Accounts Data</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of all ledger entries and client documents to keep safe on Google Drive or PC.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Download a full JSON backup of all Partner Income Tracker rows and Client Documents.</p>
             <button type="button" onclick="downloadFullBackup()" class="px-5 py-2.5 rounded-xl bg-ke-navy hover:bg-ke-navyDark text-white text-xs font-extrabold flex items-center gap-2">
               <i data-lucide="download" class="w-4 h-4 text-amber-300"></i>
               <span>Download Full Accounts Backup (.json)</span>
@@ -475,11 +553,18 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: PASSWORD LOCK, LEDGER CALCULATIONS & CLIENT DOCS SYNC       -->
+  <!-- JAVASCRIPT: PARTNER INCOME TRACKER, 3-WAY SHARE & PDF REPORT GENERATOR  -->
   <!-- ======================================================================= -->
   <script>
     const DEFAULT_PARTNER_PASS = 'KE2020';
     let currentPartner = 'Amar';
+
+    function formatMoney(num) {
+      return Number(num || 0).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
 
     function getStoredPassword() {
       return localStorage.getItem('ke_partner_pass') || DEFAULT_PARTNER_PASS;
@@ -502,7 +587,8 @@
         document.getElementById('active-partner-name').textContent = partner;
         document.getElementById('partner-lock-view').classList.add('hidden');
         document.getElementById('partner-dashboard-view').classList.remove('hidden');
-        renderLedger();
+        document.getElementById('row-date').value = new Date().toISOString().split('T')[0];
+        renderIncomeTable();
         renderPublishedDocs();
         if (window.lucide) lucide.createIcons();
       } else {
@@ -529,89 +615,243 @@
       activeBtn.classList.add('bg-ke-navy', 'text-white', 'shadow-xs');
     }
 
-    // LEDGER MANAGEMENT
-    function getLedgerEntries() {
-      const saved = JSON.parse(localStorage.getItem('ke_ledger_entries') || 'null');
+    // PARTNER INCOME TRACKER DATA (Initialized with Sheet1 Entry: vikash shinde)
+    function getIncomeRows() {
+      const saved = JSON.parse(localStorage.getItem('ke_partner_income_rows') || 'null');
       if (saved) return saved;
       const initial = [
-        { id: 1, date: '2026-11-18', partner: 'Amar', site: 'Warje Housing Society', desc: 'CCTV & VDP Advance Payment', type: 'Income', amount: 35000 },
-        { id: 2, date: '2026-11-18', partner: 'Vishal', site: 'Warje Housing Society', desc: 'Cat6 Cable & PVC Conduit Material', type: 'Expense', amount: 11200 },
-        { id: 3, date: '2026-11-19', partner: 'Munal', site: 'Kothrud Bungalow Solar', desc: 'Low-TDS Solar Panel Cleaning Service', type: 'Income', amount: 4500 }
+        {
+          id: 1732010000000,
+          date: '2026-11-19',
+          client: 'vikash shinde',
+          income: 20000.00,
+          material: 650.00,
+          expense: 200.00,
+          settled: 'Yes',
+          addedBy: 'Amar'
+        }
       ];
-      localStorage.setItem('ke_ledger_entries', JSON.stringify(initial));
+      localStorage.setItem('ke_partner_income_rows', JSON.stringify(initial));
       return initial;
     }
 
-    function addLedgerEntry(event) {
+    function updateLiveSplitPreview() {
+      const inc = parseFloat(document.getElementById('row-income').value) || 0;
+      const mat = parseFloat(document.getElementById('row-material').value) || 0;
+      const exp = parseFloat(document.getElementById('row-expense').value) || 0;
+      const net = inc - mat - exp;
+      const share = net / 3;
+      document.getElementById('live-preview-pill').textContent =
+        `Live Preview: Net ₹ ${formatMoney(net)} | Each Partner ₹ ${formatMoney(share)}`;
+    }
+
+    function addIncomeRow(event) {
       event.preventDefault();
-      const type = document.getElementById('led-type').value;
-      const site = document.getElementById('led-site').value.trim();
-      const desc = document.getElementById('led-desc').value.trim();
-      const amount = parseFloat(document.getElementById('led-amount').value) || 0;
-      const today = new Date().toISOString().split('T')[0];
+      const date = document.getElementById('row-date').value;
+      const client = document.getElementById('row-client').value.trim();
+      const income = parseFloat(document.getElementById('row-income').value) || 0;
+      const material = parseFloat(document.getElementById('row-material').value) || 0;
+      const expense = parseFloat(document.getElementById('row-expense').value) || 0;
+      const settled = document.getElementById('row-settled').value;
 
-      const list = getLedgerEntries();
-      list.unshift({ id: Date.now(), date: today, partner: currentPartner, site, desc, type, amount });
-      localStorage.setItem('ke_ledger_entries', JSON.stringify(list));
+      const rows = getIncomeRows();
+      rows.push({
+        id: Date.now(),
+        date,
+        client,
+        income,
+        material,
+        expense,
+        settled,
+        addedBy: currentPartner
+      });
+      localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
 
-      document.getElementById('led-site').value = '';
-      document.getElementById('led-desc').value = '';
-      document.getElementById('led-amount').value = '';
-      renderLedger();
+      document.getElementById('row-client').value = '';
+      document.getElementById('row-income').value = '';
+      document.getElementById('row-material').value = '0';
+      document.getElementById('row-expense').value = '0';
+      updateLiveSplitPreview();
+      renderIncomeTable();
     }
 
-    function deleteLedgerEntry(id) {
-      const list = getLedgerEntries().filter(item => item.id !== id);
-      localStorage.setItem('ke_ledger_entries', JSON.stringify(list));
-      renderLedger();
+    function toggleSettlement(id) {
+      const rows = getIncomeRows().map(r => {
+        if (r.id === id) {
+          r.settled = r.settled === 'Yes' ? 'No' : 'Yes';
+        }
+        return r;
+      });
+      localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      renderIncomeTable();
     }
 
-    function renderLedger() {
-      const list = getLedgerEntries();
-      let income = 0, expense = 0;
-      list.forEach(item => {
-        if (item.type === 'Income') income += Number(item.amount);
-        else expense += Number(item.amount);
+    function deleteIncomeRow(id) {
+      if (!confirm('Delete this entry from Partner Income Tracker?')) return;
+      const rows = getIncomeRows().filter(r => r.id !== id);
+      localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      renderIncomeTable();
+    }
+
+    function renderIncomeTable() {
+      const allRows = getIncomeRows();
+      const filter = document.getElementById('filter-settled').value;
+
+      let totInc = 0, totMat = 0, totExp = 0, totNet = 0, pendingNet = 0;
+      allRows.forEach(r => {
+        const net = Number(r.income) - Number(r.material) - Number(r.expense);
+        totInc += Number(r.income);
+        totMat += Number(r.material);
+        totExp += Number(r.expense);
+        totNet += net;
+        if (r.settled !== 'Yes') pendingNet += net;
       });
 
-      document.getElementById('kpi-income').textContent = `₹ ${income.toLocaleString('en-IN')}`;
-      document.getElementById('kpi-expense').textContent = `₹ ${expense.toLocaleString('en-IN')}`;
-      document.getElementById('kpi-balance').textContent = `₹ ${(income - expense).toLocaleString('en-IN')}`;
+      const totShare = totNet / 3;
+      document.getElementById('kpi-gross').textContent = `₹ ${formatMoney(totInc)}`;
+      document.getElementById('kpi-net').textContent = `₹ ${formatMoney(totNet)}`;
+      document.getElementById('kpi-expense').textContent = `₹ ${formatMoney(totExp)}`;
+      document.getElementById('kpi-material').textContent = `₹ ${formatMoney(totMat)}`;
 
-      const tbody = document.getElementById('ledger-table-body');
-      tbody.innerHTML = list.map(item => `
-        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-          <td class="py-3 px-4 font-medium">${item.date}</td>
-          <td class="py-3 px-4 font-bold text-ke-navy dark:text-amber-300">${item.partner}</td>
-          <td class="py-3 px-4 font-semibold">${item.site}</td>
-          <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${item.desc}</td>
-          <td class="py-3 px-4">
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${item.type === 'Income' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
-              ${item.type}
-            </span>
-          </td>
-          <td class="py-3 px-4 text-right font-extrabold ${item.type === 'Income' ? 'text-emerald-600' : 'text-ke-red'}">
-            ${item.type === 'Income' ? '+' : '-'} ₹ ${Number(item.amount).toLocaleString('en-IN')}
-          </td>
-          <td class="py-3 px-4 text-center">
-            <button type="button" onclick="deleteLedgerEntry(${item.id})" class="text-slate-400 hover:text-ke-red font-bold">✕</button>
-          </td>
-        </tr>
-      `).join('');
+      document.getElementById('share-amar').textContent = `₹ ${formatMoney(totShare)}`;
+      document.getElementById('share-munal').textContent = `₹ ${formatMoney(totShare)}`;
+      document.getElementById('share-vishal').textContent = `₹ ${formatMoney(totShare)}`;
+      document.getElementById('pending-settlement-amt').textContent = `₹ ${formatMoney(pendingNet)}`;
+
+      const filteredRows = allRows.filter(r => filter === 'ALL' || r.settled === filter);
+      const tbody = document.getElementById('income-table-body');
+
+      tbody.innerHTML = filteredRows.map((r, index) => {
+        const net = Number(r.income) - Number(r.material) - Number(r.expense);
+        const share = net / 3;
+        const isYes = r.settled === 'Yes';
+        return `
+          <tr class="${index % 2 === 0 ? 'bg-[#f8f8ff] dark:bg-slate-900' : 'bg-white dark:bg-slate-900/60'} hover:bg-blue-50/60 dark:hover:bg-slate-800/70">
+            <td class="py-2.5 px-3 text-center font-bold">${index + 1}</td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap">${r.date}</td>
+            <td class="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">${r.client}</td>
+            <td class="py-2.5 px-3 text-right font-medium">${formatMoney(r.income)}</td>
+            <td class="py-2.5 px-3 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.material)}</td>
+            <td class="py-2.5 px-3 text-right text-slate-600 dark:text-slate-300">${formatMoney(r.expense)}</td>
+            <td class="py-2.5 px-3 text-right font-extrabold text-ke-navy dark:text-emerald-400">${formatMoney(net)}</td>
+            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-3 text-right font-semibold">${formatMoney(share)}</td>
+            <td class="py-2.5 px-3 text-center">
+              <button type="button" onclick="toggleSettlement(${r.id})" title="Click to toggle Yes / No"
+                class="px-3.5 py-1 rounded-full text-[11px] font-extrabold transition-all ${isYes ? 'bg-[#3ec08a] text-[#003823]' : 'bg-amber-200 text-amber-900'}">
+                ${isYes ? 'Yes' : 'No'}
+              </button>
+            </td>
+            <td class="py-2.5 px-2 text-center">
+              <button type="button" onclick="deleteIncomeRow(${r.id})" class="text-slate-400 hover:text-ke-red font-bold">✕</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('foot-income').textContent = formatMoney(totInc);
+      document.getElementById('foot-material').textContent = formatMoney(totMat);
+      document.getElementById('foot-expense').textContent = formatMoney(totExp);
+      document.getElementById('foot-net').textContent = formatMoney(totNet);
+      document.getElementById('foot-amar').textContent = formatMoney(totShare);
+      document.getElementById('foot-munal').textContent = formatMoney(totShare);
+      document.getElementById('foot-vishal').textContent = formatMoney(totShare);
     }
 
-    function exportLedgerCSV() {
-      const list = getLedgerEntries();
-      let csv = 'Date,Partner,Site,Description,Type,Amount\n';
-      list.forEach(r => {
-        csv += `"${r.date}","${r.partner}","${r.site}","${r.desc}","${r.type}",${r.amount}\n`;
+    function exportIncomeCSV() {
+      const rows = getIncomeRows();
+      let csv = 'Sr. No.,Date,Client,Income,Material,Expenses,Net Benefit on Hand,Amar Share,Munal Share,Vishal Share,Partner Settlement\n';
+      rows.forEach((r, idx) => {
+        const net = Number(r.income) - Number(r.material) - Number(r.expense);
+        const share = (net / 3).toFixed(2);
+        csv += `${idx + 1},"${r.date}","${r.client}",${Number(r.income).toFixed(2)},${Number(r.material).toFixed(2)},${Number(r.expense).toFixed(2)},${net.toFixed(2)},${share},${share},${share},"${r.settled}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Kalyani_Electrical_Accounts_${new Date().toISOString().split('T')[0]}.csv`;
+      a.download = `Kalyani_Partner_Income_Tracker_${new Date().toISOString().split('T')[0]}.csv`;
       a.click();
+    }
+
+    function printIncomeTrackerPDF() {
+      const rows = getIncomeRows();
+      let totInc = 0, totMat = 0, totExp = 0, totNet = 0;
+      const bodyHtml = rows.map((r, idx) => {
+        const net = Number(r.income) - Number(r.material) - Number(r.expense);
+        const share = net / 3;
+        totInc += Number(r.income);
+        totMat += Number(r.material);
+        totExp += Number(r.expense);
+        totNet += net;
+        return `
+          <tr>
+            <td style="text-align:center;">${idx + 1}</td>
+            <td style="text-align:center;">${r.date}</td>
+            <td>${r.client}</td>
+            <td style="text-align:right;">${formatMoney(r.income)}</td>
+            <td style="text-align:right;">${formatMoney(r.material)}</td>
+            <td style="text-align:right;">${formatMoney(r.expense)}</td>
+            <td style="text-align:right; font-weight:bold;">${formatMoney(net)}</td>
+            <td style="text-align:right;">${formatMoney(share)}</td>
+            <td style="text-align:right;">${formatMoney(share)}</td>
+            <td style="text-align:right;">${formatMoney(share)}</td>
+            <td style="text-align:center; font-weight:bold;">${r.settled}</td>
+          </tr>
+        `;
+      }).join('');
+
+      const win = window.open('', '_blank', 'width=1050,height=750');
+      if (!win) {
+        alert('Popup blocked. Please allow popups to print/save PDF.');
+        return;
+      }
+
+      win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Partner Income Tracker — Kalyani Electrical</title>
+          <style>
+            @page { size: A4 landscape; margin: 10mm; }
+            body { font-family: Arial, sans-serif; color: #181c1f; margin: 0; }
+            .title { background: #3c5f90 !important; color: #fff; padding: 12px; text-align: center; font-size: 16px; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; }
+            th { background: #3c5f90 !important; color: #fff; padding: 7px 5px; border: 1px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            td { padding: 6px 5px; border: 1px solid #000; }
+            tfoot td { background: #ececf4 !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          </style>
+        </head>
+        <body>
+          <div class="title">Partner Income Tracker — Login by ${currentPartner} (Kalyani Electrical • kalyanielectrical.in)</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Sr. No.</th><th>Date</th><th>Client</th><th>Income</th><th>Material</th><th>Expenses</th>
+                <th>Net Benefit on Hand</th><th>Amar's Share</th><th>Munal's Share</th><th>Vishal's Share</th><th>Partner Settlement</th>
+              </tr>
+            </thead>
+            <tbody>${bodyHtml}</tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">Total</td>
+                <td style="text-align:right;">${formatMoney(totInc)}</td>
+                <td style="text-align:right;">${formatMoney(totMat)}</td>
+                <td style="text-align:right;">${formatMoney(totExp)}</td>
+                <td style="text-align:right;">${formatMoney(totNet)}</td>
+                <td style="text-align:right;">${formatMoney(totNet / 3)}</td>
+                <td style="text-align:right;">${formatMoney(totNet / 3)}</td>
+                <td style="text-align:right;">${formatMoney(totNet / 3)}</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+          <script>window.onload = function() { setTimeout(function() { window.print(); }, 250); };<\/script>
+        </body>
+        </html>
+      `);
+      win.document.close();
     }
 
     // CLIENT DOCUMENTS PUBLISHER (SYNCS WITH client.html)
@@ -690,14 +930,14 @@
       const data = {
         exportedBy: currentPartner,
         exportedAt: new Date().toISOString(),
-        ledger: getLedgerEntries(),
+        partnerIncomeTracker: getIncomeRows(),
         clientDocuments: getPartnerClientDocs()
       };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Kalyani_Electrical_Full_Backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `Kalyani_Partner_Accounts_Backup_${new Date().toISOString().split('T')[0]}.json`;
       a.click();
     }
 
@@ -707,7 +947,7 @@
         nav_ratecard: 'Rate Card', nav_contact: 'Contact Us', nav_client: 'Client Portal',
         nav_accounts: 'Accounts', nav_privacy: 'Privacy Policy',
         acc_badge: 'Restricted Partner Access',
-        acc_title: 'Partner Accounts & Vault',
+        acc_title: 'Partner Income Tracker & Vault',
         acc_sub: 'Authorized exclusively for partners Amar, Munal, and Vishal. Select your partner profile and enter the Partner Password to unlock.',
         acc_lbl_pass: 'Partner Security Password *',
         acc_btn_unlock: 'Unlock Partner Accounts'
@@ -717,7 +957,7 @@
         nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क करें', nav_client: 'क्लाइंट पोर्टल',
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्राइवेसी पॉलिसी',
         acc_badge: 'केवल पार्टनर्स के लिए सुरक्षित',
-        acc_title: 'पार्टनर अकाउंट्स और वॉल्ट',
+        acc_title: 'पार्टनर इनकम ट्रैकर और अकाउंट्स',
         acc_sub: 'यह पेज केवल अमर, मुनाल और विशाल के लिए सुरक्षित है। अनलॉक करने के लिए पार्टनर पासवर्ड दर्ज करें।',
         acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
         acc_btn_unlock: 'अकाउंट्स अनलॉक करें'
@@ -727,7 +967,7 @@
         nav_ratecard: 'रेट कार्ड', nav_contact: 'संपर्क', nav_client: 'क्लायंट पोर्टल',
         nav_accounts: 'अकाउंट्स', nav_privacy: 'प्रायव्हसी पॉलिसी',
         acc_badge: 'फक्त पार्टनर्ससाठी राखीव',
-        acc_title: 'पार्टनर अकाउंट्स आणि व्हॉल्ट',
+        acc_title: 'पार्टनर इन्कम ट्रॅकर आणि अकाउंट्स',
         acc_sub: 'हे पेज फक्त अमर, मुनाल आणि विशाल यांच्यासाठी सुरक्षित आहे. उघडण्यासाठी पार्टनर पासवर्ड टाका.',
         acc_lbl_pass: 'पार्टनर सुरक्षा पासवर्ड *',
         acc_btn_unlock: 'अकाउंट्स उघडा'
