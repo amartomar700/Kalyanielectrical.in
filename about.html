@@ -69,18 +69,26 @@
     .partner-card {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
-    .partner-card:hover {
-      transform: translateY(-4px);
+    @media (hover: hover) and (pointer: fine) {
+      .partner-card:hover {
+        transform: translateY(-4px);
+      }
+    }
+
+    a svg, button svg {
+      pointer-events: none;
     }
 
     #bot-panel {
       transform-origin: bottom right;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+      visibility: visible;
     }
     #bot-panel.hidden-bot {
       opacity: 0;
       transform: scale(0.92) translateY(12px);
-      pointer-events: none;
+      pointer-events: none !important;
+      visibility: hidden;
     }
   </style>
 </head>
@@ -167,7 +175,7 @@
   <!-- ======================================================================= -->
   <!-- MAIN CONTENT: ABOUT US PAGE                                             -->
   <!-- ======================================================================= -->
-  <main class="pt-20 flex-grow bg-subtle-grid">
+  <main class="pt-20 flex-grow bg-subtle-grid relative z-10">
 
     <!-- ===================================================================== -->
     <!-- SECTION 1: ELEGANT HERO & COMPANY ORIGIN STORY                        -->
@@ -199,11 +207,11 @@
             </p>
 
             <div class="mt-8 flex flex-wrap items-center gap-3.5">
-              <a href="services.html" class="px-6 py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-bold text-sm shadow-lg shadow-ke-navy/20 flex items-center gap-2 transition-all">
+              <a href="services.html" class="px-6 py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-bold text-sm shadow-lg shadow-ke-navy/20 flex items-center gap-2 transition-all touch-manipulation">
                 <span data-i18n="btn_view_services">Explore Our 9 Services</span>
                 <i data-lucide="arrow-right" class="w-4 h-4 text-ke-red"></i>
               </a>
-              <a href="contact.html" class="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-ke-navy dark:text-white border border-slate-300 dark:border-slate-700 font-bold text-sm hover:border-ke-navy transition-all flex items-center gap-2">
+              <a href="contact.html" class="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-ke-navy dark:text-white border border-slate-300 dark:border-slate-700 font-bold text-sm hover:border-ke-navy transition-all flex items-center gap-2 touch-manipulation">
                 <i data-lucide="phone-call" class="w-4 h-4 text-ke-red"></i>
                 <span data-i18n="btn_contact_partners">Speak With a Partner</span>
               </a>
@@ -327,16 +335,16 @@
             </div>
 
             <!-- Direct Contact Footer -->
-            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 relative z-10">
               <div class="flex items-center justify-between text-xs mb-3">
                 <span data-i18n="direct_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Quotation Desk:</span>
-                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 83096 42700</span>
+                <a href="tel:+918309642700" class="font-display font-extrabold text-sm text-ke-navy dark:text-white underline decoration-dotted touch-manipulation">+91 83096 42700</a>
               </div>
               <div class="grid grid-cols-2 gap-2.5">
-                <a href="tel:+918309642700" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <a href="tel:+918309642700" class="py-3 rounded-xl bg-slate-100 dark:bg-slate-800 active:bg-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call">Call Amar</span>
                 </a>
-                <button type="button" onclick="openPartnerWhatsApp('quotation')" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <button type="button" onclick="openPartnerWhatsApp('quotation')" class="py-3 rounded-xl bg-emerald-600 active:bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
                 </button>
               </div>
@@ -395,16 +403,16 @@
             </div>
 
             <!-- Direct Contact Footer -->
-            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 relative z-10">
               <div class="flex items-center justify-between text-xs mb-3">
                 <span data-i18n="inquiry_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Inquiry Desk:</span>
-                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 83291 71435</span>
+                <a href="tel:+918329171435" class="font-display font-extrabold text-sm text-ke-navy dark:text-white underline decoration-dotted touch-manipulation">+91 83291 71435</a>
               </div>
               <div class="grid grid-cols-2 gap-2.5">
-                <a href="tel:+918329171435" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <a href="tel:+918329171435" class="py-3 rounded-xl bg-slate-100 dark:bg-slate-800 active:bg-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call_munal">Call Munal</span>
                 </a>
-                <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="py-3 rounded-xl bg-emerald-600 active:bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
                 </button>
               </div>
@@ -463,16 +471,16 @@
             </div>
 
             <!-- Direct Contact Footer -->
-            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+            <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 relative z-10">
               <div class="flex items-center justify-between text-xs mb-3">
                 <span data-i18n="support_desk_lbl" class="text-slate-500 dark:text-slate-400 font-medium">Direct Support Desk:</span>
-                <span class="font-display font-extrabold text-sm text-ke-navy dark:text-white">+91 80874 79681</span>
+                <a href="tel:+918087479681" class="font-display font-extrabold text-sm text-ke-navy dark:text-white underline decoration-dotted touch-manipulation">+91 80874 79681</a>
               </div>
               <div class="grid grid-cols-2 gap-2.5">
-                <a href="tel:+918087479681" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <a href="tel:+918087479681" class="py-3 rounded-xl bg-slate-100 dark:bg-slate-800 active:bg-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-ke-navy dark:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="phone" class="w-3.5 h-3.5"></i> <span data-i18n="btn_call_vishal">Call Vishal</span>
                 </a>
-                <button type="button" onclick="openPartnerWhatsApp('complaint')" class="py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                <button type="button" onclick="openPartnerWhatsApp('complaint')" class="py-3 rounded-xl bg-ke-red active:bg-ke-redDark hover:bg-ke-redDark text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors touch-manipulation">
                   <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
                 </button>
               </div>
@@ -548,11 +556,11 @@
               </p>
             </div>
             <div class="lg:col-span-5 flex flex-wrap sm:justify-end gap-3">
-              <a href="rate-card.html" class="px-5 py-3.5 rounded-2xl bg-ke-red hover:bg-ke-redDark text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md transition-all">
+              <a href="rate-card.html" class="px-5 py-3.5 rounded-2xl bg-ke-red hover:bg-ke-redDark text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md transition-all touch-manipulation">
                 <i data-lucide="file-down" class="w-4 h-4"></i>
                 <span data-i18n="btn_rate_card">View Rate Card</span>
               </a>
-              <a href="gallery.html" class="px-5 py-3.5 rounded-2xl bg-white text-ke-navy hover:bg-slate-100 font-bold text-xs sm:text-sm flex items-center gap-2 transition-all">
+              <a href="gallery.html" class="px-5 py-3.5 rounded-2xl bg-white text-ke-navy hover:bg-slate-100 font-bold text-xs sm:text-sm flex items-center gap-2 transition-all touch-manipulation">
                 <i data-lucide="images" class="w-4 h-4 text-ke-red"></i>
                 <span data-i18n="btn_gallery">View Site Gallery</span>
               </a>
@@ -565,10 +573,10 @@
   </main>
 
   <!-- ======================================================================= -->
-  <!-- FLOATING WHATSAPP & DESK ASSISTANT                                      -->
+  <!-- FLOATING WHATSAPP & DESK ASSISTANT (Fixed: pointer-events-none wrapper) -->
   <!-- ======================================================================= -->
-  <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end">
-    <div id="bot-panel" class="hidden-bot mb-3 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col items-end pointer-events-none">
+    <div id="bot-panel" class="hidden-bot pointer-events-auto mb-3 w-[calc(100vw-2rem)] max-w-sm bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
       <div class="bg-ke-navy px-5 py-4 text-white flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-ke-red flex items-center justify-center shrink-0">
@@ -579,27 +587,27 @@
             <span class="text-[11px] text-slate-300 block">Amar • Munal • Vishal</span>
           </div>
         </div>
-        <button type="button" onclick="toggleBot()" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-200">
+        <button type="button" onclick="toggleBot()" aria-label="Close WhatsApp Desk" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-200 touch-manipulation">
           <i data-lucide="chevron-down" class="w-5 h-5"></i>
         </button>
       </div>
       <div class="p-4 bg-slate-50 dark:bg-slate-950 space-y-2.5">
-        <button type="button" onclick="openPartnerWhatsApp('quotation')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+        <button type="button" onclick="openPartnerWhatsApp('quotation')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all touch-manipulation">
           <span>Amar — Quotations &amp; IT/Security (8309642700)</span>
           <span class="px-2 py-0.5 rounded bg-ke-red/10 text-ke-red text-[10px]">Quote</span>
         </button>
-        <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+        <button type="button" onclick="openPartnerWhatsApp('inquiry')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all touch-manipulation">
           <span>Munal — Inquiries &amp; Power Backup (8329171435)</span>
           <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 text-[10px]">Inquiry</span>
         </button>
-        <button type="button" onclick="openPartnerWhatsApp('complaint')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all">
+        <button type="button" onclick="openPartnerWhatsApp('complaint')" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-ke-navy hover:text-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-ke-navy dark:text-slate-100 flex items-center justify-between transition-all touch-manipulation">
           <span>Vishal — Licensed Execution &amp; Support (8087479681)</span>
           <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 text-[10px]">Support</span>
         </button>
       </div>
     </div>
 
-    <button type="button" onclick="toggleBot()" class="flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-ke-navy hover:bg-ke-navyDark text-white shadow-xl border border-white/15 transition-all hover:scale-[1.03]">
+    <button type="button" onclick="toggleBot()" class="pointer-events-auto flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-ke-navy hover:bg-ke-navyDark text-white shadow-xl border border-white/15 transition-transform active:scale-95 touch-manipulation">
       <span class="relative flex h-3 w-3">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ke-red opacity-75"></span>
         <span class="relative inline-flex rounded-full h-3 w-3 bg-ke-red"></span>
@@ -610,10 +618,10 @@
   </div>
 
   <!-- ======================================================================= -->
-  <!-- BOTTOM FOOTER (Privacy Policy Strictly Here + Social & Help Buttons)   -->
+  <!-- BOTTOM FOOTER (Extra mobile bottom padding so floating button clears it) -->
   <!-- ======================================================================= -->
-  <footer class="bg-ke-navy text-white border-t border-ke-navyDark mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <footer class="bg-ke-navy text-white border-t border-ke-navyDark mt-auto relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 lg:pb-10">
       <div class="flex flex-col lg:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
         
         <div class="flex items-center gap-3.5 text-center sm:text-left">
@@ -643,18 +651,18 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-2.5">
-          <a href="index.html" data-i18n="nav_home" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Home</a>
-          <a href="about.html" data-i18n="nav_about" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">About Us</a>
-          <a href="privacy.html" data-i18n="nav_privacy" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Privacy Policy</a>
-          <a href="contact.html" data-i18n="nav_contact" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition-all">Contact Us</a>
+          <a href="index.html" data-i18n="nav_home" class="px-3.5 py-2.5 rounded-xl bg-white/10 active:bg-white/30 hover:bg-white/20 text-xs font-bold transition-colors touch-manipulation">Home</a>
+          <a href="about.html" data-i18n="nav_about" class="px-3.5 py-2.5 rounded-xl bg-white/10 active:bg-white/30 hover:bg-white/20 text-xs font-bold transition-colors touch-manipulation">About Us</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="px-3.5 py-2.5 rounded-xl bg-white/10 active:bg-white/30 hover:bg-white/20 text-xs font-bold transition-colors touch-manipulation">Privacy Policy</a>
+          <a href="contact.html" data-i18n="nav_contact" class="px-3.5 py-2.5 rounded-xl bg-white/10 active:bg-white/30 hover:bg-white/20 text-xs font-bold transition-colors touch-manipulation">Contact Us</a>
 
-          <a href="https://www.instagram.com/kalyani_electrical" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-pink-600/90 hover:bg-pink-600 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+          <a href="https://www.instagram.com/kalyani_electrical" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-pink-600/90 active:bg-pink-700 hover:bg-pink-600 text-white text-xs font-bold flex items-center gap-1.5 transition-colors touch-manipulation">
             <i data-lucide="instagram" class="w-3.5 h-3.5"></i><span>Instagram</span>
           </a>
-          <a href="https://www.facebook.com/search/top?q=Kalyani%20Electrical%20Pune" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-blue-600/90 hover:bg-blue-600 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+          <a href="https://www.facebook.com/search/top?q=Kalyani%20Electrical%20Pune" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-blue-600/90 active:bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold flex items-center gap-1.5 transition-colors touch-manipulation">
             <i data-lucide="facebook" class="w-3.5 h-3.5"></i><span>Facebook</span>
           </a>
-          <a href="mailto:kalyanielectrical6@gmail.com?subject=Help%20-%20Kalyani%20Electrical%20(kalyanielectrical.in)" class="px-4 py-2 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+          <a href="mailto:kalyanielectrical6@gmail.com?subject=Help%20-%20Kalyani%20Electrical%20(kalyanielectrical.in)" class="px-4 py-2.5 rounded-xl bg-ke-red active:bg-ke-redDark hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-colors touch-manipulation">
             <i data-lucide="mail" class="w-3.5 h-3.5"></i><span>Help</span>
           </a>
         </div>
@@ -662,7 +670,7 @@
 
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
         <p>© 2020–2026 kalyanielectrical.in — Kalyani Electrical Services, Tapodham, Warje, Pune – 411058.</p>
-        <a href="mailto:kalyanielectrical6@gmail.com" class="hover:text-white transition-colors">kalyanielectrical6@gmail.com</a>
+        <a href="mailto:kalyanielectrical6@gmail.com" class="hover:text-white transition-colors touch-manipulation">kalyanielectrical6@gmail.com</a>
       </div>
     </div>
   </footer>
