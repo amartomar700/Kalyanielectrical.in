@@ -331,16 +331,16 @@
         <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" onclick="switchAccTab('dailywork')" id="tab-btn-dailywork" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
-            1. Daily Work Entry
+1. Daily Work Entry
           </button>
           <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
-            2. Ledger &amp; Audit Log
+2. Ledger &amp; Audit Log
           </button>
           <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
-            3. Upload Client Portal Docs
+3. Upload Client Portal Docs
           </button>
           <button type="button" onclick="switchAccTab('settings')" id="tab-btn-settings" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
-            4. Backup &amp; Password
+4. Backup &amp; Password
           </button>
         </div>
 
@@ -606,48 +606,74 @@
               Publish Site Document to Client Portal
             </h3>
             <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">
-              Enter the client's 10-digit mobile number and document details—the client can immediately log in on <strong>Client Portal</strong> and download it as PDF.
+              Enter the client's 10-digit mobile number, document details, and Google Drive link or file—the client can immediately log in on <strong>Client Portal</strong> and view or download it.
             </p>
 
-            <form onsubmit="publishClientDocument(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold mb-1.5">Client 10-Digit Mobile Number *</label>
-                <input type="tel" id="doc-mobile" required maxlength="10" pattern="[0-9]{10}" placeholder="e.g., 9876543210" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-bold" />
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1.5">Client / Society / Company Name *</label>
-                <input type="text" id="doc-client-name" required placeholder="e.g., Vikash Shinde" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1.5">Document Category *</label>
-                <select id="doc-type" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-semibold">
-                  <option value="Quotation & BOQ Estimate">Quotation &amp; BOQ Estimate</option>
-                  <option value="Tax Invoice / Bill">Tax Invoice / Bill</option>
-                  <option value="Work Completion & Warranty Certificate">Work Completion &amp; Warranty Certificate</option>
-                  <option value="Electrical / Solar Single-Line Diagram">Electrical / Solar Single-Line Diagram</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1.5">Site Location &amp; Amount (₹)</label>
-                <div class="grid grid-cols-2 gap-2">
-                  <input type="text" id="doc-location" required placeholder="Warje, Pune" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs" />
-                  <input type="text" id="doc-amount" required placeholder="₹ 20,000" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
+            <!-- Publish Site Document to Client Portal (Updated: No Amount + Link & File Upload) -->
+            <form id="clientDocForm" onsubmit="if(typeof publishClientDoc === 'function') publishClientDoc(event);">
+              
+              <!-- Row 1: Mobile & Client Name -->
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:18px;">
+                <div>
+                  <label for="docClientMobile" class="block mb-1.5">Client 10-Digit Mobile Number *</label>
+                  <input type="tel" id="docClientMobile" maxlength="10" pattern="[0-9]{10}" placeholder="e.g., 9876543210" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                </div>
+                <div>
+                  <label for="docClientName" class="block mb-1.5">Client / Society / Company Name *</label>
+                  <input type="text" id="docClientName" placeholder="e.g., Vikash Shinde" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
               </div>
-              <div class="sm:col-span-2">
-                <label class="block text-xs font-bold mb-1.5">Document Title *</label>
-                <input type="text" id="doc-title" required placeholder="e.g., Electrical Installation & Testing Work" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+
+              <!-- Row 2: Category & Site Location -->
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:18px;">
+                <div>
+                  <label for="docCategory" class="block mb-1.5">Document Category *</label>
+                  <select id="docCategory" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
+                    <option value="Quotation & BOQ Estimate">Quotation &amp; BOQ Estimate</option>
+                    <option value="Tax Invoice / Bill">Tax Invoice / Bill</option>
+                    <option value="Work Completion / Handover Report">Work Completion / Handover Report</option>
+                    <option value="AMC & Maintenance Report">AMC &amp; Maintenance Report</option>
+                    <option value="Site Drawing / Network Layout">Site Drawing / Network Layout</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="docSiteLocation" class="block mb-1.5">Site Location *</label>
+                  <input type="text" id="docSiteLocation" placeholder="e.g., Warje, Pune" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                </div>
               </div>
-              <div class="sm:col-span-2">
-                <label class="block text-xs font-bold mb-1.5">Work Summary / Technical Notes *</label>
-                <textarea id="doc-summary" rows="2" required placeholder="Brief summary of items, warranty terms, or payment status..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+
+              <!-- Row 3: Document Title -->
+              <div style="margin-bottom:18px;">
+                <label for="docTitle" class="block mb-1.5">Document Title *</label>
+                <input type="text" id="docTitle" placeholder="e.g., Electrical Installation & Testing Work" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
               </div>
-              <div class="sm:col-span-2">
-                <button type="submit" class="px-6 py-3 rounded-xl bg-ke-navy hover:bg-ke-navyDark text-white text-xs sm:text-sm font-extrabold flex items-center gap-2">
-                  <i data-lucide="upload-cloud" class="w-5 h-5 text-amber-300"></i>
-                  <span>Publish to Client Portal</span>
-                </button>
+
+              <!-- Row 4: Document Link & File Upload Option -->
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:18px;">
+                <div>
+                  <label for="docExternalLink" class="block mb-1.5">Document / Google Drive Link (Optional)</label>
+                  <input type="url" id="docExternalLink" placeholder="https://drive.google.com/..." class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                </div>
+                <div>
+                  <label for="docFileUpload" class="block mb-1.5">Upload Document File — PDF / JPG / PNG (Optional)</label>
+                  <input type="file" id="docFileUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <small style="color:#94a3b8; display:block; margin-top:6px; font-size:0.95rem;">
+                    Max 2.5 MB (Badi file ke liye Google Drive link dalein)
+                  </small>
+                </div>
               </div>
+
+              <!-- Row 5: Work Summary -->
+              <div style="margin-bottom:22px;">
+                <label for="docSummary" class="block mb-1.5">Work Summary / Technical Notes *</label>
+                <textarea id="docSummary" rows="3" placeholder="Brief summary of items, warranty terms, or work status..." required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" style="background:#1d4ed8; color:#ffffff; border:none; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:10px;">
+                ☁️ Publish to Client Portal
+              </button>
+
             </form>
           </div>
 
@@ -1546,39 +1572,73 @@
       win.document.close();
     }
 
+    // =======================================================================
+    // PUBLISH DOCUMENTS TO CLIENT PORTAL (Link + File Upload, No Amount)
+    // =======================================================================
     function getPartnerClientDocs() {
       return JSON.parse(localStorage.getItem('ke_client_docs') || '[]');
     }
 
-    function publishClientDocument(event) {
+    function publishClientDoc(event) {
       event.preventDefault();
-      const mobile = document.getElementById('doc-mobile').value.replace(/\D/g, '');
-      const clientName = document.getElementById('doc-client-name').value.trim();
-      const docType = document.getElementById('doc-type').value;
-      const siteLocation = document.getElementById('doc-location').value.trim();
-      const amount = document.getElementById('doc-amount').value.trim();
-      const title = document.getElementById('doc-title').value.trim();
-      const summary = document.getElementById('doc-summary').value.trim();
-      const today = new Date().toISOString().split('T')[0];
 
-      const docs = getPartnerClientDocs();
-      docs.unshift({
-        id: 'KE-DOC-' + Math.floor(1000 + Math.random() * 9000),
-        mobile,
-        clientName,
-        siteLocation,
-        docType,
-        title,
-        date: today,
-        amount,
-        summary,
-        fileUrl: ''
-      });
-      localStorage.setItem('ke_client_docs', JSON.stringify(docs));
+      const mobile = document.getElementById('docClientMobile').value.replace(/\D/g, '');
+      if (mobile.length !== 10) {
+        alert('Kripya 10-digit ka sahi mobile number dalein.');
+        return;
+      }
 
-      event.target.reset();
-      renderPublishedDocs();
-      alert(`Document published! Client can now log in on Client Portal with mobile number ${mobile} to download it.`);
+      const clientName = document.getElementById('docClientName').value.trim();
+      const docType = document.getElementById('docCategory').value;
+      const siteLocation = document.getElementById('docSiteLocation').value.trim();
+      const title = document.getElementById('docTitle').value.trim();
+      const link = document.getElementById('docExternalLink').value.trim();
+      const summary = document.getElementById('docSummary').value.trim();
+      const fileInput = document.getElementById('docFileUpload');
+      const file = fileInput.files[0];
+
+      const saveDocData = (fileBase64 = '', fileName = '') => {
+        const docs = getPartnerClientDocs();
+        docs.unshift({
+          id: 'KE-DOC-' + Math.floor(1000 + Math.random() * 9000),
+          mobile,
+          clientName,
+          siteLocation,
+          docType,
+          title,
+          date: new Date().toISOString().split('T')[0],
+          link: link,
+          fileUrl: link || fileBase64,
+          fileData: fileBase64,
+          fileName: fileName,
+          summary
+        });
+
+        try {
+          localStorage.setItem('ke_client_docs', JSON.stringify(docs));
+        } catch (err) {
+          alert('Browser storage full ho gaya hai. Kripya badi file ke liye Google Drive link dalein.');
+          return;
+        }
+
+        event.target.reset();
+        renderPublishedDocs();
+        alert(`Document successfully published to Client Portal! Client can now log in with mobile number ${mobile}.`);
+      };
+
+      if (file) {
+        if (file.size > 2.5 * 1024 * 1024) {
+          alert('File 2.5 MB se badi hai. Kripya Google Drive par upload karke uska Link dalein.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+          saveDocData(evt.target.result, file.name);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        saveDocData('', '');
+      }
     }
 
     function deleteClientDoc(id) {
@@ -1594,18 +1654,29 @@
         container.innerHTML = '<p class="text-sm text-slate-500">No custom client documents added yet. Use the form above to publish documents for any client mobile number.</p>';
         return;
       }
-      container.innerHTML = docs.map(d => `
-        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <span class="text-xs font-extrabold text-ke-red">${d.id} • Mobile: +91 ${d.mobile}</span>
-            <h4 class="font-bold text-base text-ke-navy dark:text-white">${d.clientName} — ${d.title}</h4>
-            <p class="text-sm text-slate-500">${d.docType} • ${d.siteLocation} • ${d.amount}</p>
+      container.innerHTML = docs.map(d => {
+        const badges = [];
+        if (d.link) {
+          badges.push(`<a href="${d.link}" target="_blank" rel="noopener noreferrer" class="underline text-blue-600 dark:text-blue-400 font-semibold">Drive Link ↗</a>`);
+        }
+        if (d.fileData) {
+          badges.push(`<a href="${d.fileData}" download="${d.fileName || 'document'}" class="underline text-emerald-600 dark:text-emerald-400 font-semibold">📎 ${d.fileName || 'Attached File'}</a>`);
+        }
+        const attachmentInfo = badges.length > 0 ? ` • ${badges.join(' • ')}` : '';
+
+        return `
+          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-extrabold text-ke-red">${d.id} • Mobile: +91 ${d.mobile}</span>
+              <h4 class="font-bold text-base text-ke-navy dark:text-white">${d.clientName} — ${d.title}</h4>
+              <p class="text-sm text-slate-500">${d.docType} • ${d.siteLocation}${attachmentInfo}</p>
+            </div>
+            <button type="button" onclick="deleteClientDoc('${d.id}')" class="!min-h-0 !py-2 !px-4 !text-xs rounded-lg bg-red-100 text-ke-red font-bold hover:bg-ke-red hover:text-white">
+              Remove
+            </button>
           </div>
-          <button type="button" onclick="deleteClientDoc('${d.id}')" class="!min-h-0 !py-2 !px-4 !text-xs rounded-lg bg-red-100 text-ke-red font-bold hover:bg-ke-red hover:text-white">
-            Remove
-          </button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     async function changePartnerPassword(event) {
