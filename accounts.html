@@ -77,7 +77,7 @@
     main div[style*="font-size: 12px"],
     main span[style*="font-size: 11px"],
     main span[style*="font-size: 12px"] {
-      font-size: 1.2rem !important; /* ~19px (Date *, Income *, Work Date * sab bade) */
+      font-size: 1.2rem !important;
       font-weight: 600 !important;
       line-height: 1.4 !important;
     }
@@ -85,7 +85,7 @@
     main input,
     main select,
     main textarea {
-      font-size: 1.2rem !important; /* ~19px Box ke andar ka text */
+      font-size: 1.2rem !important;
       padding: 14px 16px !important;
       min-height: 54px !important;
     }
@@ -606,11 +606,11 @@
               Publish Site Document to Client Portal
             </h3>
             <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">
-              Enter the client's 10-digit mobile number, document details, and Google Drive link or file—the client can immediately log in on <strong>Client Portal</strong> and view or download it.
+              Enter the client's 10-digit mobile number and upload their file—it will automatically create a personal folder in your Google Drive and show up on their <strong>Client Portal</strong>.
             </p>
 
-            <!-- Publish Site Document to Client Portal (Updated: No Amount + Link & File Upload) -->
-            <form id="clientDocForm" onsubmit="if(typeof publishClientDoc === 'function') publishClientDoc(event);">
+            <!-- Publish Site Document to Client Portal (Google Drive Auto-Folder + Link & File Upload) -->
+            <form id="clientDocForm" onsubmit="publishClientDoc(event)">
               
               <!-- Row 1: Mobile & Client Name -->
               <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:18px;">
@@ -651,14 +651,14 @@
               <!-- Row 4: Document Link & File Upload Option -->
               <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:18px;">
                 <div>
-                  <label for="docExternalLink" class="block mb-1.5">Document / Google Drive Link (Optional)</label>
+                  <label for="docExternalLink" class="block mb-1.5">External Google Drive Link (Optional)</label>
                   <input type="url" id="docExternalLink" placeholder="https://drive.google.com/..." class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
                 <div>
-                  <label for="docFileUpload" class="block mb-1.5">Upload Document File — PDF / JPG / PNG (Optional)</label>
-                  <input type="file" id="docFileUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
-                  <small style="color:#94a3b8; display:block; margin-top:6px; font-size:0.95rem;">
-                    Max 2.5 MB (Badi file ke liye Google Drive link dalein)
+                  <label for="docFileUpload" class="block mb-1.5">Upload File to Client Drive Folder (Max 15 MB)</label>
+                  <input type="file" id="docFileUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <small style="color:#64748b; display:block; margin-top:6px; font-size:0.95rem;">
+                    File seedha client ke Google Drive folder me save hogi
                   </small>
                 </div>
               </div>
@@ -671,7 +671,7 @@
 
               <!-- Submit Button -->
               <button type="submit" style="background:#1d4ed8; color:#ffffff; border:none; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:10px;">
-                ☁️ Publish to Client Portal
+                ☁️ Upload to Client Drive &amp; Publish
               </button>
 
             </form>
@@ -772,7 +772,7 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: SERVER-VERIFIED AUTH, DAILY WORK ENTRY & AUDIT LOG        -->
+  <!-- JAVASCRIPT: SERVER-VERIFIED AUTH, DAILY WORK ENTRY & GOOGLE DRIVE SYNC  -->
   <!-- ======================================================================= -->
   <script>
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUw6DPxou-kW33GLXtR1-YJa43JC_LcruFg8LuP-9beDOpfRbV6hqfqfLnkQB_rBwCgw/exec';
@@ -1573,13 +1573,13 @@
     }
 
     // =======================================================================
-    // PUBLISH DOCUMENTS TO CLIENT PORTAL (Link + File Upload, No Amount)
+    // PUBLISH DOCUMENTS TO CLIENT PORTAL (Direct Google Drive Folder Upload)
     // =======================================================================
     function getPartnerClientDocs() {
       return JSON.parse(localStorage.getItem('ke_client_docs') || '[]');
     }
 
-    function publishClientDoc(event) {
+    async function publishClientDoc(event) {
       event.preventDefault();
 
       const mobile = document.getElementById('docClientMobile').value.replace(/\D/g, '');
@@ -1588,56 +1588,94 @@
         return;
       }
 
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      const origText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '⏳ Uploading to Client Google Drive...';
+
       const clientName = document.getElementById('docClientName').value.trim();
       const docType = document.getElementById('docCategory').value;
       const siteLocation = document.getElementById('docSiteLocation').value.trim();
       const title = document.getElementById('docTitle').value.trim();
-      const link = document.getElementById('docExternalLink').value.trim();
+      const externalLink = document.getElementById('docExternalLink').value.trim();
       const summary = document.getElementById('docSummary').value.trim();
+
+      const payload = {
+        action: 'publishClientDoc',
+        password: sessionPass,
+        mobile: mobile,
+        clientName: clientName,
+        category: docType,
+        location: siteLocation,
+        title: title,
+        externalLink: externalLink,
+        summary: summary,
+        fileBase64: '',
+        fileName: '',
+        mimeType: ''
+      };
+
       const fileInput = document.getElementById('docFileUpload');
       const file = fileInput.files[0];
 
-      const saveDocData = (fileBase64 = '', fileName = '') => {
-        const docs = getPartnerClientDocs();
-        docs.unshift({
-          id: 'KE-DOC-' + Math.floor(1000 + Math.random() * 9000),
-          mobile,
-          clientName,
-          siteLocation,
-          docType,
-          title,
-          date: new Date().toISOString().split('T')[0],
-          link: link,
-          fileUrl: link || fileBase64,
-          fileData: fileBase64,
-          fileName: fileName,
-          summary
-        });
-
+      const sendToAppsScript = async () => {
         try {
-          localStorage.setItem('ke_client_docs', JSON.stringify(docs));
-        } catch (err) {
-          alert('Browser storage full ho gaya hai. Kripya badi file ke liye Google Drive link dalein.');
-          return;
-        }
+          const res = await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+          const result = await res.json();
 
-        event.target.reset();
-        renderPublishedDocs();
-        alert(`Document successfully published to Client Portal! Client can now log in with mobile number ${mobile}.`);
+          if (result && result.status === 'ok') {
+            // Local summary list me bhi record rakhein (bina bhari base64 ke)
+            const docs = getPartnerClientDocs();
+            docs.unshift({
+              id: result.id || ('KE-DOC-' + Math.floor(1000 + Math.random() * 9000)),
+              mobile: mobile,
+              clientName: clientName,
+              siteLocation: siteLocation,
+              docType: docType,
+              title: title,
+              date: new Date().toISOString().split('T')[0],
+              fileUrl: result.fileUrl || externalLink,
+              folderUrl: result.folderUrl || '',
+              fileName: file ? file.name : '',
+              summary: summary
+            });
+            localStorage.setItem('ke_client_docs', JSON.stringify(docs));
+
+            event.target.reset();
+            renderPublishedDocs();
+            alert(`Success! File seedha client ke Google Drive folder me save ho gayi hai.\nClient Mobile: ${mobile}`);
+          } else {
+            alert('Upload me samasya aayi: ' + (result.message || 'Unknown error'));
+          }
+        } catch (err) {
+          alert('Network error: Google Drive par upload nahi ho paya. Kripya internet ya Apps Script deployment check karein.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }
       };
 
       if (file) {
-        if (file.size > 2.5 * 1024 * 1024) {
-          alert('File 2.5 MB se badi hai. Kripya Google Drive par upload karke uska Link dalein.');
+        if (file.size > 15 * 1024 * 1024) {
+          alert('File 15 MB se badi hai. Kripya 15 MB se chhoti file chunein.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
           return;
         }
         const reader = new FileReader();
         reader.onload = function (evt) {
-          saveDocData(evt.target.result, file.name);
+          payload.fileBase64 = evt.target.result;
+          payload.fileName = file.name;
+          payload.mimeType = file.type;
+          sendToAppsScript();
         };
         reader.readAsDataURL(file);
       } else {
-        saveDocData('', '');
+        sendToAppsScript();
       }
     }
 
@@ -1651,18 +1689,18 @@
       const docs = getPartnerClientDocs();
       const container = document.getElementById('published-docs-list');
       if (docs.length === 0) {
-        container.innerHTML = '<p class="text-sm text-slate-500">No custom client documents added yet. Use the form above to publish documents for any client mobile number.</p>';
+        container.innerHTML = '<p class="text-sm text-slate-500">No custom client documents added yet. Use the form above to upload files directly to the client\'s Google Drive folder.</p>';
         return;
       }
       container.innerHTML = docs.map(d => {
-        const badges = [];
-        if (d.link) {
-          badges.push(`<a href="${d.link}" target="_blank" rel="noopener noreferrer" class="underline text-blue-600 dark:text-blue-400 font-semibold">Drive Link ↗</a>`);
+        const links = [];
+        if (d.fileUrl) {
+          links.push(`<a href="${d.fileUrl}" target="_blank" rel="noopener noreferrer" class="underline text-blue-600 dark:text-blue-400 font-semibold">View File ↗</a>`);
         }
-        if (d.fileData) {
-          badges.push(`<a href="${d.fileData}" download="${d.fileName || 'document'}" class="underline text-emerald-600 dark:text-emerald-400 font-semibold">📎 ${d.fileName || 'Attached File'}</a>`);
+        if (d.folderUrl) {
+          links.push(`<a href="${d.folderUrl}" target="_blank" rel="noopener noreferrer" class="underline text-emerald-600 dark:text-emerald-400 font-semibold">📁 Client Drive Folder</a>`);
         }
-        const attachmentInfo = badges.length > 0 ? ` • ${badges.join(' • ')}` : '';
+        const attachmentInfo = links.length > 0 ? ` • ${links.join(' • ')}` : '';
 
         return `
           <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
@@ -1672,7 +1710,7 @@
               <p class="text-sm text-slate-500">${d.docType} • ${d.siteLocation}${attachmentInfo}</p>
             </div>
             <button type="button" onclick="deleteClientDoc('${d.id}')" class="!min-h-0 !py-2 !px-4 !text-xs rounded-lg bg-red-100 text-ke-red font-bold hover:bg-ke-red hover:text-white">
-              Remove
+              Remove from List
             </button>
           </div>
         `;
