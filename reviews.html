@@ -1,0 +1,89 @@
+// --- doGet(e) ke andar ---
+if (action === 'getApprovedReviews') {
+  const sheet = getOrCreateReviewsSheet();
+  const data = sheet.getDataRange().getValues();
+  const approved = [];
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][7]).trim() === 'Approved') {
+      approved.push({
+        id: data[i][0],
+        date: data[i][1],
+        name: data[i][2],
+        area: data[i][3],
+        service: data[i][4],
+        stars: Number(data[i][5]) || 5,
+        customText: data[i][6]
+      });
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok', reviews: approved.reverse() }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+if (action === 'getAllReviews') {
+  // Password check ke baad (accounts.html ke liye)
+  const sheet = getOrCreateReviewsSheet();
+  const data = sheet.getDataRange().getValues();
+  const all = [];
+  for (let i = 1; i < data.length; i++) {
+    all.push({
+      id: data[i][0],
+      date: data[i][1],
+      name: data[i][2],
+      area: data[i][3],
+      service: data[i][4],
+      stars: Number(data[i][5]) || 5,
+      customText: data[i][6],
+      status: data[i][7] || 'Pending'
+    });
+  }
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok', reviews: all.reverse() }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// --- doPost(e) ke andar ---
+if (payload.action === 'submitReview') {
+  const sheet = getOrCreateReviewsSheet();
+  const id = 'REV-' + Date.now();
+  const dateStr = new Date().toLocaleDateString('en-IN');
+  sheet.appendRow([
+    id,
+    dateStr,
+    payload.name || '',
+    payload.area || '',
+    payload.service || '',
+    Number(payload.stars) || 5,
+    payload.customText || '',
+    'Pending'
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok', id: id }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+if (payload.action === 'moderateReview') {
+  // Password verify karne ke baad
+  const sheet = getOrCreateReviewsSheet();
+  const data = sheet.getDataRange().getValues();
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][0]) === String(payload.id)) {
+      if (payload.newStatus === 'Delete') {
+        sheet.deleteRow(i + 1);
+      } else {
+        sheet.getRange(i + 1, 8).setValue(payload.newStatus); // 'Approved' ya 'Pending'
+      }
+      break;
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function getOrCreateReviewsSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('Reviews');
+  if (!sheet) {
+    sheet = ss.insertSheet('Reviews');
+    sheet.appendRow(['ID', 'Date', 'Client Name', 'Area', 'Service', 'Stars', 'Feedback', 'Status']);
+  }
+  return sheet;
+}
