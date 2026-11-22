@@ -193,7 +193,7 @@
             </div>
           </div>
 
-          <button type="submit" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
+          <button type="submit" id="client-login-btn" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
             <i data-lucide="log-in" class="w-4 h-4 text-ke-red"></i>
             <span data-i18n="cp_btn_login">View My Site Documents</span>
           </button>
@@ -223,13 +223,25 @@
               Your Project Documents
             </h2>
             <p class="text-slate-300 text-xs sm:text-sm mt-1">
-              Click <strong>Download / Save PDF</strong> on any document below to print or save an official copy.
+              Click <strong>Open / Download File</strong> or access your complete Google Drive project folder below.
             </p>
           </div>
-          <button type="button" onclick="logoutClient()" class="self-start sm:self-auto px-4 py-2.5 rounded-xl bg-white/10 hover:bg-ke-red text-white text-xs font-bold flex items-center gap-1.5 transition-all">
-            <i data-lucide="log-out" class="w-4 h-4"></i>
-            <span data-i18n="cp_btn_logout">Switch Number / Logout</span>
-          </button>
+          <div class="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+            <a id="client-master-folder-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
+              <i data-lucide="folder-open" class="w-4 h-4"></i>
+              <span>Open My Drive Folder</span>
+            </a>
+            <button type="button" onclick="logoutClient()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-ke-red text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span data-i18n="cp_btn_logout">Switch Number / Logout</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="client-loading-state" class="hidden bg-white dark:bg-slate-900 rounded-3xl p-10 border border-slate-200 dark:border-slate-800 text-center">
+          <div class="inline-block w-8 h-8 border-4 border-ke-navy border-t-ke-red rounded-full animate-spin mb-3"></div>
+          <p class="text-sm font-bold text-ke-navy dark:text-white">Fetching your documents from Kalyani Electrical Cloud...</p>
         </div>
 
         <!-- Documents Grid -->
@@ -364,10 +376,12 @@
   </footer>
 
   <!-- ======================================================================= -->
-  <!-- JAVASCRIPT: CLIENT MOBILE LOGIN, DOCUMENT VAULT & PDF GENERATOR         -->
+  <!-- JAVASCRIPT: LIVE CLOUD SYNC, GOOGLE DRIVE VAULT & PDF GENERATOR         -->
   <!-- ======================================================================= -->
   <script>
-    // Built-in Demo Records (Plus any records added by Partners in accounts.html)
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUw6DPxou-kW33GLXtR1-YJa43JC_LcruFg8LuP-9beDOpfRbV6hqfqfLnkQB_rBwCgw/exec';
+
+    // Built-in Demo Records (Used when testing with 9876543210)
     const DEFAULT_CLIENT_DOCS = [
       {
         id: 'KE-DOC-2026-101',
@@ -377,33 +391,26 @@
         docType: 'Quotation & Energy Saving Plan',
         title: 'Apartment Common Passage Energy Saving & LED Retrofit Proposal',
         date: '2026-11-12',
-        amount: '₹ 48,500',
         summary: 'Complete alternate-circuit switching setup, astronomical timer installation, and common passage LED upgrade with 1-year workmanship warranty.',
-        fileUrl: ''
+        fileUrl: '',
+        folderUrl: ''
       },
       {
         id: 'KE-DOC-2026-102',
         mobile: '9876543210',
         clientName: 'Green Valley Co-op Housing Society',
-        siteLocation: 'Warje, Pune – 411058',
+        siteLocation: 'Warje, Pune – 411054',
         docType: 'Tax Invoice & Warranty Certificate',
         title: '16-Channel IP CCTV & Gate Video Door Phone (VDP) Installation',
         date: '2026-11-18',
-        amount: '₹ 64,000',
         summary: 'Supply and installation of 16 HD/IP Night-Vision Cameras, NVR rack dressing, Cat6 cabling, and main-gate Video Door Phone integration.',
-        fileUrl: ''
+        fileUrl: '',
+        folderUrl: ''
       }
     ];
 
     let activeClientMobile = '';
-
-    function getAllClientDocuments() {
-      let partnerAdded = [];
-      try {
-        partnerAdded = JSON.parse(localStorage.getItem('ke_client_docs') || '[]');
-      } catch (e) {}
-      return [...partnerAdded, ...DEFAULT_CLIENT_DOCS];
-    }
+    let loadedClientDocs = [];
 
     function handleClientLogin(event) {
       event.preventDefault();
@@ -420,27 +427,70 @@
       renderClientDashboard('9876543210');
     }
 
-    function renderClientDashboard(mobile) {
+    async function renderClientDashboard(mobile) {
       activeClientMobile = mobile;
       document.getElementById('client-login-view').classList.add('hidden');
       document.getElementById('client-dashboard-view').classList.remove('hidden');
       document.getElementById('logged-client-phone').textContent = mobile;
 
-      const allDocs = getAllClientDocuments();
-      const matchingDocs = allDocs.filter(d => (d.mobile || '').replace(/\D/g, '') === mobile);
-
       const listEl = document.getElementById('client-docs-list');
       const emptyEl = document.getElementById('client-no-docs');
+      const loadingEl = document.getElementById('client-loading-state');
       const headingEl = document.getElementById('logged-client-heading');
+      const masterFolderBtn = document.getElementById('client-master-folder-btn');
 
-      if (matchingDocs.length === 0) {
-        listEl.innerHTML = '';
+      listEl.innerHTML = '';
+      emptyEl.classList.add('hidden');
+      masterFolderBtn.classList.add('hidden');
+      loadingEl.classList.remove('hidden');
+
+      let cloudDocs = [];
+      try {
+        const res = await fetch(`${APPS_SCRIPT_URL}?action=getClientDocs&mobile=${encodeURIComponent(mobile)}`);
+        const data = await res.json();
+        if (data && data.status === 'ok' && Array.isArray(data.docs)) {
+          cloudDocs = data.docs;
+        }
+      } catch (err) {
+        console.warn('Cloud fetch failed, checking local fallback:', err);
+      }
+
+      // Local fallback (same device or demo records)
+      let localAdded = [];
+      try {
+        localAdded = JSON.parse(localStorage.getItem('ke_client_docs') || '[]')
+          .filter(d => (d.mobile || '').replace(/\D/g, '') === mobile);
+      } catch (e) {}
+
+      const demoMatches = DEFAULT_CLIENT_DOCS.filter(d => (d.mobile || '').replace(/\D/g, '') === mobile);
+
+      // Merge unique records (prefer cloud records first)
+      const seenIds = new Set();
+      loadedClientDocs = [];
+      [...cloudDocs, ...localAdded, ...demoMatches].forEach(doc => {
+        if (!seenIds.has(doc.id)) {
+          seenIds.add(doc.id);
+          loadedClientDocs.push(doc);
+        }
+      });
+
+      loadingEl.classList.add('hidden');
+
+      if (loadedClientDocs.length === 0) {
         emptyEl.classList.remove('hidden');
         headingEl.textContent = 'Client Document Portal';
       } else {
         emptyEl.classList.add('hidden');
-        headingEl.textContent = `${matchingDocs[0].clientName} — Site Documents`;
-        listEl.innerHTML = matchingDocs.map((doc, idx) => `
+        headingEl.textContent = `${loadedClientDocs[0].clientName} — Site Documents`;
+
+        // If client has a Google Drive Folder URL, show top master folder button
+        const docWithFolder = loadedClientDocs.find(d => d.folderUrl);
+        if (docWithFolder && docWithFolder.folderUrl) {
+          masterFolderBtn.href = docWithFolder.folderUrl;
+          masterFolderBtn.classList.remove('hidden');
+        }
+
+        listEl.innerHTML = loadedClientDocs.map((doc) => `
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between gap-2 mb-3">
@@ -460,18 +510,28 @@
               </p>
             </div>
 
-            <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <span class="block text-[10px] uppercase font-bold text-slate-400">Document Value</span>
-                <span class="font-display font-extrabold text-base text-ke-red">${doc.amount || 'Approved'}</span>
+            <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2.5">
+              <div class="flex flex-wrap items-center gap-2">
+                ${doc.fileUrl ? `
+                  <a href="${doc.fileUrl}" target="_blank" rel="noopener noreferrer"
+                     class="px-4 py-2.5 rounded-xl bg-ke-navy hover:bg-ke-navyDark text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
+                    <i data-lucide="external-link" class="w-4 h-4 text-amber-300"></i>
+                    <span>Open / Download File</span>
+                  </a>
+                ` : ''}
+                ${doc.folderUrl ? `
+                  <a href="${doc.folderUrl}" target="_blank" rel="noopener noreferrer"
+                     class="px-3.5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold flex items-center gap-1.5 transition-all">
+                    <i data-lucide="folder" class="w-4 h-4"></i>
+                    <span>Drive Folder</span>
+                  </a>
+                ` : ''}
               </div>
-              <div class="flex items-center gap-2">
-                ${doc.fileUrl ? `<a href="${doc.fileUrl}" target="_blank" download class="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-ke-navy dark:text-white">Open Attachment</a>` : ''}
-                <button type="button" onclick="downloadOfficialDocPdf('${doc.id}')" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
-                  <i data-lucide="download" class="w-4 h-4"></i>
-                  <span>Download / Save PDF</span>
-                </button>
-              </div>
+
+              <button type="button" onclick="downloadOfficialDocPdf('${doc.id}')" class="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-ke-red hover:text-white text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Summary PDF</span>
+              </button>
             </div>
           </div>
         `).join('');
@@ -481,7 +541,7 @@
     }
 
     function downloadOfficialDocPdf(docId) {
-      const doc = getAllClientDocuments().find(d => d.id === docId);
+      const doc = loadedClientDocs.find(d => d.id === docId);
       if (!doc) return;
 
       const win = window.open('', '_blank', 'width=900,height=750');
@@ -526,14 +586,14 @@
               <td class="lbl">Registered Mobile</td><td>+91 ${doc.mobile}</td>
             </tr>
             <tr>
-              <td class="lbl">Site Location</td><td>${doc.siteLocation}</td>
-              <td class="lbl">Amount / Value</td><td><strong>${doc.amount || 'N/A'}</strong></td>
+              <td class="lbl">Site Location</td><td colspan="3">${doc.siteLocation}</td>
             </tr>
           </table>
 
           <div class="box">
             <strong style="color:#0F2354; font-size:14px;">Subject: ${doc.title}</strong>
             <p style="margin-top:8px;">${doc.summary}</p>
+            ${doc.fileUrl ? `<p style="margin-top:10px; font-size:11px; color:#0F2354;"><strong>Attached File Link:</strong> ${doc.fileUrl}</p>` : ''}
           </div>
 
           <div class="footer">
@@ -552,6 +612,7 @@
 
     function logoutClient() {
       activeClientMobile = '';
+      loadedClientDocs = [];
       document.getElementById('client-dashboard-view').classList.add('hidden');
       document.getElementById('client-login-view').classList.remove('hidden');
     }
