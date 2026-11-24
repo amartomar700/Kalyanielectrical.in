@@ -1,0 +1,8 @@
+<svg style="display:none;" viewBox="0 0 260 155" class="h-10 w-auto" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354" />
+              <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A" />
+              <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354" />
+              <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A" />
+              <text x="130" y="132" text-anchor="middle" font-family="&#39;Plus Jakarta Sans&#39;, sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
+              <text x="130" y="150" text-anchor="middle" font-family="&#39;Inter&#39;, sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
+            </svg>
