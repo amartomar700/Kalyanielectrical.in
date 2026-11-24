@@ -949,7 +949,7 @@
    const taxTypeEl = document.querySelector('input[name="billTaxType"]:checked');
    const isIntra = isTaxInvoice && (!taxTypeEl || taxTypeEl.value === 'INTRA');
 
-   const fromName = document.getElementById('bill_from_name').value.trim() || 'KALYANI ELECTRICAL (Est. 2020)';
+   const fromName = document.getElementById('bill_from_name').value.trim() || 'KALYANI ELECTRICAL ';
    const fromAddr = document.getElementById('bill_from_addr').value.trim() || 'Tapodham, Warje, Pune – 411058';
    const fromMob = document.getElementById('bill_from_mob').value.trim() || 'Amar: +91 83096 42700 | Munal: +91 83291 71435 | Vishal: +91 80874 79681';
    const fromEmail = document.getElementById('bill_from_email').value.trim() || 'kalyanielectrical6@gmail.com | kalyanielectrical.in';
