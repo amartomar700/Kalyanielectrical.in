@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Site Logs, Billing &amp; Sync Console | Kalyani Electrical — kalyanielectrical.in</title>
+  <title>Site Logs, Billing &amp; Sync Console | Kalyani Electrical — kalyanielectricals.in</title>
   <meta name="description" content="Protected site operations and billing console for Kalyani Electrical partners (Amar, Munal & Vishal)." />
 
   <!-- Favicons & App Manifest -->
@@ -70,38 +70,6 @@
     }
 
     a svg, button svg { pointer-events: none; }
-
-    /* Ledger, Daily Work & Client Portal Large Text (Excluding Billing Suite) */
-    #tab-panel-dailywork label,
-    #tab-panel-ledger label,
-    #tab-panel-clientdocs label,
-    #tab-panel-reviews label,
-    #tab-panel-settings label {
-      font-size: 1.15rem !important;
-      font-weight: 600 !important;
-      line-height: 1.4 !important;
-    }
-
-    #tab-panel-dailywork input, #tab-panel-dailywork select,
-    #tab-panel-ledger input, #tab-panel-ledger select,
-    #tab-panel-clientdocs input, #tab-panel-clientdocs select, #tab-panel-clientdocs textarea,
-    #tab-panel-reviews select,
-    #tab-panel-settings input {
-      font-size: 1.15rem !important;
-      padding: 13px 15px !important;
-      min-height: 50px !important;
-    }
-
-    #tab-panel-dailywork button,
-    #tab-panel-ledger button,
-    #tab-panel-clientdocs button,
-    #tab-panel-reviews button,
-    #tab-panel-settings button {
-      font-size: 1.1rem !important;
-      padding: 12px 20px !important;
-      min-height: 48px !important;
-      touch-action: manipulation;
-    }
 
     /* =================================================================== */
     /* KALYANI ELECTRICAL BILLING & QUOTATION SUITE STYLES                 */
@@ -330,7 +298,7 @@
       margin-top: 14px;
       align-items: start;
     }
-    .tax-radio-group { display: flex; flex-wrap: wrap; gap: 16px; margin: 10px 0 14px 0; font-size: 13px; font-weight: 700; color: #334155; }
+    .tax-radio-group { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 14px 0; font-size: 13px; font-weight: 700; color: #334155; }
     .tax-radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 
     .summary-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px 18px; }
@@ -454,7 +422,7 @@
             </svg>
           </div>
           <div class="hidden xl:block border-l border-slate-200 dark:border-slate-700 pl-3">
-            <span class="block font-display font-bold text-xs text-ke-navy dark:text-white tracking-wide uppercase">kalyanielectrical.in</span>
+            <span class="block font-display font-bold text-xs text-ke-navy dark:text-white tracking-wide uppercase">kalyanielectricals.in</span>
             <span class="block text-[11px] text-slate-500 dark:text-slate-400 font-medium">Est. 2020 • Pune</span>
           </div>
         </a>
@@ -545,7 +513,7 @@
             <div class="relative">
               <input type="password" id="partner-password-input" required placeholder="Enter Password"
                      class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-base font-bold tracking-widest text-ke-navy dark:text-white focus:outline-none focus:border-ke-navy" />
-              <button type="button" onclick="togglePassVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-ke-navy !min-h-0 !p-2">
+              <button type="button" onclick="togglePassVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-ke-navy p-2">
                 <i data-lucide="eye" class="w-5 h-5"></i>
               </button>
             </div>
@@ -568,7 +536,7 @@
         <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">
-              ● Active Session • kalyanielectrical.in
+              ● Active Session • kalyanielectricals.in
             </span>
             <h2 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
               Site Logs &amp; Billing Console — Login by <span id="active-partner-name" class="text-amber-300">Amar</span>
@@ -597,19 +565,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-[#d9e2f8]/60 dark:bg-slate-900 rounded-2xl p-5 border border-ke-navy/20 dark:border-slate-800 shadow-xs">
             <span class="text-xs font-extrabold uppercase tracking-wider text-ke-navy dark:text-blue-300 block">Total Gross Income</span>
-            <span id="kpi-gross" class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1.5 block">₹ 20,000.00</span>
+            <span id="kpi-gross" class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1.5 block">₹ 0.00</span>
           </div>
           <div class="bg-emerald-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-emerald-500/25 dark:border-slate-800 shadow-xs">
             <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 block">Total Net Income</span>
-            <span id="kpi-net" class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-700 dark:text-emerald-400 mt-1.5 block">₹ 19,150.00</span>
+            <span id="kpi-net" class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-700 dark:text-emerald-400 mt-1.5 block">₹ 0.00</span>
           </div>
           <div class="bg-amber-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-amber-500/25 dark:border-slate-800 shadow-xs">
             <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-300 block">Expenses (Petrol, Tools, Freight)</span>
-            <span id="kpi-expense" class="font-display font-extrabold text-2xl sm:text-3xl text-amber-800 dark:text-amber-300 mt-1.5 block">₹ 200.00</span>
+            <span id="kpi-expense" class="font-display font-extrabold text-2xl sm:text-3xl text-amber-800 dark:text-amber-300 mt-1.5 block">₹ 0.00</span>
           </div>
           <div class="bg-rose-50/90 dark:bg-slate-900 rounded-2xl p-5 border border-ke-red/25 dark:border-slate-800 shadow-xs">
             <span class="text-xs font-extrabold uppercase tracking-wider text-ke-red block">Total Material</span>
-            <span id="kpi-material" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-red mt-1.5 block">₹ 650.00</span>
+            <span id="kpi-material" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-red mt-1.5 block">₹ 0.00</span>
           </div>
         </div>
 
@@ -618,23 +586,23 @@
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
               <span class="text-[11px] font-bold text-slate-400 uppercase block">Amar's Total Share</span>
-              <span id="share-amar" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+              <span id="share-amar" class="font-display font-extrabold text-lg text-[#D91E2A]">₹ 0.00</span>
             </div>
-            <span class="w-9 h-9 rounded-xl bg-ke-navy text-white font-extrabold text-sm flex items-center justify-center">A</span>
+            <span class="w-9 h-9 rounded-xl bg-[#D91E2A] text-white font-extrabold text-sm flex items-center justify-center">A</span>
           </div>
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
               <span class="text-[11px] font-bold text-slate-400 uppercase block">Munal's Total Share</span>
-              <span id="share-munal" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+              <span id="share-munal" class="font-display font-extrabold text-lg text-blue-600 dark:text-blue-400">₹ 0.00</span>
             </div>
             <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-extrabold text-sm flex items-center justify-center">M</span>
           </div>
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
               <span class="text-[11px] font-bold text-slate-400 uppercase block">Vishal's Total Share</span>
-              <span id="share-vishal" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">₹ 6,383.33</span>
+              <span id="share-vishal" class="font-display font-extrabold text-lg text-amber-500">₹ 0.00</span>
             </div>
-            <span class="w-9 h-9 rounded-xl bg-ke-red text-white font-extrabold text-sm flex items-center justify-center">V</span>
+            <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-extrabold text-sm flex items-center justify-center">V</span>
           </div>
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
@@ -645,7 +613,7 @@
           </div>
         </div>
 
-        <!-- Dashboard Navigation Tabs (6 Tabs including Quotation & Billing) -->
+        <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" onclick="switchAccTab('dailywork')" id="tab-btn-dailywork" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
             1. Daily Work Entry
@@ -685,15 +653,15 @@
             <form id="daily-work-form" onsubmit="saveDailyWorkRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
               <input type="hidden" id="editing-work-id" value="" />
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Work Date *</label>
+                <label class="block text-xs font-bold text-slate-500 mb-1.5">Work Date *</label>
                 <input type="date" id="work-date" required class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div class="lg:col-span-2">
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Site / Work Activity *</label>
+                <label class="block text-xs font-bold text-slate-500 mb-1.5">Site / Work Activity *</label>
                 <input type="text" id="work-activity" required placeholder="e.g., Warje site wiring, CCTV check, panel visit" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Status *</label>
+                <label class="block text-xs font-bold text-slate-500 mb-1.5">Status *</label>
                 <select id="work-status" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
                   <option value="Completed">Completed</option>
                   <option value="In Progress">In Progress</option>
@@ -701,7 +669,7 @@
                 </select>
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Notes / Handover</label>
+                <label class="block text-xs font-bold text-slate-500 mb-1.5">Notes / Handover</label>
                 <input type="text" id="work-notes" placeholder="Material needed / next step" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div class="flex items-end gap-2">
@@ -833,9 +801,15 @@
               <div class="parties-grid">
                 <div class="party-card">
                   <h3 id="hdr_from">From <span>(Fixed Company Details)</span></h3>
-                  <div class="u-field">
-                    <label>Company Name (Fixed)</label>
-                    <input type="text" id="from_name" value="KALYANI ELECTRICAL" readonly>
+                  <div class="party-row-2">
+                    <div class="u-field">
+                      <label>Company Name (Fixed)</label>
+                      <input type="text" id="from_name" value="KALYANI ELECTRICAL" readonly>
+                    </div>
+                    <div class="u-field">
+                      <label>Website Address (Fixed)</label>
+                      <input type="text" id="from_web" value="www.kalyanielectricals.in" readonly>
+                    </div>
                   </div>
                   <div class="u-field">
                     <label>Office Address</label>
@@ -897,12 +871,13 @@
                 <button type="button" class="link-btn" onclick="addBillRow('labour')">+ Add Labour / Installation Charge Row</button>
               </div>
 
-              <!-- Bottom Tax Type & Summary -->
+              <!-- Bottom Tax Type (With GST & Without GST) & Summary -->
               <div class="bottom-calc-grid">
                 <div>
                   <div class="tax-radio-group" id="gstTypeGroup">
-                    <label><input type="radio" name="taxType" value="INTRA" checked onchange="recalcBill()"> Intra-state (CGST + SGST)</label>
-                    <label><input type="radio" name="taxType" value="INTER" onchange="recalcBill()"> Inter-state (IGST)</label>
+                    <label><input type="radio" name="taxType" value="INTRA" checked onchange="onTaxModeChange()"> Intra-state (CGST + SGST)</label>
+                    <label><input type="radio" name="taxType" value="INTER" onchange="onTaxModeChange()"> Inter-state (IGST)</label>
+                    <label style="color:#066399;"><input type="radio" name="taxType" value="NOGST" onchange="onTaxModeChange()"> Without GST (Non-GST Bill)</label>
                   </div>
                   <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:440px;">
                     <div class="u-field">
@@ -917,7 +892,7 @@
                 </div>
 
                 <div class="summary-box">
-                  <div class="sum-line"><span>Taxable Amount:</span><span id="lbl_sub">₹0.00</span></div>
+                  <div class="sum-line"><span>Taxable / Subtotal Amount:</span><span id="lbl_sub">₹0.00</span></div>
                   <div class="sum-line" id="row_cgst"><span>CGST:</span><span id="lbl_cgst">₹0.00</span></div>
                   <div class="sum-line" id="row_sgst"><span>SGST:</span><span id="lbl_sgst">₹0.00</span></div>
                   <div class="sum-line" id="row_igst" style="display:none;"><span>IGST:</span><span id="lbl_igst">₹0.00</span></div>
@@ -934,7 +909,7 @@
                 <input type="text" id="inv_terms" value="1. Goods once sold will not be taken back. 2. Subject to Pune jurisdiction. 3. E. & O.E." oninput="updateLivePreview()">
               </div>
 
-              <!-- Action Buttons (PDF & Print Untouched + Excel Save) -->
+              <!-- Action Buttons (PDF & Print + Excel Save) -->
               <div class="cta-bar">
                 <button type="button" class="btn-save-sheet" id="btnSaveBillSheet" onclick="saveBillingDocToSheet()">💾 Save to Excel Sheet</button>
                 <button type="button" class="btn-gold" id="btnDownloadPdf" onclick="downloadCleanPDF()">📥 Download A4 PDF</button>
@@ -965,54 +940,54 @@
         <div id="tab-panel-ledger" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <h3 id="entry-form-heading" class="font-display font-extrabold text-xl text-ke-navy dark:text-white">
-                Add Record Entry (Entry by: <span class="text-ke-red" id="form-creator-label">Amar</span>)
+              <h3 id="entry-form-heading" class="font-display font-extrabold text-lg text-ke-navy dark:text-white">
+                Add Record Entry (Entry by: <span id="form-creator-label">Amar</span>)
               </h3>
               <span id="live-preview-pill" class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
                 Live Preview: Net ₹ 0.00 | Each Share ₹ 0.00
               </span>
             </div>
 
-            <form id="income-entry-form" onsubmit="saveIncomeRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4">
+            <form id="income-entry-form" onsubmit="saveIncomeRow(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
               <input type="hidden" id="editing-row-id" value="" />
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Date *</label>
-                <input type="date" id="row-date" required class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Date *</label>
+                <input type="date" id="row-date" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div class="lg:col-span-2">
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Client / Site Name *</label>
-                <input type="text" id="row-client" required placeholder="e.g., vikash shinde" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Client / Site Name *</label>
+                <input type="text" id="row-client" required placeholder="e.g., vikash shinde" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Income (₹) *</label>
-                <input type="number" id="row-income" required min="0" step="0.01" placeholder="20000" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Income (₹) *</label>
+                <input type="number" id="row-income" required min="0" step="0.01" placeholder="20000" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Material (₹)</label>
-                <input type="number" id="row-material" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Material (₹)</label>
+                <input type="number" id="row-material" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Expenses (₹)</label>
-                <input type="number" id="row-expense" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Expenses (₹)</label>
+                <input type="number" id="row-expense" min="0" step="0.01" value="0" oninput="updateLiveSplitPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-500 mb-1.5">Settlement</label>
-                <div class="flex gap-2">
-                  <select id="row-settled" class="w-full px-2 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
+                <label class="block text-[11px] font-bold text-slate-500 mb-1">Settlement</label>
+                <div class="flex gap-1.5">
+                  <select id="row-settled" class="w-full px-2 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold">
                     <option value="No">No</option>
                     <option value="Yes">Yes</option>
                   </select>
-                  <button type="submit" id="save-row-btn" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold shrink-0">+ Add</button>
-                  <button type="button" id="cancel-edit-btn" onclick="cancelEditRow()" class="hidden px-3 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-xs font-bold shrink-0">✕</button>
+                  <button type="submit" id="save-row-btn" class="px-3.5 py-2 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold shrink-0">+ Add</button>
+                  <button type="button" id="cancel-edit-btn" onclick="cancelEditRow()" class="hidden px-2.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 text-xs font-bold shrink-0">✕</button>
                 </div>
               </div>
             </form>
           </div>
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
-            <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+            <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Records &amp; Settlement Sheet</h3>
+                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Records &amp; Settlement Sheet</h3>
               </div>
               <div class="flex flex-wrap items-center gap-2">
                 <select id="filter-creator" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold">
@@ -1030,35 +1005,35 @@
               </div>
             </div>
             <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-sm">
+              <table class="w-full text-left border-collapse text-xs sm:text-sm">
                 <thead>
-                  <tr class="bg-[#3c5f90] text-white uppercase tracking-wider text-xs">
-                    <th class="py-3 px-2.5 text-center">Sr.</th>
-                    <th class="py-3 px-2.5 text-center">Date</th>
-                    <th class="py-3 px-3">Client</th>
-                    <th class="py-3 px-2.5 text-center">Entry By</th>
-                    <th class="py-3 px-2.5 text-right">Income</th>
-                    <th class="py-3 px-2.5 text-right">Material</th>
-                    <th class="py-3 px-2.5 text-right">Expenses</th>
-                    <th class="py-3 px-2.5 text-right">Net Benefit</th>
-                    <th class="py-3 px-2.5 text-right">Amar</th>
-                    <th class="py-3 px-2.5 text-right">Munal</th>
-                    <th class="py-3 px-2.5 text-right">Vishal</th>
-                    <th class="py-3 px-2.5 text-center">Settled</th>
-                    <th class="py-3 px-2.5 text-center">Actions</th>
+                  <tr class="bg-[#3c5f90] text-white uppercase tracking-wider text-[11px]">
+                    <th class="py-2.5 px-2 text-center">Sr.</th>
+                    <th class="py-2.5 px-2 text-center">Date</th>
+                    <th class="py-2.5 px-3">Client</th>
+                    <th class="py-2.5 px-2 text-center">Entry By</th>
+                    <th class="py-2.5 px-2 text-right">Income</th>
+                    <th class="py-2.5 px-2 text-right">Material</th>
+                    <th class="py-2.5 px-2 text-right">Expenses</th>
+                    <th class="py-2.5 px-2 text-right">Net Benefit</th>
+                    <th class="py-2.5 px-2 text-right">Amar</th>
+                    <th class="py-2.5 px-2 text-right">Munal</th>
+                    <th class="py-2.5 px-2 text-right">Vishal</th>
+                    <th class="py-2.5 px-2 text-center">Settled</th>
+                    <th class="py-2.5 px-2 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="income-table-body" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
                 <tfoot>
-                  <tr class="bg-[#ececf4] dark:bg-slate-800 font-extrabold border-t-2 border-slate-400">
-                    <td class="py-3 px-3 text-center" colspan="4">Total</td>
-                    <td id="foot-income" class="py-3 px-2.5 text-right">0.00</td>
-                    <td id="foot-material" class="py-3 px-2.5 text-right">0.00</td>
-                    <td id="foot-expense" class="py-3 px-2.5 text-right">0.00</td>
-                    <td id="foot-net" class="py-3 px-2.5 text-right text-emerald-700">0.00</td>
-                    <td id="foot-amar" class="py-3 px-2.5 text-right">0.00</td>
-                    <td id="foot-munal" class="py-3 px-2.5 text-right">0.00</td>
-                    <td id="foot-vishal" class="py-3 px-2.5 text-right">0.00</td>
+                  <tr class="bg-[#ececf4] dark:bg-slate-800 font-extrabold border-t-2 border-slate-400 text-xs">
+                    <td class="py-2.5 px-3 text-center" colspan="4">Total</td>
+                    <td id="foot-income" class="py-2.5 px-2 text-right">0.00</td>
+                    <td id="foot-material" class="py-2.5 px-2 text-right">0.00</td>
+                    <td id="foot-expense" class="py-2.5 px-2 text-right">0.00</td>
+                    <td id="foot-net" class="py-2.5 px-2 text-right text-emerald-700 dark:text-emerald-400">0.00</td>
+                    <td id="foot-amar" class="py-2.5 px-2 text-right text-[#D91E2A]">0.00</td>
+                    <td id="foot-munal" class="py-2.5 px-2 text-right text-blue-600 dark:text-blue-400">0.00</td>
+                    <td id="foot-vishal" class="py-2.5 px-2 text-right text-amber-500">0.00</td>
                     <td colspan="2"></td>
                   </tr>
                 </tfoot>
@@ -1067,20 +1042,20 @@
           </div>
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border-2 border-amber-500/30 dark:border-slate-800 shadow-md">
-            <div class="p-5 bg-amber-50/70 dark:bg-slate-800/70 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
-              <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Edit &amp; Delete History Log</h3>
+            <div class="p-4 sm:p-5 bg-amber-50/70 dark:bg-slate-800/70 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Edit &amp; Delete History Log</h3>
               <span id="audit-count-badge" class="px-3 py-1 rounded-full bg-ke-navy text-white text-xs font-bold">0 Changes Logged</span>
             </div>
             <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-sm">
+              <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase text-xs">
-                    <th class="py-2.5 px-4">Date &amp; Time</th>
-                    <th class="py-2.5 px-3">User</th>
-                    <th class="py-2.5 px-3">Action</th>
-                    <th class="py-2.5 px-3">Client / Item</th>
-                    <th class="py-2.5 px-4">Old Details</th>
-                    <th class="py-2.5 px-4">New Details</th>
+                  <tr class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase text-[11px]">
+                    <th class="py-2 px-4">Date &amp; Time</th>
+                    <th class="py-2 px-3">User</th>
+                    <th class="py-2 px-3">Action</th>
+                    <th class="py-2 px-3">Client / Item</th>
+                    <th class="py-2 px-4">Old Details</th>
+                    <th class="py-2 px-4">New Details</th>
                   </tr>
                 </thead>
                 <tbody id="audit-log-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
@@ -1095,22 +1070,22 @@
         <div id="tab-panel-clientdocs" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-1">Publish Site Document to Client Portal</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">Upload client PDFs or reports directly to their Google Drive folder.</p>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-5">Upload client PDFs or reports directly to their Google Drive folder.</p>
             <form id="clientDocForm" onsubmit="publishClientDoc(event)">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label class="block mb-1.5">Client 10-Digit Mobile Number *</label>
-                  <input type="tel" id="docClientMobile" maxlength="10" pattern="[0-9]{10}" placeholder="e.g., 9876543210" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <label class="block text-xs font-bold mb-1">Client 10-Digit Mobile Number *</label>
+                  <input type="tel" id="docClientMobile" maxlength="10" pattern="[0-9]{10}" placeholder="e.g., 9876543210" required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
                 <div>
-                  <label class="block mb-1.5">Client / Society / Company Name *</label>
-                  <input type="text" id="docClientName" placeholder="e.g., Vikash Shinde" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <label class="block text-xs font-bold mb-1">Client / Society / Company Name *</label>
+                  <input type="text" id="docClientName" placeholder="e.g., Vikash Shinde" required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label class="block mb-1.5">Document Category *</label>
-                  <select id="docCategory" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
+                  <label class="block text-xs font-bold mb-1">Document Category *</label>
+                  <select id="docCategory" required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
                     <option value="Quotation & BOQ Estimate">Quotation &amp; BOQ Estimate</option>
                     <option value="Tax Invoice / Bill">Tax Invoice / Bill</option>
                     <option value="Work Completion / Handover Report">Work Completion / Handover Report</option>
@@ -1119,33 +1094,33 @@
                   </select>
                 </div>
                 <div>
-                  <label class="block mb-1.5">Site Location *</label>
-                  <input type="text" id="docSiteLocation" placeholder="e.g., Warje, Pune" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <label class="block text-xs font-bold mb-1">Site Location *</label>
+                  <input type="text" id="docSiteLocation" placeholder="e.g., Warje, Pune" required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
               </div>
               <div class="mb-4">
-                <label class="block mb-1.5">Document Title *</label>
-                <input type="text" id="docTitle" placeholder="e.g., Electrical Installation & Testing Work" required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                <label class="block text-xs font-bold mb-1">Document Title *</label>
+                <input type="text" id="docTitle" placeholder="e.g., Electrical Installation & Testing Work" required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label class="block mb-1.5">External Google Drive Link (Optional)</label>
-                  <input type="url" id="docExternalLink" placeholder="https://drive.google.com/..." class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <label class="block text-xs font-bold mb-1">External Google Drive Link (Optional)</label>
+                  <input type="url" id="docExternalLink" placeholder="https://drive.google.com/..." class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
                 <div>
-                  <label class="block mb-1.5">Upload File to Client Drive Folder (Max 15 MB)</label>
-                  <input type="file" id="docFileUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+                  <label class="block text-xs font-bold mb-1">Upload File to Client Drive Folder (Max 15 MB)</label>
+                  <input type="file" id="docFileUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx" class="w-full px-3.5 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
                 </div>
               </div>
               <div class="mb-5">
-                <label class="block mb-1.5">Work Summary / Technical Notes *</label>
-                <textarea id="docSummary" rows="3" placeholder="Brief summary..." required class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"></textarea>
+                <label class="block text-xs font-bold mb-1">Work Summary / Technical Notes *</label>
+                <textarea id="docSummary" rows="3" placeholder="Brief summary..." required class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"></textarea>
               </div>
-              <button type="submit" class="px-6 py-3 rounded-xl bg-blue-700 text-white font-bold">☁️ Upload to Client Drive &amp; Publish</button>
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-700 text-white text-sm font-bold">☁️ Upload to Client Drive &amp; Publish</button>
             </form>
           </div>
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-4">Published Client Documents</h3>
+            <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white mb-4">Published Client Documents</h3>
             <div id="published-docs-list" class="space-y-3"></div>
           </div>
         </div>
@@ -1156,7 +1131,7 @@
         <div id="tab-panel-reviews" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-slate-100 dark:border-slate-800">
-              <h3 class="font-display font-extrabold text-xl text-ke-navy dark:text-white">Client Reviews Approval Panel</h3>
+              <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Client Reviews Approval Panel</h3>
               <div class="flex items-center gap-2.5">
                 <select id="filter-review-status" onchange="renderAdminReviewsList()" class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 px-3 py-2 text-xs font-bold">
                   <option value="ALL">All Reviews</option>
@@ -1166,7 +1141,7 @@
                 <button type="button" onclick="fetchAllReviewsFromCloud()" class="px-4 py-2 rounded-xl bg-ke-navy text-white text-xs font-bold">Refresh</button>
               </div>
             </div>
-            <div id="admin-reviews-loading" class="hidden py-8 text-center">Loading reviews...</div>
+            <div id="admin-reviews-loading" class="hidden py-8 text-center text-sm">Loading reviews...</div>
             <div id="admin-reviews-list" class="space-y-4"></div>
           </div>
         </div>
@@ -1176,7 +1151,7 @@
         <!-- ================================================================= -->
         <div id="tab-panel-settings" class="acc-tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-2">Change Access Password</h3>
+            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Change Access Password</h3>
             <form onsubmit="changePartnerPassword(event)" class="space-y-3 mt-4">
               <input type="password" id="current-partner-pass" required placeholder="Current Password" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 text-sm font-bold" />
               <input type="password" id="new-partner-pass" required minlength="4" placeholder="New Password (min 4 chars)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 text-sm font-bold" />
@@ -1184,8 +1159,8 @@
             </form>
           </div>
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h3 class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-2">Backup Console Data</h3>
-            <p class="text-sm text-slate-500 mb-4">Download a full JSON backup of all logs, ledger, and saved bills.</p>
+            <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Backup Console Data</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mb-4">Download a full JSON backup of all logs, ledger, and saved bills.</p>
             <button type="button" onclick="downloadFullBackup()" class="px-5 py-2.5 rounded-xl bg-ke-navy text-white text-xs font-extrabold">Download Full Backup (.json)</button>
           </div>
         </div>
@@ -1230,7 +1205,7 @@
           </div>
           <div>
             <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight block">
-              kalyanielectrical.in <span class="text-ke-red">Electrical Services</span>
+              kalyanielectricals.in <span class="text-ke-red">Electrical Services</span>
             </span>
             <span class="text-xs text-slate-300 block mt-0.5">
               Tapodham, Warje, Pune – 411058 • Est. 2020 (Amar, Munal &amp; Vishal)
@@ -1247,7 +1222,7 @@
         </div>
       </div>
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
-        <p>© 2020–2026 kalyanielectrical.in — Kalyani Electrical Services, Tapodham, Warje, Pune – 411058.</p>
+        <p>© 2020–2026 kalyanielectricals.in — Kalyani Electrical Services, Tapodham, Warje, Pune – 411058.</p>
         <a href="mailto:kalyanielectrical6@gmail.com" class="hover:text-white">kalyanielectrical6@gmail.com</a>
       </div>
     </div>
@@ -1268,6 +1243,15 @@
 
     function formatMoney(num) {
       return Number(num || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Partner Name Color Helper (Amar: Red, Munal: Blue, Vishal: Yellow/Amber)
+    function getPartnerTextColorClass(name) {
+      const n = String(name || '').trim().toLowerCase();
+      if (n === 'amar') return 'text-[#D91E2A] font-extrabold';
+      if (n === 'munal') return 'text-blue-600 dark:text-blue-400 font-extrabold';
+      if (n === 'vishal') return 'text-amber-500 font-extrabold';
+      return 'text-slate-700 dark:text-slate-200 font-bold';
     }
 
     function summarizeRow(r) {
@@ -1317,7 +1301,11 @@
       sessionPass = entered;
       currentPartner = partner;
       document.getElementById('active-partner-name').textContent = partner;
-      document.getElementById('form-creator-label').textContent = partner;
+
+      const formCreatorEl = document.getElementById('form-creator-label');
+      formCreatorEl.textContent = partner;
+      formCreatorEl.className = getPartnerTextColorClass(partner);
+
       document.getElementById('work-creator-label').textContent = partner;
       document.getElementById('partner-lock-view').classList.add('hidden');
       document.getElementById('partner-dashboard-view').classList.remove('hidden');
@@ -1326,6 +1314,7 @@
       document.getElementById('row-date').value = todayStr;
       document.getElementById('work-date').value = todayStr;
 
+      cleanBogusDefaultRows();
       initKalyaniBillingSuite();
 
       cancelEditRow();
@@ -1375,20 +1364,21 @@
     // =======================================================================
     const $b = id => document.getElementById(id);
 
-    const DEFAULT_KE_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300">
-        <path d="M225 45 A135 135 0 0 0 48 242 A148 148 0 0 1 225 45 Z" fill="#0F2354"/>
-        <path d="M72 260 A135 135 0 0 0 282 140 A148 148 0 0 1 72 260 Z" fill="#D91E2A"/>
-        <polygon points="62,92 98,92 98,148 152,92 194,92 132,154 182,218 138,218 98,164 98,218 62,218" fill="#0F2354"/>
-        <polygon points="238,48 155,165 196,165 136,262 222,145 182,145" fill="#D91E2A"/>
-        <polygon points="228,92 296,92 286,115 218,115" fill="#D91E2A"/>
-        <polygon points="212,144 276,144 266,167 202,167" fill="#D91E2A"/>
-        <polygon points="184,195 256,195 246,218 174,218" fill="#D91E2A"/>
-      </svg>
-    `);
+    const DEFAULT_KE_LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 320 300">
+      <path d="M225 45 A135 135 0 0 0 48 242 A148 148 0 0 1 225 45 Z" fill="#0F2354"/>
+      <path d="M72 260 A135 135 0 0 0 282 140 A148 148 0 0 1 72 260 Z" fill="#D91E2A"/>
+      <polygon points="62,92 98,92 98,148 152,92 194,92 132,154 182,218 138,218 98,164 98,218 62,218" fill="#0F2354"/>
+      <polygon points="238,48 155,165 196,165 136,262 222,145 182,145" fill="#D91E2A"/>
+      <polygon points="228,92 296,92 286,115 218,115" fill="#D91E2A"/>
+      <polygon points="212,144 276,144 266,167 202,167" fill="#D91E2A"/>
+      <polygon points="184,195 256,195 246,218 174,218" fill="#D91E2A"/>
+    </svg>`;
+
+    const DEFAULT_KE_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(DEFAULT_KE_LOGO_SVG);
 
     let docType = 'INVOICE';
     let logoDataUrl = DEFAULT_KE_LOGO;
+    let logoPngDataUrl = '';
     let savedBillingCache = [];
     let isEditingExistingBill = false;
     let serialCounters = JSON.parse(localStorage.getItem('ke_serial_counters_v1') || '{"INV":0,"QUO":0,"EST":0,"LBR":0,"PI":0}');
@@ -1499,8 +1489,39 @@
       }
     };
 
-    function initKalyaniBillingSuite() {
+    // Convert any SVG/Image Logo to crisp PNG Data URL so html2pdf NEVER drops it
+    function convertImageToPngDataUrl(srcUrl) {
+      return new Promise((resolve) => {
+        if (srcUrl.startsWith('data:image/png')) {
+          resolve(srcUrl);
+          return;
+        }
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = 260;
+            canvas.height = 240;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 10, 10, 240, 220);
+            resolve(canvas.toDataURL('image/png'));
+          } catch (e) {
+            resolve(srcUrl);
+          }
+        };
+        img.onerror = () => resolve(srcUrl);
+        img.src = srcUrl;
+      });
+    }
+
+    async function initKalyaniBillingSuite() {
+      logoPngDataUrl = await convertImageToPngDataUrl(DEFAULT_KE_LOGO);
+      logoDataUrl = logoPngDataUrl;
       $b('logoPreview').src = logoDataUrl;
+
       const today = new Date().toISOString().split('T')[0];
       $b('inv_date').value = today;
       $b('inv_valid_date').value = new Date(Date.now() + 15 * 86400000).toISOString().split('T')[0];
@@ -1525,6 +1546,21 @@
       }
     }
 
+    function isTaxEnabledForCurrentDoc() {
+      if (docType !== 'INVOICE') return false;
+      const checkedRadio = document.querySelector('input[name="taxType"]:checked');
+      return checkedRadio ? (checkedRadio.value !== 'NOGST') : true;
+    }
+
+    function onTaxModeChange() {
+      const isTaxOn = isTaxEnabledForCurrentDoc();
+      document.querySelectorAll('.gst-col').forEach(el => {
+        el.style.display = isTaxOn ? '' : 'none';
+      });
+      $b('docTopTitle').innerText = (docType === 'INVOICE' && !isTaxOn) ? 'INVOICE / BILL' : DOC_CONFIG[docType].title;
+      recalcBill();
+    }
+
     function setDocType(type, keepCustomNo = false) {
       docType = type;
       const cfg = DOC_CONFIG[type];
@@ -1533,7 +1569,11 @@
         $b('tab_' + t).classList.toggle('active', t === type);
       });
 
-      $b('docTopTitle').innerText = cfg.title;
+      const isTaxInvoiceTab = (type === 'INVOICE');
+      $b('gstTypeGroup').style.display = isTaxInvoiceTab ? 'flex' : 'none';
+
+      const isTaxOn = isTaxEnabledForCurrentDoc();
+      $b('docTopTitle').innerText = (isTaxInvoiceTab && !isTaxOn) ? 'INVOICE / BILL' : cfg.title;
       $b('lbl_doc_no').innerText = cfg.noLabel;
       $b('lbl_doc_date').innerText = cfg.dateLabel;
       $b('hdr_from').innerHTML = cfg.fromHeader;
@@ -1552,10 +1592,8 @@
       $b('th_hsn').innerText = type === 'LABOUR' ? 'SAC / Unit' : 'HSN/SAC';
       $b('th_qty').innerText = type === 'LABOUR' ? 'Days / Qty*' : 'Qty*';
 
-      const isTaxInvoice = (type === 'INVOICE');
-      $b('gstTypeGroup').style.display = isTaxInvoice ? 'flex' : 'none';
       document.querySelectorAll('.gst-col').forEach(el => {
-        el.style.display = isTaxInvoice ? '' : 'none';
+        el.style.display = isTaxOn ? '' : 'none';
       });
 
       renderBillPresetChips();
@@ -1584,8 +1622,9 @@
       const f = e.target.files[0];
       if (!f) return;
       const r = new FileReader();
-      r.onload = ev => {
-        logoDataUrl = ev.target.result;
+      r.onload = async ev => {
+        logoPngDataUrl = await convertImageToPngDataUrl(ev.target.result);
+        logoDataUrl = logoPngDataUrl;
         $b('logoPreview').src = logoDataUrl;
         updateLivePreview();
       };
@@ -1593,7 +1632,7 @@
     }
 
     function renderBillTable() {
-      const isTaxInvoice = (docType === 'INVOICE');
+      const isTaxOn = isTaxEnabledForCurrentDoc();
       $b('itemsBody').innerHTML = billItems.map((it, i) => {
         const base = (it.qty || 0) * (it.rate || 0);
         const afterDisc = base - (base * (it.disc || 0) / 100);
@@ -1621,7 +1660,7 @@
         `;
       }).join('');
       document.querySelectorAll('.gst-col').forEach(el => {
-        el.style.display = isTaxInvoice ? '' : 'none';
+        el.style.display = isTaxOn ? '' : 'none';
       });
       recalcBill();
     }
@@ -1643,9 +1682,9 @@
 
     function recalcBill() {
       const taxMode = document.querySelector('input[name="taxType"]:checked').value;
-      const isTaxInvoice = (docType === 'INVOICE');
-      const isIntra = isTaxInvoice && (taxMode === 'INTRA');
-      const isNoGst = !isTaxInvoice;
+      const isTaxOn = isTaxEnabledForCurrentDoc();
+      const isIntra = isTaxOn && (taxMode === 'INTRA');
+      const isNoGst = !isTaxOn;
 
       let sub = 0, totalTax = 0;
       billItems.forEach((it, i) => {
@@ -1686,9 +1725,9 @@
     function buildCleanInvoiceHTML() {
       const cfg = DOC_CONFIG[docType];
       const taxMode = document.querySelector('input[name="taxType"]:checked').value;
-      const isTaxInvoice = (docType === 'INVOICE');
-      const isIntra = isTaxInvoice && (taxMode === 'INTRA');
-      const isNoGst = !isTaxInvoice;
+      const isTaxOn = isTaxEnabledForCurrentDoc();
+      const isIntra = isTaxOn && (taxMode === 'INTRA');
+      const isNoGst = !isTaxOn;
       const extra = Math.max(0, parseFloat($b('extra_charge').value) || 0);
       const adv = Math.max(0, parseFloat($b('adv_received').value) || 0);
       let sub = 0, totalTax = 0;
@@ -1716,6 +1755,8 @@
       const grand = Math.round(sub + totalTax + extra);
       const bal = Math.max(0, grand - adv);
       const validDt = $b('inv_valid_date').value;
+      const activeLogoSrc = logoPngDataUrl || logoDataUrl;
+      const docDisplayTitle = (docType === 'INVOICE' && isNoGst) ? 'INVOICE / BILL' : cfg.title;
 
       const docShortLabel = docType === 'INVOICE' ? 'Invoice' :
                             docType === 'QUOTATION' ? 'Quotation' :
@@ -1726,17 +1767,17 @@
         <div class="doc-sheet-inner" style="font-family:-apple-system,sans-serif; color:#0f172a; padding:18px; border:1.5px solid #066399; border-radius:8px; background:#fff; width:100%; box-sizing:border-box;">
           <div class="doc-header-row" style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2.5px solid #066399; padding-bottom:12px; margin-bottom:14px; gap:12px;">
             <div style="display:flex; gap:12px; align-items:center;">
-              <img src="${logoDataUrl}" style="height:64px; width:64px; object-fit:contain;">
+              <img src="${activeLogoSrc}" alt="KE Logo" style="height:66px; width:66px; object-fit:contain; display:block;">
               <div>
                 <h2 style="margin:0; font-size:19px; color:#0F2354; text-transform:uppercase; letter-spacing:0.4px; font-weight:900;">KALYANI ELECTRICAL</h2>
                 <p style="margin:2px 0 0; font-size:10.5px; color:#475569; font-weight:600;">Electricals • CCTV Surveillance • Solar Power • LAN Networking</p>
                 <p style="margin:2px 0 0; font-size:10.5px; color:#334155;">${escapeHtml($b('from_addr1').value)}</p>
                 <p style="margin:3px 0 0; font-size:10.5px; color:#0f172a; font-weight:700;">${escapeHtml($b('from_mob').value)}</p>
-                <p style="margin:2px 0 0; font-size:10px; color:#475569;">Email: ${escapeHtml($b('from_upi').value)} ${$b('from_gst').value ? `| GSTIN: <b>${escapeHtml($b('from_gst').value)}</b>` : ''}</p>
+                <p style="margin:2px 0 0; font-size:10px; color:#066399; font-weight:700;">Web: ${escapeHtml($b('from_web').value)} <span style="color:#475569; font-weight:500;">| Email: ${escapeHtml($b('from_upi').value)}</span> ${$b('from_gst').value ? `<span style="color:#0f172a;">| GSTIN: <b>${escapeHtml($b('from_gst').value)}</b></span>` : ''}</p>
               </div>
             </div>
             <div style="text-align:right; flex-shrink:0;">
-              <span style="background:#066399; color:#fff; padding:4px 12px; border-radius:4px; font-size:11px; font-weight:800;">${cfg.title}</span>
+              <span style="background:#066399; color:#fff; padding:4px 12px; border-radius:4px; font-size:11px; font-weight:800;">${docDisplayTitle}</span>
               <p style="margin:6px 0 0; font-size:11.5px;"><b>${docShortLabel} No:</b> ${escapeHtml($b('inv_no').value)}</p>
               <p style="margin:2px 0 0; font-size:11px;"><b>Date:</b> ${escapeHtml($b('inv_date').value)}</p>
               ${(cfg.showValid && validDt) ? `<p style="margin:2px 0 0; font-size:11px;"><b>Valid Until:</b> ${escapeHtml(validDt)}</p>` : ''}
@@ -1976,6 +2017,10 @@
       try {
         const d = typeof rec.jsonData === 'string' ? JSON.parse(rec.jsonData) : rec.jsonData;
         isEditingExistingBill = true;
+        if (d.taxType) {
+          const radio = document.querySelector(`input[name="taxType"][value="${d.taxType}"]`);
+          if (radio) radio.checked = true;
+        }
         setDocType(d.docType || 'INVOICE', true);
 
         $b('inv_no').value = d.inv_no || '';
@@ -1995,10 +2040,6 @@
         $b('adv_received').value = d.adv_received || 0;
         $b('inv_terms').value = d.inv_terms || '';
 
-        if (d.taxType) {
-          const radio = document.querySelector(`input[name="taxType"][value="${d.taxType}"]`);
-          if (radio) radio.checked = true;
-        }
         billItems = Array.isArray(d.items) && d.items.length > 0 ? d.items : [{ name: '', hsn: '', gst: 18, qty: 1, rate: 0, disc: 0 }];
         renderBillTable();
         closeBillingRecordsModal();
@@ -2008,8 +2049,11 @@
       }
     }
 
-    // UNTOUCHED PDF & PRINT FUNCTIONS
+    // FIXED PDF EXPORT WITH GUARANTEED PNG LOGO RENDERING
     async function downloadCleanPDF() {
+      if (!logoPngDataUrl) {
+        logoPngDataUrl = await convertImageToPngDataUrl(logoDataUrl || DEFAULT_KE_LOGO);
+      }
       updateLivePreview();
       const cfg = DOC_CONFIG[docType];
       const mainBtn = $b('btnDownloadPdf');
@@ -2034,6 +2078,11 @@
       const copiedContainer = clone.querySelector('#invoiceDocContent');
       if (copiedContainer) copiedContainer.removeAttribute('id');
       clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+      // Ensure every image inside PDF clone uses crisp PNG data URL
+      clone.querySelectorAll('img').forEach(img => {
+        if (logoPngDataUrl) img.src = logoPngDataUrl;
+      });
 
       clone.style.cssText = [
         `width:${PDF_WIDTH}px`,
@@ -2082,7 +2131,7 @@
       const filename = `${cfg.filePrefix}_${cleanNo}.pdf`;
 
       try {
-        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 150)));
+        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 250)));
         await html2pdf().set({
           margin: [10, 12, 12, 12],
           filename,
@@ -2119,7 +2168,7 @@
       billItems.forEach((it, idx) => {
         if (it.name) itemLines += `${idx+1}. ${it.name} (${it.qty} × ₹${it.rate})\n`;
       });
-      const msg = `*🧾 ${cfg.title} (${inv})*\n*From:* KALYANI ELECTRICAL (Pune)\n*Contact:* Amar: 8309642700 | Munal: 8329171435 | Vishal: 8087479681\n*Client:* ${$b('to_name').value || 'Customer'}\n\n${itemLines}-------------------------\n*Total Amount:* ${tot}`;
+      const msg = `*🧾 ${cfg.title} (${inv})*\n*From:* KALYANI ELECTRICAL (Pune)\n*Web:* www.kalyanielectricals.in\n*Contact:* Amar: 8309642700 | Munal: 8329171435 | Vishal: 8087479681\n*Client:* ${$b('to_name').value || 'Customer'}\n\n${itemLines}-------------------------\n*Total Amount:* ${tot}`;
       window.open(ph ? `https://wa.me/91${ph}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -2147,6 +2196,32 @@
         $b('extra_charge').value = 0;
         $b('adv_received').value = 0;
         renderBillTable();
+      }
+    }
+
+    // =======================================================================
+    // CLEAN BOGUS / DEFAULT 000 ENTRIES FIX
+    // =======================================================================
+    function isBogusEntry(r) {
+      if (!r) return true;
+      const clientStr = String(r.client || '').trim();
+      const inc = Number(r.income) || 0;
+      const mat = Number(r.material) || 0;
+      const exp = Number(r.expense) || 0;
+      if (clientStr === '000' || clientStr === '0' || (!clientStr && inc === 0 && mat === 0 && exp === 0)) {
+        return true;
+      }
+      if (String(r.id) === '1732010000000' && clientStr === 'vikash shinde' && inc === 20000) {
+        return true;
+      }
+      return false;
+    }
+
+    function cleanBogusDefaultRows() {
+      const raw = JSON.parse(localStorage.getItem('ke_partner_income_rows') || '[]');
+      if (Array.isArray(raw)) {
+        const cleaned = raw.filter(r => !isBogusEntry(r));
+        localStorage.setItem('ke_partner_income_rows', JSON.stringify(cleaned));
       }
     }
 
@@ -2187,7 +2262,7 @@
           <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border-2 ${isApproved ? 'border-emerald-500/30' : 'border-amber-500/50'} flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
               <span class="px-3 py-1 rounded-full text-xs font-extrabold ${isApproved ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'}">${isApproved ? '✓ Approved' : '⏳ Pending'}</span>
-              <h4 class="font-bold text-lg mt-1">${escapeHtml(r.name)} (${escapeHtml(r.area)})</h4>
+              <h4 class="font-bold text-base mt-1">${escapeHtml(r.name)} (${escapeHtml(r.area)})</h4>
               <p class="text-xs font-bold text-ke-red">${escapeHtml(r.service)}</p>
               <p class="text-sm italic mt-1">“${escapeHtml(r.customText)}”</p>
             </div>
@@ -2214,11 +2289,8 @@
     }
 
     function getDailyWorkRows() {
-      const saved = JSON.parse(localStorage.getItem('ke_daily_work_rows') || 'null');
-      if (saved) return saved;
-      const initial = [{ id: 1732010000100, date: '2026-11-19', activity: 'Vikash Shinde site work & inspection', status: 'Completed', notes: 'Settled & logged', addedBy: 'Amar', editedCount: 0 }];
-      localStorage.setItem('ke_daily_work_rows', JSON.stringify(initial));
-      return initial;
+      const saved = JSON.parse(localStorage.getItem('ke_daily_work_rows') || '[]');
+      return Array.isArray(saved) ? saved : [];
     }
 
     function saveDailyWorkRow(event) {
@@ -2283,18 +2355,24 @@
       const partnerFilter = document.getElementById('filter-work-partner').value;
       const filtered = rows.filter(r => (!dateFilter || r.date === dateFilter) && (partnerFilter === 'ALL' || (r.addedBy || 'Amar') === partnerFilter));
       const tbody = document.getElementById('daily-work-table-body');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-6 text-center text-slate-400 text-xs">No daily work entries yet.</td></tr>`;
+        return;
+      }
       tbody.innerHTML = filtered.map((r, idx) => {
-        const isOwner = (r.addedBy || 'Amar') === currentPartner;
+        const creator = r.addedBy || 'Amar';
+        const isOwner = creator === currentPartner;
+        const nameColorClass = getPartnerTextColorClass(creator);
         return `
           <tr>
             <td class="py-2.5 px-2.5 text-center font-bold">${idx + 1}</td>
             <td class="py-2.5 px-3 text-center">${r.date}</td>
-            <td class="py-2.5 px-4 font-semibold">${r.activity}</td>
-            <td class="py-2.5 px-3 text-center">${r.addedBy || 'Amar'}</td>
-            <td class="py-2.5 px-3 text-center">${r.status}</td>
-            <td class="py-2.5 px-4">${r.notes || '-'}</td>
+            <td class="py-2.5 px-4 font-semibold">${escapeHtml(r.activity)}</td>
+            <td class="py-2.5 px-3 text-center"><span class="${nameColorClass}">${escapeHtml(creator)}</span></td>
+            <td class="py-2.5 px-3 text-center">${escapeHtml(r.status)}</td>
+            <td class="py-2.5 px-4">${escapeHtml(r.notes || '-')}</td>
             <td class="py-2.5 px-3 text-center">
-              ${isOwner ? `<button type="button" onclick="startEditWorkRow(${r.id})" class="px-2.5 py-1 text-xs rounded bg-slate-200 font-bold mr-1">Edit</button><button type="button" onclick="deleteDailyWorkRow(${r.id})" class="px-2.5 py-1 text-xs rounded text-ke-red font-bold">✕</button>` : 'View Only'}
+              ${isOwner ? `<button type="button" onclick="startEditWorkRow(${r.id})" class="px-2.5 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 font-bold mr-1">Edit</button><button type="button" onclick="deleteDailyWorkRow(${r.id})" class="px-2.5 py-1 text-xs rounded text-ke-red font-bold">✕</button>` : '<span class="text-xs text-slate-400">View Only</span>'}
             </td>
           </tr>
         `;
@@ -2314,12 +2392,12 @@
       document.getElementById('audit-count-badge').textContent = `${logs.length} Changes Logged`;
       document.getElementById('audit-log-body').innerHTML = logs.map(l => `
         <tr>
-          <td class="py-2.5 px-4">${l.timestamp}</td>
-          <td class="py-2.5 px-3 font-bold">${l.partner}</td>
-          <td class="py-2.5 px-3">${l.action}</td>
-          <td class="py-2.5 px-3 font-bold">${l.client}</td>
-          <td class="py-2.5 px-4">${l.oldSummary}</td>
-          <td class="py-2.5 px-4">${l.newSummary}</td>
+          <td class="py-2 px-4">${l.timestamp}</td>
+          <td class="py-2 px-3"><span class="${getPartnerTextColorClass(l.partner)}">${escapeHtml(l.partner)}</span></td>
+          <td class="py-2 px-3">${l.action}</td>
+          <td class="py-2 px-3 font-bold">${escapeHtml(l.client)}</td>
+          <td class="py-2 px-4">${escapeHtml(l.oldSummary)}</td>
+          <td class="py-2 px-4">${escapeHtml(l.newSummary)}</td>
         </tr>
       `).join('');
     }
@@ -2337,18 +2415,23 @@
         const res = await fetch(`${APPS_SCRIPT_URL}?password=${encodeURIComponent(sessionPass)}`);
         const data = await res.json();
         if (data && data.status === 'ok') {
-          if (Array.isArray(data.rows) && data.rows.length > 0) { localStorage.setItem('ke_partner_income_rows', JSON.stringify(data.rows)); renderIncomeTable(); }
-          if (Array.isArray(data.auditLogs) && data.auditLogs.length > 0) { localStorage.setItem('ke_partner_audit_logs', JSON.stringify(data.auditLogs)); renderAuditLog(); }
+          if (Array.isArray(data.rows)) {
+            const validCloudRows = data.rows.filter(r => !isBogusEntry(r));
+            localStorage.setItem('ke_partner_income_rows', JSON.stringify(validCloudRows));
+            renderIncomeTable();
+          }
+          if (Array.isArray(data.auditLogs) && data.auditLogs.length > 0) {
+            localStorage.setItem('ke_partner_audit_logs', JSON.stringify(data.auditLogs));
+            renderAuditLog();
+          }
         }
       } catch (err) {}
     }
 
     function getIncomeRows() {
-      const saved = JSON.parse(localStorage.getItem('ke_partner_income_rows') || 'null');
-      if (saved) return saved;
-      const initial = [{ id: 1732010000000, date: '2026-11-19', client: 'vikash shinde', income: 20000, material: 650, expense: 200, settled: 'Yes', addedBy: 'Amar', editedCount: 0 }];
-      localStorage.setItem('ke_partner_income_rows', JSON.stringify(initial));
-      return initial;
+      const saved = JSON.parse(localStorage.getItem('ke_partner_income_rows') || '[]');
+      if (!Array.isArray(saved)) return [];
+      return saved.filter(r => !isBogusEntry(r));
     }
 
     function updateLiveSplitPreview() {
@@ -2368,6 +2451,12 @@
       const material = parseFloat(document.getElementById('row-material').value) || 0;
       const expense = parseFloat(document.getElementById('row-expense').value) || 0;
       const settled = document.getElementById('row-settled').value;
+
+      if (!client || client === '000') {
+        alert('कृपया सही Client / Site Name दर्ज करें।');
+        return;
+      }
+
       const rows = getIncomeRows();
 
       if (editId) {
@@ -2420,8 +2509,11 @@
       const rows = getIncomeRows();
       const target = rows.find(r => String(r.id) === String(id));
       if (!target || target.addedBy !== currentPartner) return;
+      const oldS = target.settled;
       target.settled = target.settled === 'Yes' ? 'No' : 'Yes';
+      const auditEntry = recordAuditLog('Edited', target.client, `Settled: ${oldS}`, `Settled: ${target.settled}`);
       localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows));
+      syncWithGoogleSheet({ action: 'toggle', id: id, audit: auditEntry });
       renderIncomeTable();
     }
 
@@ -2429,9 +2521,10 @@
       const rows = getIncomeRows();
       const target = rows.find(r => String(r.id) === String(id));
       if (!target || target.addedBy !== currentPartner) return;
-      if (!confirm('Delete this entry?')) return;
-      recordAuditLog('Deleted', target.client, summarizeRow(target), `Deleted by ${currentPartner}`);
+      if (!confirm('Delete this entry permanently from Ledger and Excel Sheet?')) return;
+      const auditEntry = recordAuditLog('Deleted', target.client, summarizeRow(target), `Deleted by ${currentPartner}`);
       localStorage.setItem('ke_partner_income_rows', JSON.stringify(rows.filter(r => String(r.id) !== String(id))));
+      syncWithGoogleSheet({ action: 'delete', id: id, audit: auditEntry });
       renderIncomeTable();
     }
 
@@ -2458,28 +2551,37 @@
       document.getElementById('pending-settlement-amt').textContent = `₹ ${formatMoney(pendingNet)}`;
 
       const filteredRows = allRows.filter(r => (settledFilter === 'ALL' || r.settled === settledFilter) && (creatorFilter === 'ALL' || (r.addedBy || 'Amar') === creatorFilter));
-      document.getElementById('income-table-body').innerHTML = filteredRows.map((r, index) => {
-        const isOwner = (r.addedBy || 'Amar') === currentPartner;
-        const net = Number(r.income) - Number(r.material) - Number(r.expense);
-        const share = net / 3;
-        return `
-          <tr>
-            <td class="py-2.5 px-2.5 text-center font-bold">${index + 1}</td>
-            <td class="py-2.5 px-2.5 text-center">${r.date}</td>
-            <td class="py-2.5 px-3 font-semibold">${r.client}</td>
-            <td class="py-2.5 px-2.5 text-center">${r.addedBy || 'Amar'}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(r.income)}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(r.material)}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(r.expense)}</td>
-            <td class="py-2.5 px-2.5 text-right font-bold">${formatMoney(net)}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(share)}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(share)}</td>
-            <td class="py-2.5 px-2.5 text-right">${formatMoney(share)}</td>
-            <td class="py-2.5 px-2.5 text-center">${isOwner ? `<button type="button" onclick="toggleSettlement(${r.id})" class="px-3 py-1 text-xs rounded-full font-bold ${r.settled === 'Yes' ? 'bg-emerald-300' : 'bg-amber-200'}">${r.settled}</button>` : r.settled}</td>
-            <td class="py-2.5 px-2.5 text-center">${isOwner ? `<button type="button" onclick="startEditRow(${r.id})" class="px-2 py-1 text-xs bg-slate-200 rounded font-bold mr-1">Edit</button><button type="button" onclick="deleteIncomeRow(${r.id})" class="text-ke-red font-bold">✕</button>` : 'View'}</td>
-          </tr>
-        `;
-      }).join('');
+      const tbody = document.getElementById('income-table-body');
+
+      if (filteredRows.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="13" class="py-6 text-center text-slate-400 text-xs">No ledger entries found. Add a new record above.</td></tr>`;
+      } else {
+        tbody.innerHTML = filteredRows.map((r, index) => {
+          const creator = r.addedBy || 'Amar';
+          const isOwner = creator === currentPartner;
+          const net = Number(r.income) - Number(r.material) - Number(r.expense);
+          const share = net / 3;
+          const nameColorClass = getPartnerTextColorClass(creator);
+
+          return `
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <td class="py-2 px-2 text-center font-bold">${index + 1}</td>
+              <td class="py-2 px-2 text-center whitespace-nowrap">${r.date}</td>
+              <td class="py-2 px-3 font-semibold">${escapeHtml(r.client)}</td>
+              <td class="py-2 px-2 text-center whitespace-nowrap"><span class="${nameColorClass}">${escapeHtml(creator)}</span></td>
+              <td class="py-2 px-2 text-right">${formatMoney(r.income)}</td>
+              <td class="py-2 px-2 text-right">${formatMoney(r.material)}</td>
+              <td class="py-2 px-2 text-right">${formatMoney(r.expense)}</td>
+              <td class="py-2 px-2 text-right font-bold">${formatMoney(net)}</td>
+              <td class="py-2 px-2 text-right">${formatMoney(share)}</td>
+              <td class="py-2 px-2 text-right">${formatMoney(share)}</td>
+              <td class="py-2 px-2 text-right">${formatMoney(share)}</td>
+              <td class="py-2 px-2 text-center">${isOwner ? `<button type="button" onclick="toggleSettlement(${r.id})" class="px-2.5 py-0.5 text-xs rounded-full font-bold ${r.settled === 'Yes' ? 'bg-emerald-300 text-emerald-950' : 'bg-amber-200 text-amber-950'}">${r.settled}</button>` : r.settled}</td>
+              <td class="py-2 px-2 text-center whitespace-nowrap">${isOwner ? `<button type="button" onclick="startEditRow(${r.id})" class="px-2 py-0.5 text-xs bg-slate-200 dark:bg-slate-700 rounded font-bold mr-1">Edit</button><button type="button" onclick="deleteIncomeRow(${r.id})" class="text-ke-red font-bold px-1">✕</button>` : '<span class="text-slate-400">View</span>'}</td>
+            </tr>
+          `;
+        }).join('');
+      }
 
       document.getElementById('foot-income').textContent = formatMoney(totInc);
       document.getElementById('foot-material').textContent = formatMoney(totMat);
@@ -2544,8 +2646,8 @@
     function renderPublishedDocs() {
       const docs = getPartnerClientDocs();
       document.getElementById('published-docs-list').innerHTML = docs.map(d => `
-        <div class="p-4 rounded-2xl bg-slate-50 border flex justify-between items-center">
-          <div><b>${d.clientName}</b> — ${d.title} (+91 ${d.mobile})</div>
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs sm:text-sm">
+          <div><b>${escapeHtml(d.clientName)}</b> — ${escapeHtml(d.title)} (+91 ${escapeHtml(d.mobile)})</div>
           ${d.fileUrl ? `<a href="${d.fileUrl}" target="_blank" class="text-blue-600 font-bold underline">View ↗</a>` : ''}
         </div>
       `).join('');
