@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Billing, Quotation &amp; Estimate Console | Kalyani Electrical — kalyanielectrical.in</title>
-  <meta name="description" content="Independent Billing, GST/Non-GST Tax Invoice, Quotation, Estimate & Labour Bill generator with HD A4 PDF export and Google Sheet log report for Kalyani Electrical." />
+  <meta name="description" content="Independent Billing, GST/Non-GST Tax Invoice, Quotation, Estimate & Labour Bill generator with auto-save on Save/PDF/Print, HD A4 PDF export, and searchable Google Sheet log report for Kalyani Electrical." />
 
   <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -156,12 +156,12 @@
       <!-- TOP BANNER -->
       <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
         <div>
-          <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">● Standalone Billing Engine • Fast &amp; Independent</span>
+          <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">● Auto-Save Active on Save, PDF &amp; Print</span>
           <h1 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
             Billing, Quotation &amp; Estimate Console
           </h1>
           <p class="text-slate-200 text-xs sm:text-sm mt-1">
-            GST Bill, Without GST Bill, Quotation, Estimate &amp; Labour Bill — Dedicated Cloud Sync &amp; HD A4 PDF.
+            GST Bill, Without GST Bill, Quotation, Estimate &amp; Labour Bill — Auto-saves to Google Sheet &amp; Log Report.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2.5">
@@ -186,7 +186,7 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
           <div>
             <h2 class="font-display font-extrabold text-xl sm:text-2xl text-ke-navy dark:text-white">Create Document</h2>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Company details pehle se saved hain (Default Hidden) — zaroorat hone par Show karein.</p>
+            <p id="cloud-sync-status-text" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Company details pre-saved (Hidden) • Save, PDF Download ya Print dabate hi record auto-save hoga.</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <button type="button" id="btn-toggle-company-box" onclick="toggleCompanyDetailsBox()" class="compact-btn rounded-xl bg-amber-100 text-amber-950 font-extrabold border border-amber-300 hover:bg-amber-200">
@@ -214,7 +214,7 @@
           </div>
         </div>
 
-        <!-- 6 Document Mode Tabs: GST Bill, Without GST Bill, Estimate, Quotation, Labour Bill, Proforma -->
+        <!-- 6 Document Mode Tabs -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 bg-slate-100 dark:bg-slate-800 p-2 rounded-2xl border border-slate-200 dark:border-slate-700">
           <button type="button" id="bill_tab_QUOTATION" onclick="setBillingDocType('QUOTATION')" class="bill-mode-btn compact-btn rounded-xl font-extrabold bg-ke-navy text-white shadow-xs">Quotation</button>
           <button type="button" id="bill_tab_ESTIMATE" onclick="setBillingDocType('ESTIMATE')" class="bill-mode-btn compact-btn rounded-xl font-extrabold text-slate-700 dark:text-slate-300">Estimate</button>
@@ -310,11 +310,11 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Action Buttons: ALL THREE (Save, Download PDF, Print) trigger auto-save -->
         <div class="flex flex-wrap items-center justify-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-          <button type="button" id="btn-save-billing-sheet" onclick="saveBillingToGoogleSheet()" class="rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold shadow-md flex items-center gap-2">☁️ Save to Google Sheet</button>
+          <button type="button" id="btn-save-billing-sheet" onclick="handleManualSaveClick()" class="rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold shadow-md flex items-center gap-2">☁️ Save to Google Sheet</button>
           <button type="button" id="btn-download-bill-pdf" onclick="downloadBillingPDF()" class="rounded-2xl bg-ke-red hover:bg-ke-redDark text-white font-extrabold shadow-md flex items-center gap-2">📥 Download HD A4 PDF</button>
-          <button type="button" onclick="printBillingA4()" class="rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-extrabold shadow-sm flex items-center gap-2">🖨️ Direct Print</button>
+          <button type="button" id="btn-print-bill-a4" onclick="printBillingA4()" class="rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-extrabold shadow-sm flex items-center gap-2">🖨️ Direct Print</button>
           <button type="button" onclick="shareBillingWhatsApp()" class="rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold shadow-sm flex items-center gap-2">📲 WhatsApp</button>
           <button type="button" id="btn-toggle-bill-preview" onclick="toggleBillingPreview()" class="rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-extrabold flex items-center gap-2">👁️ Show Preview</button>
         </div>
@@ -334,13 +334,13 @@
 
       </div>
 
-      <!-- BOTTOM LOG REPORT WITH MULTI-FIELD SEARCH -->
+      <!-- BOTTOM LOG REPORT WITH MULTI-FIELD SEARCH & DUPLICATE ENTRY BADGES -->
       <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
         <div class="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h2 class="font-display font-extrabold text-lg sm:text-xl text-ke-navy dark:text-white">📒 Billing &amp; Quotation Log Report</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Alag Google Sheet se live log — Client naam, mobile number, date, doc no. ya kisi bhi detail se search karein.</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Save, PDF ya Print se bani har entry yahan dikhegi — Duplicate Bill No. bhi alag badge ke saath save rahega.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <span id="log-match-count" class="px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-extrabold">0 Records</span>
@@ -352,7 +352,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-slate-50 dark:bg-slate-800/70 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div class="lg:col-span-2 relative">
               <input type="text" id="search-bill-log-input" oninput="renderBillingLedgerLogs()"
-                placeholder="🔍 Search client name, mobile, doc no., date, work scope, amount..."
+                placeholder="🔍 Search client name, mobile, doc no., date, duplicate, scope, amount..."
                 class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-semibold !min-h-0 !py-2.5 !px-3.5 !text-sm" />
             </div>
             <div>
@@ -381,10 +381,10 @@
                 <th class="py-3 px-3 text-center">Sr.</th>
                 <th class="py-3 px-3">Date &amp; Saved Time</th>
                 <th class="py-3 px-3 text-center">Type</th>
-                <th class="py-3 px-3">Doc No.</th>
+                <th class="py-3 px-3">Doc No. &amp; Entry Status</th>
                 <th class="py-3 px-4">Client Name &amp; Mobile</th>
                 <th class="py-3 px-3">Scope / Address</th>
-                <th class="py-3 px-3 text-center">By</th>
+                <th class="py-3 px-3 text-center">By / Via</th>
                 <th class="py-3 px-3 text-right">Total (₹)</th>
                 <th class="py-3 px-3 text-center">Action</th>
               </tr>
@@ -411,10 +411,9 @@
     // =====================================================================
     // STEP 1: Naye Billing Apps Script ka Web App URL yahan paste karein
     // =====================================================================
-    const BILLING_APPS_SCRIPT_URL = 'PASTE_YOUR_NEW_BILLING_APPS_SCRIPT_WEB_APP_URL_HERE';
+    const BILLING_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmGQOyCdS78tjI3DXcLRIot8XLWqRULBp1nVpXzdBTrXHJ7mEp8Gsfl4Ie7YSDkxgZ/exec';
 
     let currentPartner = sessionStorage.getItem('ke_active_partner') || 'Amar';
-    let sessionPass = sessionStorage.getItem('ke_session_pass') || '';
     let allBillingRecords = [];
     let billingCounters = { INV: 100, BILL: 100, QUO: 100, EST: 100, LBR: 100, PI: 100 };
 
@@ -473,7 +472,7 @@
       alert('✅ Company details saved! Ab ye default rahengi.');
     }
 
-    // Document Mode Management (GST Bill, Without GST Bill, Quotation, Estimate, Labour Bill, Proforma)
+    // Document Mode Management
     let currentBillDocType = 'QUOTATION';
     let billItems = [
       { name: 'Electrical Wiring & Point Installation', unit: 'Nos', hsn: '9954', gst: 18, qty: 1, rate: 0 }
@@ -746,7 +745,129 @@
     }
 
     // =====================================================================
-    // PROVEN HD A4 PDF EXPORT (Visible White Overlay + Relative Staging)
+    // CENTRAL AUTO-SAVE ENGINE (Triggers on Save, PDF Download & Print)
+    // =====================================================================
+    async function saveBillingToGoogleSheet(savedVia = 'Manual Save', showPopups = false) {
+      const docNo = $('bill_inv_no').value.trim();
+      const clientName = $('bill_to_name').value.trim() || 'Walk-in Client';
+      if (!docNo) {
+        if (showPopups) alert('Kripya Document No. zaroor bharein.');
+        return false;
+      }
+
+      const totals = recalcBilling();
+      const nowStr = new Date().toLocaleString('en-IN');
+
+      // Check existing entries with same Doc No (append as new row, never overwrite)
+      const existingSameCount = allBillingRecords.filter(
+        r => String(r.docNo || '').trim().toLowerCase() === docNo.toLowerCase()
+      ).length;
+
+      const duplicateTag = existingSameCount > 0
+        ? `Duplicate Entry (#${existingSameCount + 1} — Same Bill No.)`
+        : 'Original';
+
+      const payload = {
+        action: 'saveBillingDoc',
+        savedVia: savedVia,
+        docType: currentBillDocType,
+        inv_no: docNo,
+        inv_date: $('bill_inv_date').value,
+        inv_disp: $('bill_inv_disp').value.trim(),
+        inv_mode: $('bill_inv_mode').value,
+        from_name: $('bill_from_name').value.trim(),
+        from_addr: $('bill_from_addr').value.trim(),
+        from_mob: $('bill_from_mob').value.trim(),
+        from_email: $('bill_from_email').value.trim(),
+        from_gst: $('bill_from_gst').value.trim(),
+        from_upi: $('bill_from_upi').value.trim(),
+        to_name: clientName,
+        to_mob: $('bill_to_mob').value.trim(),
+        to_addr: $('bill_to_addr').value.trim(),
+        to_gst: $('bill_to_gst').value.trim(),
+        items: billItems,
+        extra_charge: totals.extra,
+        adv_received: totals.adv,
+        grandTotal: totals.grand,
+        balanceDue: totals.bal,
+        terms: $('bill_terms').value.trim(),
+        createdBy: currentPartner
+      };
+
+      const localRecord = {
+        entryId: 'KE-' + Date.now(),
+        lastUpdated: nowStr,
+        date: payload.inv_date,
+        docType: payload.docType,
+        docNo: docNo,
+        duplicateTag: duplicateTag,
+        savedVia: savedVia,
+        clientName: clientName,
+        clientMobile: payload.to_mob,
+        clientAddress: payload.to_addr,
+        workScope: payload.inv_disp,
+        grandTotal: totals.grand,
+        advancePaid: totals.adv,
+        balanceDue: totals.bal,
+        createdBy: currentPartner,
+        jsonData: JSON.stringify(payload)
+      };
+
+      // Always prepend new entry so duplicates are preserved separately
+      allBillingRecords.unshift(localRecord);
+      localStorage.setItem('ke_standalone_billing_logs', JSON.stringify(allBillingRecords));
+      renderBillingLedgerLogs();
+
+      const statusEl = $('cloud-sync-status-text');
+
+      if (!BILLING_APPS_SCRIPT_URL || BILLING_APPS_SCRIPT_URL.includes('PASTE_YOUR_NEW')) {
+        if (statusEl) statusEl.innerHTML = `<span class="text-amber-600 font-bold">⚠️ Local Log mein save hua (${savedVia}). Cloud sync ke liye BILLING_APPS_SCRIPT_URL set karein.</span>`;
+        if (showPopups) alert(`✅ ${docNo} (${duplicateTag}) local Log Report mein save ho gaya! Google Sheet ke liye BILLING_APPS_SCRIPT_URL set karein.`);
+        return true;
+      }
+
+      if (statusEl) statusEl.innerHTML = `<span class="text-blue-600 font-bold">⏳ Saving ${escapeHtml(docNo)} (${escapeHtml(savedVia)}) to Google Sheet...</span>`;
+
+      try {
+        const res = await fetch(BILLING_APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data && data.status === 'ok') {
+          if (statusEl) statusEl.innerHTML = `<span class="text-emerald-600 font-bold">✅ Saved to Google Sheet (${escapeHtml(docNo)} • ${escapeHtml(data.duplicateTag || duplicateTag)} via ${escapeHtml(savedVia)})</span>`;
+          if (showPopups) alert(`✅ ${BILL_DOC_META[currentBillDocType].label} (${docNo}) Google Sheet mein save ho gaya!\nStatus: ${data.duplicateTag || duplicateTag}`);
+          fetchBillingRecordsFromCloud(true);
+          return true;
+        } else {
+          const errMsg = (data && data.message) ? data.message : 'Unknown Apps Script response';
+          if (statusEl) statusEl.innerHTML = `<span class="text-ke-red font-bold">❌ Sheet Save Error: ${escapeHtml(errMsg)}</span>`;
+          if (showPopups) alert('❌ Sheet Save Error: ' + errMsg);
+          return false;
+        }
+      } catch (err) {
+        if (statusEl) statusEl.innerHTML = `<span class="text-amber-600 font-bold">⚠️ Local Log saved, par Google Sheet network error aaya (Deployment check karein).</span>`;
+        if (showPopups) alert('⚠️ Local Log mein save ho gaya hai, par Google Sheet se connect nahi ho paya. Apps Script URL aur "Anyone" access check karein.');
+        return false;
+      }
+    }
+
+    async function handleManualSaveClick() {
+      const btn = $('btn-save-billing-sheet');
+      const origText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Saving...';
+      try {
+        await saveBillingToGoogleSheet('Manual Save', true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+
+    // =====================================================================
+    // PROVEN HD A4 PDF EXPORT + AUTO-SAVE
     // =====================================================================
     async function downloadBillingPDF() {
       const btn = $('btn-download-bill-pdf');
@@ -768,8 +889,11 @@
 
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '⏳ Generating HD PDF...';
+        btn.innerHTML = '⏳ Saving & Generating HD PDF...';
       }
+
+      // Auto-save to Sheet & Log Report before generating PDF
+      await saveBillingToGoogleSheet('PDF Download', false);
 
       const PDF_WIDTH = 720;
       const clone = source.cloneNode(true);
@@ -856,7 +980,26 @@
       }
     }
 
-    function printBillingA4() {
+    // =====================================================================
+    // DIRECT PRINT + AUTO-SAVE
+    // =====================================================================
+    async function printBillingA4() {
+      const btn = $('btn-print-bill-a4');
+      const origText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '⏳ Saving & Printing...';
+      }
+
+      try {
+        await saveBillingToGoogleSheet('Direct Print', false);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origText;
+        }
+      }
+
       const meta = BILL_DOC_META[currentBillDocType] || BILL_DOC_META.QUOTATION;
       const w = window.open('', '_blank', 'width=850,height=900');
       if (!w) {
@@ -884,100 +1027,9 @@
     }
 
     // =====================================================================
-    // DEDICATED GOOGLE SHEET SAVE, SYNC & LOG REPORT WITH SEARCH
+    // CLOUD FETCH & LOG REPORT RENDERER WITH DUPLICATE BADGES & SEARCH
     // =====================================================================
-    async function saveBillingToGoogleSheet() {
-      const docNo = $('bill_inv_no').value.trim();
-      const clientName = $('bill_to_name').value.trim();
-      if (!docNo || !clientName) {
-        alert('Kripya Document No. aur Client / Society Name zaroor bharein.');
-        return;
-      }
-
-      const totals = recalcBilling();
-      const nowStr = new Date().toLocaleString('en-IN');
-      const payload = {
-        action: 'saveBillingDoc',
-        password: sessionPass,
-        docType: currentBillDocType,
-        inv_no: docNo,
-        inv_date: $('bill_inv_date').value,
-        inv_disp: $('bill_inv_disp').value.trim(),
-        inv_mode: $('bill_inv_mode').value,
-        from_name: $('bill_from_name').value.trim(),
-        from_addr: $('bill_from_addr').value.trim(),
-        from_mob: $('bill_from_mob').value.trim(),
-        from_email: $('bill_from_email').value.trim(),
-        from_gst: $('bill_from_gst').value.trim(),
-        from_upi: $('bill_from_upi').value.trim(),
-        to_name: clientName,
-        to_mob: $('bill_to_mob').value.trim(),
-        to_addr: $('bill_to_addr').value.trim(),
-        to_gst: $('bill_to_gst').value.trim(),
-        items: billItems,
-        extra_charge: totals.extra,
-        adv_received: totals.adv,
-        grandTotal: totals.grand,
-        balanceDue: totals.bal,
-        terms: $('bill_terms').value.trim(),
-        createdBy: currentPartner
-      };
-
-      // Save locally first so log report works immediately even offline
-      const localRecord = {
-        lastUpdated: nowStr,
-        date: payload.inv_date,
-        docType: payload.docType,
-        docNo: docNo,
-        clientName: clientName,
-        clientMobile: payload.to_mob,
-        clientAddress: payload.to_addr,
-        workScope: payload.inv_disp,
-        grandTotal: totals.grand,
-        advancePaid: totals.adv,
-        balanceDue: totals.bal,
-        createdBy: currentPartner,
-        jsonData: JSON.stringify(payload)
-      };
-
-      const existingIdx = allBillingRecords.findIndex(r => r.docNo.toLowerCase() === docNo.toLowerCase());
-      if (existingIdx >= 0) allBillingRecords[existingIdx] = localRecord;
-      else allBillingRecords.unshift(localRecord);
-      localStorage.setItem('ke_standalone_billing_logs', JSON.stringify(allBillingRecords));
-      renderBillingLedgerLogs();
-
-      if (!BILLING_APPS_SCRIPT_URL || BILLING_APPS_SCRIPT_URL.includes('PASTE_YOUR_NEW')) {
-        alert(`✅ ${BILL_DOC_META[currentBillDocType].label} (${docNo}) local Log Report mein save ho gaya! Cloud sync ke liye BILLING_APPS_SCRIPT_URL set karein.`);
-        return;
-      }
-
-      const btn = $('btn-save-billing-sheet');
-      const origText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = '⏳ Saving to Sheet...';
-
-      try {
-        const res = await fetch(BILLING_APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data && data.status === 'ok') {
-          alert(`✅ ${BILL_DOC_META[currentBillDocType].label} (${docNo}) Billing Google Sheet mein save ho gaya hai!`);
-          fetchBillingRecordsFromCloud();
-        } else {
-          alert('Save warning: ' + (data.message || 'Check Apps Script deployment'));
-        }
-      } catch (err) {
-        alert('Saved locally. Cloud sync mein network error aaya.');
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = origText;
-      }
-    }
-
-    async function fetchBillingRecordsFromCloud() {
+    async function fetchBillingRecordsFromCloud(silent = false) {
       const localCache = JSON.parse(localStorage.getItem('ke_standalone_billing_logs') || '[]');
       if (localCache.length > 0 && allBillingRecords.length === 0) {
         allBillingRecords = localCache;
@@ -990,11 +1042,12 @@
       }
 
       const tbody = $('billing-ledger-log-body');
-      tbody.innerHTML = '<tr><td colspan="9" class="py-5 px-4 text-center text-slate-400">Syncing real-time logs from Billing Google Sheet...</td></tr>';
+      if (!silent && tbody) {
+        tbody.innerHTML = '<tr><td colspan="9" class="py-5 px-4 text-center text-slate-400">Syncing real-time logs from Billing Google Sheet...</td></tr>';
+      }
 
       try {
-        const url = `${BILLING_APPS_SCRIPT_URL}?action=getBillingRecords&password=${encodeURIComponent(sessionPass)}`;
-        const res = await fetch(url);
+        const res = await fetch(`${BILLING_APPS_SCRIPT_URL}?action=getBillingRecords&t=${Date.now()}`);
         const data = await res.json();
         if (data && data.status === 'ok') {
           allBillingRecords = data.records || [];
@@ -1029,6 +1082,13 @@
       const dateFilter = $('search-bill-log-date').value;
       const typeFilter = $('filter-bill-log-type').value;
 
+      // Dynamically detect duplicate bill numbers across all records
+      const docCounts = {};
+      allBillingRecords.forEach(r => {
+        const key = String(r.docNo || '').trim().toLowerCase();
+        if (key) docCounts[key] = (docCounts[key] || 0) + 1;
+      });
+
       const filtered = allBillingRecords.filter(r => {
         if (typeFilter !== 'ALL' && r.docType !== typeFilter) return false;
         if (dateFilter && String(r.date || '') !== dateFilter) return false;
@@ -1037,6 +1097,8 @@
         const searchableText = [
           r.docNo,
           r.docType,
+          r.duplicateTag,
+          r.savedVia,
           r.clientName,
           r.clientMobile,
           r.clientAddress,
@@ -1067,13 +1129,21 @@
           'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300';
 
         const typeLabel = BILL_DOC_META[r.docType]?.label || r.docType;
+        const key = String(r.docNo || '').trim().toLowerCase();
+        const isDuplicate = (docCounts[key] || 0) > 1 || String(r.duplicateTag || '').toLowerCase().includes('duplicate');
+        const tagText = r.duplicateTag && r.duplicateTag !== 'Original'
+          ? r.duplicateTag
+          : (isDuplicate ? 'Duplicate Bill No.' : '');
 
         return `
           <tr class="${idx % 2 === 0 ? 'bg-[#f8f8ff] dark:bg-slate-900' : 'bg-white dark:bg-slate-900/60'} hover:bg-blue-50/60 dark:hover:bg-slate-800/70">
             <td class="py-2.5 px-3 text-center font-bold">${idx + 1}</td>
             <td class="py-2.5 px-3 whitespace-nowrap text-xs font-semibold text-slate-600 dark:text-slate-300">${escapeHtml(r.lastUpdated || r.date)}</td>
             <td class="py-2.5 px-3 text-center whitespace-nowrap"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${badgeColor}">${escapeHtml(typeLabel)}</span></td>
-            <td class="py-2.5 px-3 font-extrabold text-ke-navy dark:text-amber-300 whitespace-nowrap">${escapeHtml(r.docNo)}</td>
+            <td class="py-2.5 px-3 whitespace-nowrap">
+              <div class="font-extrabold text-ke-navy dark:text-amber-300">${escapeHtml(r.docNo)}</div>
+              ${tagText ? `<span class="inline-block mt-0.5 px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold">⚠️ ${escapeHtml(tagText)}</span>` : ''}
+            </td>
             <td class="py-2.5 px-4">
               <div class="font-bold text-slate-900 dark:text-white">${escapeHtml(r.clientName)}</div>
               ${r.clientMobile ? `<div class="text-xs text-slate-500">📞 ${escapeHtml(r.clientMobile)}</div>` : ''}
@@ -1082,18 +1152,24 @@
               ${r.workScope ? `<div class="font-semibold">${escapeHtml(r.workScope)}</div>` : ''}
               ${r.clientAddress ? `<div class="text-slate-400">${escapeHtml(r.clientAddress)}</div>` : ''}
             </td>
-            <td class="py-2.5 px-3 text-center text-xs font-bold text-slate-500">${escapeHtml(r.createdBy || 'Amar')}</td>
+            <td class="py-2.5 px-3 text-center text-xs">
+              <div class="font-bold text-slate-700 dark:text-slate-200">${escapeHtml(r.createdBy || 'Amar')}</div>
+              ${r.savedVia ? `<div class="text-[10px] text-slate-400">${escapeHtml(r.savedVia)}</div>` : ''}
+            </td>
             <td class="py-2.5 px-3 text-right font-extrabold text-emerald-700 dark:text-emerald-400 whitespace-nowrap">₹ ${formatMoney(r.grandTotal)}</td>
             <td class="py-2.5 px-3 text-center whitespace-nowrap">
-              <button type="button" onclick="loadBillingRecordIntoForm('${escapeHtml(r.docNo)}')" class="!min-h-0 !py-1.5 !px-3 !text-xs rounded-lg bg-ke-navy hover:bg-ke-navyDark text-white font-bold">Load / Edit</button>
+              <button type="button" onclick="loadBillingRecordByIndex(${idx})" class="!min-h-0 !py-1.5 !px-3 !text-xs rounded-lg bg-ke-navy hover:bg-ke-navyDark text-white font-bold">Load / Edit</button>
             </td>
           </tr>
         `;
       }).join('');
+
+      window._currentFilteredBillingLogs = filtered;
     }
 
-    function loadBillingRecordIntoForm(docNo) {
-      const rec = allBillingRecords.find(r => r.docNo === docNo);
+    function loadBillingRecordByIndex(filteredIdx) {
+      const list = window._currentFilteredBillingLogs || allBillingRecords;
+      const rec = list[filteredIdx];
       if (!rec || !rec.jsonData) {
         alert('Record details not available.');
         return;
