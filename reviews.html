@@ -88,6 +88,186 @@
       pointer-events: none !important;
       visibility: hidden;
     }
+
+    /*
+     * From Uiverse.io by Nawsome - https://uiverse.io/Nawsome/empty-snail-69
+     * MIT License, Copyright (c) Nawsome
+     * Scoped for Kalyani Electrical Review Submit Switch (.ke-snail-switch)
+     */
+    .ke-snail-switch-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ke-snail-switch,
+    .ke-snail-switch *,
+    .ke-snail-switch *::before,
+    .ke-snail-switch *::after {
+      box-sizing: border-box;
+    }
+
+    .ke-snail-switch {
+      display: block;
+      background-color: black;
+      width: 150px;
+      height: 195px;
+      box-shadow:
+        0 0 10px 2px rgba(0, 0, 0, 0.2),
+        0 0 1px 2px black,
+        inset 0 2px 2px -2px white,
+        inset 0 0 2px 15px #47434c,
+        inset 0 0 2px 22px black;
+      border-radius: 5px;
+      padding: 20px;
+      perspective: 700px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transform: scale(0.76);
+      transform-origin: center center;
+      margin: -22px 0;
+    }
+
+    .ke-snail-switch__input {
+      display: none;
+    }
+
+    .ke-snail-switch__input:checked + .ke-snail-switch__button {
+      transform: translateZ(20px) rotateX(25deg);
+      box-shadow: 0 -10px 20px #ff1818;
+    }
+
+    .ke-snail-switch__input:checked + .ke-snail-switch__button .ke-snail-switch__light {
+      animation: ke-snail-flicker 0.2s infinite 0.3s;
+    }
+
+    .ke-snail-switch__input:checked + .ke-snail-switch__button .ke-snail-switch__shine {
+      opacity: 1;
+    }
+
+    .ke-snail-switch__input:checked + .ke-snail-switch__button .ke-snail-switch__shadow {
+      opacity: 0;
+    }
+
+    .ke-snail-switch__button {
+      display: block;
+      transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+      transform-origin: center center -20px;
+      transform: translateZ(20px) rotateX(-25deg);
+      transform-style: preserve-3d;
+      background-color: #9b0621;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+      background: linear-gradient(#980000 0%, #6f0000 30%, #6f0000 70%, #980000 100%);
+      background-repeat: no-repeat;
+    }
+
+    .ke-snail-switch__button::before {
+      content: "";
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.8) 10%, rgba(255, 255, 255, 0.3) 30%, #650000 75%, #320000) 50% 50% / 97% 97%,
+        #b10000;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 50px;
+      transform-origin: top;
+      transform: rotateX(-90deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .ke-snail-switch__button::after {
+      content: "";
+      background-image: linear-gradient(#650000, #320000);
+      width: 100%;
+      height: 50px;
+      transform-origin: top;
+      transform: translateY(50px) rotateX(-90deg);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      box-shadow:
+        0 50px 8px 0px black,
+        0 80px 20px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .ke-snail-switch__light {
+      opacity: 0;
+      animation: ke-snail-light-off 1s;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#ffc97e, #ff1818 40%, transparent 70%);
+    }
+
+    .ke-snail-switch__dots {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(transparent 30%, rgba(101, 0, 0, 0.7) 70%);
+      background-size: 10px 10px;
+    }
+
+    .ke-snail-switch__characters {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(white, white) 50% 20% / 5% 20%,
+        radial-gradient(circle, transparent 50%, white 52%, white 70%, transparent 72%) 50% 80% / 33% 25%;
+      background-repeat: no-repeat;
+    }
+
+    .ke-snail-switch__shine {
+      transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+      opacity: 0.3;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(white, transparent 3%) 50% 50% / 97% 97%,
+        linear-gradient(rgba(255, 255, 255, 0.5), transparent 50%, transparent 80%, rgba(255, 255, 255, 0.5)) 50% 50% / 97% 97%;
+      background-repeat: no-repeat;
+    }
+
+    .ke-snail-switch__shadow {
+      transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+      opacity: 1;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent 70%, rgba(0, 0, 0, 0.8));
+      background-repeat: no-repeat;
+    }
+
+    @keyframes ke-snail-flicker {
+      0% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes ke-snail-light-off {
+      0% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased flex flex-col min-h-screen selection:bg-ke-navy selection:text-white">
@@ -227,7 +407,7 @@
                 <label for="rev-address" data-i18n="lbl_address" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                   Address / Area / City *
                 </label>
-                <input type="text" id="rev-address" required placeholder="e.g., Indiranagar, Bengaluru, Karnataka"
+                <input type="text" id="rev-address" required placeholder="e.g., Warje / Kothrud, Pune"
                        class="w-full px-3.5 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-ke-navy" />
               </div>
 
@@ -278,14 +458,30 @@
               ✓ Thank you! Your review has been submitted and will appear live on this page right after verification.
             </div>
 
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-              <span class="text-[11px] text-slate-500 dark:text-slate-400">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 text-center sm:text-left">
                 All submitted reviews are verified before publishing publicly.
               </span>
-              <button type="submit" id="rev-submit-btn" class="px-7 py-3.5 rounded-2xl bg-ke-red hover:bg-ke-redDark text-white font-extrabold text-sm shadow-lg flex items-center gap-2 transition-all touch-manipulation">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span data-i18n="btn_submit_rev">Submit Review</span>
-              </button>
+
+              <!--
+                From Uiverse.io by Nawsome - https://uiverse.io/Nawsome/empty-snail-69
+                MIT License, Copyright (c) Nawsome
+              -->
+              <div class="ke-snail-switch-wrap">
+                <label class="ke-snail-switch" title="Flip Power Switch ON to Submit Review" aria-label="Flip switch ON to submit review">
+                  <input type="checkbox" id="rev-submit-switch" class="ke-snail-switch__input" />
+                  <div class="ke-snail-switch__button">
+                    <div class="ke-snail-switch__light"></div>
+                    <div class="ke-snail-switch__dots"></div>
+                    <div class="ke-snail-switch__characters"></div>
+                    <div class="ke-snail-switch__shine"></div>
+                    <div class="ke-snail-switch__shadow"></div>
+                  </div>
+                </label>
+                <span id="rev-switch-status" data-i18n="btn_submit_rev" class="text-xs font-extrabold tracking-wide uppercase text-ke-red">
+                  Switch ON to Submit Review
+                </span>
+              </div>
             </div>
           </form>
         </div>
@@ -531,14 +727,32 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    async function submitPublicReview(event) {
-      event.preventDefault();
-      const btn = document.getElementById('rev-submit-btn');
-      const alertBox = document.getElementById('review-submit-alert');
-      const origHtml = btn.innerHTML;
+    function resetReviewSubmitSwitch() {
+      const sw = document.getElementById('rev-submit-switch');
+      const statusEl = document.getElementById('rev-switch-status');
+      const lang = localStorage.getItem('ke_lang') || 'en';
+      if (sw) {
+        sw.checked = false;
+        sw.disabled = false;
+      }
+      if (statusEl && I18N[lang]) {
+        statusEl.textContent = I18N[lang].btn_submit_rev;
+        statusEl.className = 'text-xs font-extrabold tracking-wide uppercase text-ke-red';
+      }
+    }
 
-      btn.disabled = true;
-      btn.innerHTML = '<span>Submitting...</span>';
+    async function submitPublicReview(event) {
+      if (event) event.preventDefault();
+      const form = document.getElementById('public-review-form');
+      const sw = document.getElementById('rev-submit-switch');
+      const statusEl = document.getElementById('rev-switch-status');
+      const alertBox = document.getElementById('review-submit-alert');
+
+      if (sw) sw.disabled = true;
+      if (statusEl) {
+        statusEl.textContent = 'Submitting Review...';
+        statusEl.className = 'text-xs font-extrabold tracking-wide uppercase text-amber-600 dark:text-amber-400 animate-pulse';
+      }
       alertBox.classList.add('hidden');
 
       const payload = {
@@ -558,15 +772,18 @@
           body: JSON.stringify(payload)
         });
 
-        event.target.reset();
+        form.reset();
         setStarRating(5);
         alertBox.classList.remove('hidden');
+
+        if (statusEl) {
+          statusEl.textContent = '✓ Submitted!';
+          statusEl.className = 'text-xs font-extrabold tracking-wide uppercase text-emerald-600 dark:text-emerald-400';
+        }
+        setTimeout(resetReviewSubmitSwitch, 1400);
       } catch (err) {
         alert('Network error: Review submit nahi ho paya. Kripya internet check karein.');
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = origHtml;
-        if (window.lucide) lucide.createIcons();
+        resetReviewSubmitSwitch();
       }
     }
 
@@ -585,7 +802,7 @@
         lbl_project: 'Project Type / Service *',
         lbl_stars: 'Select Star Rating *',
         lbl_feedback: 'Your Review / Experience *',
-        btn_submit_rev: 'Submit Review',
+        btn_submit_rev: 'Switch ON to Submit Review',
         live_rev_title: 'Verified Client Reviews',
         live_rev_sub: 'Real feedback from clients across Pune & Maharashtra'
       },
@@ -603,7 +820,7 @@
         lbl_project: 'प्रोजेक्ट का प्रकार / सेवा *',
         lbl_stars: 'स्टार रेटिंग चुनें *',
         lbl_feedback: 'आपका अनुभव / रिव्यू *',
-        btn_submit_rev: 'रिव्यू सबमिट करें',
+        btn_submit_rev: 'रिव्यू सबमिट करने के लिए स्विच ON करें',
         live_rev_title: 'सत्यापित क्लाइंट रिव्यूज़',
         live_rev_sub: 'पुणे और महाराष्ट्र के ग्राहकों की वास्तविक प्रतिक्रिया'
       },
@@ -621,7 +838,7 @@
         lbl_project: 'प्रोजेक्टचा प्रकार / सेवा *',
         lbl_stars: 'स्टार रेटिंग निवडा *',
         lbl_feedback: 'तुमचा अनुभव / रिव्ह्यू *',
-        btn_submit_rev: 'रिव्ह्यू सबमिट करा',
+        btn_submit_rev: 'रिव्ह्यू सबमिट करण्यासाठी स्विच ON करा',
         live_rev_title: 'प्रमाणित क्लायंट रिव्ह्यूज',
         live_rev_sub: 'पुणे आणि महाराष्ट्रातील ग्राहकांचे खरे अभिप्राय'
       }
@@ -675,6 +892,27 @@
       setLanguage(localStorage.getItem('ke_lang') || 'en');
       setStarRating(5);
       loadApprovedReviews();
+
+      const submitSwitch = document.getElementById('rev-submit-switch');
+      const reviewForm = document.getElementById('public-review-form');
+      if (submitSwitch && reviewForm) {
+        submitSwitch.addEventListener('change', () => {
+          if (!submitSwitch.checked) return;
+
+          if (!reviewForm.checkValidity()) {
+            reviewForm.reportValidity();
+            setTimeout(() => {
+              submitSwitch.checked = false;
+            }, 350);
+            return;
+          }
+
+          // Let the 3D rocker tilt and red glow animate before submitting
+          setTimeout(() => {
+            submitPublicReview(null);
+          }, 380);
+        });
+      }
 
       const menuBtn = document.getElementById('mobile-menu-toggle');
       const drawer = document.getElementById('mobile-menu-drawer');
