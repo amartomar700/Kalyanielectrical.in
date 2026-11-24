@@ -408,14 +408,12 @@
   </footer>
 
   <script>
-    // =====================================================================
-    // STEP 1: Naye Billing Apps Script ka Web App URL yahan paste karein
-    // =====================================================================
     const BILLING_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmGQOyCdS78tjI3DXcLRIot8XLWqRULBp1nVpXzdBTrXHJ7mEp8Gsfl4Ie7YSDkxgZ/exec';
 
     let currentPartner = sessionStorage.getItem('ke_active_partner') || 'Amar';
     let allBillingRecords = [];
     let billingCounters = { INV: 100, BILL: 100, QUO: 100, EST: 100, LBR: 100, PI: 100 };
+    let cachedLogoDataUrl = '';
 
     function $(id) {
       return document.getElementById(id);
@@ -427,6 +425,78 @@
 
     function formatMoney(num) {
       return Number(num || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // =====================================================================
+    // LOGO CONVERTER: Converts logo.png or Vector Logo into crisp PNG DataURL
+    // so html2pdf / html2canvas NEVER renders a blank logo box
+    // =====================================================================
+    function prepareBrandLogoDataUrl() {
+      return new Promise((resolve) => {
+        if (cachedLogoDataUrl) return resolve(cachedLogoDataUrl);
+
+        // 1. Try converting the loaded header logo.png via canvas first
+        const headerImg = document.querySelector('header img[src*="logo.png"]');
+        if (headerImg && headerImg.complete && headerImg.naturalWidth > 0) {
+          try {
+            const c = document.createElement('canvas');
+            c.width = headerImg.naturalWidth * 2;
+            c.height = headerImg.naturalHeight * 2;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, c.width, c.height);
+            ctx.drawImage(headerImg, 0, 0, c.width, c.height);
+            cachedLogoDataUrl = c.toDataURL('image/png');
+            return resolve(cachedLogoDataUrl);
+          } catch (e) {}
+        }
+
+        // 2. Fallback: Render high-res Kalyani Electrical vector emblem onto Canvas -> PNG
+        const svgMarkup = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="260" height="155" viewBox="0 0 260 155">
+            <rect width="260" height="155" fill="#ffffff"/>
+            <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
+            <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
+            <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
+            <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
+            <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
+            <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
+            <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
+            <text x="130" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
+            <text x="130" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
+          </svg>`;
+
+        const img = new Image();
+        const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 520;
+          canvas.height = 310;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(url);
+          cachedLogoDataUrl = canvas.toDataURL('image/png');
+          resolve(cachedLogoDataUrl);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          resolve('');
+        };
+        img.src = url;
+      });
+    }
+
+    function getBrandLogoSVG() {
+      const src = cachedLogoDataUrl || 'logo.png';
+      return `
+        <div style="width:88px; height:58px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid #cbd5e1; border-radius:6px; padding:3px; background:#ffffff;">
+          <img src="${src}" alt="Kalyani Electrical" style="display:block; max-height:50px; max-width:80px; width:auto; height:auto; object-fit:contain;" />
+        </div>
+      `;
     }
 
     function changeOperator(name) {
@@ -585,10 +655,11 @@
       return { sub, totalTax, extra, grand, adv, bal };
     }
 
-    function toggleBillingPreview() {
+    async function toggleBillingPreview() {
       const wrap = $('bill-preview-wrapper');
       const btn = $('btn-toggle-bill-preview');
       if (wrap.classList.contains('hidden')) {
+        await prepareBrandLogoDataUrl();
         updateBillingPreview();
         wrap.classList.remove('hidden');
         btn.innerHTML = '🙈 Hide Preview';
@@ -596,24 +667,6 @@
         wrap.classList.add('hidden');
         btn.innerHTML = '👁️ Show Preview';
       }
-    }
-
-    function getBrandLogoSVG() {
-      return `
-        <div style="width:82px; height:56px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid #cbd5e1; border-radius:6px; padding:3px; background:#ffffff;">
-          <svg style="display:block; height:48px; width:74px;" viewBox="0 0 260 155" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
-            <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
-            <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
-            <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
-            <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
-            <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
-            <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
-            <text x="130" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
-            <text x="130" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
-          </svg>
-        </div>
-      `;
     }
 
     function buildBillingA4HTML() {
@@ -758,7 +811,6 @@
       const totals = recalcBilling();
       const nowStr = new Date().toLocaleString('en-IN');
 
-      // Check existing entries with same Doc No (append as new row, never overwrite)
       const existingSameCount = allBillingRecords.filter(
         r => String(r.docNo || '').trim().toLowerCase() === docNo.toLowerCase()
       ).length;
@@ -813,7 +865,6 @@
         jsonData: JSON.stringify(payload)
       };
 
-      // Always prepend new entry so duplicates are preserved separately
       allBillingRecords.unshift(localRecord);
       localStorage.setItem('ke_standalone_billing_logs', JSON.stringify(allBillingRecords));
       renderBillingLedgerLogs();
@@ -867,13 +918,16 @@
     }
 
     // =====================================================================
-    // PROVEN HD A4 PDF EXPORT + AUTO-SAVE
+    // PROVEN HD A4 PDF EXPORT + PNG LOGO RENDERING + AUTO-SAVE
     // =====================================================================
     async function downloadBillingPDF() {
       const btn = $('btn-download-bill-pdf');
       const originalButtonText = btn ? btn.innerHTML : '';
 
+      // Convert logo to PNG Data URL BEFORE building preview HTML
+      await prepareBrandLogoDataUrl();
       updateBillingPreview();
+
       const source = $('billA4Sheet');
       const innerContent = $('billDocRenderTarget');
 
@@ -947,7 +1001,7 @@
       const filename = clientSlug ? `${metaLabel}_${docNo}_${clientSlug}.pdf` : `${metaLabel}_${docNo}.pdf`;
 
       try {
-        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 180)));
+        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 200)));
 
         await html2pdf().set({
           margin: [10, 10, 10, 10],
@@ -992,6 +1046,7 @@
       }
 
       try {
+        await prepareBrandLogoDataUrl();
         await saveBillingToGoogleSheet('Direct Print', false);
       } finally {
         if (btn) {
@@ -1082,7 +1137,6 @@
       const dateFilter = $('search-bill-log-date').value;
       const typeFilter = $('filter-bill-log-type').value;
 
-      // Dynamically detect duplicate bill numbers across all records
       const docCounts = {};
       allBillingRecords.forEach(r => {
         const key = String(r.docNo || '').trim().toLowerCase();
@@ -1226,13 +1280,14 @@
       localStorage.setItem('ke_theme', isDark ? 'dark' : 'light');
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       if (window.lucide) lucide.createIcons();
       if (localStorage.getItem('ke_theme') === 'dark') document.documentElement.classList.add('dark');
 
       $('bill-operator-select').value = currentPartner;
       $('bill_inv_date').value = new Date().toISOString().split('T')[0];
 
+      await prepareBrandLogoDataUrl();
       loadSavedCompanyDefaults();
       setBillingDocType('QUOTATION', false);
       renderBillingTable();
