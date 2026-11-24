@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kalyani Electrical - Billing, Quotation & Estimate Portal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  :root {
+    --brand-blue: #066399;
+    --brand-dark: #044870;
+    --ke-red: #c8102e;
+    --card-tint: #f2f8fd;
+    --card-border: #cde4f7;
+    --gold: #facc15;
+    --gold-hover: #eab308;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #cbd5e1;
+    --bg: #eef2f6;
+  }
+  * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* Top Navigation */
+  .saas-nav {
+    background: var(--brand-dark);
+    color: #fff;
+    padding: 12px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .btn-back {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.2s;
+  }
+  .btn-back:hover { background: var(--gold); color: #0f172a; }
+  .brand-logo { font-size: 17px; font-weight: 900; letter-spacing: 0.4px; }
+  .brand-logo span { color: var(--gold); }
+  .nav-pill {
+    background: var(--gold);
+    color: #0f172a;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-pill:disabled, .btn-gold:disabled { opacity: 0.7; cursor: not-allowed; }
+
+  /* Hero Banner */
+  .hero-banner {
+    background: linear-gradient(180deg, var(--brand-blue) 0%, #0a74b0 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 26px 20px 110px 20px;
+  }
+  .hero-banner h1 { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.3px; }
+  .hero-banner p { margin: 6px 0 0; font-size: 13.5px; opacity: 0.92; }
+
+  /* Main Container */
+  .sheet-container {
+    max-width: 1120px;
+    margin: -85px auto 40px auto;
+    padding: 0 16px;
+  }
+  .main-paper {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 34px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.10);
+    border: 1px solid #e2e8f0;
+  }
+
+  /* 5 Document Tabs */
+  .doc-mode-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    margin-bottom: 18px;
+  }
+  .mode-tab {
+    border: none;
+    background: transparent;
+    padding: 10px 8px;
+    border-radius: 7px;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .mode-tab:hover { background: rgba(255,255,255,0.7); color: var(--brand-blue); }
+  .mode-tab.active {
+    background: var(--brand-blue);
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(6, 99, 153, 0.25);
+  }
+
+  /* Quick Utility Bar */
+  .quick-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .q-btn {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 7px 13px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .q-btn:hover { border-color: var(--brand-blue); color: var(--brand-blue); background: var(--card-tint); }
+  .q-btn.primary { background: #066399; color: #fff; border-color: #066399; }
+  .q-btn.primary:hover { background: #044870; }
+  .q-btn.success { background: #15803d; color: #fff; border-color: #15803d; }
+  .q-btn.success:hover { background: #166534; }
+
+  .doc-top-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--ink);
+    margin: 0 0 20px 0;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  /* Top Meta + Logo Split */
+  .top-meta-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    margin-bottom: 24px;
+    align-items: start;
+  }
+  .u-field { margin-bottom: 12px; position: relative; }
+  .u-field label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 2px;
+  }
+  .u-field input, .u-field select {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    padding: 7px 2px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    transition: 0.2s;
+  }
+  .u-field input:focus, .u-field select:focus { border-bottom-color: var(--brand-blue); }
+  .u-field input[readonly] { color: #044870; background: #f8fafc; padding-left: 6px; border-radius: 4px; }
+
+  /* Logo Box */
+  .logo-drop-box {
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    background: #ffffff;
+    padding: 10px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .logo-drop-box img { max-height: 92px; max-width: 90%; object-fit: contain; }
+
+  /* Party Cards */
+  .parties-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+  .party-card {
+    background: var(--card-tint);
+    border: 1.5px solid var(--card-border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .party-card h3 { margin: 0 0 12px 0; font-size: 14px; font-weight: 800; color: var(--ink); }
+  .party-card h3 span { font-weight: 500; color: var(--muted); font-size: 12px; }
+  .party-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Preset Chips */
+  .preset-bar {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+  .preset-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--brand-dark);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .preset-chip {
+    background: #ffffff;
+    border: 1px solid #bae6fd;
+    color: var(--brand-blue);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .preset-chip:hover { background: var(--brand-blue); color: #ffffff; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin-bottom: 14px; border-radius: 8px; border: 1px solid #cbd5e1; }
+  .saas-table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  .saas-table th { background: var(--brand-blue); color: #ffffff; font-size: 12px; font-weight: 700; padding: 11px 10px; text-align: left; }
+  .saas-table td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; background: #fff; }
+  .saas-table input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding: 6px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    background: transparent;
+  }
+  .saas-table input:focus { border-bottom-color: var(--brand-blue); }
+  .t-right { text-align: right !important; }
+  .t-center { text-align: center !important; }
+
+  .btn-del {
+    background: #fee2e2;
+    color: #dc2626;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    color: var(--brand-blue);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .link-btn:hover { text-decoration: underline; }
+
+  /* Totals & Tax */
+  .bottom-calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 14px;
+    align-items: start;
+  }
+  .tax-radio-group { display: flex; flex-wrap: wrap; gap: 16px; margin: 10px 0 14px 0; font-size: 13px; font-weight: 700; color: #334155; }
+  .tax-radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+  .summary-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px 18px; }
+  .sum-line { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13.5px; color: #334155; font-weight: 600; }
+  .sum-grand {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 4px 0;
+    margin-top: 6px;
+    border-top: 2px solid var(--brand-blue);
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--brand-dark);
+  }
+  .sum-due { display: flex; justify-content: space-between; padding: 6px 0 0 0; font-size: 14px; font-weight: 800; color: #b91c1c; }
+
+  .terms-dashed { border: 1.5px dashed #94a3b8; border-radius: 8px; padding: 12px 16px; margin-top: 22px; background: #fafafa; }
+  .terms-dashed label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+  .terms-dashed input { width: 100%; border: none; background: transparent; font-size: 13px; color: var(--ink); outline: none; }
+
+  /* CTA Buttons */
+  .cta-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .btn-save-sheet {
+    background: #15803d;
+    color: #ffffff;
+    border: none;
+    padding: 13px 26px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(21, 128, 61, 0.3);
+    transition: 0.2s;
+  }
+  .btn-save-sheet:hover { background: #166534; transform: translateY(-1px); }
+  .btn-gold {
+    background: var(--gold);
+    color: #0f172a;
+    border: none;
+    padding: 13px 26px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
+    transition: 0.2s;
+  }
+  .btn-gold:hover { background: var(--gold-hover); transform: translateY(-1px); }
+  .btn-outline {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1.5px solid #0f172a;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .btn-outline:hover { background: #f1f5f9; }
+  .btn-wa {
+    background: #0284c7;
+    color: #ffffff;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* Live Preview */
+  .preview-wrapper { margin-top: 32px; padding-top: 24px; border-top: 2px dashed #cbd5e1; }
+  .preview-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--brand-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preview-scroll { overflow-x: auto; background: #f1f5f9; padding: 16px; border-radius: 10px; border: 1px solid #cbd5e1; }
+  #a4DocSheet { max-width: 794px; margin: 0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08); }
+
+  /* Modal for Old Records */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .modal-card {
+    background: #fff;
+    width: 100%;
+    max-width: 820px;
+    max-height: 85vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  }
+  .modal-head {
+    background: var(--brand-dark);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-body { padding: 16px 20px; overflow-y: auto; }
+  .rec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rec-table th { background: #f1f5f9; padding: 9px; text-align: left; border-bottom: 2px solid #cbd5e1; }
+  .rec-table td { padding: 9px; border-bottom: 1px solid #e2e8f0; }
+
+  @media (max-width: 820px) { .doc-mode-bar { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 780px) {
+    .saas-nav { padding: 10px 14px; }
+    .hero-banner { padding: 24px 14px 100px 14px; }
+    .hero-banner h1 { font-size: 21px; }
+    .main-paper { padding: 20px 14px; }
+    .top-meta-grid, .parties-grid, .bottom-calc-grid, .party-row-2 { grid-template-columns: 1fr; gap: 14px; }
+    .preview-scroll { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="saas-nav">
+  <a href="account.html" target="_self" class="btn-back">← Back to Account</a>
+  <div class="brand-logo">KALYANI <span>ELECTRICAL</span></div>
+  <button type="button" class="nav-pill" id="navPdfBtn" onclick="downloadCleanPDF()">Download PDF ↗</button>
+</nav>
+
+<div class="hero-banner">
+  <h1>Kalyani Electrical — Billing &amp; Quotation Portal</h1>
+  <p>Tax Invoice, Quotation, Estimate, Proforma &amp; Labour Bill with Auto Serial Number &amp; Excel Sync</p>
+</div>
+
+<div class="sheet-container">
+  <div class="main-paper">
+
+    <!-- 5 Document Modes -->
+    <div class="doc-mode-bar">
+      <button type="button" class="mode-tab active" id="tab_INVOICE" onclick="setDocType('INVOICE')">🧾 Tax Invoice / Bill</button>
+      <button type="button" class="mode-tab" id="tab_QUOTATION" onclick="setDocType('QUOTATION')">📋 Quotation</button>
+      <button type="button" class="mode-tab" id="tab_ESTIMATE" onclick="setDocType('ESTIMATE')">📐 Estimate</button>
+      <button type="button" class="mode-tab" id="tab_LABOUR" onclick="setDocType('LABOUR')">🛠️ Labour Bill</button>
+      <button type="button" class="mode-tab" id="tab_PROFORMA" onclick="setDocType('PROFORMA')">📄 Proforma Invoice</button>
+    </div>
+
+    <!-- Quick Utility Bar -->
+    <div class="quick-bar">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="q-btn primary" onclick="newDocument()">+ New Bill (Next Serial No.)</button>
+        <button type="button" class="q-btn success" onclick="openRecordsModal()">📂 Saved Bills / Edit Old</button>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <span id="syncStatusBadge" style="font-size:11.5px; font-weight:700; color:#047857;">● Serial Ready</span>
+        <button type="button" class="q-btn" onclick="resetCurrentForm()">↺ Reset Items</button>
+      </div>
+    </div>
+
+    <h2 class="doc-top-title" id="docTopTitle">TAX INVOICE</h2>
+
+    <!-- Top Meta + Fixed Logo -->
+    <div class="top-meta-grid">
+      <div>
+        <div class="u-field">
+          <label id="lbl_doc_no">Invoice Number* (Auto Serial)</label>
+          <input type="text" id="inv_no" value="INV-001" oninput="updateLivePreview()">
+        </div>
+        <div class="u-field">
+          <label id="lbl_po_no">Buyer's Ref / PO Order No.</label>
+          <input type="text" id="inv_po" placeholder="e.g. PO-8842 / Site Ref" oninput="updateLivePreview()">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="u-field">
+            <label id="lbl_doc_date">Invoice Date*</label>
+            <input type="date" id="inv_date" onchange="updateLivePreview()">
+          </div>
+          <div class="u-field" id="valid_until_wrap" style="display:none;">
+            <label id="lbl_valid_date">Valid Until / Work Date</label>
+            <input type="date" id="inv_valid_date" onchange="updateLivePreview()">
+          </div>
+        </div>
+        <div class="u-field">
+          <label>Mode / Terms of Payment</label>
+          <select id="inv_mode" onchange="updateLivePreview()">
+            <option value="UPI / Online Transfer">UPI / Online Transfer</option>
+            <option value="CASH">CASH</option>
+            <option value="NEFT / RTGS / Cheque">NEFT / RTGS / Cheque</option>
+            <option value="50% Advance, 50% On Completion">50% Advance, 50% On Completion</option>
+            <option value="Credit (15 Days)">Credit (15 Days)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <!-- Fixed Kalyani Electrical Logo (SVG embedded so it never breaks + option to override) -->
+        <label class="logo-drop-box" for="logoInput" title="Click if you want to change logo">
+          <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="handleLogo(event)">
+          <img id="logoPreview" alt="Kalyani Electrical Logo">
+        </label>
+        <div class="u-field">
+          <label id="lbl_dispatch">Site Location / Work Scope</label>
+          <input type="text" id="inv_disp" placeholder="e.g. Warje Site / Electrical & CCTV Work" oninput="updateLivePreview()">
+        </div>
+        <div class="u-field">
+          <label>Place of Supply / State</label>
+          <input type="text" id="inv_dest" value="Maharashtra (27)" oninput="updateLivePreview()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Two Cards: Fixed Kalyani Electrical & Client -->
+    <div class="parties-grid">
+      <div class="party-card">
+        <h3 id="hdr_from">From <span>(Fixed Company Details)</span></h3>
+        <div class="u-field">
+          <label>Company Name (Fixed)</label>
+          <input type="text" id="from_name" value="KALYANI ELECTRICAL" readonly>
+        </div>
+        <div class="u-field">
+          <label>Office Address</label>
+          <input type="text" id="from_addr1" value="Tapodham, Warje, Pune - 411058, Maharashtra" oninput="updateLivePreview()">
+        </div>
+        <div class="u-field">
+          <label>Contact Numbers (Amar | Mrunal | Vishal)</label>
+          <input type="text" id="from_mob" value="Amar: +91 8309642700 | Mrunal: +91 8329171435 | Vishal: +91 8087479681" oninput="updateLivePreview()">
+        </div>
+        <div class="party-row-2">
+          <div class="u-field"><label>GSTIN (Optional)</label><input type="text" id="from_gst" placeholder="27XXXXX0000X1Z5" oninput="updateLivePreview()"></div>
+          <div class="u-field"><label>Email / UPI ID</label><input type="text" id="from_upi" value="kalyanielectrical6@gmail.com" oninput="updateLivePreview()"></div>
+        </div>
+      </div>
+
+      <div class="party-card">
+        <h3 id="hdr_to">For <span>(Client's Details)</span></h3>
+        <div class="u-field"><label>Client / Company Name*</label><input type="text" id="to_name" placeholder="e.g. Sharma Residency / Society" oninput="updateLivePreview()"></div>
+        <div class="u-field"><label>Client / Site Address</label><input type="text" id="to_addr1" placeholder="Street, Area, Pune" oninput="updateLivePreview()"></div>
+        <div class="party-row-2">
+          <div class="u-field"><label>City &amp; State</label><input type="text" id="to_city" value="Pune, Maharashtra" oninput="updateLivePreview()"></div>
+          <div class="u-field"><label>Client Phone / WhatsApp</label><input type="text" id="to_mob" placeholder="9876543210" oninput="updateLivePreview()"></div>
+        </div>
+        <div class="party-row-2">
+          <div class="u-field"><label>Client GSTIN (Optional)</label><input type="text" id="to_gst" placeholder="27XXXXX1111X1Z2" oninput="updateLivePreview()"></div>
+          <div class="u-field"><label>Client Email (Optional)</label><input type="text" id="to_email" placeholder="client@email.com" oninput="updateLivePreview()"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Preset Chips -->
+    <div class="preset-bar">
+      <div class="preset-title">Quick Add Electrical, CCTV, Solar &amp; Networking Items:</div>
+      <div class="chip-row" id="presetChips"></div>
+    </div>
+
+    <!-- Items Table -->
+    <div class="table-wrap">
+      <table class="saas-table">
+        <thead>
+          <tr>
+            <th class="t-center" style="width:5%;">Sl.</th>
+            <th style="width:32%;" id="th_desc">Product / Service Description*</th>
+            <th style="width:10%;" id="th_hsn">HSN/SAC</th>
+            <th class="t-center gst-col" style="width:9%;">GST %</th>
+            <th class="t-center" style="width:10%;" id="th_qty">Qty / Days*</th>
+            <th class="t-right" style="width:12%;">Rate (₹)*</th>
+            <th class="t-center" style="width:8%;">Disc %</th>
+            <th class="t-right" style="width:10%;">Amount (₹)</th>
+            <th style="width:4%;"></th>
+          </tr>
+        </thead>
+        <tbody id="itemsBody"></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+      <button type="button" class="link-btn" onclick="addRow('material')">+ Add Item / Material Row</button>
+      <button type="button" class="link-btn" onclick="addRow('labour')">+ Add Labour / Installation Charge Row</button>
+    </div>
+
+    <!-- Bottom Tax Type & Summary -->
+    <div class="bottom-calc-grid">
+      <div>
+        <div class="tax-radio-group" id="gstTypeGroup">
+          <label><input type="radio" name="taxType" value="INTRA" checked onchange="recalc()"> Intra-state (CGST + SGST)</label>
+          <label><input type="radio" name="taxType" value="INTER" onchange="recalc()"> Inter-state (IGST)</label>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:440px;">
+          <div class="u-field">
+            <label>Extra / Transport / Material Charges (₹)</label>
+            <input type="number" id="extra_charge" value="0" min="0" oninput="recalc()">
+          </div>
+          <div class="u-field">
+            <label>Advance / Token Received (₹)</label>
+            <input type="number" id="adv_received" value="0" min="0" oninput="recalc()">
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <div class="sum-line"><span>Taxable Amount:</span><span id="lbl_sub">₹0.00</span></div>
+        <div class="sum-line" id="row_cgst"><span>CGST:</span><span id="lbl_cgst">₹0.00</span></div>
+        <div class="sum-line" id="row_sgst"><span>SGST:</span><span id="lbl_sgst">₹0.00</span></div>
+        <div class="sum-line" id="row_igst" style="display:none;"><span>IGST:</span><span id="lbl_igst">₹0.00</span></div>
+        <div class="sum-line" id="row_extra" style="display:none;"><span>Extra Charges:</span><span id="lbl_extra">₹0.00</span></div>
+        <div class="sum-grand"><span>Grand Total:</span><span id="lbl_grand">₹0.00</span></div>
+        <div class="sum-line" id="row_adv" style="display:none; color:#047857;"><span>Advance Received:</span><span id="lbl_adv">-₹0.00</span></div>
+        <div class="sum-due" id="row_bal" style="display:none;"><span>Balance Due:</span><span id="lbl_bal">₹0.00</span></div>
+      </div>
+    </div>
+
+    <!-- Terms & Conditions -->
+    <div class="terms-dashed">
+      <label>Terms and Conditions / Work Notes</label>
+      <input type="text" id="inv_terms" value="1. Goods once sold will not be taken back. 2. Subject to Pune jurisdiction. 3. E. & O.E." oninput="updateLivePreview()">
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="cta-bar">
+      <button type="button" class="btn-save-sheet" id="btnSaveSheet" onclick="saveToGoogleSheet()">💾 Save to Excel Sheet</button>
+      <button type="button" class="btn-gold" id="btnDownloadPdf" onclick="downloadCleanPDF()">📥 Download A4 PDF</button>
+      <button type="button" class="btn-outline" onclick="printCleanA4()">🖨️ Direct Print</button>
+      <button type="button" class="btn-wa" id="btnShareWa" onclick="shareWA()">📲 WhatsApp Bill</button>
+    </div>
+
+    <!-- Live A4 Document Preview -->
+    <div class="preview-wrapper">
+      <div class="preview-label">
+        <span>📄 Live A4 Document Preview (Kalyani Electrical)</span>
+        <span style="font-weight:500; color:#64748b; text-transform:none;">Exact layout exported to A4 PDF</span>
+      </div>
+      <div class="preview-scroll">
+        <div id="a4DocSheet">
+          <div id="invoiceDocContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Saved Records Modal (Open & Edit Old Files) -->
+<div class="modal-backdrop" id="recordsModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 style="margin:0; font-size:16px;">📂 Saved Quotations, Invoices &amp; Estimates (Excel Sheet)</h3>
+      <button type="button" onclick="closeRecordsModal()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:12px; display:flex; gap:8px;">
+        <input type="text" id="searchRecordInput" placeholder="Search by Client Name or Serial No (e.g. QUO-001)..." oninput="filterRecordsList()" style="flex:1; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px;">
+        <button type="button" class="q-btn primary" onclick="fetchAllRecordsFromSheet(true)">🔄 Refresh</button>
+      </div>
+      <div id="recordsTableContainer">Loading records from Excel Sheet...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  // ⚠️ यहां अपना Google Apps Script Web App URL पेस्ट करें
+  const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+  // Kalyani Electrical Default High-Res SVG Logo (Matches your KE Thunderbolt Logo)
+  const DEFAULT_KE_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300">
+      <path d="M225 45 A135 135 0 0 0 48 242 A148 148 0 0 1 225 45 Z" fill="#13295b"/>
+      <path d="M72 260 A135 135 0 0 0 282 140 A148 148 0 0 1 72 260 Z" fill="#c8102e"/>
+      <polygon points="62,92 98,92 98,148 152,92 194,92 132,154 182,218 138,218 98,164 98,218 62,218" fill="#13295b"/>
+      <polygon points="238,48 155,165 196,165 136,262 222,145 182,145" fill="#c8102e"/>
+      <polygon points="228,92 296,92 286,115 218,115" fill="#c8102e"/>
+      <polygon points="212,144 276,144 266,167 202,167" fill="#c8102e"/>
+      <polygon points="184,195 256,195 246,218 174,218" fill="#c8102e"/>
+    </svg>
+  `);
+
+  let docType = 'INVOICE';
+  let logoDataUrl = DEFAULT_KE_LOGO;
+  let savedRecordsCache = [];
+  let isEditingExisting = false;
+
+  // Serial Counters (Local + Synced with Excel Sheet)
+  let serialCounters = JSON.parse(localStorage.getItem('ke_serial_counters_v1') || '{"INV":0,"QUO":0,"EST":0,"LBR":0,"PI":0}');
+
+  let items = [
+    { name: '4MP IP Dome Camera (Hikvision / CP Plus)', hsn: '8525', gst: 18, qty: 4, rate: 3200, disc: 0 },
+    { name: 'Installation & Structured Cabling Charges', hsn: '9987', gst: 18, qty: 1, rate: 2500, disc: 0 }
+  ];
+
+  const DOC_CONFIG = {
+    INVOICE: {
+      title: 'TAX INVOICE',
+      prefix: 'INV',
+      noLabel: 'Invoice Number*',
+      dateLabel: 'Invoice Date*',
+      fromHeader: 'Invoice From <span>(Kalyani Electrical)</span>',
+      toHeader: 'Invoice For <span>(Client\'s Details)</span>',
+      pdfBtn: '📥 Download A4 Invoice PDF',
+      waBtn: '📲 WhatsApp Invoice',
+      filePrefix: 'KE_Invoice',
+      showValid: false,
+      defaultTerms: '1. Goods once sold will not be taken back. 2. Subject to Pune jurisdiction. 3. E. & O.E.',
+      presets: [
+        { name: '4MP IP Dome Camera', hsn: '8525', gst: 18, rate: 3200 },
+        { name: '8Ch NVR + 1TB Surveillance HDD', hsn: '8521', gst: 18, rate: 8500 },
+        { name: 'Cat6 Cable Bundle (90m)', hsn: '8544', gst: 18, rate: 2200 },
+        { name: 'Installation & Cabling Charges', hsn: '9987', gst: 18, rate: 2500 },
+        { name: 'LT Panel / MCB DB Wiring Work', hsn: '9954', gst: 18, rate: 3500 }
+      ]
+    },
+    QUOTATION: {
+      title: 'QUOTATION',
+      prefix: 'QUO',
+      noLabel: 'Quotation Number*',
+      dateLabel: 'Quotation Date*',
+      fromHeader: 'Quotation From <span>(Kalyani Electrical)</span>',
+      toHeader: 'Quotation For <span>(Client\'s Details)</span>',
+      pdfBtn: '📥 Download A4 Quotation PDF',
+      waBtn: '📲 WhatsApp Quotation',
+      filePrefix: 'KE_Quotation',
+      showValid: true,
+      defaultTerms: '1. Quotation valid for 15 days from issue date. 2. 50% advance along with work order. 3. Taxes extra as applicable.',
+      presets: [
+        { name: 'Complete 4 Camera CCTV Package', hsn: '8525', gst: 18, rate: 16500 },
+        { name: 'Biometric Access Control Setup', hsn: '8543', gst: 18, rate: 6500 },
+        { name: 'LAN Networking & Rack Dressing', hsn: '9987', gst: 18, rate: 4500 },
+        { name: 'Solar Rooftop Structure & Fitting', hsn: '8541', gst: 12, rate: 25000 },
+        { name: 'AMC Annual Maintenance Charges', hsn: '9987', gst: 18, rate: 5000 }
+      ]
+    },
+    ESTIMATE: {
+      title: 'ESTIMATE',
+      prefix: 'EST',
+      noLabel: 'Estimate Number*',
+      dateLabel: 'Estimate Date*',
+      fromHeader: 'Estimate From <span>(Kalyani Electrical)</span>',
+      toHeader: 'Estimate For <span>(Client\'s Details)</span>',
+      pdfBtn: '📥 Download A4 Estimate PDF',
+      waBtn: '📲 WhatsApp Estimate',
+      filePrefix: 'KE_Estimate',
+      showValid: true,
+      defaultTerms: '1. This is an approximate cost estimate. 2. Final billing will be as per actual material & measurement used.',
+      presets: [
+        { name: 'Concealed Copper Wiring (Per Point)', hsn: '9954', gst: 0, rate: 650 },
+        { name: 'MCB Distribution Box Fitting', hsn: '8537', gst: 0, rate: 2800 },
+        { name: 'CCTV Camera Point Cabling', hsn: '9987', gst: 0, rate: 550 },
+        { name: 'Copper Earthing Pit Complete', hsn: '8535', gst: 0, rate: 3200 },
+        { name: 'Fire Alarm / PA System Wiring', hsn: '8531', gst: 0, rate: 1800 }
+      ]
+    },
+    LABOUR: {
+      title: 'LABOUR ESTIMATE / BILL',
+      prefix: 'LBR',
+      noLabel: 'Labour Slip / Bill No.*',
+      dateLabel: 'Work / Bill Date*',
+      fromHeader: 'Contractor <span>(Kalyani Electrical)</span>',
+      toHeader: 'Client / Site Owner <span>(Client\'s Details)</span>',
+      pdfBtn: '📥 Download Labour Bill PDF',
+      waBtn: '📲 WhatsApp Labour Bill',
+      filePrefix: 'KE_Labour_Bill',
+      showValid: false,
+      defaultTerms: '1. Only labour & service charges included; material provided by client. 2. Payment due upon work completion.',
+      presets: [
+        { name: 'Skilled Electrician / Technician (Per Day)', hsn: '9987', gst: 0, rate: 900 },
+        { name: 'Helper / Assistant Labour (Per Day)', hsn: '9987', gst: 0, rate: 600 },
+        { name: 'CCTV Camera Installation & Focusing (Per Cam)', hsn: '9987', gst: 0, rate: 450 },
+        { name: 'Switchboard & Wiring Labour (Per Point)', hsn: '9954', gst: 0, rate: 350 },
+        { name: 'NVR / DVR & Mobile View Configuration', hsn: '9987', gst: 0, rate: 800 }
+      ]
+    },
+    PROFORMA: {
+      title: 'PROFORMA INVOICE',
+      prefix: 'PI',
+      noLabel: 'Proforma Invoice No.*',
+      dateLabel: 'Proforma Date*',
+      fromHeader: 'Proforma From <span>(Kalyani Electrical)</span>',
+      toHeader: 'Proforma For <span>(Client\'s Details)</span>',
+      pdfBtn: '📥 Download Proforma PDF',
+      waBtn: '📲 WhatsApp Proforma',
+      filePrefix: 'KE_Proforma',
+      showValid: true,
+      defaultTerms: '1. Proforma invoice issued for advance payment processing. 2. Tax invoice will be issued upon delivery.',
+      presets: [
+        { name: 'Advance Booking - Surveillance System', hsn: '8525', gst: 18, rate: 10000 },
+        { name: 'Electrical Panel & Material Supply Lot', hsn: '8536', gst: 18, rate: 15000 },
+        { name: 'Solar Power Plant Installation Advance', hsn: '8541', gst: 12, rate: 25000 }
+      ]
+    }
+  };
+
+  function getNextSerialNumber(prefix) {
+    const nextNum = (serialCounters[prefix] || 0) + 1;
+    return `${prefix}-${String(nextNum).padStart(3, '0')}`;
+  }
+
+  function incrementLocalCounter(docNo) {
+    const match = String(docNo || '').trim().match(/^(INV|QUO|EST|LBR|PI)-(\d+)$/i);
+    if (match) {
+      const prefix = match[1].toUpperCase();
+      const num = parseInt(match[2], 10);
+      if (num > (serialCounters[prefix] || 0)) {
+        serialCounters[prefix] = num;
+        localStorage.setItem('ke_serial_counters_v1', JSON.stringify(serialCounters));
+      }
+    }
+  }
+
+  function setDocType(type, keepCustomNo = false) {
+    docType = type;
+    const cfg = DOC_CONFIG[type];
+
+    ['INVOICE', 'QUOTATION', 'ESTIMATE', 'LABOUR', 'PROFORMA'].forEach(t => {
+      $('tab_' + t).classList.toggle('active', t === type);
+    });
+
+    $('docTopTitle').innerText = cfg.title;
+    $('lbl_doc_no').innerText = cfg.noLabel;
+    $('lbl_doc_date').innerText = cfg.dateLabel;
+    $('hdr_from').innerHTML = cfg.fromHeader;
+    $('hdr_to').innerHTML = cfg.toHeader;
+    $('btnDownloadPdf').innerText = cfg.pdfBtn;
+    $('btnShareWa').innerText = cfg.waBtn;
+    $('valid_until_wrap').style.display = cfg.showValid ? 'block' : 'none';
+
+    if (!keepCustomNo) {
+      isEditingExisting = false;
+      $('inv_terms').value = cfg.defaultTerms;
+      $('inv_no').value = getNextSerialNumber(cfg.prefix);
+    }
+
+    $('th_desc').innerText = type === 'LABOUR' ? 'Labour Work / Service Description*' : 'Product / Service Description*';
+    $('th_hsn').innerText = type === 'LABOUR' ? 'SAC / Unit' : 'HSN/SAC';
+    $('th_qty').innerText = type === 'LABOUR' ? 'Days / Qty*' : 'Qty*';
+
+    const isTaxInvoice = (type === 'INVOICE');
+    $('gstTypeGroup').style.display = isTaxInvoice ? 'flex' : 'none';
+    document.querySelectorAll('.gst-col').forEach(el => {
+      el.style.display = isTaxInvoice ? '' : 'none';
+    });
+
+    renderPresetChips();
+    recalc();
+  }
+
+  function renderPresetChips() {
+    const cfg = DOC_CONFIG[docType];
+    $('presetChips').innerHTML = cfg.presets.map((p, idx) =>
+      `<button type="button" class="preset-chip" onclick="addPresetItem(${idx})">+ ${p.name} (₹${p.rate})</button>`
+    ).join('');
+  }
+
+  function addPresetItem(idx) {
+    const p = DOC_CONFIG[docType].presets[idx];
+    if (!p) return;
+    if (items.length === 1 && !items[0].name.trim() && items[0].rate === 0) {
+      items[0] = { name: p.name, hsn: p.hsn, gst: p.gst, qty: 1, rate: p.rate, disc: 0 };
+    } else {
+      items.push({ name: p.name, hsn: p.hsn, gst: p.gst, qty: 1, rate: p.rate, disc: 0 });
+    }
+    renderTable();
+  }
+
+  function handleLogo(e) {
+    const f = e.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      logoDataUrl = ev.target.result;
+      $('logoPreview').src = logoDataUrl;
+      updateLivePreview();
+    };
+    r.readAsDataURL(f);
+  }
+
+  function renderTable() {
+    const isTaxInvoice = (docType === 'INVOICE');
+    $('itemsBody').innerHTML = items.map((it, i) => {
+      const base = (it.qty || 0) * (it.rate || 0);
+      const afterDisc = base - (base * (it.disc || 0) / 100);
+      const effectiveGst = Number(it.gst) || 0;
+      return `
+        <tr>
+          <td class="t-center"><b>${i+1}</b></td>
+          <td><input value="${escHtml(it.name)}" placeholder="Description" oninput="items[${i}].name=this.value;updateLivePreview()"></td>
+          <td><input value="${escHtml(it.hsn||'')}" placeholder="${docType === 'LABOUR' ? 'Day/Pt' : 'HSN'}" oninput="items[${i}].hsn=this.value;updateLivePreview()"></td>
+          <td class="gst-col">
+            <select style="width:100%; border:none; border-bottom:1.5px solid #cbd5e1; padding:6px 2px; font-size:12.5px; font-weight:700; background:transparent; outline:none; text-align:center;" onchange="items[${i}].gst=parseFloat(this.value)||0;recalc()">
+              <option value="0" ${effectiveGst===0?'selected':''}>0%</option>
+              <option value="5" ${effectiveGst===5?'selected':''}>5%</option>
+              <option value="12" ${effectiveGst===12?'selected':''}>12%</option>
+              <option value="18" ${effectiveGst===18?'selected':''}>18%</option>
+              <option value="28" ${effectiveGst===28?'selected':''}>28%</option>
+            </select>
+          </td>
+          <td><input type="number" class="t-center" value="${it.qty}" min="0" step="any" oninput="items[${i}].qty=parseFloat(this.value)||0;recalc()"></td>
+          <td><input type="number" class="t-right" value="${it.rate}" min="0" step="any" oninput="items[${i}].rate=parseFloat(this.value)||0;recalc()"></td>
+          <td><input type="number" class="t-center" value="${it.disc}" min="0" max="100" oninput="items[${i}].disc=parseFloat(this.value)||0;recalc()"></td>
+          <td class="t-right" id="row_amt_${i}"><b>₹${afterDisc.toLocaleString('en-IN', {minimumFractionDigits:2})}</b></td>
+          <td class="t-center"><button type="button" class="btn-del" onclick="delRow(${i})">×</button></td>
+        </tr>
+      `;
+    }).join('');
+    document.querySelectorAll('.gst-col').forEach(el => {
+      el.style.display = isTaxInvoice ? '' : 'none';
+    });
+    recalc();
+  }
+
+  function addRow(kind) {
+    if (kind === 'labour') {
+      items.push({ name: 'Labour / Installation Charges', hsn: '9987', gst: 18, qty: 1, rate: 0, disc: 0 });
+    } else {
+      items.push({ name: '', hsn: '', gst: 18, qty: 1, rate: 0, disc: 0 });
+    }
+    renderTable();
+  }
+
+  function delRow(i) {
+    if (items.length > 1) {
+      items.splice(i, 1);
+    } else {
+      items[0] = { name: '', hsn: '', gst: 0, qty: 1, rate: 0, disc: 0 };
+    }
+    renderTable();
+  }
+
+  function recalc() {
+    const taxMode = document.querySelector('input[name="taxType"]:checked').value;
+    const isTaxInvoice = (docType === 'INVOICE');
+    const isIntra = isTaxInvoice && (taxMode === 'INTRA');
+    const isNoGst = !isTaxInvoice;
+
+    let sub = 0, totalTax = 0;
+    items.forEach((it, i) => {
+      const base = (it.qty || 0) * (it.rate || 0);
+      const taxable = Math.max(0, base - (base * (it.disc || 0) / 100));
+      const tax = isNoGst ? 0 : (taxable * (it.gst || 0) / 100);
+      sub += taxable;
+      totalTax += tax;
+      const cell = $(`row_amt_${i}`);
+      if (cell) cell.innerHTML = `<b>₹${taxable.toLocaleString('en-IN', {minimumFractionDigits:2})}</b>`;
+    });
+
+    const extra = Math.max(0, parseFloat($('extra_charge').value) || 0);
+    const grand = Math.round(sub + totalTax + extra);
+    const adv = Math.max(0, parseFloat($('adv_received').value) || 0);
+    const bal = Math.max(0, grand - adv);
+
+    $('lbl_sub').innerText = '₹' + sub.toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('row_cgst').style.display = isIntra ? 'flex' : 'none';
+    $('row_sgst').style.display = isIntra ? 'flex' : 'none';
+    $('row_igst').style.display = (!isIntra && !isNoGst) ? 'flex' : 'none';
+    $('row_extra').style.display = extra > 0 ? 'flex' : 'none';
+    $('row_adv').style.display = adv > 0 ? 'flex' : 'none';
+    $('row_bal').style.display = adv > 0 ? 'flex' : 'none';
+
+    $('lbl_cgst').innerText = '₹' + (totalTax / 2).toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_sgst').innerText = '₹' + (totalTax / 2).toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_igst').innerText = '₹' + totalTax.toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_extra').innerText = '₹' + extra.toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_grand').innerText = '₹' + grand.toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_adv').innerText = '-₹' + adv.toLocaleString('en-IN', {minimumFractionDigits:2});
+    $('lbl_bal').innerText = '₹' + bal.toLocaleString('en-IN', {minimumFractionDigits:2});
+
+    updateLivePreview();
+    return { sub, totalTax, extra, grand, adv, bal };
+  }
+
+  function escHtml(str) {
+    return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function buildCleanInvoiceHTML() {
+    const cfg = DOC_CONFIG[docType];
+    const taxMode = document.querySelector('input[name="taxType"]:checked').value;
+    const isTaxInvoice = (docType === 'INVOICE');
+    const isIntra = isTaxInvoice && (taxMode === 'INTRA');
+    const isNoGst = !isTaxInvoice;
+    const extra = Math.max(0, parseFloat($('extra_charge').value) || 0);
+    const adv = Math.max(0, parseFloat($('adv_received').value) || 0);
+    let sub = 0, totalTax = 0;
+
+    const rowsHtml = items.map((it, i) => {
+      const base = (it.qty || 0) * (it.rate || 0);
+      const taxable = Math.max(0, base - (base * (it.disc || 0) / 100));
+      const gstRate = isNoGst ? 0 : (it.gst || 0);
+      const tax = taxable * gstRate / 100;
+      sub += taxable;
+      totalTax += tax;
+      return `
+        <tr>
+          <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${i+1}</td>
+          <td style="padding:6px; border:1px solid #cbd5e1;"><b>${escHtml(it.name || '-')}</b></td>
+          <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${escHtml(it.hsn || '-')}</td>
+          ${!isNoGst ? `<td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${gstRate}%<br><span style="font-size:9px; color:#64748b;">₹${tax.toLocaleString('en-IN', {minimumFractionDigits:2})}</span></td>` : ''}
+          <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${it.qty}</td>
+          <td style="text-align:right; padding:6px; border:1px solid #cbd5e1;">₹${(it.rate||0).toLocaleString('en-IN')}</td>
+          <td style="text-align:right; padding:6px; border:1px solid #cbd5e1;"><b>₹${(taxable + tax).toLocaleString('en-IN', {minimumFractionDigits:2})}</b></td>
+        </tr>
+      `;
+    }).join('');
+
+    const grand = Math.round(sub + totalTax + extra);
+    const bal = Math.max(0, grand - adv);
+    const validDt = $('inv_valid_date').value;
+
+    const docShortLabel = docType === 'INVOICE' ? 'Invoice' :
+                          docType === 'QUOTATION' ? 'Quotation' :
+                          docType === 'ESTIMATE' ? 'Estimate' :
+                          docType === 'LABOUR' ? 'Labour Bill' : 'Proforma';
+
+    return `
+      <div class="doc-sheet-inner" style="font-family:-apple-system,sans-serif; color:#0f172a; padding:18px; border:1.5px solid #066399; border-radius:8px; background:#fff; width:100%; box-sizing:border-box;">
+        <div class="doc-header-row" style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2.5px solid #066399; padding-bottom:12px; margin-bottom:14px; gap:12px;">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <img src="${logoDataUrl}" style="height:64px; width:64px; object-fit:contain;">
+            <div>
+              <h2 style="margin:0; font-size:19px; color:#066399; text-transform:uppercase; letter-spacing:0.4px;">KALYANI ELECTRICAL</h2>
+              <p style="margin:2px 0 0; font-size:10.5px; color:#475569; font-weight:600;">Electricals • CCTV Surveillance • Solar Power • LAN Networking</p>
+              <p style="margin:2px 0 0; font-size:10.5px; color:#334155;">${escHtml($('from_addr1').value)}</p>
+              <p style="margin:3px 0 0; font-size:10.5px; color:#0f172a; font-weight:700;">${escHtml($('from_mob').value)}</p>
+              <p style="margin:2px 0 0; font-size:10px; color:#475569;">Email: ${escHtml($('from_upi').value)} ${$('from_gst').value ? `| GSTIN: <b>${escHtml($('from_gst').value)}</b>` : ''}</p>
+            </div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <span style="background:#066399; color:#fff; padding:4px 12px; border-radius:4px; font-size:11px; font-weight:800;">${cfg.title}</span>
+            <p style="margin:6px 0 0; font-size:11.5px;"><b>${docShortLabel} No:</b> ${escHtml($('inv_no').value)}</p>
+            <p style="margin:2px 0 0; font-size:11px;"><b>Date:</b> ${escHtml($('inv_date').value)}</p>
+            ${(cfg.showValid && validDt) ? `<p style="margin:2px 0 0; font-size:11px;"><b>Valid Until:</b> ${escHtml(validDt)}</p>` : ''}
+          </div>
+        </div>
+
+        <div class="doc-parties-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; font-size:11px;">
+          <div style="background:#f2f8fd; border:1px solid #cde4f7; padding:10px; border-radius:6px;">
+            <b style="color:#066399; display:block; margin-bottom:4px;">${docType === 'INVOICE' ? 'BILLED TO (CLIENT):' : 'PREPARED FOR (CLIENT):'}</b>
+            <b>${escHtml($('to_name').value || 'Walk-in Customer')}</b><br>
+            ${escHtml($('to_addr1').value)} ${escHtml($('to_city').value)}<br>
+            ${$('to_mob').value ? `Mob: ${escHtml($('to_mob').value)}` : ''}
+            ${$('to_gst').value ? `<br>GSTIN: <b>${escHtml($('to_gst').value)}</b>` : ''}
+          </div>
+          <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:6px;">
+            <b style="color:#0f172a; display:block; margin-bottom:4px;">WORK &amp; PAYMENT DETAILS:</b>
+            <b>Payment Terms:</b> ${escHtml($('inv_mode').value)}<br>
+            <b>Ref / PO No:</b> ${escHtml($('inv_po').value || '-')}<br>
+            <b>Site / Scope:</b> ${escHtml($('inv_disp').value || '-')}<br>
+            <b>Place of Supply:</b> ${escHtml($('inv_dest').value)}
+          </div>
+        </div>
+
+        <table class="doc-items-table" style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:12px;">
+          <thead>
+            <tr style="background:#066399; color:#fff;">
+              <th style="padding:6px; border:1px solid #066399;">#</th>
+              <th style="padding:6px; border:1px solid #066399; text-align:left;">${docType === 'LABOUR' ? 'Labour / Work Description' : 'Description'}</th>
+              <th style="padding:6px; border:1px solid #066399;">${docType === 'LABOUR' ? 'SAC/Unit' : 'HSN'}</th>
+              ${!isNoGst ? `<th style="padding:6px; border:1px solid #066399;">GST</th>` : ''}
+              <th style="padding:6px; border:1px solid #066399;">${docType === 'LABOUR' ? 'Days/Qty' : 'Qty'}</th>
+              <th style="padding:6px; border:1px solid #066399; text-align:right;">Rate</th>
+              <th style="padding:6px; border:1px solid #066399; text-align:right;">${!isNoGst ? 'Total (Incl. GST)' : 'Amount'}</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+
+        <div class="doc-bottom-row" style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+          <div style="font-size:10.5px; color:#334155; max-width:54%;">
+            <b>Terms &amp; Conditions:</b><br>${escHtml($('inv_terms').value)}
+          </div>
+          <table style="font-size:11.5px; border-collapse:collapse; min-width:235px;">
+            <tr><td style="padding:4px 8px;">${isNoGst ? 'Subtotal:' : 'Taxable Subtotal:'}</td><td style="padding:4px 8px; text-align:right;">₹${sub.toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+            ${!isNoGst && isIntra ? `
+              <tr><td style="padding:4px 8px;">CGST:</td><td style="padding:4px 8px; text-align:right;">₹${(totalTax/2).toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+              <tr><td style="padding:4px 8px;">SGST:</td><td style="padding:4px 8px; text-align:right;">₹${(totalTax/2).toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+            ` : ''}
+            ${!isNoGst && !isIntra ? `
+              <tr><td style="padding:4px 8px;">IGST:</td><td style="padding:4px 8px; text-align:right;">₹${totalTax.toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+            ` : ''}
+            ${extra > 0 ? `<tr><td style="padding:4px 8px;">Extra Charges:</td><td style="padding:4px 8px; text-align:right;">₹${extra.toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>` : ''}
+            <tr style="background:#f2f8fd; border-top:2px solid #066399; font-weight:900; font-size:14px; color:#044870;">
+              <td style="padding:6px 8px;">${docType === 'ESTIMATE' || docType === 'QUOTATION' ? 'Estimated Total:' : 'Grand Total:'}</td>
+              <td style="padding:6px 8px; text-align:right;">₹${grand.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
+            </tr>
+            ${adv > 0 ? `
+              <tr style="color:#047857;"><td style="padding:4px 8px;">Advance Paid:</td><td style="padding:4px 8px; text-align:right;">-₹${adv.toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+              <tr style="color:#b91c1c; font-weight:800;"><td style="padding:4px 8px;">Balance Due:</td><td style="padding:4px 8px; text-align:right;">₹${bal.toLocaleString('en-IN', {minimumFractionDigits:2})}</td></tr>
+            ` : ''}
+          </table>
+        </div>
+
+        <div class="doc-sig-row" style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:28px; font-size:10.5px;">
+          <div style="color:#64748b;">Client / Receiver Signature</div>
+          <div style="text-align:center; border-top:1.5px dashed #475569; padding-top:4px; min-width:190px; font-weight:800; color:#066399;">For KALYANI ELECTRICAL</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function updateLivePreview() {
+    const target = $('invoiceDocContent');
+    if (target) target.innerHTML = buildCleanInvoiceHTML();
+  }
+
+  // ==========================================
+  // GOOGLE SHEET (EXCEL) SAVE & EDIT FUNCTIONS
+  // ==========================================
+  async function saveToGoogleSheet() {
+    const totals = recalc();
+    const docNo = $('inv_no').value.trim();
+    if (!docNo) {
+      alert('कृपया Serial Number दर्ज करें।');
+      return;
+    }
+
+    const payload = {
+      docType: docType,
+      inv_no: docNo,
+      inv_po: $('inv_po').value,
+      inv_date: $('inv_date').value,
+      inv_valid_date: $('inv_valid_date').value,
+      inv_mode: $('inv_mode').value,
+      inv_disp: $('inv_disp').value,
+      inv_dest: $('inv_dest').value,
+      from_addr1: $('from_addr1').value,
+      from_mob: $('from_mob').value,
+      from_gst: $('from_gst').value,
+      from_upi: $('from_upi').value,
+      to_name: $('to_name').value,
+      to_addr1: $('to_addr1').value,
+      to_city: $('to_city').value,
+      to_mob: $('to_mob').value,
+      to_gst: $('to_gst').value,
+      to_email: $('to_email').value,
+      taxType: document.querySelector('input[name="taxType"]:checked').value,
+      extra_charge: $('extra_charge').value,
+      adv_received: $('adv_received').value,
+      inv_terms: $('inv_terms').value,
+      items: items,
+      grandTotal: totals.grand,
+      balanceDue: totals.bal
+    };
+
+    // पहले लोकल काउंटर और लोकल बैकअप अपडेट करें
+    incrementLocalCounter(docNo);
+    const localArchive = JSON.parse(localStorage.getItem('ke_saved_docs_v1') || '{}');
+    localArchive[docNo] = payload;
+    localStorage.setItem('ke_saved_docs_v1', JSON.stringify(localArchive));
+
+    if (!SCRIPT_URL || SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
+      alert(`✅ ${docNo} लोकल में सेव हो गया है!\n(Google Sheet में ऑनलाइन सेव करने के लिए कोड में SCRIPT_URL डालें)`);
+      return;
+    }
+
+    const btn = $('btnSaveSheet');
+    const origText = btn.innerText;
+    btn.disabled = true;
+    btn.innerText = '⏳ Saving to Excel...';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      $('syncStatusBadge').innerText = `● Saved: ${docNo}`;
+      alert(`✅ ${docNo} सफलतापूर्वक Excel (Google Sheet) में सेव हो गया है!`);
+    } catch (err) {
+      console.error(err);
+      alert('⚠️ Excel शीट से कनेक्ट नहीं हो पाया, लेकिन डेटा ब्राउज़र में सुरक्षित सेव कर लिया गया है।');
+    } finally {
+      btn.disabled = false;
+      btn.innerText = origText;
+    }
+  }
+
+  async function fetchAllRecordsFromSheet(showAlert = false) {
+    // लोकल रिकॉर्ड्स लोड करें
+    const localArchive = JSON.parse(localStorage.getItem('ke_saved_docs_v1') || '{}');
+    let mergedList = Object.values(localArchive).map(d => ({
+      docNo: d.inv_no,
+      docType: d.docType,
+      date: d.inv_date,
+      clientName: d.to_name || 'Walk-in Customer',
+      clientMob: d.to_mob || '',
+      grandTotal: d.grandTotal || 0,
+      jsonData: JSON.stringify(d)
+    }));
+
+    if (SCRIPT_URL && !SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=getAll`);
+        const data = await res.json();
+        if (data.status === 'success') {
+          if (data.maxCounters) {
+            ['INV', 'QUO', 'EST', 'LBR', 'PI'].forEach(p => {
+              if ((data.maxCounters[p] || 0) > (serialCounters[p] || 0)) {
+                serialCounters[p] = data.maxCounters[p];
+              }
+            });
+            localStorage.setItem('ke_serial_counters_v1', JSON.stringify(serialCounters));
+            if (!isEditingExisting) {
+              $('inv_no').value = getNextSerialNumber(DOC_CONFIG[docType].prefix);
+              updateLivePreview();
+            }
+          }
+          if (Array.isArray(data.records) && data.records.length > 0) {
+            mergedList = data.records;
+          }
+          $('syncStatusBadge').innerText = '● Excel Synced';
+        }
+      } catch (e) {
+        console.log('Sheet sync skipped or offline:', e);
+      }
+    }
+
+    savedRecordsCache = mergedList;
+    renderRecordsTable(savedRecordsCache);
+    if (showAlert) alert('Records refreshed!');
+  }
+
+  function openRecordsModal() {
+    $('recordsModal').style.display = 'flex';
+    fetchAllRecordsFromSheet(false);
+  }
+
+  function closeRecordsModal() {
+    $('recordsModal').style.display = 'none';
+  }
+
+  function filterRecordsList() {
+    const q = $('searchRecordInput').value.toLowerCase().trim();
+    const filtered = savedRecordsCache.filter(r =>
+      String(r.docNo).toLowerCase().includes(q) ||
+      String(r.clientName).toLowerCase().includes(q) ||
+      String(r.docType).toLowerCase().includes(q)
+    );
+    renderRecordsTable(filtered);
+  }
+
+  function renderRecordsTable(list) {
+    const box = $('recordsTableContainer');
+    if (!list || list.length === 0) {
+      box.innerHTML = '<p style="text-align:center; color:#64748b; padding:20px;">अभी तक कोई बिल या कोटेशन सेव नहीं किया गया है।</p>';
+      return;
+    }
+
+    box.innerHTML = `
+      <table class="rec-table">
+        <thead>
+          <tr>
+            <th>Serial No.</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Client Name</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${list.map((r, idx) => `
+            <tr>
+              <td><b>${escHtml(r.docNo)}</b></td>
+              <td>${escHtml(r.docType)}</td>
+              <td>${escHtml(r.date)}</td>
+              <td>${escHtml(r.clientName)}</td>
+              <td><b>₹${Number(r.grandTotal || 0).toLocaleString('en-IN')}</b></td>
+              <td>
+                <button type="button" class="q-btn primary" onclick="loadRecordForEdit('${escHtml(r.docNo)}')">✏️ Open / Edit</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function loadRecordForEdit(docNo) {
+    const rec = savedRecordsCache.find(r => String(r.docNo) === String(docNo));
+    if (!rec || !rec.jsonData) return;
+    try {
+      const d = typeof rec.jsonData === 'string' ? JSON.parse(rec.jsonData) : rec.jsonData;
+      isEditingExisting = true;
+      setDocType(d.docType || 'INVOICE', true);
+
+      $('inv_no').value = d.inv_no || '';
+      $('inv_po').value = d.inv_po || '';
+      $('inv_date').value = d.inv_date || '';
+      $('inv_valid_date').value = d.inv_valid_date || '';
+      $('inv_mode').value = d.inv_mode || 'UPI / Online Transfer';
+      $('inv_disp').value = d.inv_disp || '';
+      $('inv_dest').value = d.inv_dest || 'Maharashtra (27)';
+      $('to_name').value = d.to_name || '';
+      $('to_addr1').value = d.to_addr1 || '';
+      $('to_city').value = d.to_city || '';
+      $('to_mob').value = d.to_mob || '';
+      $('to_gst').value = d.to_gst || '';
+      $('to_email').value = d.to_email || '';
+      $('extra_charge').value = d.extra_charge || 0;
+      $('adv_received').value = d.adv_received || 0;
+      $('inv_terms').value = d.inv_terms || '';
+
+      if (d.taxType) {
+        const radio = document.querySelector(`input[name="taxType"][value="${d.taxType}"]`);
+        if (radio) radio.checked = true;
+      }
+
+      items = Array.isArray(d.items) && d.items.length > 0 ? d.items : [{ name: '', hsn: '', gst: 18, qty: 1, rate: 0, disc: 0 }];
+      renderTable();
+      closeRecordsModal();
+      $('syncStatusBadge').innerText = `● Editing: ${d.inv_no}`;
+    } catch (e) {
+      alert('फाइल लोड करने में समस्या आई।');
+    }
+  }
+
+  // ==========================================
+  // UNTOUCHED PDF & PRINT FUNCTIONS
+  // ==========================================
+  async function downloadCleanPDF() {
+    updateLivePreview();
+    const cfg = DOC_CONFIG[docType];
+    const mainBtn = $('btnDownloadPdf');
+    const navBtn = $('navPdfBtn');
+    const originalMainText = mainBtn ? mainBtn.textContent : cfg.pdfBtn;
+    const originalNavText = navBtn ? navBtn.textContent : 'Download PDF ↗';
+    const source = $('a4DocSheet');
+
+    if (!source || !$('invoiceDocContent').innerHTML.trim()) {
+      alert('कृपया PDF डाउनलोड करने से पहले बिल/डॉक्यूमेंट का विवरण भरें।');
+      return;
+    }
+
+    if (typeof html2pdf === 'undefined') {
+      alert('PDF library उपलब्ध नहीं है। कृपया इंटरनेट कनेक्शन जाँचें और पुनः प्रयास करें।');
+      return;
+    }
+
+    if (mainBtn) { mainBtn.disabled = true; mainBtn.textContent = '⏳ Generating PDF...'; }
+    if (navBtn) { navBtn.disabled = true; navBtn.textContent = '⏳ PDF...'; }
+
+    const PDF_WIDTH = 680;
+    const clone = source.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.dir = document.documentElement.dir || 'ltr';
+    const copiedContainer = clone.querySelector('#invoiceDocContent');
+    if (copiedContainer) copiedContainer.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+    clone.style.cssText = [
+      `width:${PDF_WIDTH}px`,
+      `max-width:${PDF_WIDTH}px`,
+      `min-width:${PDF_WIDTH}px`,
+      'margin:0',
+      'padding:0',
+      'background:#ffffff',
+      'color:#0f172a',
+      'border:none',
+      'border-radius:0',
+      'box-shadow:none',
+      'box-sizing:border-box',
+      'overflow:visible'
+    ].join(';');
+
+    const exportStyle = document.createElement('style');
+    exportStyle.textContent = `
+      .pdf-export-sheet, .pdf-export-sheet * { box-sizing:border-box !important; }
+      .pdf-export-sheet .doc-sheet-inner {
+        width:100% !important; max-width:100% !important; margin:0 !important;
+        padding:18px !important; overflow:visible !important;
+        border:1.5px solid #066399 !important; border-radius:8px !important;
+        background:#ffffff !important; color:#0f172a !important;
+      }
+      .pdf-export-sheet .doc-header-row {
+        display:flex !important; justify-content:space-between !important;
+        align-items:flex-start !important; gap:12px !important;
+      }
+      .pdf-export-sheet .doc-parties-grid {
+        display:grid !important; grid-template-columns:1fr 1fr !important;
+        gap:12px !important; font-size:11px !important;
+      }
+      .pdf-export-sheet .doc-items-table {
+        width:100% !important; border-collapse:collapse !important; font-size:11px !important;
+      }
+      .pdf-export-sheet .doc-items-table tr {
+        break-inside:avoid !important; page-break-inside:avoid !important;
+      }
+      .pdf-export-sheet .doc-bottom-row {
+        display:flex !important; justify-content:space-between !important;
+        align-items:flex-start !important; gap:16px !important;
+        break-inside:avoid !important; page-break-inside:avoid !important;
+      }
+      .pdf-export-sheet .doc-sig-row {
+        display:flex !important; justify-content:space-between !important;
+        align-items:flex-end !important; margin-top:28px !important;
+        break-inside:avoid !important; page-break-inside:avoid !important;
+      }
+    `;
+    clone.classList.add('pdf-export-sheet');
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#ffffff;z-index:999999;overflow:auto;margin:0;padding:0;';
+
+    const staging = document.createElement('div');
+    staging.style.cssText = `position:relative;top:0;left:0;width:${PDF_WIDTH}px;min-width:${PDF_WIDTH}px;margin:0;padding:0;background:#ffffff;color:#0f172a;`;
+    staging.appendChild(clone);
+    overlay.appendChild(staging);
+    document.head.appendChild(exportStyle);
+    document.body.appendChild(overlay);
+
+    const cleanNo = ($('inv_no').value.trim() || 'Doc').replace(/[^a-zA-Z0-9-_]/g, '_');
+    const filename = `${cfg.filePrefix}_${cleanNo}.pdf`;
+
+    try {
+      await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 150)));
+      await html2pdf().set({
+        margin: [10, 12, 12, 12],
+        filename,
+        image: { type: 'png', quality: 1.0 },
+        html2canvas: {
+          scale: 3,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0,
+          x: 0,
+          y: 0,
+          width: PDF_WIDTH,
+          windowWidth: PDF_WIDTH,
+          backgroundColor: '#ffffff'
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }
+      }).from(staging).save();
+    } catch (error) {
+      console.error('Invoice PDF export failed:', error);
+      alert('PDF generate नहीं हो पाया। कृपया दोबारा प्रयास करें या Direct Print में Save as PDF चुनें।');
+    } finally {
+      overlay.remove();
+      exportStyle.remove();
+      if (mainBtn) { mainBtn.disabled = false; mainBtn.textContent = originalMainText; }
+      if (navBtn) { navBtn.disabled = false; navBtn.textContent = originalNavText; }
+    }
+  }
+
+  function printCleanA4() {
+    const cfg = DOC_CONFIG[docType];
+    const w = window.open('', '_blank', 'width=850,height=900');
+    w.document.write(`<!DOCTYPE html><html><head><title>${cfg.title} - Kalyani Electrical</title><style>@page{size:A4 portrait;margin:0mm}body{margin:10mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}table{border-collapse:collapse}</style></head><body>${buildCleanInvoiceHTML()}</body></html>`);
+    w.document.close(); w.focus(); setTimeout(() => { w.print(); w.close(); }, 400);
+  }
+
+  function shareWA() {
+    const cfg = DOC_CONFIG[docType];
+    const inv = $('inv_no').value;
+    const tot = $('lbl_grand').innerText;
+    const ph = $('to_mob').value.replace(/[^0-9]/g, '');
+    let itemLines = '';
+    items.forEach((it, idx) => {
+      if (it.name) itemLines += `${idx+1}. ${it.name} (${it.qty} × ₹${it.rate})\n`;
+    });
+    const msg = `*🧾 ${cfg.title} (${inv})*\n*From:* KALYANI ELECTRICAL (Pune)\n*Contact:* Amar: 8309642700 | Mrunal: 8329171435 | Vishal: 8087479681\n*Client:* ${$('to_name').value || 'Customer'}\n\n${itemLines}-------------------------\n*Total Amount:* ${tot}`;
+    window.open(ph ? `https://wa.me/91${ph}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  function newDocument() {
+    isEditingExisting = false;
+    const cfg = DOC_CONFIG[docType];
+    $('inv_no').value = getNextSerialNumber(cfg.prefix);
+    $('inv_date').value = new Date().toISOString().split('T')[0];
+    $('to_name').value = '';
+    $('to_addr1').value = '';
+    $('to_city').value = 'Pune, Maharashtra';
+    $('to_mob').value = '';
+    $('to_gst').value = '';
+    $('to_email').value = '';
+    $('extra_charge').value = 0;
+    $('adv_received').value = 0;
+    items = [{ name: '', hsn: '', gst: docType === 'ESTIMATE' || docType === 'LABOUR' ? 0 : 18, qty: 1, rate: 0, disc: 0 }];
+    $('syncStatusBadge').innerText = `● New: ${$('inv_no').value}`;
+    renderTable();
+  }
+
+  function resetCurrentForm() {
+    if (confirm('Clear current items and reset amounts?')) {
+      items = [{ name: '', hsn: '', gst: docType === 'ESTIMATE' || docType === 'LABOUR' ? 0 : 18, qty: 1, rate: 0, disc: 0 }];
+      $('extra_charge').value = 0;
+      $('adv_received').value = 0;
+      renderTable();
+    }
+  }
+
+  window.onload = () => {
+    $('logoPreview').src = logoDataUrl;
+    const today = new Date().toISOString().split('T')[0];
+    $('inv_date').value = today;
+    const next15 = new Date(Date.now() + 15 * 86400000).toISOString().split('T')[0];
+    $('inv_valid_date').value = next15;
+
+    setDocType('INVOICE');
+    renderTable();
+    fetchAllRecordsFromSheet(false);
+  };
+</script>
+</body>
+</html>
