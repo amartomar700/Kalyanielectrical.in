@@ -6,7 +6,6 @@
   <title>Site Logs, Billing &amp; Sync Console | Kalyani Electrical — kalyanielectricals.in</title>
   <meta name="description" content="Protected site operations and billing console for Kalyani Electrical partners (Amar, Munal & Vishal)." />
 
-  <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -14,18 +13,12 @@
   <meta name="theme-color" content="#0F2354" />
   <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- html2pdf Library for A4 PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
@@ -51,29 +44,21 @@
   </script>
 
   <style>
-    body {
-      overflow-x: hidden;
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-
+    body { overflow-x: hidden; transition: background-color 0.25s ease, color 0.25s ease; }
     .bg-subtle-grid {
       background-image:
         linear-gradient(to right, rgba(15, 35, 84, 0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(15, 35, 84, 0.04) 1px, transparent 1px);
       background-size: 38px 38px;
     }
-
     .dark .bg-subtle-grid {
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     }
-
     a svg, button svg { pointer-events: none; }
 
-    /* =================================================================== */
-    /* KALYANI ELECTRICAL BILLING & QUOTATION SUITE STYLES                 */
-    /* =================================================================== */
+    /* Billing Suite Styles */
     #ke-billing-suite {
       --brand-blue: #066399;
       --brand-dark: #044870;
@@ -89,7 +74,7 @@
     .ke-bill-paper {
       background: #ffffff;
       border-radius: 18px;
-      padding: 28px 32px;
+      padding: 24px 28px;
       box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
       border: 1px solid #e2e8f0;
     }
@@ -101,7 +86,7 @@
       padding: 6px;
       border-radius: 10px;
       border: 1px solid #cbd5e1;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .mode-tab {
       border: none;
@@ -116,18 +101,15 @@
       text-align: center;
     }
     .mode-tab:hover { background: rgba(255,255,255,0.7); color: var(--brand-blue); }
-    .mode-tab.active {
-      background: var(--brand-blue);
-      color: #ffffff;
-      box-shadow: 0 3px 8px rgba(6, 99, 153, 0.25);
-    }
+    .mode-tab.active { background: var(--brand-blue); color: #ffffff; box-shadow: 0 3px 8px rgba(6, 99, 153, 0.25); }
+
     .quick-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid #e2e8f0;
     }
@@ -135,7 +117,7 @@
       background: #f8fafc;
       border: 1px solid #cbd5e1;
       color: #334155;
-      padding: 7px 14px;
+      padding: 7px 13px;
       border-radius: 7px;
       font-size: 12.5px;
       font-weight: 700;
@@ -147,27 +129,29 @@
     .q-btn.primary:hover { background: #044870; }
     .q-btn.success { background: #15803d; color: #fff; border-color: #15803d; }
     .q-btn.success:hover { background: #166534; }
+    .q-btn.convert { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+    .q-btn.convert:hover { background: #6d28d9; }
 
     .doc-top-title {
       text-align: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
       color: var(--ink);
-      margin: 0 0 20px 0;
+      margin: 0 0 16px 0;
       letter-spacing: 0.6px;
       text-transform: uppercase;
     }
     .top-meta-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      margin-bottom: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 18px;
       align-items: start;
     }
-    .u-field { margin-bottom: 12px; position: relative; }
+    .u-field { margin-bottom: 10px; position: relative; }
     .u-field label {
       display: block;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
@@ -178,7 +162,7 @@
       width: 100%;
       border: none;
       border-bottom: 1.5px solid var(--line);
-      padding: 7px 2px;
+      padding: 6px 2px;
       font-size: 13.5px;
       font-weight: 600;
       color: var(--ink);
@@ -192,7 +176,7 @@
     .logo-drop-box {
       border: 1.5px solid #cbd5e1;
       border-radius: 10px;
-      height: 115px;
+      height: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -200,24 +184,19 @@
       text-align: center;
       cursor: pointer;
       background: #ffffff;
-      padding: 10px;
-      margin-bottom: 14px;
+      padding: 8px;
+      margin-bottom: 12px;
     }
-    .logo-drop-box img { max-height: 92px; max-width: 90%; object-fit: contain; }
+    .logo-drop-box img { max-height: 82px; max-width: 90%; object-fit: contain; }
 
-    .parties-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-bottom: 22px;
-    }
     .party-card {
       background: var(--card-tint);
       border: 1.5px solid var(--card-border);
       border-radius: 10px;
-      padding: 18px 20px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
     }
-    .party-card h3 { margin: 0 0 12px 0; font-size: 14px; font-weight: 800; color: var(--ink); }
+    .party-card h3 { margin: 0 0 10px 0; font-size: 14px; font-weight: 800; color: var(--ink); }
     .party-card h3 span { font-weight: 500; color: var(--muted); font-size: 12px; }
     .party-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
@@ -228,13 +207,7 @@
       padding: 10px 12px;
       margin-bottom: 14px;
     }
-    .preset-title {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--brand-dark);
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
+    .preset-title { font-size: 11px; font-weight: 800; color: var(--brand-dark); text-transform: uppercase; margin-bottom: 7px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
     .preset-chip {
       background: #ffffff;
@@ -250,9 +223,9 @@
     .preset-chip:hover { background: var(--brand-blue); color: #ffffff; }
 
     .table-wrap { overflow-x: auto; margin-bottom: 14px; border-radius: 8px; border: 1px solid #cbd5e1; }
-    .saas-table { width: 100%; border-collapse: collapse; min-width: 720px; }
-    .saas-table th { background: var(--brand-blue); color: #ffffff; font-size: 12px; font-weight: 700; padding: 11px 10px; text-align: left; }
-    .saas-table td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; background: #fff; }
+    .saas-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .saas-table th { background: var(--brand-blue); color: #ffffff; font-size: 12px; font-weight: 700; padding: 10px; text-align: left; }
+    .saas-table td { padding: 9px 8px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; background: #fff; }
     .saas-table input {
       width: 100%;
       border: none;
@@ -267,158 +240,65 @@
     .t-right { text-align: right !important; }
     .t-center { text-align: center !important; }
 
-    .btn-del {
-      background: #fee2e2;
-      color: #dc2626;
-      border: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .link-btn {
-      background: none;
-      border: none;
-      color: var(--brand-blue);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 4px 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .btn-del { background: #fee2e2; color: #dc2626; border: none; width: 26px; height: 26px; border-radius: 50%; font-weight: 800; cursor: pointer; }
+    .link-btn { background: none; border: none; color: var(--brand-blue); font-size: 13px; font-weight: 700; cursor: pointer; padding: 4px 0; display: inline-flex; align-items: center; gap: 5px; }
     .link-btn:hover { text-decoration: underline; }
 
-    .bottom-calc-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 14px;
-      align-items: start;
-    }
+    .bottom-calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 14px; align-items: start; }
     .tax-radio-group { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 14px 0; font-size: 13px; font-weight: 700; color: #334155; }
     .tax-radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 
     .summary-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px 18px; }
     .sum-line { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13.5px; color: #334155; font-weight: 600; }
-    .sum-grand {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0 4px 0;
-      margin-top: 6px;
-      border-top: 2px solid var(--brand-blue);
-      font-size: 17px;
-      font-weight: 900;
-      color: var(--brand-dark);
-    }
+    .sum-grand { display: flex; justify-content: space-between; padding: 10px 0 4px 0; margin-top: 6px; border-top: 2px solid var(--brand-blue); font-size: 17px; font-weight: 900; color: var(--brand-dark); }
     .sum-due { display: flex; justify-content: space-between; padding: 6px 0 0 0; font-size: 14px; font-weight: 800; color: #b91c1c; }
 
-    .terms-dashed { border: 1.5px dashed #94a3b8; border-radius: 8px; padding: 12px 16px; margin-top: 22px; background: #fafafa; }
+    .terms-dashed { border: 1.5px dashed #94a3b8; border-radius: 8px; padding: 12px 16px; margin-top: 18px; background: #fafafa; }
     .terms-dashed label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
     .terms-dashed input { width: 100%; border: none; background: transparent; font-size: 13px; color: var(--ink); outline: none; }
 
-    .cta-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
-    .btn-save-sheet {
-      background: #15803d;
-      color: #ffffff;
-      border: none;
-      padding: 13px 26px;
-      border-radius: 8px;
-      font-size: 14.5px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.3);
-      transition: 0.2s;
-    }
+    .cta-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .btn-save-sheet { background: #15803d; color: #ffffff; border: none; padding: 12px 22px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; }
     .btn-save-sheet:hover { background: #166534; }
-    .btn-gold {
-      background: var(--gold);
-      color: #0f172a;
-      border: none;
-      padding: 13px 26px;
-      border-radius: 8px;
-      font-size: 14.5px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
-      transition: 0.2s;
-    }
+    .btn-convert-inv { background: #7c3aed; color: #ffffff; border: none; padding: 12px 22px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .btn-convert-inv:hover { background: #6d28d9; }
+    .btn-gold { background: var(--gold); color: #0f172a; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; }
     .btn-gold:hover { background: var(--gold-hover); }
     .btn-gold:disabled, .btn-save-sheet:disabled { opacity: 0.7; cursor: not-allowed; }
-    .btn-outline {
-      background: #ffffff;
-      color: #0f172a;
-      border: 1.5px solid #0f172a;
-      padding: 13px 22px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .btn-outline { background: #ffffff; color: #0f172a; border: 1.5px solid #0f172a; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
     .btn-outline:hover { background: #f1f5f9; }
-    .btn-wa {
-      background: #0284c7;
-      color: #ffffff;
-      border: none;
-      padding: 13px 22px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .btn-wa { background: #0284c7; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
 
-    .preview-wrapper { margin-top: 32px; padding-top: 24px; border-top: 2px dashed #cbd5e1; }
-    .preview-label {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--brand-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .preview-wrapper { margin-top: 28px; padding-top: 20px; border-top: 2px dashed #cbd5e1; }
+    .preview-label { font-size: 12px; font-weight: 800; color: var(--brand-dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
     .preview-scroll { overflow-x: auto; background: #f1f5f9; padding: 16px; border-radius: 10px; border: 1px solid #cbd5e1; }
     #a4DocSheet { max-width: 794px; margin: 0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08); }
 
     @media (max-width: 820px) { .doc-mode-bar { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 780px) {
       .ke-bill-paper { padding: 18px 14px; }
-      .top-meta-grid, .parties-grid, .bottom-calc-grid, .party-row-2 { grid-template-columns: 1fr; gap: 14px; }
+      .top-meta-grid, .bottom-calc-grid, .party-row-2 { grid-template-columns: 1fr; gap: 12px; }
       .preview-scroll { padding: 8px; }
     }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased flex flex-col min-h-screen selection:bg-ke-navy selection:text-white">
 
-  <!-- ======================================================================= -->
-  <!-- TOP NAVIGATION BAR                                                      -->
-  <!-- ======================================================================= -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-2">
-
-        <!-- Brand Logo -->
         <a href="index.html" class="flex items-center gap-3 text-left focus:outline-none shrink-0" aria-label="Kalyani Electrical Home">
           <div class="bg-white p-1.5 rounded-xl border border-slate-200/80 shadow-2xs flex items-center justify-center">
             <img src="logo.png" alt="Kalyani Electrical Logo" class="h-11 sm:h-12 w-auto object-contain"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <svg style="display:none;" viewBox="0 0 260 155" class="h-11 sm:h-12 w-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kalyani Electrical Emblem">
+            <svg style="display:none;" viewBox="0 0 260 155" class="h-11 sm:h-12 w-auto" xmlns="http://www.w3.org/2000/svg">
               <path d="M 76 96 A 56 56 0 0 1 168 22 A 59 59 0 0 0 76 96 Z" fill="#0F2354"/>
               <path d="M 196 80 A 58 58 0 0 1 88 106 A 61 61 0 0 0 196 80 Z" fill="#D91E2A"/>
               <path d="M 84 40 H 102 L 98 63 L 122 40 H 143 L 114 66 L 129 94 H 109 L 98 73 L 94 94 H 76 Z" fill="#0F2354"/>
               <polygon points="164,20 123,72 141,72 121,114 166,61 147,61" fill="#D91E2A"/>
-              <polygon points="163,40 206,40 203,52 160,52" fill="#D91E2A"/>
-              <polygon points="160,61 198,61 195,73 157,73" fill="#D91E2A"/>
-              <polygon points="151,82 195,82 192,94 148,94" fill="#D91E2A"/>
               <text x="130" y="132" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="25" letter-spacing="4.5" fill="#0F2354">KALYANI</text>
-              <polygon points="91,132 95.5,123 100,132" fill="#D91E2A"/>
-              <line x1="36" y1="146" x2="64" y2="146" stroke="#0F2354" stroke-width="2"/>
               <text x="130" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.8" fill="#D91E2A">ELECTRICAL</text>
-              <line x1="196" y1="146" x2="224" y2="146" stroke="#0F2354" stroke-width="2"/>
             </svg>
           </div>
           <div class="hidden xl:block border-l border-slate-200 dark:border-slate-700 pl-3">
@@ -427,74 +307,59 @@
           </div>
         </a>
 
-        <!-- Desktop Navigation Links -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
-          <a href="index.html" data-i18n="nav_home" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Home</a>
-          <a href="services.html" data-i18n="nav_services" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Services</a>
-          <a href="about.html" data-i18n="nav_about" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">About Us</a>
-          <a href="gallery.html" data-i18n="nav_gallery" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Gallery</a>
-          <a href="rate-card.html" data-i18n="nav_ratecard" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Rate Card</a>
-          <a href="reviews.html" data-i18n="nav_reviews" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Reviews</a>
-          <a href="contact.html" data-i18n="nav_contact" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Contact Us</a>
-          <a href="client.html" data-i18n="nav_client" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Client Portal</a>
-          <a href="accounts.html" data-i18n="nav_accounts" class="px-2.5 py-2 rounded-xl text-xs font-bold text-ke-red bg-ke-red/10 border border-ke-red/20 transition-all">Accounts</a>
+          <a href="index.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+          <a href="services.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Services</a>
+          <a href="about.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">About Us</a>
+          <a href="gallery.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Gallery</a>
+          <a href="rate-card.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Rate Card</a>
+          <a href="reviews.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Reviews</a>
+          <a href="contact.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Contact Us</a>
+          <a href="client.html" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Client Portal</a>
+          <a href="accounts.html" class="px-2.5 py-2 rounded-xl text-xs font-bold text-ke-red bg-ke-red/10 border border-ke-red/20">Accounts</a>
         </nav>
 
-        <!-- Right Controls -->
         <div class="flex items-center gap-2">
-          <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
-            <button type="button" onclick="setLanguage('en')" id="lang-btn-en" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold bg-ke-navy text-white transition-all">EN</button>
-            <button type="button" onclick="setLanguage('hi')" id="lang-btn-hi" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-ke-navy transition-all">हिंदी</button>
-            <button type="button" onclick="setLanguage('mr')" id="lang-btn-mr" class="lang-btn px-2 py-1 rounded-lg text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-ke-navy transition-all">मराठी</button>
-          </div>
-
-          <button type="button" onclick="toggleTheme()" aria-label="Toggle Light and Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ke-navy dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+          <button type="button" onclick="toggleTheme()" aria-label="Toggle Light and Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ke-navy dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700">
             <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
             <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
           </button>
-
-          <button id="mobile-menu-toggle" type="button" aria-label="Toggle Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-ke-navy dark:text-white hover:bg-slate-200">
+          <button id="mobile-menu-toggle" type="button" aria-label="Toggle Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-ke-navy dark:text-white">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
     <div id="mobile-menu-drawer" class="hidden lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-5 space-y-1.5 shadow-xl">
-      <a href="index.html" data-i18n="nav_home" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Home</a>
-      <a href="services.html" data-i18n="nav_services" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Services</a>
-      <a href="about.html" data-i18n="nav_about" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">About Us</a>
-      <a href="gallery.html" data-i18n="nav_gallery" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Gallery</a>
-      <a href="rate-card.html" data-i18n="nav_ratecard" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Rate Card</a>
-      <a href="reviews.html" data-i18n="nav_reviews" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Reviews</a>
-      <a href="contact.html" data-i18n="nav_contact" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Contact Us</a>
-      <a href="client.html" data-i18n="nav_client" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200">Client Portal</a>
-      <a href="accounts.html" data-i18n="nav_accounts" class="block px-4 py-2.5 rounded-xl text-sm font-bold text-ke-red bg-ke-red/10">Accounts</a>
+      <a href="index.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Home</a>
+      <a href="services.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Services</a>
+      <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">About Us</a>
+      <a href="gallery.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Gallery</a>
+      <a href="rate-card.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Rate Card</a>
+      <a href="reviews.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Reviews</a>
+      <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Contact Us</a>
+      <a href="client.html" class="block px-4 py-2.5 rounded-xl text-sm font-semibold">Client Portal</a>
+      <a href="accounts.html" class="block px-4 py-2.5 rounded-xl text-sm font-bold text-ke-red bg-ke-red/10">Accounts</a>
     </div>
   </header>
 
-  <!-- ======================================================================= -->
-  <!-- MAIN CONTENT                                                            -->
-  <!-- ======================================================================= -->
+  <!-- MAIN CONTENT -->
   <main class="pt-20 flex-grow bg-subtle-grid relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
-      <!-- =================================================================== -->
-      <!-- VIEW A: LOCK SCREEN                                                 -->
-      <!-- =================================================================== -->
+      <!-- VIEW A: LOCK SCREEN -->
       <div id="partner-lock-view" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-10 border-2 border-ke-navy/15 dark:border-slate-800 shadow-2xl text-center">
         <div class="w-16 h-16 rounded-2xl bg-ke-red text-white flex items-center justify-center mx-auto mb-5 shadow-md">
           <i data-lucide="shield-lock" class="w-8 h-8"></i>
         </div>
-
-        <span data-i18n="acc_badge" class="inline-block px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-extrabold uppercase tracking-wider mb-2">
+        <span class="inline-block px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-extrabold uppercase tracking-wider mb-2">
           Restricted Access
         </span>
-        <h1 data-i18n="acc_title" class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white">
+        <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-ke-navy dark:text-white">
           Site Logs &amp; Billing Console
         </h1>
-        <p data-i18n="acc_sub" class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
           Authorized exclusively for team members <strong>Amar</strong>, <strong>Munal</strong>, and <strong>Vishal</strong>.
         </p>
 
@@ -507,9 +372,8 @@
               <option value="Vishal">Vishal</option>
             </select>
           </div>
-
           <div>
-            <label data-i18n="acc_lbl_pass" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Access Password *</label>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Access Password *</label>
             <div class="relative">
               <input type="password" id="partner-password-input" required placeholder="Enter Password"
                      class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-base font-bold tracking-widest text-ke-navy dark:text-white focus:outline-none focus:border-ke-navy" />
@@ -519,17 +383,14 @@
             </div>
             <p id="pass-error-msg" class="hidden text-xs font-bold text-ke-red mt-1.5">Incorrect password! Please try again.</p>
           </div>
-
           <button type="submit" id="unlock-submit-btn" class="w-full py-3.5 rounded-2xl bg-ke-navy hover:bg-ke-navyDark text-white font-extrabold text-sm shadow-lg shadow-ke-navy/20 flex items-center justify-center gap-2 transition-all">
             <i data-lucide="unlock" class="w-5 h-5 text-amber-300"></i>
-            <span data-i18n="acc_btn_unlock">Unlock Console</span>
+            <span>Unlock Console</span>
           </button>
         </form>
       </div>
 
-      <!-- =================================================================== -->
-      <!-- VIEW B: UNLOCKED CONSOLE DASHBOARD                                 -->
-      <!-- =================================================================== -->
+      <!-- VIEW B: UNLOCKED CONSOLE DASHBOARD -->
       <div id="partner-dashboard-view" class="hidden space-y-6">
 
         <!-- Header Bar -->
@@ -546,15 +407,15 @@
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2.5">
-            <button type="button" onclick="syncAllCloudData()" class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+            <button type="button" onclick="syncAllCloudData()" class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5">
               <i data-lucide="refresh-cw" class="w-4 h-4"></i>
               <span>Sync Sheet</span>
             </button>
-            <button type="button" onclick="printIncomeTrackerPDF()" class="px-4 py-2.5 rounded-xl bg-white text-ke-navy hover:bg-slate-100 text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all">
+            <button type="button" onclick="printIncomeTrackerPDF()" class="px-4 py-2.5 rounded-xl bg-white text-ke-navy hover:bg-slate-100 text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
               <i data-lucide="printer" class="w-4 h-4 text-ke-red"></i>
               <span>Print Ledger</span>
             </button>
-            <button type="button" onclick="lockPartnerDashboard()" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+            <button type="button" onclick="lockPartnerDashboard()" class="px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-bold flex items-center gap-1.5 shadow-sm">
               <i data-lucide="lock" class="w-4 h-4"></i>
               <span>Lock</span>
             </button>
@@ -615,30 +476,28 @@
 
         <!-- Dashboard Navigation Tabs -->
         <div class="flex flex-wrap items-center gap-2">
-          <button type="button" onclick="switchAccTab('dailywork')" id="tab-btn-dailywork" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs transition-all">
+          <button type="button" onclick="switchAccTab('dailywork')" id="tab-btn-dailywork" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-ke-navy text-white shadow-xs">
             1. Daily Work Entry
           </button>
-          <button type="button" onclick="switchAccTab('billing')" id="tab-btn-billing" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
+          <button type="button" onclick="switchAccTab('billing')" id="tab-btn-billing" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
             🧾 2. Quotation &amp; Billing
           </button>
-          <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
+          <button type="button" onclick="switchAccTab('ledger')" id="tab-btn-ledger" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
             3. Ledger &amp; Audit Log
           </button>
-          <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
+          <button type="button" onclick="switchAccTab('clientdocs')" id="tab-btn-clientdocs" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
             4. Upload Client Portal Docs
           </button>
-          <button type="button" onclick="switchAccTab('reviews')" id="tab-btn-reviews" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all flex items-center gap-2">
+          <button type="button" onclick="switchAccTab('reviews')" id="tab-btn-reviews" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 flex items-center gap-2">
             <span>5. Client Reviews Approval</span>
             <span id="pending-reviews-badge" class="hidden px-2 py-0.5 rounded-full bg-ke-red text-white text-[11px] font-extrabold">0</span>
           </button>
-          <button type="button" onclick="switchAccTab('settings')" id="tab-btn-settings" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-all">
+          <button type="button" onclick="switchAccTab('settings')" id="tab-btn-settings" class="acc-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
             6. Backup &amp; Password
           </button>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 1: DAILY WORK ENTRY                                           -->
-        <!-- ================================================================= -->
+        <!-- TAB 1: DAILY WORK ENTRY -->
         <div id="tab-panel-dailywork" class="acc-tab-panel space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -673,10 +532,10 @@
                 <input type="text" id="work-notes" placeholder="Material needed / next step" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-semibold" />
               </div>
               <div class="flex items-end gap-2">
-                <button type="submit" id="save-work-btn" class="w-full px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold transition-all">
+                <button type="submit" id="save-work-btn" class="w-full px-4 py-2.5 rounded-xl bg-ke-red hover:bg-ke-redDark text-white text-xs font-extrabold">
                   + Save Entry
                 </button>
-                <button type="button" id="cancel-work-edit-btn" onclick="cancelEditWorkRow()" class="hidden px-3 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold shrink-0">
+                <button type="button" id="cancel-work-edit-btn" onclick="cancelEditWorkRow()" class="hidden px-3 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-xs font-bold shrink-0">
                   ✕
                 </button>
               </div>
@@ -685,9 +544,7 @@
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Daily Work Entry Log</h3>
-              </div>
+              <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white">Daily Work Entry Log</h3>
               <div class="flex flex-wrap items-center gap-2">
                 <input type="date" id="filter-work-date" onchange="renderDailyWorkTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold" />
                 <button type="button" onclick="clearWorkDateFilter()" class="px-2.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-[11px] font-bold">All Dates</button>
@@ -718,9 +575,7 @@
           </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 2: KALYANI ELECTRICAL QUOTATION & BILLING SUITE               -->
-        <!-- ================================================================= -->
+        <!-- TAB 2: KALYANI ELECTRICAL QUOTATION & BILLING SUITE -->
         <div id="tab-panel-billing" class="acc-tab-panel hidden">
           <div id="ke-billing-suite">
             <div class="ke-bill-paper">
@@ -734,11 +589,13 @@
                 <button type="button" class="mode-tab" id="tab_PROFORMA" onclick="setDocType('PROFORMA')">📄 Proforma Invoice</button>
               </div>
 
-              <!-- Quick Utility Bar -->
+              <!-- Quick Utility Bar (Includes Show/Hide Company Details & Convert to Invoice) -->
               <div class="quick-bar">
                 <div style="display:flex; gap:8px; flex-wrap:wrap;">
                   <button type="button" class="q-btn primary" onclick="newBillingDocument()">+ New Bill (Next Serial No.)</button>
                   <button type="button" class="q-btn success" onclick="openBillingRecordsModal()">📂 Saved Bills / Edit Old</button>
+                  <button type="button" class="q-btn" id="toggleCompanyBtn" onclick="toggleCompanyDetailsPanel()">👁️ Show Company Details</button>
+                  <button type="button" class="q-btn convert" id="topConvertBtn" style="display:none;" onclick="convertCurrentToInvoice()">🧾 Convert to Invoice</button>
                 </div>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
                   <span id="billSyncStatusBadge" style="font-size:12px; font-weight:800; color:#047857;">● Serial Ready</span>
@@ -746,9 +603,50 @@
                 </div>
               </div>
 
+              <!-- COLLAPSIBLE COMPANY DETAILS PANEL (HIDDEN BY DEFAULT FOR COMPACT FORM) -->
+              <div id="companyDetailsPanel" style="display:none; background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:16px 18px; margin-bottom:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                  <h3 style="margin:0; font-size:14px; font-weight:800; color:#0F2354;">🏢 Kalyani Electrical — Company Profile &amp; Logo</h3>
+                  <button type="button" class="q-btn" onclick="toggleCompanyDetailsPanel()">✕ Hide</button>
+                </div>
+                <div style="display:grid; grid-template-columns:130px 1fr; gap:18px; align-items:start;">
+                  <div>
+                    <label class="logo-drop-box" for="logoInput" style="margin-bottom:4px;" title="Click to change logo">
+                      <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="handleBillLogo(event)">
+                      <img id="logoPreview" alt="Kalyani Electrical Logo">
+                    </label>
+                    <span style="display:block; text-align:center; font-size:10px; color:#64748b;">Click logo to change</span>
+                  </div>
+                  <div>
+                    <div class="party-row-2">
+                      <div class="u-field">
+                        <label>Company Name (Fixed)</label>
+                        <input type="text" id="from_name" value="KALYANI ELECTRICAL" readonly>
+                      </div>
+                      <div class="u-field">
+                        <label>Website Address (Fixed)</label>
+                        <input type="text" id="from_web" value="www.kalyanielectricals.in" readonly>
+                      </div>
+                    </div>
+                    <div class="u-field">
+                      <label>Office Address</label>
+                      <input type="text" id="from_addr1" value="Tapodham, Warje, Pune - 411058, Maharashtra" oninput="updateLivePreview()">
+                    </div>
+                    <div class="u-field">
+                      <label>Contact Numbers (Amar | Munal | Vishal)</label>
+                      <input type="text" id="from_mob" value="Amar: +91 8309642700 | Munal: +91 8329171435 | Vishal: +91 8087479681" oninput="updateLivePreview()">
+                    </div>
+                    <div class="party-row-2">
+                      <div class="u-field"><label>GSTIN (Optional)</label><input type="text" id="from_gst" placeholder="27XXXXX0000X1Z5" oninput="updateLivePreview()"></div>
+                      <div class="u-field"><label>Email / UPI ID</label><input type="text" id="from_upi" value="kalyanielectrical6@gmail.com" oninput="updateLivePreview()"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <h2 class="doc-top-title" id="docTopTitle">TAX INVOICE</h2>
 
-              <!-- Top Meta + Fixed KE Logo -->
+              <!-- Compact Top Grid: Document Meta (Left) + Client Details (Right) -->
               <div class="top-meta-grid">
                 <div>
                   <div class="u-field">
@@ -759,7 +657,7 @@
                     <label id="lbl_po_no">Buyer's Ref / PO Order No.</label>
                     <input type="text" id="inv_po" placeholder="e.g. PO-8842 / Site Ref" oninput="updateLivePreview()">
                   </div>
-                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                  <div class="party-row-2">
                     <div class="u-field">
                       <label id="lbl_doc_date">Invoice Date*</label>
                       <input type="date" id="inv_date" onchange="updateLivePreview()">
@@ -779,53 +677,20 @@
                       <option value="Credit (15 Days)">Credit (15 Days)</option>
                     </select>
                   </div>
-                </div>
-
-                <div>
-                  <label class="logo-drop-box" for="logoInput" title="Kalyani Electrical Logo (Click to replace if needed)">
-                    <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="handleBillLogo(event)">
-                    <img id="logoPreview" alt="Kalyani Electrical Logo">
-                  </label>
-                  <div class="u-field">
-                    <label id="lbl_dispatch">Site Location / Work Scope</label>
-                    <input type="text" id="inv_disp" placeholder="e.g. Warje Site / Electrical & CCTV Work" oninput="updateLivePreview()">
-                  </div>
-                  <div class="u-field">
-                    <label>Place of Supply / State</label>
-                    <input type="text" id="inv_dest" value="Maharashtra (27)" oninput="updateLivePreview()">
-                  </div>
-                </div>
-              </div>
-
-              <!-- Two Cards: Fixed Kalyani Electrical & Client -->
-              <div class="parties-grid">
-                <div class="party-card">
-                  <h3 id="hdr_from">From <span>(Fixed Company Details)</span></h3>
                   <div class="party-row-2">
                     <div class="u-field">
-                      <label>Company Name (Fixed)</label>
-                      <input type="text" id="from_name" value="KALYANI ELECTRICAL" readonly>
+                      <label id="lbl_dispatch">Site Location / Work Scope</label>
+                      <input type="text" id="inv_disp" placeholder="e.g. Warje Site / CCTV Work" oninput="updateLivePreview()">
                     </div>
                     <div class="u-field">
-                      <label>Website Address (Fixed)</label>
-                      <input type="text" id="from_web" value="www.kalyanielectricals.in" readonly>
+                      <label>Place of Supply / State</label>
+                      <input type="text" id="inv_dest" value="Maharashtra (27)" oninput="updateLivePreview()">
                     </div>
-                  </div>
-                  <div class="u-field">
-                    <label>Office Address</label>
-                    <input type="text" id="from_addr1" value="Tapodham, Warje, Pune - 411058, Maharashtra" oninput="updateLivePreview()">
-                  </div>
-                  <div class="u-field">
-                    <label>Contact Numbers (Amar | Munal | Vishal)</label>
-                    <input type="text" id="from_mob" value="Amar: +91 8309642700 | Munal: +91 8329171435 | Vishal: +91 8087479681" oninput="updateLivePreview()">
-                  </div>
-                  <div class="party-row-2">
-                    <div class="u-field"><label>GSTIN (Optional)</label><input type="text" id="from_gst" placeholder="27XXXXX0000X1Z5" oninput="updateLivePreview()"></div>
-                    <div class="u-field"><label>Email / UPI ID</label><input type="text" id="from_upi" value="kalyanielectrical6@gmail.com" oninput="updateLivePreview()"></div>
                   </div>
                 </div>
 
-                <div class="party-card">
+                <!-- Client Details Card (Always Visible) -->
+                <div class="party-card" style="margin-bottom:0;">
                   <h3 id="hdr_to">For <span>(Client's Details)</span></h3>
                   <div class="u-field"><label>Client / Company Name*</label><input type="text" id="to_name" placeholder="e.g. Sharma Residency / Society" oninput="updateLivePreview()"></div>
                   <div class="u-field"><label>Client / Site Address</label><input type="text" id="to_addr1" placeholder="Street, Area, Pune" oninput="updateLivePreview()"></div>
@@ -852,8 +717,8 @@
                   <thead>
                     <tr>
                       <th class="t-center" style="width:5%;">Sl.</th>
-                      <th style="width:32%;" id="th_desc">Product / Service Description*</th>
-                      <th style="width:10%;" id="th_hsn">HSN/SAC</th>
+                      <th style="width:34%;" id="th_desc">Product / Service Description*</th>
+                      <th class="hsn-col" style="width:10%;" id="th_hsn">HSN/SAC</th>
                       <th class="t-center gst-col" style="width:9%;">GST %</th>
                       <th class="t-center" style="width:10%;" id="th_qty">Qty / Days*</th>
                       <th class="t-right" style="width:12%;">Rate (₹)*</th>
@@ -909,9 +774,10 @@
                 <input type="text" id="inv_terms" value="1. Goods once sold will not be taken back. 2. Subject to Pune jurisdiction. 3. E. & O.E." oninput="updateLivePreview()">
               </div>
 
-              <!-- Action Buttons (PDF & Print + Excel Save) -->
+              <!-- Action Buttons -->
               <div class="cta-bar">
                 <button type="button" class="btn-save-sheet" id="btnSaveBillSheet" onclick="saveBillingDocToSheet()">💾 Save to Excel Sheet</button>
+                <button type="button" class="btn-convert-inv" id="btnConvertToInvoice" style="display:none;" onclick="convertCurrentToInvoice()">🧾 Convert to Invoice</button>
                 <button type="button" class="btn-gold" id="btnDownloadPdf" onclick="downloadCleanPDF()">📥 Download A4 PDF</button>
                 <button type="button" class="btn-outline" onclick="printCleanA4()">🖨️ Direct Print</button>
                 <button type="button" class="btn-wa" id="btnShareWa" onclick="shareBillWA()">📲 WhatsApp Bill</button>
@@ -934,9 +800,7 @@
           </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 3: LEDGER + EDIT/DELETE AUDIT HISTORY                        -->
-        <!-- ================================================================= -->
+        <!-- TAB 3: LEDGER + EDIT/DELETE AUDIT HISTORY -->
         <div id="tab-panel-ledger" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -986,9 +850,7 @@
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Records &amp; Settlement Sheet</h3>
-              </div>
+              <h3 class="font-display font-extrabold text-base text-ke-navy dark:text-white">Records &amp; Settlement Sheet</h3>
               <div class="flex flex-wrap items-center gap-2">
                 <select id="filter-creator" onchange="renderIncomeTable()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold">
                   <option value="ALL">All Profiles</option>
@@ -1064,9 +926,7 @@
           </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 4: PUBLISH DOCUMENTS TO CLIENT PORTAL                         -->
-        <!-- ================================================================= -->
+        <!-- TAB 4: PUBLISH DOCUMENTS TO CLIENT PORTAL -->
         <div id="tab-panel-clientdocs" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-xl text-ke-navy dark:text-white mb-1">Publish Site Document to Client Portal</h3>
@@ -1125,9 +985,7 @@
           </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 5: CLIENT REVIEWS APPROVAL                                    -->
-        <!-- ================================================================= -->
+        <!-- TAB 5: CLIENT REVIEWS APPROVAL -->
         <div id="tab-panel-reviews" class="acc-tab-panel hidden space-y-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-slate-100 dark:border-slate-800">
@@ -1146,9 +1004,7 @@
           </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 6: BACKUP & CHANGE PASSWORD                                   -->
-        <!-- ================================================================= -->
+        <!-- TAB 6: BACKUP & CHANGE PASSWORD -->
         <div id="tab-panel-settings" class="acc-tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm">
             <h3 class="font-display font-extrabold text-lg text-ke-navy dark:text-white mb-2">Change Access Password</h3>
@@ -1169,16 +1025,16 @@
     </div>
   </main>
 
-  <!-- MODAL FOR SAVED QUOTATIONS & INVOICES (OPEN & EDIT OLD FILES) -->
+  <!-- MODAL FOR SAVED QUOTATIONS & INVOICES -->
   <div id="billingRecordsModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.65); z-index:999; align-items:center; justify-content:center; padding:16px;">
-    <div style="background:#fff; width:100%; max-width:850px; max-height:85vh; border-radius:14px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.25); color:#0f172a;">
+    <div style="background:#fff; width:100%; max-width:900px; max-height:85vh; border-radius:14px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.25); color:#0f172a;">
       <div style="background:#0F2354; color:#fff; padding:14px 20px; display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="margin:0; font-size:16px; font-weight:800;">📂 Saved Quotations, Invoices &amp; Estimates (Excel Sheet)</h3>
+        <h3 style="margin:0; font-size:16px; font-weight:800;">📂 Saved Quotations, Estimates &amp; Invoices (Excel Sheet)</h3>
         <button type="button" onclick="closeBillingRecordsModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">×</button>
       </div>
       <div style="padding:16px 20px; overflow-y:auto;">
         <div style="margin-bottom:12px; display:flex; gap:8px;">
-          <input type="text" id="searchBillRecordInput" placeholder="Search by Client Name or Serial No (e.g. QUO-001, INV-001)..." oninput="filterBillingRecordsList()" style="flex:1; padding:9px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px;">
+          <input type="text" id="searchBillRecordInput" placeholder="Search by Client Name or Serial No (e.g. QUO-001, EST-001, INV-001)..." oninput="filterBillingRecordsList()" style="flex:1; padding:9px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px;">
           <button type="button" class="q-btn primary" onclick="fetchBillingRecordsFromSheet(true)">🔄 Refresh</button>
         </div>
         <div id="billingRecordsTableContainer">Loading records from Excel Sheet...</div>
@@ -1228,9 +1084,7 @@
     </div>
   </footer>
 
-  <!-- ======================================================================= -->
-  <!-- COMPLETE JAVASCRIPT: CONSOLE + KALYANI ELECTRICAL BILLING GENERATOR     -->
-  <!-- ======================================================================= -->
+  <!-- JAVASCRIPT -->
   <script>
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUw6DPxou-kW33GLXtR1-YJa43JC_LcruFg8LuP-9beDOpfRbV6hqfqfLnkQB_rBwCgw/exec';
     let currentPartner = 'Amar';
@@ -1245,7 +1099,6 @@
       return Number(num || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    // Partner Name Color Helper (Amar: Red, Munal: Blue, Vishal: Yellow/Amber)
     function getPartnerTextColorClass(name) {
       const n = String(name || '').trim().toLowerCase();
       if (n === 'amar') return 'text-[#D91E2A] font-extrabold';
@@ -1394,8 +1247,7 @@
         prefix: 'INV',
         noLabel: 'Invoice Number*',
         dateLabel: 'Invoice Date*',
-        fromHeader: 'Invoice From <span>(Kalyani Electrical)</span>',
-        toHeader: 'Invoice For <span>(Client\'s Details)</span>',
+        toHeader: 'For <span>(Client\'s Details)</span>',
         pdfBtn: '📥 Download A4 Invoice PDF',
         waBtn: '📲 WhatsApp Invoice',
         filePrefix: 'KE_Invoice',
@@ -1414,7 +1266,6 @@
         prefix: 'QUO',
         noLabel: 'Quotation Number*',
         dateLabel: 'Quotation Date*',
-        fromHeader: 'Quotation From <span>(Kalyani Electrical)</span>',
         toHeader: 'Quotation For <span>(Client\'s Details)</span>',
         pdfBtn: '📥 Download A4 Quotation PDF',
         waBtn: '📲 WhatsApp Quotation',
@@ -1434,7 +1285,6 @@
         prefix: 'EST',
         noLabel: 'Estimate Number*',
         dateLabel: 'Estimate Date*',
-        fromHeader: 'Estimate From <span>(Kalyani Electrical)</span>',
         toHeader: 'Estimate For <span>(Client\'s Details)</span>',
         pdfBtn: '📥 Download A4 Estimate PDF',
         waBtn: '📲 WhatsApp Estimate',
@@ -1454,7 +1304,6 @@
         prefix: 'LBR',
         noLabel: 'Labour Slip / Bill No.*',
         dateLabel: 'Work / Bill Date*',
-        fromHeader: 'Contractor <span>(Kalyani Electrical)</span>',
         toHeader: 'Client / Site Owner <span>(Client\'s Details)</span>',
         pdfBtn: '📥 Download Labour Bill PDF',
         waBtn: '📲 WhatsApp Labour Bill',
@@ -1474,7 +1323,6 @@
         prefix: 'PI',
         noLabel: 'Proforma Invoice No.*',
         dateLabel: 'Proforma Date*',
-        fromHeader: 'Proforma From <span>(Kalyani Electrical)</span>',
         toHeader: 'Proforma For <span>(Client\'s Details)</span>',
         pdfBtn: '📥 Download Proforma PDF',
         waBtn: '📲 WhatsApp Proforma',
@@ -1489,7 +1337,14 @@
       }
     };
 
-    // Convert any SVG/Image Logo to crisp PNG Data URL so html2pdf NEVER drops it
+    function toggleCompanyDetailsPanel() {
+      const panel = $b('companyDetailsPanel');
+      const btn = $b('toggleCompanyBtn');
+      const isHidden = panel.style.display === 'none';
+      panel.style.display = isHidden ? 'block' : 'none';
+      btn.innerText = isHidden ? '🙈 Hide Company Details' : '👁️ Show Company Details';
+    }
+
     function convertImageToPngDataUrl(srcUrl) {
       return new Promise((resolve) => {
         if (srcUrl.startsWith('data:image/png')) {
@@ -1554,7 +1409,7 @@
 
     function onTaxModeChange() {
       const isTaxOn = isTaxEnabledForCurrentDoc();
-      document.querySelectorAll('.gst-col').forEach(el => {
+      document.querySelectorAll('.gst-col, .hsn-col').forEach(el => {
         el.style.display = isTaxOn ? '' : 'none';
       });
       $b('docTopTitle').innerText = (docType === 'INVOICE' && !isTaxOn) ? 'INVOICE / BILL' : DOC_CONFIG[docType].title;
@@ -1572,11 +1427,14 @@
       const isTaxInvoiceTab = (type === 'INVOICE');
       $b('gstTypeGroup').style.display = isTaxInvoiceTab ? 'flex' : 'none';
 
+      const showConvert = (type === 'QUOTATION' || type === 'ESTIMATE');
+      $b('btnConvertToInvoice').style.display = showConvert ? 'inline-block' : 'none';
+      $b('topConvertBtn').style.display = showConvert ? 'inline-block' : 'none';
+
       const isTaxOn = isTaxEnabledForCurrentDoc();
       $b('docTopTitle').innerText = (isTaxInvoiceTab && !isTaxOn) ? 'INVOICE / BILL' : cfg.title;
       $b('lbl_doc_no').innerText = cfg.noLabel;
       $b('lbl_doc_date').innerText = cfg.dateLabel;
-      $b('hdr_from').innerHTML = cfg.fromHeader;
       $b('hdr_to').innerHTML = cfg.toHeader;
       $b('btnDownloadPdf').innerText = cfg.pdfBtn;
       $b('btnShareWa').innerText = cfg.waBtn;
@@ -1592,12 +1450,47 @@
       $b('th_hsn').innerText = type === 'LABOUR' ? 'SAC / Unit' : 'HSN/SAC';
       $b('th_qty').innerText = type === 'LABOUR' ? 'Days / Qty*' : 'Qty*';
 
-      document.querySelectorAll('.gst-col').forEach(el => {
+      document.querySelectorAll('.gst-col, .hsn-col').forEach(el => {
         el.style.display = isTaxOn ? '' : 'none';
       });
 
       renderBillPresetChips();
       recalcBill();
+    }
+
+    async function convertCurrentToInvoice() {
+      if (docType !== 'QUOTATION' && docType !== 'ESTIMATE') return;
+      const sourceNo = $b('inv_no').value.trim();
+
+      if (!confirm(`क्या आप ${sourceNo} (${docType}) को नए Tax Invoice में कन्वर्ट करना चाहते हैं?\n(${sourceNo} अपने पुराने नंबर पर सुरक्षित रहेगा और एक नया INV नंबर बनेगा)`)) {
+        return;
+      }
+
+      await saveBillingDocToSheet(true);
+
+      isEditingExistingBill = false;
+      const intraRadio = document.querySelector('input[name="taxType"][value="INTRA"]');
+      if (intraRadio) intraRadio.checked = true;
+
+      setDocType('INVOICE', false);
+      $b('inv_po').value = sourceNo ? `Ref: ${sourceNo}` : $b('inv_po').value;
+      $b('inv_date').value = new Date().toISOString().split('T')[0];
+
+      billItems = billItems.map(it => ({
+        ...it,
+        gst: (Number(it.gst) > 0) ? it.gst : 18
+      }));
+
+      renderBillTable();
+      $b('billSyncStatusBadge').innerText = `● Converted from ${sourceNo} → ${$b('inv_no').value}`;
+      alert(`✅ ${sourceNo} से नया Invoice (${$b('inv_no').value}) तैयार हो गया है!\nआप इसे चेक करके Save या PDF डाउनलोड कर सकते हैं।`);
+    }
+
+    function convertSavedRecordToInvoice(docNo) {
+      loadBillingRecordForEdit(docNo);
+      setTimeout(() => {
+        convertCurrentToInvoice();
+      }, 150);
     }
 
     function renderBillPresetChips() {
@@ -1641,7 +1534,7 @@
           <tr>
             <td class="t-center"><b>${i+1}</b></td>
             <td><input value="${escapeHtml(it.name)}" placeholder="Description" oninput="billItems[${i}].name=this.value;updateLivePreview()"></td>
-            <td><input value="${escapeHtml(it.hsn||'')}" placeholder="${docType === 'LABOUR' ? 'Day/Pt' : 'HSN'}" oninput="billItems[${i}].hsn=this.value;updateLivePreview()"></td>
+            <td class="hsn-col"><input value="${escapeHtml(it.hsn||'')}" placeholder="${docType === 'LABOUR' ? 'Day/Pt' : 'HSN'}" oninput="billItems[${i}].hsn=this.value;updateLivePreview()"></td>
             <td class="gst-col">
               <select style="width:100%; border:none; border-bottom:1.5px solid #cbd5e1; padding:6px 2px; font-size:12.5px; font-weight:700; background:transparent; outline:none; text-align:center;" onchange="billItems[${i}].gst=parseFloat(this.value)||0;recalcBill()">
                 <option value="0" ${effectiveGst===0?'selected':''}>0%</option>
@@ -1659,7 +1552,7 @@
           </tr>
         `;
       }).join('');
-      document.querySelectorAll('.gst-col').forEach(el => {
+      document.querySelectorAll('.gst-col, .hsn-col').forEach(el => {
         el.style.display = isTaxOn ? '' : 'none';
       });
       recalcBill();
@@ -1743,7 +1636,7 @@
           <tr>
             <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${i+1}</td>
             <td style="padding:6px; border:1px solid #cbd5e1;"><b>${escapeHtml(it.name || '-')}</b></td>
-            <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${escapeHtml(it.hsn || '-')}</td>
+            ${!isNoGst ? `<td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${escapeHtml(it.hsn || '-')}</td>` : ''}
             ${!isNoGst ? `<td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${gstRate}%<br><span style="font-size:9px; color:#64748b;">₹${tax.toLocaleString('en-IN', {minimumFractionDigits:2})}</span></td>` : ''}
             <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${it.qty}</td>
             <td style="text-align:right; padding:6px; border:1px solid #cbd5e1;">₹${(it.rate||0).toLocaleString('en-IN')}</td>
@@ -1806,7 +1699,7 @@
               <tr style="background:#066399; color:#fff;">
                 <th style="padding:6px; border:1px solid #066399;">#</th>
                 <th style="padding:6px; border:1px solid #066399; text-align:left;">${docType === 'LABOUR' ? 'Labour / Work Description' : 'Description'}</th>
-                <th style="padding:6px; border:1px solid #066399;">${docType === 'LABOUR' ? 'SAC/Unit' : 'HSN'}</th>
+                ${!isNoGst ? `<th style="padding:6px; border:1px solid #066399;">${docType === 'LABOUR' ? 'SAC/Unit' : 'HSN'}</th>` : ''}
                 ${!isNoGst ? `<th style="padding:6px; border:1px solid #066399;">GST</th>` : ''}
                 <th style="padding:6px; border:1px solid #066399;">${docType === 'LABOUR' ? 'Days/Qty' : 'Qty'}</th>
                 <th style="padding:6px; border:1px solid #066399; text-align:right;">Rate</th>
@@ -1854,11 +1747,13 @@
       if (target) target.innerHTML = buildCleanInvoiceHTML();
     }
 
-    // SAVE TO GOOGLE SHEET (EXCEL)
-    async function saveBillingDocToSheet() {
+    async function saveBillingDocToSheet(silent = false) {
       const totals = recalcBill();
       const docNo = $b('inv_no').value.trim();
-      if (!docNo) { alert('कृपया Serial Number दर्ज करें।'); return; }
+      if (!docNo) {
+        if (!silent) alert('कृपया Serial Number दर्ज करें।');
+        return;
+      }
 
       const payload = {
         action: 'saveBillingDoc',
@@ -1898,8 +1793,10 @@
 
       const btn = $b('btnSaveBillSheet');
       const origText = btn.innerText;
-      btn.disabled = true;
-      btn.innerText = '⏳ Saving to Excel...';
+      if (!silent) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Saving to Excel...';
+      }
 
       try {
         await fetch(APPS_SCRIPT_URL, {
@@ -1908,12 +1805,14 @@
           body: JSON.stringify(payload)
         });
         $b('billSyncStatusBadge').innerText = `● Saved: ${docNo}`;
-        alert(`✅ ${docNo} सफलतापूर्वक Excel (Google Sheet) में सेव हो गया है!`);
+        if (!silent) alert(`✅ ${docNo} सफलतापूर्वक Excel (Google Sheet) में सेव हो गया है!`);
       } catch (err) {
-        alert(`⚠️ ${docNo} लोकल में सेव हो गया है, लेकिन Google Sheet नेटवर्क में समस्या है।`);
+        if (!silent) alert(`⚠️ ${docNo} लोकल में सेव हो गया है, लेकिन Google Sheet नेटवर्क में समस्या है।`);
       } finally {
-        btn.disabled = false;
-        btn.innerText = origText;
+        if (!silent) {
+          btn.disabled = false;
+          btn.innerText = origText;
+        }
       }
     }
 
@@ -1990,22 +1889,26 @@
               <th style="padding:9px; text-align:left;">Date</th>
               <th style="padding:9px; text-align:left;">Client Name</th>
               <th style="padding:9px; text-align:left;">Amount</th>
-              <th style="padding:9px; text-align:left;">Action</th>
+              <th style="padding:9px; text-align:left;">Actions</th>
             </tr>
           </thead>
           <tbody>
-            ${list.map(r => `
-              <tr style="border-bottom:1px solid #e2e8f0;">
-                <td style="padding:9px;"><b>${escapeHtml(r.docNo)}</b></td>
-                <td style="padding:9px;">${escapeHtml(r.docType)}</td>
-                <td style="padding:9px;">${escapeHtml(r.date)}</td>
-                <td style="padding:9px;">${escapeHtml(r.clientName)}</td>
-                <td style="padding:9px;"><b>₹${Number(r.grandTotal || 0).toLocaleString('en-IN')}</b></td>
-                <td style="padding:9px;">
-                  <button type="button" class="q-btn primary" onclick="loadBillingRecordForEdit('${escapeHtml(r.docNo)}')">✏️ Open / Edit</button>
-                </td>
-              </tr>
-            `).join('')}
+            ${list.map(r => {
+              const canConvert = (r.docType === 'QUOTATION' || r.docType === 'ESTIMATE');
+              return `
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                  <td style="padding:9px;"><b>${escapeHtml(r.docNo)}</b></td>
+                  <td style="padding:9px;">${escapeHtml(r.docType)}</td>
+                  <td style="padding:9px;">${escapeHtml(r.date)}</td>
+                  <td style="padding:9px;">${escapeHtml(r.clientName)}</td>
+                  <td style="padding:9px;"><b>₹${Number(r.grandTotal || 0).toLocaleString('en-IN')}</b></td>
+                  <td style="padding:9px; white-space:nowrap;">
+                    <button type="button" class="q-btn primary" onclick="loadBillingRecordForEdit('${escapeHtml(r.docNo)}')">✏️ Open / Edit</button>
+                    ${canConvert ? `<button type="button" class="q-btn convert" style="margin-left:4px;" onclick="convertSavedRecordToInvoice('${escapeHtml(r.docNo)}')">🧾 Convert to Invoice</button>` : ''}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
           </tbody>
         </table>
       `;
@@ -2049,7 +1952,6 @@
       }
     }
 
-    // FIXED PDF EXPORT WITH GUARANTEED PNG LOGO RENDERING
     async function downloadCleanPDF() {
       if (!logoPngDataUrl) {
         logoPngDataUrl = await convertImageToPngDataUrl(logoDataUrl || DEFAULT_KE_LOGO);
@@ -2079,7 +1981,6 @@
       if (copiedContainer) copiedContainer.removeAttribute('id');
       clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
 
-      // Ensure every image inside PDF clone uses crisp PNG data URL
       clone.querySelectorAll('img').forEach(img => {
         if (logoPngDataUrl) img.src = logoPngDataUrl;
       });
@@ -2177,6 +2078,7 @@
       const cfg = DOC_CONFIG[docType];
       $b('inv_no').value = getNextSerialNumber(cfg.prefix);
       $b('inv_date').value = new Date().toISOString().split('T')[0];
+      $b('inv_po').value = '';
       $b('to_name').value = '';
       $b('to_addr1').value = '';
       $b('to_city').value = 'Pune, Maharashtra';
@@ -2199,9 +2101,7 @@
       }
     }
 
-    // =======================================================================
     // CLEAN BOGUS / DEFAULT 000 ENTRIES FIX
-    // =======================================================================
     function isBogusEntry(r) {
       if (!r) return true;
       const clientStr = String(r.client || '').trim();
@@ -2225,9 +2125,7 @@
       }
     }
 
-    // =======================================================================
-    // EXISTING CONSOLE FUNCTIONS (DAILY WORK, LEDGER, REVIEWS, DRIVE, AUTH)
-    // =======================================================================
+    // EXISTING CONSOLE FUNCTIONS
     async function fetchAllReviewsFromCloud() {
       if (!APPS_SCRIPT_URL || !sessionPass) return;
       const loadingEl = document.getElementById('admin-reviews-loading');
@@ -2673,7 +2571,6 @@
       a.click();
     }
 
-    function setLanguage(lang) { localStorage.setItem('ke_lang', lang); }
     function toggleTheme() { document.documentElement.classList.toggle('dark'); }
 
     window.addEventListener('DOMContentLoaded', () => {
