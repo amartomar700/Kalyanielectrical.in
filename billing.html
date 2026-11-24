@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Billing, Quotation &amp; Estimate Console | Kalyani Electrical — kalyanielectrical.in</title>
-  <meta name="description" content="Independent Billing, GST/Non-GST Tax Invoice, Quotation, Estimate & Labour Bill generator with auto-save on Save/PDF/Print, HD A4 PDF export, and searchable Google Sheet log report for Kalyani Electrical." />
+  <meta name="description" content="Independent Billing, GST/Non-GST Tax Invoice, Quotation, Estimate & Labour Bill generator with 1-Click CCTV & Electrical Catalog, auto-save on Save/PDF/Print, HD A4 PDF export, and fast searchable log report." />
 
   <!-- Favicons & App Manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -104,6 +104,13 @@
       padding: 8px 14px !important;
       min-height: 38px !important;
     }
+
+    .catalog-chip {
+      font-size: 0.8rem !important;
+      padding: 6px 11px !important;
+      min-height: 34px !important;
+      line-height: 1.2 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased flex flex-col min-h-screen selection:bg-ke-navy selection:text-white">
@@ -156,12 +163,12 @@
       <!-- TOP BANNER -->
       <div class="bg-gradient-to-r from-[#3c5f90] to-ke-navy text-white rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-ke-red">
         <div>
-          <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">● Auto-Save Active on Save, PDF &amp; Print</span>
+          <span class="inline-block px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold mb-1.5">● 1-Click CCTV &amp; Electrical Catalog • Auto-Save Active</span>
           <h1 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
             Billing, Quotation &amp; Estimate Console
           </h1>
           <p class="text-slate-200 text-xs sm:text-sm mt-1">
-            GST Bill, Without GST Bill, Quotation, Estimate &amp; Labour Bill — Auto-saves to Google Sheet &amp; Log Report.
+            GST Bill, Without GST Bill, Quotation, Estimate &amp; Labour Bill — Instant Catalog &amp; HD A4 PDF.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2.5">
@@ -173,7 +180,7 @@
               <option value="Vishal" class="text-slate-900">Vishal</option>
             </select>
           </div>
-          <button type="button" onclick="fetchBillingRecordsFromCloud()" class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5 !min-h-0">
+          <button type="button" onclick="fetchBillingRecordsFromCloud(false)" class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5 !min-h-0">
             <i data-lucide="refresh-cw" class="w-4 h-4"></i><span>Sync Billing Sheet</span>
           </button>
         </div>
@@ -233,11 +240,11 @@
               <div><label class="block text-xs text-slate-500 mb-1">Date *</label><input type="date" id="bill_inv_date" onchange="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold" /></div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label class="block text-xs text-slate-500 mb-1">Ref / PO / Site Scope</label><input type="text" id="bill_inv_disp" placeholder="e.g., Passage Lights / CCTV" oninput="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700" /></div>
+              <div><label class="block text-xs text-slate-500 mb-1">Ref / PO / Site Scope</label><input type="text" id="bill_inv_disp" placeholder="e.g., 8 Ch CCTV Setup / Wiring" oninput="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700" /></div>
               <div>
                 <label class="block text-xs text-slate-500 mb-1">Payment Terms</label>
                 <select id="bill_inv_mode" onchange="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold">
-                  <option value="75% Advance, 25% On Completion">75% Advance, 25% On Completion</option>
+                  <option value="50% Advance, 50% On Completion">50% Advance, 50% On Completion</option>
                   <option value="UPI / NEFT / RTGS">UPI / NEFT / RTGS</option>
                   <option value="CASH">CASH</option>
                   <option value="Credit (15 Days)">Credit (15 Days)</option>
@@ -256,6 +263,60 @@
               <div><label class="block text-xs text-slate-500 mb-1">Site Address / Area</label><input type="text" id="bill_to_addr" placeholder="e.g., Warje / Sinhagad Road, Pune" oninput="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700" /></div>
               <div id="client-gst-field-wrap" class="hidden"><label class="block text-xs text-slate-500 mb-1">Client GSTIN (Optional)</label><input type="text" id="bill_to_gst" placeholder="27XXXXX0000X1Z5" oninput="updateBillingPreview()" class="w-full rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700" /></div>
             </div>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- ONE-CLICK QUICK CATALOG PANEL (CCTV, NVR/DVR, CABLES, WIRING)   -->
+        <!-- =============================================================== -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/75 border-2 border-ke-navy/15 dark:border-slate-700 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-ke-red text-white text-xs font-extrabold">⚡ 1-Click Catalog</span>
+              <h3 class="font-display font-extrabold text-sm sm:text-base text-ke-navy dark:text-white">Direct Item Add Buttons (Click karke table mein jodein)</h3>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="toggleAddCustomCatalogForm()" class="compact-btn rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold">+ New Custom Button</button>
+              <button type="button" id="btn-toggle-catalog-box" onclick="toggleCatalogBox()" class="compact-btn rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-bold">Hide Catalog</button>
+            </div>
+          </div>
+
+          <!-- Add Custom Catalog Chip Mini-Form -->
+          <div id="custom-catalog-form" class="hidden p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-4 gap-2.5 items-end">
+            <div>
+              <label class="block text-[11px] text-slate-500 mb-1">Button / Item Name *</label>
+              <input type="text" id="new_cat_name" placeholder="e.g., 32 Ch NVR / 4MP IP Cam" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 !min-h-0 !py-2 !text-sm" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-500 mb-1">Unit (Nos / Mtr / Roll)</label>
+              <input type="text" id="new_cat_unit" value="Nos" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 !min-h-0 !py-2 !text-sm" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-500 mb-1">Default Rate (₹) (Optional)</label>
+              <input type="number" id="new_cat_rate" value="0" min="0" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 !min-h-0 !py-2 !text-sm" />
+            </div>
+            <div class="flex gap-2">
+              <button type="button" onclick="saveNewCustomCatalogChip()" class="compact-btn w-full rounded-lg bg-ke-navy text-white font-extrabold">Save Button</button>
+              <button type="button" onclick="toggleAddCustomCatalogForm()" class="compact-btn rounded-lg bg-slate-200 dark:bg-slate-700 font-bold">✕</button>
+            </div>
+          </div>
+
+          <!-- Catalog Category Tabs + Search -->
+          <div id="catalog-panel-body" class="space-y-3 pt-1">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1.5" id="catalog-category-tabs">
+                <button type="button" onclick="setCatalogCategory('ALL')" id="cat-tab-ALL" class="catalog-chip rounded-lg font-extrabold bg-ke-navy text-white">All Items</button>
+                <button type="button" onclick="setCatalogCategory('DVR_NVR')" id="cat-tab-DVR_NVR" class="catalog-chip rounded-lg font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">DVR &amp; NVR</button>
+                <button type="button" onclick="setCatalogCategory('CAMERAS')" id="cat-tab-CAMERAS" class="catalog-chip rounded-lg font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">HD &amp; IP Cameras</button>
+                <button type="button" onclick="setCatalogCategory('CABLES_ACC')" id="cat-tab-CABLES_ACC" class="catalog-chip rounded-lg font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">Wire, Cable &amp; PoE</button>
+                <button type="button" onclick="setCatalogCategory('ELECTRICAL')" id="cat-tab-ELECTRICAL" class="catalog-chip rounded-lg font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">Electrical &amp; Labour</button>
+                <button type="button" onclick="setCatalogCategory('CUSTOM')" id="cat-tab-CUSTOM" class="catalog-chip rounded-lg font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">My Custom</button>
+              </div>
+              <input type="text" id="catalog-quick-search" oninput="renderCatalogButtons()" placeholder="Filter buttons..."
+                class="rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 !min-h-0 !py-1.5 !px-3 !text-xs w-44 sm:w-52" />
+            </div>
+
+            <div id="catalog-buttons-grid" class="flex flex-wrap gap-2"></div>
           </div>
         </div>
 
@@ -280,7 +341,7 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <button type="button" onclick="addBillingRow()" class="compact-btn rounded-xl bg-blue-50 dark:bg-slate-800 text-ke-navy dark:text-blue-300 border border-blue-200 dark:border-slate-700 font-extrabold hover:bg-blue-100">+ Add Item Row</button>
+          <button type="button" onclick="addBillingRow()" class="compact-btn rounded-xl bg-blue-50 dark:bg-slate-800 text-ke-navy dark:text-blue-300 border border-blue-200 dark:border-slate-700 font-extrabold hover:bg-blue-100">+ Add Blank Row</button>
           <div id="bill_gst_mode_wrap" class="hidden flex items-center gap-4 text-sm font-bold">
             <label class="flex items-center gap-2 cursor-pointer !text-sm"><input type="radio" name="billTaxType" value="INTRA" checked onchange="recalcBilling()" class="!min-h-0 !w-4 !h-4"> CGST + SGST (Maharashtra)</label>
             <label class="flex items-center gap-2 cursor-pointer !text-sm"><input type="radio" name="billTaxType" value="INTER" onchange="recalcBilling()" class="!min-h-0 !w-4 !h-4"> IGST (Out of State)</label>
@@ -296,7 +357,7 @@
             </div>
             <div>
               <label class="block text-xs text-slate-500 mb-1">Terms &amp; Conditions / Notes</label>
-              <textarea id="bill_terms" rows="2" oninput="updateBillingPreview()" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm">1. Quotation valid for 15 days. 2. Wire/cable billed as per actual site measurement. 3. 6 months workmanship warranty.</textarea>
+              <textarea id="bill_terms" rows="2" oninput="updateBillingPreview()" class="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm">1. Quotation valid for 15 days. 2. Wire/cable billed as per actual site measurement. 3. 1 year manufacturer warranty on DVR/NVR/Cameras.</textarea>
             </div>
           </div>
 
@@ -334,7 +395,7 @@
 
       </div>
 
-      <!-- BOTTOM LOG REPORT WITH MULTI-FIELD SEARCH & DUPLICATE ENTRY BADGES -->
+      <!-- BOTTOM LOG REPORT WITH INSTANT CACHE LOAD, MULTI-FIELD SEARCH & DUPLICATE BADGES -->
       <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg">
         <div class="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-3">
@@ -344,7 +405,7 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <span id="log-match-count" class="px-3 py-1 rounded-full bg-ke-navy/10 dark:bg-white/10 text-ke-navy dark:text-amber-300 text-xs font-extrabold">0 Records</span>
-              <button type="button" onclick="fetchBillingRecordsFromCloud()" class="compact-btn rounded-xl bg-ke-navy text-white font-bold hover:bg-ke-navyDark">🔄 Refresh Log</button>
+              <button type="button" onclick="fetchBillingRecordsFromCloud(false)" class="compact-btn rounded-xl bg-ke-navy text-white font-bold hover:bg-ke-navyDark">🔄 Refresh Log</button>
             </div>
           </div>
 
@@ -390,7 +451,7 @@
               </tr>
             </thead>
             <tbody id="billing-ledger-log-body" class="divide-y divide-slate-200 dark:divide-slate-800">
-              <tr><td colspan="9" class="py-6 px-4 text-center text-slate-400">Loading billing logs...</td></tr>
+              <tr><td colspan="9" class="py-6 px-4 text-center text-slate-400">No saved records yet.</td></tr>
             </tbody>
           </table>
         </div>
@@ -428,14 +489,183 @@
     }
 
     // =====================================================================
+    // 1-CLICK CCTV & ELECTRICAL CATALOG DATA + RENDERER
+    // =====================================================================
+    const DEFAULT_CATALOG_ITEMS = [
+      // DVR & NVR
+      { cat: 'DVR_NVR', label: '4 Ch HD DVR', name: '4 Channel Full HD DVR (CP Plus / Hikvision)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '8 Ch HD DVR', name: '8 Channel Full HD DVR (CP Plus / Hikvision)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '16 Ch HD DVR', name: '16 Channel Full HD DVR (CP Plus / Hikvision)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '4 Ch NVR', name: '4 Channel IP NVR (4K / PoE Support)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '8 Ch NVR', name: '8 Channel IP NVR (4K / PoE Support)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '16 Ch NVR', name: '16 Channel IP NVR (4K / Dual SATA)', unit: 'Nos', hsn: '8521', rate: 0 },
+      { cat: 'DVR_NVR', label: '1TB Surveillance HDD', name: '1TB Surveillance Hard Disk (WD Purple / Seagate SkyHawk)', unit: 'Nos', hsn: '8471', rate: 0 },
+      { cat: 'DVR_NVR', label: '2TB Surveillance HDD', name: '2TB Surveillance Hard Disk (WD Purple / Seagate SkyHawk)', unit: 'Nos', hsn: '8471', rate: 0 },
+
+      // HD & IP Cameras
+      { cat: 'CAMERAS', label: '2MP HD Dome Cam', name: '2MP Full HD Dome Camera (IR / Night Vision)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '2MP HD Bullet Cam', name: '2MP Full HD Outdoor Bullet Camera (Weatherproof)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '5MP HD Dome Cam', name: '5MP Super HD Dome Camera (Color / IR)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '5MP HD Bullet Cam', name: '5MP Super HD Outdoor Bullet Camera (IP67)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '2MP IP Dome Cam', name: '2MP PoE IP Dome Camera with Built-in Mic', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '2MP IP Bullet Cam', name: '2MP PoE IP Outdoor Bullet Camera with Mic', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '5MP IP Dome Cam', name: '5MP PoE IP Dome Camera (Color + Audio)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: '5MP IP Bullet Cam', name: '5MP PoE IP Outdoor Bullet Camera (Color + Audio)', unit: 'Nos', hsn: '8525', rate: 0 },
+      { cat: 'CAMERAS', label: 'PTZ / Wi-Fi Cam', name: 'Smart PTZ / Wi-Fi Pan-Tilt Camera', unit: 'Nos', hsn: '8525', rate: 0 },
+
+      // Cables, Wire & PoE Accessories
+      { cat: 'CABLES_ACC', label: '3+1 CCTV Cable (Mtr)', name: '3+1 Copper CCTV Coaxial Cable (Per Meter)', unit: 'Mtr', hsn: '8544', rate: 0 },
+      { cat: 'CABLES_ACC', label: '3+1 CCTV Roll (90m)', name: '3+1 Copper CCTV Cable Bundle (90 Mtr)', unit: 'Roll', hsn: '8544', rate: 0 },
+      { cat: 'CABLES_ACC', label: 'Cat6 LAN Cable (Mtr)', name: 'Cat6 UTP Outdoor/Indoor Networking Cable (Per Meter)', unit: 'Mtr', hsn: '8544', rate: 0 },
+      { cat: 'CABLES_ACC', label: 'Cat6 LAN Box (305m)', name: 'Cat6 UTP LAN Cable Box (305 Mtr)', unit: 'Box', hsn: '8544', rate: 0 },
+      { cat: 'CABLES_ACC', label: '4 Port PoE Switch', name: '4 Port Gigabit PoE Switch + 2 Uplink', unit: 'Nos', hsn: '8517', rate: 0 },
+      { cat: 'CABLES_ACC', label: '8 Port PoE Switch', name: '8 Port Gigabit PoE Switch + 2 Uplink', unit: 'Nos', hsn: '8517', rate: 0 },
+      { cat: 'CABLES_ACC', label: '4 Ch / 8 Ch SMPS', name: '12V DC CCTV Power Supply (SMPS)', unit: 'Nos', hsn: '8504', rate: 0 },
+      { cat: 'CABLES_ACC', label: 'BNC & DC Connectors', name: 'Heavy Brass BNC + DC Pin Set & PVC Junction Box', unit: 'Set', hsn: '8536', rate: 0 },
+      { cat: 'CABLES_ACC', label: '2U / 4U DVR Rack', name: 'Wall Mount Metal DVR / NVR Lockable Rack', unit: 'Nos', hsn: '8538', rate: 0 },
+      { cat: 'CABLES_ACC', label: 'HDMI / VGA Cable', name: 'High-Speed HDMI / VGA Display Cable', unit: 'Nos', hsn: '8544', rate: 0 },
+
+      // Electrical & Labour
+      { cat: 'ELECTRICAL', label: '1.5 sq.mm Wire', name: '1.5 sq.mm FR PVC Insulated Copper Wire (90m Coil)', unit: 'Coil', hsn: '8544', rate: 0 },
+      { cat: 'ELECTRICAL', label: '2.5 sq.mm Wire', name: '2.5 sq.mm FR PVC Insulated Copper Wire (90m Coil)', unit: 'Coil', hsn: '8544', rate: 0 },
+      { cat: 'ELECTRICAL', label: 'PVC Conduit & Bends', name: '20mm / 25mm Heavy PVC Conduit Pipe, Saddles & Bends', unit: 'Lot', hsn: '3917', rate: 0 },
+      { cat: 'ELECTRICAL', label: 'MCB / Timer Setup', name: 'MCB, Contactor & Automatic Timer Control Box', unit: 'Set', hsn: '8536', rate: 0 },
+      { cat: 'ELECTRICAL', label: 'Camera Fitting Labour', name: 'CCTV Camera Installation, Cabling & Mobile View Setup', unit: 'Nos', hsn: '9954', rate: 0 },
+      { cat: 'ELECTRICAL', label: 'Electrical Wiring Labour', name: 'Electrical Point Wiring & Testing Labour Charges', unit: 'Job', hsn: '9954', rate: 0 }
+    ];
+
+    let activeCatalogCategory = 'ALL';
+
+    function getCustomCatalogItems() {
+      return JSON.parse(localStorage.getItem('ke_custom_billing_catalog') || '[]');
+    }
+
+    function toggleCatalogBox() {
+      const body = $('catalog-panel-body');
+      const btn = $('btn-toggle-catalog-box');
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        btn.textContent = 'Hide Catalog';
+      } else {
+        body.classList.add('hidden');
+        btn.textContent = 'Show Catalog';
+      }
+    }
+
+    function toggleAddCustomCatalogForm() {
+      $('custom-catalog-form').classList.toggle('hidden');
+    }
+
+    function saveNewCustomCatalogChip() {
+      const name = $('new_cat_name').value.trim();
+      const unit = $('new_cat_unit').value.trim() || 'Nos';
+      const rate = parseFloat($('new_cat_rate').value) || 0;
+      if (!name) {
+        alert('Button / Item Name zaroor likhein.');
+        return;
+      }
+      const list = getCustomCatalogItems();
+      list.unshift({ cat: 'CUSTOM', label: name, name: name, unit: unit, hsn: '8525', rate: rate });
+      localStorage.setItem('ke_custom_billing_catalog', JSON.stringify(list));
+      $('new_cat_name').value = '';
+      $('new_cat_rate').value = '0';
+      $('custom-catalog-form').classList.add('hidden');
+      setCatalogCategory('CUSTOM');
+    }
+
+    function setCatalogCategory(cat) {
+      activeCatalogCategory = cat;
+      ['ALL', 'DVR_NVR', 'CAMERAS', 'CABLES_ACC', 'ELECTRICAL', 'CUSTOM'].forEach(c => {
+        const btn = $('cat-tab-' + c);
+        if (!btn) return;
+        const active = (c === cat);
+        btn.classList.toggle('bg-ke-navy', active);
+        btn.classList.toggle('text-white', active);
+        btn.classList.toggle('bg-white', !active);
+      });
+      renderCatalogButtons();
+    }
+
+    function renderCatalogButtons() {
+      const grid = $('catalog-buttons-grid');
+      if (!grid) return;
+      const q = ($('catalog-quick-search')?.value || '').trim().toLowerCase();
+      const allItems = [...getCustomCatalogItems(), ...DEFAULT_CATALOG_ITEMS];
+
+      const filtered = allItems.filter(it => {
+        if (activeCatalogCategory !== 'ALL' && it.cat !== activeCatalogCategory) return false;
+        if (q && !it.label.toLowerCase().includes(q) && !it.name.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      window._renderedCatalogList = filtered;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<span class="text-xs text-slate-400 py-1">No matching catalog items found.</span>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map((it, idx) => {
+        const isCustom = it.cat === 'CUSTOM';
+        return `
+          <button type="button" onclick="addCatalogItemToBill(${idx})"
+            title="${escapeHtml(it.name)}"
+            class="catalog-chip rounded-xl border ${isCustom ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-900 dark:text-emerald-200' : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100'} hover:bg-ke-navy hover:text-white hover:border-ke-navy font-bold shadow-2xs transition flex items-center gap-1.5">
+            <span class="text-ke-red font-extrabold">+</span>
+            <span>${escapeHtml(it.label)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function addCatalogItemToBill(filteredIdx) {
+      const list = window._renderedCatalogList || [];
+      const item = list[filteredIdx];
+      if (!item) return;
+
+      const defaultGst = currentBillDocType === 'INVOICE' ? 18 : 0;
+
+      // 1. If item already exists in table, increment Qty by 1
+      const existingIndex = billItems.findIndex(
+        r => String(r.name || '').trim().toLowerCase() === item.name.trim().toLowerCase()
+      );
+      if (existingIndex >= 0) {
+        billItems[existingIndex].qty = (Number(billItems[existingIndex].qty) || 0) + 1;
+        renderBillingTable();
+        return;
+      }
+
+      // 2. If only 1 blank starter row exists, replace it cleanly
+      if (billItems.length === 1 && !billItems[0].name.trim() && Number(billItems[0].rate) === 0) {
+        billItems[0] = {
+          name: item.name,
+          unit: item.unit || 'Nos',
+          hsn: item.hsn || '8525',
+          gst: defaultGst,
+          qty: 1,
+          rate: Number(item.rate) || 0
+        };
+      } else {
+        billItems.push({
+          name: item.name,
+          unit: item.unit || 'Nos',
+          hsn: item.hsn || '8525',
+          gst: defaultGst,
+          qty: 1,
+          rate: Number(item.rate) || 0
+        });
+      }
+
+      renderBillingTable();
+    }
+
+    // =====================================================================
     // LOGO CONVERTER: Converts logo.png or Vector Logo into crisp PNG DataURL
-    // so html2pdf / html2canvas NEVER renders a blank logo box
     // =====================================================================
     function prepareBrandLogoDataUrl() {
       return new Promise((resolve) => {
         if (cachedLogoDataUrl) return resolve(cachedLogoDataUrl);
 
-        // 1. Try converting the loaded header logo.png via canvas first
         const headerImg = document.querySelector('header img[src*="logo.png"]');
         if (headerImg && headerImg.complete && headerImg.naturalWidth > 0) {
           try {
@@ -451,7 +681,6 @@
           } catch (e) {}
         }
 
-        // 2. Fallback: Render high-res Kalyani Electrical vector emblem onto Canvas -> PNG
         const svgMarkup = `
           <svg xmlns="http://www.w3.org/2000/svg" width="260" height="155" viewBox="0 0 260 155">
             <rect width="260" height="155" fill="#ffffff"/>
@@ -545,7 +774,7 @@
     // Document Mode Management
     let currentBillDocType = 'QUOTATION';
     let billItems = [
-      { name: 'Electrical Wiring & Point Installation', unit: 'Nos', hsn: '9954', gst: 18, qty: 1, rate: 0 }
+      { name: '', unit: 'Nos', hsn: '8525', gst: 18, qty: 1, rate: 0 }
     ];
 
     const BILL_DOC_META = {
@@ -589,7 +818,7 @@
         return `
           <tr>
             <td class="py-2 px-3 text-center font-bold">${i + 1}</td>
-            <td class="py-2 px-3"><input type="text" value="${escapeHtml(it.name)}" placeholder="Work / Material description" oninput="billItems[${i}].name=this.value; updateBillingPreview();" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-semibold" /></td>
+            <td class="py-2 px-3"><input type="text" value="${escapeHtml(it.name)}" placeholder="Click catalog button above or type item..." oninput="billItems[${i}].name=this.value; updateBillingPreview();" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-semibold" /></td>
             <td class="py-2 px-3"><input type="text" value="${escapeHtml(it.unit || '')}" placeholder="Nos/Mtr" oninput="billItems[${i}].unit=this.value; updateBillingPreview();" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-center" /></td>
             <td class="py-2 px-3 bill-gst-col ${isGstBill ? '' : 'hidden'}"><input type="text" value="${escapeHtml(it.hsn || '')}" placeholder="HSN/SAC" oninput="billItems[${i}].hsn=this.value; updateBillingPreview();" class="w-full rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-center" /></td>
             <td class="py-2 px-3 bill-gst-col ${isGstBill ? '' : 'hidden'}">
@@ -612,13 +841,13 @@
     }
 
     function addBillingRow() {
-      billItems.push({ name: '', unit: 'Nos', hsn: '9954', gst: currentBillDocType === 'INVOICE' ? 18 : 0, qty: 1, rate: 0 });
+      billItems.push({ name: '', unit: 'Nos', hsn: '8525', gst: currentBillDocType === 'INVOICE' ? 18 : 0, qty: 1, rate: 0 });
       renderBillingTable();
     }
 
     function removeBillingRow(idx) {
       if (billItems.length > 1) billItems.splice(idx, 1);
-      else billItems[0] = { name: '', unit: 'Nos', hsn: '9954', gst: 0, qty: 1, rate: 0 };
+      else billItems[0] = { name: '', unit: 'Nos', hsn: '8525', gst: 0, qty: 1, rate: 0 };
       renderBillingTable();
     }
 
@@ -798,7 +1027,7 @@
     }
 
     // =====================================================================
-    // CENTRAL AUTO-SAVE ENGINE (Triggers on Save, PDF Download & Print)
+    // CENTRAL AUTO-SAVE ENGINE (Non-blocking for PDF/Print, Instant Log)
     // =====================================================================
     async function saveBillingToGoogleSheet(savedVia = 'Manual Save', showPopups = false) {
       const docNo = $('bill_inv_no').value.trim();
@@ -870,14 +1099,7 @@
       renderBillingLedgerLogs();
 
       const statusEl = $('cloud-sync-status-text');
-
-      if (!BILLING_APPS_SCRIPT_URL || BILLING_APPS_SCRIPT_URL.includes('PASTE_YOUR_NEW')) {
-        if (statusEl) statusEl.innerHTML = `<span class="text-amber-600 font-bold">⚠️ Local Log mein save hua (${savedVia}). Cloud sync ke liye BILLING_APPS_SCRIPT_URL set karein.</span>`;
-        if (showPopups) alert(`✅ ${docNo} (${duplicateTag}) local Log Report mein save ho gaya! Google Sheet ke liye BILLING_APPS_SCRIPT_URL set karein.`);
-        return true;
-      }
-
-      if (statusEl) statusEl.innerHTML = `<span class="text-blue-600 font-bold">⏳ Saving ${escapeHtml(docNo)} (${escapeHtml(savedVia)}) to Google Sheet...</span>`;
+      if (statusEl) statusEl.innerHTML = `<span class="text-blue-600 font-bold">⏳ Syncing ${escapeHtml(docNo)} (${escapeHtml(savedVia)}) to Google Sheet...</span>`;
 
       try {
         const res = await fetch(BILLING_APPS_SCRIPT_URL, {
@@ -898,8 +1120,8 @@
           return false;
         }
       } catch (err) {
-        if (statusEl) statusEl.innerHTML = `<span class="text-amber-600 font-bold">⚠️ Local Log saved, par Google Sheet network error aaya (Deployment check karein).</span>`;
-        if (showPopups) alert('⚠️ Local Log mein save ho gaya hai, par Google Sheet se connect nahi ho paya. Apps Script URL aur "Anyone" access check karein.');
+        if (statusEl) statusEl.innerHTML = `<span class="text-amber-600 font-bold">⚠️ Local Log saved, par Google Sheet network error aaya.</span>`;
+        if (showPopups) alert('⚠️ Local Log mein save ho gaya hai, par Google Sheet se connect nahi ho paya.');
         return false;
       }
     }
@@ -918,13 +1140,12 @@
     }
 
     // =====================================================================
-    // PROVEN HD A4 PDF EXPORT + PNG LOGO RENDERING + AUTO-SAVE
+    // PROVEN HD A4 PDF EXPORT + PNG LOGO + BACKGROUND AUTO-SAVE
     // =====================================================================
     async function downloadBillingPDF() {
       const btn = $('btn-download-bill-pdf');
       const originalButtonText = btn ? btn.innerHTML : '';
 
-      // Convert logo to PNG Data URL BEFORE building preview HTML
       await prepareBrandLogoDataUrl();
       updateBillingPreview();
 
@@ -943,11 +1164,11 @@
 
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '⏳ Saving & Generating HD PDF...';
+        btn.innerHTML = '⏳ Generating HD PDF...';
       }
 
-      // Auto-save to Sheet & Log Report before generating PDF
-      await saveBillingToGoogleSheet('PDF Download', false);
+      // Fire cloud auto-save in background so PDF download starts instantly without lag
+      saveBillingToGoogleSheet('PDF Download', false);
 
       const PDF_WIDTH = 720;
       const clone = source.cloneNode(true);
@@ -1001,7 +1222,7 @@
       const filename = clientSlug ? `${metaLabel}_${docNo}_${clientSlug}.pdf` : `${metaLabel}_${docNo}.pdf`;
 
       try {
-        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 200)));
+        await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 180)));
 
         await html2pdf().set({
           margin: [10, 10, 10, 10],
@@ -1035,25 +1256,11 @@
     }
 
     // =====================================================================
-    // DIRECT PRINT + AUTO-SAVE
+    // DIRECT PRINT + BACKGROUND AUTO-SAVE
     // =====================================================================
     async function printBillingA4() {
-      const btn = $('btn-print-bill-a4');
-      const origText = btn ? btn.innerHTML : '';
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '⏳ Saving & Printing...';
-      }
-
-      try {
-        await prepareBrandLogoDataUrl();
-        await saveBillingToGoogleSheet('Direct Print', false);
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = origText;
-        }
-      }
+      await prepareBrandLogoDataUrl();
+      saveBillingToGoogleSheet('Direct Print', false);
 
       const meta = BILL_DOC_META[currentBillDocType] || BILL_DOC_META.QUOTATION;
       const w = window.open('', '_blank', 'width=850,height=900');
@@ -1082,9 +1289,10 @@
     }
 
     // =====================================================================
-    // CLOUD FETCH & LOG REPORT RENDERER WITH DUPLICATE BADGES & SEARCH
+    // INSTANT CACHE-FIRST LOG REPORT + BACKGROUND CLOUD SYNC
     // =====================================================================
-    async function fetchBillingRecordsFromCloud(silent = false) {
+    async function fetchBillingRecordsFromCloud(silent = true) {
+      // 1. Render local cached records IMMEDIATELY (0ms delay)
       const localCache = JSON.parse(localStorage.getItem('ke_standalone_billing_logs') || '[]');
       if (localCache.length > 0 && allBillingRecords.length === 0) {
         allBillingRecords = localCache;
@@ -1097,8 +1305,9 @@
       }
 
       const tbody = $('billing-ledger-log-body');
-      if (!silent && tbody) {
-        tbody.innerHTML = '<tr><td colspan="9" class="py-5 px-4 text-center text-slate-400">Syncing real-time logs from Billing Google Sheet...</td></tr>';
+      // Only show loading text if cache is completely empty
+      if (!silent && allBillingRecords.length === 0 && tbody) {
+        tbody.innerHTML = '<tr><td colspan="9" class="py-5 px-4 text-center text-slate-400">Syncing logs from Google Sheet...</td></tr>';
       }
 
       try {
@@ -1271,7 +1480,7 @@
       $('bill_to_gst').value = '';
       $('bill_extra_charge').value = 0;
       $('bill_adv_received').value = 0;
-      billItems = [{ name: '', unit: 'Nos', hsn: '9954', gst: currentBillDocType === 'INVOICE' ? 18 : 0, qty: 1, rate: 0 }];
+      billItems = [{ name: '', unit: 'Nos', hsn: '8525', gst: currentBillDocType === 'INVOICE' ? 18 : 0, qty: 1, rate: 0 }];
       renderBillingTable();
     }
 
@@ -1287,11 +1496,14 @@
       $('bill-operator-select').value = currentPartner;
       $('bill_inv_date').value = new Date().toISOString().split('T')[0];
 
-      await prepareBrandLogoDataUrl();
       loadSavedCompanyDefaults();
+      renderCatalogButtons();
       setBillingDocType('QUOTATION', false);
       renderBillingTable();
-      fetchBillingRecordsFromCloud();
+      fetchBillingRecordsFromCloud(true);
+
+      await prepareBrandLogoDataUrl();
+      updateBillingPreview();
     });
   </script>
 </body>
